@@ -1978,6 +1978,255 @@ for <code>RemarkCommandParser</code>.</p>
 </li>
 </ul>
 </div>
+<h3 id="use-case-add-person-by-prompt" class="discrete">Use case: Add person by prompt</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to add persons without further details</p>
+</li>
+<li>
+<p>AddressBook prompts user to input &lt;info&gt; of person to add</p>
+</li>
+<li>
+<p>User inputs &lt;info&gt; as requested</p>
+</li>
+<li>
+<p>AddressBook prompts (step 2 - 3) for the following information until all required information (r) has been filled:</p>
+</li>
+<li>
+<p>name of person (r)</p>
+</li>
+<li>
+<p>phone number (r)</p>
+</li>
+<li>
+<p>email (r)</p>
+</li>
+<li>
+<p>address (r)</p>
+</li>
+<li>
+<p>tags</p>
+</li>
+<li>
+<p>birthday</p>
+</li>
+<li>
+<p>AddressBook adds person</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>5a. AddressBook shows error message if same person found</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="use-case-upload-image-of-person-from-local-files" class="discrete">Use case: Upload image of Person from local files</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to list persons</p>
+</li>
+<li>
+<p>AddressBook shows a list of persons</p>
+</li>
+<li>
+<p>User requests to upload image of a specific person in the list</p>
+</li>
+<li>
+<p>AddressBook prompts for location of image</p>
+</li>
+<li>
+<p>User inputs file path</p>
+</li>
+<li>
+<p>AddressBook updates image</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a. The list is empty.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+<li>
+<p>6a. The file path given is invalid.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>6a1. AddressBook shows an error message.</p>
+<div class="paragraph">
+<p>Use case resumes at step 4.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>6b. The file type of file given is invalid.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>6b1. AddressBook shows an error message.</p>
+<div class="paragraph">
+<p>Use case resumes at step 4.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="use-case-set-user-reference-location" class="discrete">Use case: Set user reference location</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to set reference location</p>
+</li>
+<li>
+<p>AddressBook updates reference location</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<h3 id="use-case-generate-encoded-contact-details" class="discrete">Use case: Generate encoded contact details</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to list persons</p>
+</li>
+<li>
+<p>AddressBook shows a list of persons</p>
+</li>
+<li>
+<p>User requests to select specific person</p>
+</li>
+<li>
+<p>AddressBook prompts for which details to not encode</p>
+</li>
+<li>
+<p>User inputs flags of details to not encode</p>
+</li>
+<li>
+<p>AddressBook returns encoded string</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a. The list is empty.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+<li>
+<p>6a. The flags given are invalid.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>6a1. AddressBook shows an error message.</p>
+<div class="paragraph">
+<p>Use case resumes at step 4.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="use-case-generate-decoded-contact-details" class="discrete">Use case: Generate decoded contact details</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to decode person details</p>
+</li>
+<li>
+<p>AddressBook shows decoded details</p>
+</li>
+<li>
+<p>AddressBook prompts user on whether to save contact</p>
+</li>
+<li>
+<p>User accepts save</p>
+</li>
+<li>
+<p>AddressBook saves decoded person&#8217;s contact</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>4a. User rejects save</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+<li>
+<p>2a. Encoded details are invalid</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a1. AddressBook shows an error message.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
 <div class="paragraph">
 <p>{More to be added}</p>
 </div>
@@ -2092,7 +2341,7 @@ for <code>RemarkCommandParser</code>.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-09-29 07:51:25 +00:00
+Last updated 2017-09-29 08:00:39 +00:00
 </div>
 </div>
 </body>
