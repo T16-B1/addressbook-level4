@@ -1,4 +1,4 @@
-= Francis Lee - Project Portfolio
+= Lee Jun Yao Francis - Project Portfolio
 ifdef::env-github,env-browser[:outfilesuffix: .adoc]
 :imagesDir: ../images
 :stylesDir: ../stylesheets
@@ -8,7 +8,7 @@ AddressBook - Level 4 is a desktop address book application used for teaching So
 
 *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] {give links to collated code files}
 
-=== Enhancement Added: Undo/Redo
+=== Enhancement Added: Exit
 
 ==== External behavior
 

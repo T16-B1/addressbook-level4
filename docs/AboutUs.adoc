@@ -55,10 +55,11 @@ Responsibilities: UI
 
 '''
 
-=== Francis Lee
+=== Lee Jun Yao Francis
 image::francis.jpg[width="150", align="left"]
 {empty}[https://github.com/fustilio[github]] [<<francislee#, portfolio>>]
 
 Role: Code Monkey
+Responsibilities: TBA
 
 '''
