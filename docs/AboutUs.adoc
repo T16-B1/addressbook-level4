@@ -60,6 +60,12 @@ image::francis.jpg[width="150", align="left"]
 {empty}[https://github.com/fustilio[github]] [<<francislee#, portfolio>>]
 
 Role: Code Monkey
+
+=== Kennard Ng Pool Hua
+image::kennard.jpg[width="150", align="left"]
+{empty}[https://github.com/Kennard123661] [<<kennardngpoolhua#, portfolio>>]
+
+Role: Developer +
 Responsibilities: TBA
 
 '''

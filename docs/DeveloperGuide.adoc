@@ -965,8 +965,8 @@ Use case ends.
 .  Commands that do not require internet connection should still work when the user is not connected to the internet.
 .  Should come with automated unit tests.
 .  A new user should be able to use basic commands like add and delete without needing to refer to the help window after their first time using the application.
-.  Should allow the user to upload images of the following formats: .jpeg, .png, .bmp.
-.  Hash string of the users personal contact information should only be made up of alphanumeric characters.
+.  Should allow the user to upload images of any link:#mainstream-image-format[mainstream image format].
+.  link:#hash-string[Hash String] of the users personal contact information should only be made up of alphanumeric characters.
 .  Should update the map automatically when the user changes their starting location.
 
 {More to be added}
@@ -981,11 +981,25 @@ Mainstream OS
 Windows, Linux, Unix, OS-X
 ....
 
+[[mainstream-image-format]]
+Mainstream Image Format
+
+....
+JPEG, PNG, BMP
+....
+
 [[private-contact-detail]]
 Private contact detail
 
 ....
 A contact detail that is not meant to be shared with others
+....
+
+[[hash-string]]
+Hash String
+
+....
+An encoded string that contains the contact details of a particular person
 ....
 
 [appendix]
