@@ -217,10 +217,12 @@ The `redo` command fails as there are no `undo` commands executed previously.
 Clears all entries from the address book. +
 Format: `clear`
 
+// tag::exit[]
 === Exiting the program : `exit`
 
 Exits the program. +
 Format: `exit`
+// end::exit[]
 
 === Saving the data
 
