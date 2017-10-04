@@ -72,3 +72,12 @@ Role: Developer +
 Responsibilities: TBA
 
 '''
+
+=== Victoria Lim Yan Hui
+image::beanie.jpg[width="150", align="left"]
+{empty}[https://github.com/vicisapotato[github]] [<<victorialimyanhui#, portfolio>>]
+
+Role: Developer +
+Responsibilities: TBA
+
+'''
