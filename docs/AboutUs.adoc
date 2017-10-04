@@ -59,7 +59,7 @@ Responsibilities: UI
 image::francis.jpg[width="150", align="left"]
 {empty}[https://github.com/fustilio[github]] [<<francislee#, portfolio>>]
 
-Role: Code Monkey
+Role: Code Monkey +
 Responsibilities: TBA
 
 === Kyle Timothy Ng Chu
