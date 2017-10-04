@@ -62,6 +62,8 @@ image::francis.jpg[width="150", align="left"]
 Role: Code Monkey +
 Responsibilities: TBA
 
+'''
+
 === Kyle Timothy Ng Chu
 image::kowalski.jpg[width="150", align="left"]
 {empty}[http://github.com/kowalski985[github]] [<<kylechu#, portfolio>>]
