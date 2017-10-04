@@ -1,8 +1,8 @@
 package seedu.address.model.tag;
 
-import seedu.address.commons.exceptions.IllegalValueException;
-
 import static java.util.Objects.requireNonNull;
+
+import seedu.address.commons.exceptions.IllegalValueException;
 
 /**
  * Represents a Tag in the address book.

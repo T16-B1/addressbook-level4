@@ -1,5 +1,11 @@
 package seedu.address.model;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
+import java.util.function.Predicate;
+import java.util.logging.Logger;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -9,14 +15,6 @@ import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.tag.exceptions.TagNotFoundException;
-
-import java.util.function.Predicate;
-import java.util.logging.Logger;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -64,12 +62,6 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void deletePerson(ReadOnlyPerson target) throws PersonNotFoundException {
         addressBook.removePerson(target);
-        indicateAddressBookChanged();
-    }
-
-    @Override
-    public void deleteTag(Tag target) throws TagNotFoundException {
-        addressBook.removeTag(target);
         indicateAddressBookChanged();
     }
 
@@ -123,6 +115,5 @@ public class ModelManager extends ComponentManager implements Model {
         return addressBook.equals(other.addressBook)
                 && filteredPersons.equals(other.filteredPersons);
     }
-
 
 }
