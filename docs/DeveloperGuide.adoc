@@ -809,21 +809,21 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 3.  User requests to delete a specific person in the list
 4.  AddressBook deletes the person
 +
-Use case ends.
+Use case ends
 
 *Extensions*
 
 [none]
-* 2a. The list is empty.
+* 2a. The list is empty
 +
-Use case ends.
+Use case ends
 
-* 3a. The given index is invalid.
+* 3a. The given index is invalid
 +
 [none]
 ** 3a1. AddressBook shows an error message.
 +
-Use case resumes at step 2.
+Use case resumes at step 2
 
 [discrete]
 === Use case: Add person by prompt
@@ -831,25 +831,73 @@ Use case resumes at step 2.
 *MSS*
 
 1.  User requests to add persons without further details
-2.  AddressBook prompts user to input <info> of person to add
-3.  User inputs <info> as requested
-4.  AddressBook prompts (step 2 - 3) for the following information until all required information (r) has been filled:
-    1. name of person (r)
-    2. phone number (r)
-    3. email (r)
-    4. address (r)
-    5. tags
-    6. birthday
-5.  AddressBook adds person
+2.  AddressBook prompts user to input name of person of person to add
+3.  User inputs name of person as requested
+4.  AddressBook prompts user to input phone number of person to add
+5.  User inputs phone number as requested
+6.  AddressBook prompts user to input email of person to add
+7.  User inputs email as requested
+8.  AddressBook prompts user to input address of person to add
+9.  User inputs address as requested
+10.  AddressBook prompts user to input tags of person to add
+11.  User inputs tags as requested (optional)
+12.  AddressBook prompts user to input birthday of person to add
+13.  User inputs birthday as requested
+14.  AddressBook adds person (optional)
 +
-Use case ends.
+Use case ends
 
 *Extensions*
 
 [none]
-* 5a. AddressBook shows error message if same person found
+* 3a. The user does not input a name
 +
-Use case ends.
+[none]
+** 3a1. AddressBook shows an error message
++
+Use case resumes at step 2
+
+* 5a. The user does not input a valid phone number
++
+[none]
+** 5a1. AddressBook shows an error message
++
+Use case resumes at step 4
+
+[none]
+* 7a. The user does not input a valid email
++
+[none]
+** 7a1. AddressBook shows an error message
++
+Use case resumes at step 6
+
+* 9a. The user does not input a valid address
++
+[none]
+** 9a1. AddressBook shows an error message
++
+Use case resumes at step 8
+
+* 11a. The user does not input a tag
++
+[none]
+** 11a1. AddressBook shows that no tag has been entered
++
+Use case resumes at step 12
+
+* 13a. The user does not input a birthday
++
+[none]
+** 13a1. AddressBook shows that no birthday has been entered
++
+Use case resumes at step 14
+
+[none]
+* 14a. AddressBook shows error message if same person found
++
+Use case ends
+
 
 [discrete]
 === Use case: Upload image of Person from local files
@@ -863,28 +911,28 @@ Use case ends.
 5.  User inputs file path
 6.  AddressBook updates image
 +
-Use case ends.
+Use case ends
 
 *Extensions*
 
 [none]
-* 2a. The list is empty.
+* 2a. The list is empty
 +
 Use case ends.
 
-* 6a. The file path given is invalid.
+* 6a. The file path given is invalid
 +
 [none]
-** 6a1. AddressBook shows an error message.
+** 6a1. AddressBook shows an error message
 +
-Use case resumes at step 4.
+Use case resumes at step 4
 
-* 6b. The file type of file given is invalid.
+* 6b. The file type of file given is invalid
 +
 [none]
-** 6b1. AddressBook shows an error message.
+** 6b1. AddressBook shows an error message
 +
-Use case resumes at step 4.
+Use case resumes at step 4
 
 [discrete]
 === Use case: Set user reference location
@@ -894,7 +942,7 @@ Use case resumes at step 4.
 1.  User requests to set reference location
 2.  AddressBook updates reference location
 +
-Use case ends.
+Use case ends
 
 [discrete]
 === Use case: Generate encoded contact details
@@ -908,21 +956,21 @@ Use case ends.
 5.  User inputs flags of details to not encode
 6.  AddressBook returns encoded string
 +
-Use case ends.
+Use case ends
 
 *Extensions*
 
 [none]
-* 2a. The list is empty.
+* 2a. The list is empty
 +
-Use case ends.
+Use case ends
 
 * 6a. The flags given are invalid.
 +
 [none]
-** 6a1. AddressBook shows an error message.
+** 6a1. AddressBook shows an error message
 +
-Use case resumes at step 4.
+Use case resumes at step 4
 
 [discrete]
 === Use case: Generate decoded contact details
@@ -935,21 +983,21 @@ Use case resumes at step 4.
 4.  User accepts save
 5.  AddressBook saves decoded person's contact
 +
-Use case ends.
+Use case ends
 
 *Extensions*
 
 [none]
 * 4a. User rejects save
 +
-Use case ends.
+Use case ends
 
 * 2a. Encoded details are invalid
 +
 [none]
 ** 2a1. AddressBook shows an error message.
 +
-Use case ends.
+Use case ends
 
 {More to be added}
 
