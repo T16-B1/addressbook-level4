@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -53,6 +54,17 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     public void setPersons(List<? extends ReadOnlyPerson> persons) throws DuplicatePersonException {
         this.persons.setPersons(persons);
+    }
+
+    /**
+     * Removes tag from all persons in the AddressBook {@code tag}
+     */
+    public void removeTag(Tag tag) {
+        Iterator it = persons.iterator();
+        while (it.hasNext()) {
+            Person person = (Person) it.next();
+            person.removeTag(tag);
+        }
     }
 
     public void setTags(Set<Tag> tags) {
