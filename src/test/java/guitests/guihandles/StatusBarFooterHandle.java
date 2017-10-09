@@ -90,8 +90,8 @@ public class StatusBarFooterHandle extends NodeHandle<Node> {
     }
 
     /**
-     * Returns true if the current content of the sync total persons is different from the value remembered by the most recent
-     * {@code rememberSyncTotalPersons()} call.
+     * Returns true if the current content of total persons is different from the value remembered by the most recent
+     * {@code rememberTotalPersons()} call.
      */
     public boolean isTotalPersonsChanged() {
         return !lastRememberedTotalPersons.equals(getTotalPersons());
