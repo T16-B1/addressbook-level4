@@ -1947,7 +1947,7 @@ for <code>RemarkCommandParser</code>.</p>
 <li>
 <p>AddressBook deletes the person</p>
 <div class="paragraph">
-<p>Use case ends.</p>
+<p>Use case ends</p>
 </div>
 </li>
 </ol>
@@ -1958,19 +1958,19 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>2a. The list is empty.</p>
+<p>2a. The list is empty</p>
 <div class="paragraph">
-<p>Use case ends.</p>
+<p>Use case ends</p>
 </div>
 </li>
 <li>
-<p>3a. The given index is invalid.</p>
+<p>3a. The given index is invalid</p>
 <div class="ulist none">
 <ul class="none">
 <li>
 <p>3a1. AddressBook shows an error message.</p>
 <div class="paragraph">
-<p>Use case resumes at step 2.</p>
+<p>Use case resumes at step 2</p>
 </div>
 </li>
 </ul>
@@ -1988,36 +1988,45 @@ for <code>RemarkCommandParser</code>.</p>
 <p>User requests to add persons without further details</p>
 </li>
 <li>
-<p>AddressBook prompts user to input &lt;info&gt; of person to add</p>
+<p>AddressBook prompts user to input name of person of person to add</p>
 </li>
 <li>
-<p>User inputs &lt;info&gt; as requested</p>
+<p>User inputs name of person as requested</p>
 </li>
 <li>
-<p>AddressBook prompts (step 2 - 3) for the following information until all required information (r) has been filled:</p>
+<p>AddressBook prompts user to input phone number of person to add</p>
 </li>
 <li>
-<p>name of person (r)</p>
+<p>User inputs phone number as requested</p>
 </li>
 <li>
-<p>phone number (r)</p>
+<p>AddressBook prompts user to input email of person to add</p>
 </li>
 <li>
-<p>email (r)</p>
+<p>User inputs email as requested</p>
 </li>
 <li>
-<p>address (r)</p>
+<p>AddressBook prompts user to input address of person to add</p>
 </li>
 <li>
-<p>tags</p>
+<p>User inputs address as requested</p>
 </li>
 <li>
-<p>birthday</p>
+<p>AddressBook prompts user to input tags of person to add</p>
 </li>
 <li>
-<p>AddressBook adds person</p>
+<p>User inputs tags as requested (optional)</p>
+</li>
+<li>
+<p>AddressBook prompts user to input birthday of person to add</p>
+</li>
+<li>
+<p>User inputs birthday as requested</p>
+</li>
+<li>
+<p>AddressBook adds person (optional)</p>
 <div class="paragraph">
-<p>Use case ends.</p>
+<p>Use case ends</p>
 </div>
 </li>
 </ol>
@@ -2028,9 +2037,95 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>5a. AddressBook shows error message if same person found</p>
+<p>3a. The user does not input a name</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>3a1. AddressBook shows an error message</p>
 <div class="paragraph">
-<p>Use case ends.</p>
+<p>Use case resumes at step 2</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>5a. The user does not input a valid phone number</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>5a1. AddressBook shows an error message</p>
+<div class="paragraph">
+<p>Use case resumes at step 4</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>7a. The user does not input a valid email</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>7a1. AddressBook shows an error message</p>
+<div class="paragraph">
+<p>Use case resumes at step 6</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>9a. The user does not input a valid address</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>9a1. AddressBook shows an error message</p>
+<div class="paragraph">
+<p>Use case resumes at step 8</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>11a. The user does not input a tag</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>11a1. AddressBook shows that no tag has been entered</p>
+<div class="paragraph">
+<p>Use case resumes at step 12</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>13a. The user does not input a birthday</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>13a1. AddressBook shows that no birthday has been entered</p>
+<div class="paragraph">
+<p>Use case resumes at step 14</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>14a. AddressBook shows error message if same person found</p>
+<div class="paragraph">
+<p>Use case ends</p>
 </div>
 </li>
 </ul>
@@ -2059,7 +2154,7 @@ for <code>RemarkCommandParser</code>.</p>
 <li>
 <p>AddressBook updates image</p>
 <div class="paragraph">
-<p>Use case ends.</p>
+<p>Use case ends</p>
 </div>
 </li>
 </ol>
@@ -2070,32 +2165,32 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>2a. The list is empty.</p>
+<p>2a. The list is empty</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
 </li>
 <li>
-<p>6a. The file path given is invalid.</p>
+<p>6a. The file path given is invalid</p>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>6a1. AddressBook shows an error message.</p>
+<p>6a1. AddressBook shows an error message</p>
 <div class="paragraph">
-<p>Use case resumes at step 4.</p>
+<p>Use case resumes at step 4</p>
 </div>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p>6b. The file type of file given is invalid.</p>
+<p>6b. The file type of file given is invalid</p>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>6b1. AddressBook shows an error message.</p>
+<p>6b1. AddressBook shows an error message</p>
 <div class="paragraph">
-<p>Use case resumes at step 4.</p>
+<p>Use case resumes at step 4</p>
 </div>
 </li>
 </ul>
@@ -2115,7 +2210,7 @@ for <code>RemarkCommandParser</code>.</p>
 <li>
 <p>AddressBook updates reference location</p>
 <div class="paragraph">
-<p>Use case ends.</p>
+<p>Use case ends</p>
 </div>
 </li>
 </ol>
@@ -2144,7 +2239,7 @@ for <code>RemarkCommandParser</code>.</p>
 <li>
 <p>AddressBook returns encoded string</p>
 <div class="paragraph">
-<p>Use case ends.</p>
+<p>Use case ends</p>
 </div>
 </li>
 </ol>
@@ -2155,9 +2250,9 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>2a. The list is empty.</p>
+<p>2a. The list is empty</p>
 <div class="paragraph">
-<p>Use case ends.</p>
+<p>Use case ends</p>
 </div>
 </li>
 <li>
@@ -2165,9 +2260,9 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>6a1. AddressBook shows an error message.</p>
+<p>6a1. AddressBook shows an error message</p>
 <div class="paragraph">
-<p>Use case resumes at step 4.</p>
+<p>Use case resumes at step 4</p>
 </div>
 </li>
 </ul>
@@ -2196,7 +2291,7 @@ for <code>RemarkCommandParser</code>.</p>
 <li>
 <p>AddressBook saves decoded person&#8217;s contact</p>
 <div class="paragraph">
-<p>Use case ends.</p>
+<p>Use case ends</p>
 </div>
 </li>
 </ol>
@@ -2209,7 +2304,7 @@ for <code>RemarkCommandParser</code>.</p>
 <li>
 <p>4a. User rejects save</p>
 <div class="paragraph">
-<p>Use case ends.</p>
+<p>Use case ends</p>
 </div>
 </li>
 <li>
@@ -2219,7 +2314,7 @@ for <code>RemarkCommandParser</code>.</p>
 <li>
 <p>2a1. AddressBook shows an error message.</p>
 <div class="paragraph">
-<p>Use case ends.</p>
+<p>Use case ends</p>
 </div>
 </li>
 </ul>
@@ -2357,7 +2452,7 @@ for <code>RemarkCommandParser</code>.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-10-06 04:37:25 +00:00
+Last updated 2017-10-09 11:32:03 +00:00
 </div>
 </div>
 </body>
