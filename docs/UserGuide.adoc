@@ -64,8 +64,8 @@ A parcel can have any number of tags (including 0)
 
 Examples:
 
-* `add i/ITEM_ID n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 S123121`
-* `add i/ITEM_ID n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison S123123 p/1234567 t/criminal`
+* `add i/11111111111 n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 S123121`
+* `add i/11111112222 n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison S123123 p/1234567 t/criminal`
 
 === Listing all parcels : `list`
 
