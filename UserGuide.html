@@ -18,7 +18,7 @@
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>By: <code>Team SE-EDU</code>      Since: <code>Jun 2016</code>      Licence: <code>MIT</code></p>
+<p>By: <code>Team T16-B1</code>      Since: <code>Oct 2017</code>      Licence: <code>MIT</code></p>
 </div>
 </div>
 <div id="toc" class="toc">
@@ -28,12 +28,12 @@
 <li><a href="#features">2. Features</a>
 <ul class="sectlevel2">
 <li><a href="#viewing-help-code-help-code">2.1. Viewing help : <code>help</code></a></li>
-<li><a href="#adding-a-person-code-add-code">2.2. Adding a person: <code>add</code></a></li>
-<li><a href="#listing-all-persons-code-list-code">2.3. Listing all persons : <code>list</code></a></li>
-<li><a href="#editing-a-person-code-edit-code">2.4. Editing a person : <code>edit</code></a></li>
-<li><a href="#locating-persons-by-name-code-find-code">2.5. Locating persons by name: <code>find</code></a></li>
-<li><a href="#deleting-a-person-code-delete-code">2.6. Deleting a person : <code>delete</code></a></li>
-<li><a href="#selecting-a-person-code-select-code">2.7. Selecting a person : <code>select</code></a></li>
+<li><a href="#adding-a-parcel-code-add-code">2.2. Adding a parcel: <code>add</code></a></li>
+<li><a href="#listing-all-parcels-code-list-code">2.3. Listing all parcels : <code>list</code></a></li>
+<li><a href="#editing-a-parcel-code-edit-code">2.4. Editing a parcel : <code>edit</code></a></li>
+<li><a href="#locating-parcel-by-name-code-find-code">2.5. Locating parcel by name: <code>find</code></a></li>
+<li><a href="#deleting-a-parcel-code-delete-code">2.6. Deleting a parcel : <code>delete</code></a></li>
+<li><a href="#selecting-a-parcel-code-select-code">2.7. Selecting a parcel : <code>select</code></a></li>
 <li><a href="#listing-entered-commands-code-history-code">2.8. Listing entered commands : <code>history</code></a></li>
 <li><a href="#undoing-previous-command-code-undo-code">2.9. Undoing previous command : <code>undo</code></a></li>
 <li><a href="#redoing-the-previously-undone-command-code-redo-code">2.10. Redoing the previously undone command : <code>redo</code></a></li>
@@ -46,6 +46,7 @@
 </li>
 <li><a href="#faq">3. FAQ</a></li>
 <li><a href="#command-summary">4. Command Summary</a></li>
+<li><a href="#features-coming-in-v2-0">5. Features Coming in v2.0</a></li>
 </ul>
 </div>
 </div>
@@ -93,13 +94,13 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <div class="ulist">
 <ul>
 <li>
-<p><strong><code>list</code></strong> : lists all contacts</p>
+<p><strong><code>list</code></strong> : lists all parcels</p>
 </li>
 <li>
-<p><strong><code>add</code></strong><code>n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 S123123</code> : adds a contact named <code>John Doe</code> to the Address Book.</p>
+<p><strong><code>clear</code></strong>` : clears the list of parcels.</p>
 </li>
 <li>
-<p><strong><code>delete</code></strong><code>3</code> : deletes the 3rd contact shown in the current list</p>
+<p><strong><code>delete</code></strong><code>3</code> : deletes the 3rd parcel shown in the current list</p>
 </li>
 <li>
 <p><strong><code>exit</code></strong> : exits the app</p>
@@ -125,16 +126,16 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <div class="ulist">
 <ul>
 <li>
-<p>Words in <code>UPPER_CASE</code> are the parameters to be supplied by the user e.g. in <code>add n/NAME</code>, <code>NAME</code> is a parameter which can be used as <code>add n/John Doe</code>.</p>
+<p>Words in <code>UPPER_CASE</code> are the parameters to be supplied by the user e.g. in <code>add i/PARCEL_ID</code>, <code>PARCEL_ID</code> is a parameter which can be used as <code>add i/1110201700000001</code>.</p>
 </li>
 <li>
-<p>Items in square brackets are optional e.g <code>n/NAME [t/TAG]</code> can be used as <code>n/John Doe t/friend</code> or as <code>n/John Doe</code>.</p>
+<p>Items in square brackets are optional e.g <code>i/PARCEL_ID [t/TAG]</code> can be used as <code>i/1110201700000001 t/friend</code> or as <code>i/1110201700000001</code>.</p>
 </li>
 <li>
 <p>Items with <code>…</code>​ after them can be used multiple times including zero times e.g. <code>[t/TAG]&#8230;&#8203;</code> can be used as <code>&#160;</code> (i.e. 0 times), <code>t/friend</code>, <code>t/friend t/family</code> etc.</p>
 </li>
 <li>
-<p>Parameters can be in any order e.g. if the command specifies <code>n/NAME p/PHONE_NUMBER</code>, <code>p/PHONE_NUMBER n/NAME</code> is also acceptable.</p>
+<p>Parameters can be in any order e.g. if the command specifies <code>i/PARCEL_ID p/PHONE_NUMBER</code>, <code>p/PHONE_NUMBER i/PARCEL_ID</code> is also acceptable.</p>
 </li>
 </ul>
 </div>
@@ -147,10 +148,10 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 </div>
 </div>
 <div class="sect2">
-<h3 id="adding-a-person-code-add-code"><a class="link" href="#adding-a-person-code-add-code">2.2. Adding a person: <code>add</code></a></h3>
+<h3 id="adding-a-parcel-code-add-code"><a class="link" href="#adding-a-parcel-code-add-code">2.2. Adding a parcel: <code>add</code></a></h3>
 <div class="paragraph">
-<p>Adds a person to the address book<br>
-Format: <code>add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]&#8230;&#8203;</code></p>
+<p>Adds a parcel to the address book<br>
+Format: <code>add i/PARCEL_ID n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]&#8230;&#8203;</code></p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -159,7 +160,7 @@ Format: <code>add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]&#8230;&#8203;<
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-A person can have any number of tags (including 0)
+A parcel can have any number of tags (including 0)
 </td>
 </tr>
 </table>
@@ -170,33 +171,33 @@ A person can have any number of tags (including 0)
 <div class="ulist">
 <ul>
 <li>
-<p><code>add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 S123123</code></p>
+<p><code>add i/11111111111 n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 S123121</code></p>
 </li>
 <li>
-<p><code>add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison S321345 p/1234567 t/criminal</code></p>
+<p><code>add i/11111112222 n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison S123123 p/1234567 t/criminal</code></p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="listing-all-persons-code-list-code"><a class="link" href="#listing-all-persons-code-list-code">2.3. Listing all persons : <code>list</code></a></h3>
+<h3 id="listing-all-parcels-code-list-code"><a class="link" href="#listing-all-parcels-code-list-code">2.3. Listing all parcels : <code>list</code></a></h3>
 <div class="paragraph">
-<p>Shows a list of all persons in the address book.<br>
+<p>Shows a list of all parcels in the address book.<br>
 Format: <code>list</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="editing-a-person-code-edit-code"><a class="link" href="#editing-a-person-code-edit-code">2.4. Editing a person : <code>edit</code></a></h3>
+<h3 id="editing-a-parcel-code-edit-code"><a class="link" href="#editing-a-parcel-code-edit-code">2.4. Editing a parcel : <code>edit</code></a></h3>
 <div class="paragraph">
-<p>Edits an existing person in the address book.<br>
-Format: <code>edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]&#8230;&#8203;</code></p>
+<p>Edits an existing parcel in the address book.<br>
+Format: <code>edit INDEX [i/PARCEL_ID] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]&#8230;&#8203;</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p>Edits the person at the specified <code>INDEX</code>. The index refers to the index number shown in the last person listing. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+<p>Edits the parcel at the specified <code>INDEX</code>. The index refers to the index number shown in the last parcel listing. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
 </li>
 <li>
 <p>At least one of the optional fields must be provided.</p>
@@ -205,10 +206,10 @@ Format: <code>edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]&#8230;
 <p>Existing values will be updated to the input values.</p>
 </li>
 <li>
-<p>When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.</p>
+<p>When editing tags, the existing tags of the parcel will be removed i.e adding of tags is not cumulative.</p>
 </li>
 <li>
-<p>You can remove all the person&#8217;s tags by typing <code>t/</code> without specifying any tags after it.</p>
+<p>You can remove all the parcel&#8217;s tags by typing <code>t/</code> without specifying any tags after it.</p>
 </li>
 </ul>
 </div>
@@ -221,19 +222,19 @@ Format: <code>edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]&#8230;
 <ul>
 <li>
 <p><code>edit 1 p/91234567 e/johndoe@example.com</code><br>
-Edits the phone number and email address of the 1st person to be <code>91234567</code> and <code>johndoe@example.com</code> respectively.</p>
+Edits the phone number and email address of the 1st parcel to be <code>91234567</code> and <code>johndoe@example.com</code> respectively.</p>
 </li>
 <li>
 <p><code>edit 2 n/Betsy Crower t/</code><br>
-Edits the name of the 2nd person to be <code>Betsy Crower</code> and clears all existing tags.</p>
+Edits the name of the 2nd parcel to be <code>Betsy Crower</code> and clears all existing tags.</p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="locating-persons-by-name-code-find-code"><a class="link" href="#locating-persons-by-name-code-find-code">2.5. Locating persons by name: <code>find</code></a></h3>
+<h3 id="locating-parcel-by-name-code-find-code"><a class="link" href="#locating-parcel-by-name-code-find-code">2.5. Locating parcel by name: <code>find</code></a></h3>
 <div class="paragraph">
-<p>Finds persons whose names contain any of the given keywords.<br>
+<p>Finds parcel whose names contain any of the given keywords.<br>
 Format: <code>find KEYWORD [MORE_KEYWORDS]</code></p>
 </div>
 <div class="sidebarblock">
@@ -270,15 +271,15 @@ Returns <code>john</code> and <code>John Doe</code></p>
 </li>
 <li>
 <p><code>find Betsy Tim John</code><br>
-Returns any person having names <code>Betsy</code>, <code>Tim</code>, or <code>John</code></p>
+Returns any parcel belonging to people with names <code>Betsy</code>, <code>Tim</code>, or <code>John</code></p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="deleting-a-person-code-delete-code"><a class="link" href="#deleting-a-person-code-delete-code">2.6. Deleting a person : <code>delete</code></a></h3>
+<h3 id="deleting-a-parcel-code-delete-code"><a class="link" href="#deleting-a-parcel-code-delete-code">2.6. Deleting a parcel : <code>delete</code></a></h3>
 <div class="paragraph">
-<p>Deletes the specified person from the address book.<br>
+<p>Deletes the specified parcel from the address book.<br>
 Format: <code>delete INDEX</code></p>
 </div>
 <div class="sidebarblock">
@@ -286,7 +287,7 @@ Format: <code>delete INDEX</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p>Deletes the person at the specified <code>INDEX</code>.</p>
+<p>Deletes the parcel at the specified <code>INDEX</code>.</p>
 </li>
 <li>
 <p>The index refers to the index number shown in the most recent listing.</p>
@@ -306,20 +307,20 @@ Format: <code>delete INDEX</code></p>
 <li>
 <p><code>list</code><br>
 <code>delete 2</code><br>
-Deletes the 2nd person in the address book.</p>
+Deletes the 2nd parcel in the address book.</p>
 </li>
 <li>
 <p><code>find Betsy</code><br>
 <code>delete 1</code><br>
-Deletes the 1st person in the results of the <code>find</code> command.</p>
+Deletes the 1st parcel in the results of the <code>find</code> command.</p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="selecting-a-person-code-select-code"><a class="link" href="#selecting-a-person-code-select-code">2.7. Selecting a person : <code>select</code></a></h3>
+<h3 id="selecting-a-parcel-code-select-code"><a class="link" href="#selecting-a-parcel-code-select-code">2.7. Selecting a parcel : <code>select</code></a></h3>
 <div class="paragraph">
-<p>Selects the person identified by the index number used in the last person listing.<br>
+<p>Selects the parcel identified by the index number used in the last parcel listing.<br>
 Format: <code>select INDEX</code></p>
 </div>
 <div class="sidebarblock">
@@ -327,7 +328,7 @@ Format: <code>select INDEX</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p>Selects the person and loads the Google search page the person at the specified <code>INDEX</code>.</p>
+<p>Selects the parcel and loads the Google map page showing the location of the receiver of the parcel at the specified <code>INDEX</code>.</p>
 </li>
 <li>
 <p>The index refers to the index number shown in the most recent listing.</p>
@@ -347,12 +348,12 @@ Format: <code>select INDEX</code></p>
 <li>
 <p><code>list</code><br>
 <code>select 2</code><br>
-Selects the 2nd person in the address book.</p>
+Selects the 2nd parcel in the address book.</p>
 </li>
 <li>
 <p><code>find Betsy</code><br>
 <code>select 1</code><br>
-Selects the 1st person in the results of the <code>find</code> command.</p>
+Selects the 1st parcel in the results of the <code>find</code> command.</p>
 </li>
 </ul>
 </div>
@@ -509,8 +510,8 @@ The data from the backup file has to be loaded manually by copying the contents 
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Add</strong> <code>add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]&#8230;&#8203;</code><br>
-e.g. <code>add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, S123665 t/friend t/colleague</code></p>
+<p><strong>Add</strong> <code>add i/PARCEL_ID n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]&#8230;&#8203;</code><br>
+e.g. <code>add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague</code></p>
 </li>
 <li>
 <p><strong>Clear</strong> : <code>clear</code></p>
@@ -520,8 +521,8 @@ e.g. <code>add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, S
 e.g. <code>delete 3</code></p>
 </li>
 <li>
-<p><strong>Edit</strong> : <code>edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]&#8230;&#8203;</code><br>
-e.g. <code>edit 2 n/James Lee e/jameslee@example.com</code></p>
+<p><strong>Edit</strong> : <code>edit INDEX [i/PARCEL_ID] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]&#8230;&#8203;</code><br>
+e.g. <code>edit 2 i/1111111111111 n/James Lee e/jameslee@example.com</code></p>
 </li>
 <li>
 <p><strong>Find</strong> : <code>find KEYWORD [MORE_KEYWORDS]</code><br>
@@ -550,10 +551,94 @@ e.g.<code>select 2</code></p>
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="features-coming-in-v2-0"><a class="link" href="#features-coming-in-v2-0">5. Features Coming in v2.0</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In <code>Ark v2.0</code>, the delivery vendor will be able to do the following:<br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Add a new <code>Parcel</code></p>
+</li>
+<li>
+<p>Delete a <code>Parcel</code></p>
+</li>
+<li>
+<p>Filter <code>Parcel</code> by tags</p>
+</li>
+<li>
+<p>Automatically search for the delivery address of the selected <code>Parcel</code> in Google Maps on click.</p>
+</li>
+<li>
+<p>Know the shortest path from one address to a delivery address.</p>
+</li>
+<li>
+<p>Find the shortest path from the current location to a delivery address.</p>
+</li>
+<li>
+<p>Find customer&#8217;s <code>Parcel</code> by <code>PARCEL_ID</code></p>
+</li>
+<li>
+<p>Find customer&#8217;s <code>PARCEL_ID</code></p>
+</li>
+<li>
+<p>Sort by delivery <code>deadlines</code> for the parcel</p>
+</li>
+<li>
+<p>Sort by <code>PARCEL_ID</code></p>
+</li>
+<li>
+<p>Sort by customer&#8217;s <code>NAME</code></p>
+</li>
+<li>
+<p>Sort by customer&#8217;s <code>PHONE</code></p>
+</li>
+<li>
+<p>Sort by customer&#8217;s <code>ADDRESS</code></p>
+</li>
+<li>
+<p>Track status of <code>Parcel</code> (i.e. Shipping, Processing, Being Delivered)</p>
+</li>
+<li>
+<p>Update status of <code>Parcel</code></p>
+</li>
+<li>
+<p>Color code <code>ParcelCard</code> based on impending deadlines.</p>
+</li>
+<li>
+<p>Generate the optimal route for the day&#8217;s deliveries, based on shortest time, shortest distance travelled or most parcels delivered.</p>
+</li>
+<li>
+<p>Archive completed deliveries</p>
+</li>
+<li>
+<p>Autocomplete input commands.</p>
+</li>
+<li>
+<p>Add multiple parcels by importing a XML file</p>
+</li>
+<li>
+<p>Store the sender&#8217;s and receiver&#8217;s details (i.e. <code>Name</code>, <code>Phone</code>, <code>Email Address</code>, <code>Address</code>)</p>
+</li>
+<li>
+<p>Be informed of overdue parcels.</p>
+</li>
+<li>
+<p>Be informed of parcels that can be delivered at a specific location.</p>
+</li>
+<li>
+<p>Assign levels of importance to deliveries.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-10-12 03:17:54 +00:00
+Last updated 2017-10-12 13:56:51 +00:00
 </div>
 </div>
 </body>
