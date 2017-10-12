@@ -44,10 +44,10 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 ====
 *Command Format*
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add i/ITEM_ID`, `ITEM_ID` is a parameter which can be used as `add i/1110201700000001`.
-* Items in square brackets are optional e.g `i/ITEM_ID [t/TAG]` can be used as `i/1110201700000001 t/friend` or as `i/1110201700000001`.
+* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add i/PARCEL_ID`, `PARCEL_ID` is a parameter which can be used as `add i/1110201700000001`.
+* Items in square brackets are optional e.g `i/PARCEL_ID [t/TAG]` can be used as `i/1110201700000001 t/friend` or as `i/1110201700000001`.
 * Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-* Parameters can be in any order e.g. if the command specifies `i/ITEM_ID p/PHONE_NUMBER`, `p/PHONE_NUMBER i/ITEM_ID` is also acceptable.
+* Parameters can be in any order e.g. if the command specifies `i/PARCEL_ID p/PHONE_NUMBER`, `p/PHONE_NUMBER i/PARCEL_ID` is also acceptable.
 ====
 
 === Viewing help : `help`
@@ -57,7 +57,7 @@ Format: `help`
 === Adding a parcel: `add`
 
 Adds a parcel to the address book +
-Format: `add i/ITEM_ID n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
+Format: `add i/PARCEL_ID n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
 
 [TIP]
 A parcel can have any number of tags (including 0)
@@ -75,7 +75,7 @@ Format: `list`
 === Editing a parcel : `edit`
 
 Edits an existing parcel in the address book. +
-Format: `edit INDEX [i/ITEM_ID] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+Format: `edit INDEX [i/PARCEL_ID] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
 
 ****
 * Edits the parcel at the specified `INDEX`. The index refers to the index number shown in the last parcel listing. The index *must be a positive integer* 1, 2, 3, ...
@@ -234,12 +234,12 @@ There is no need to save manually.
 
 == Command Summary
 
-* *Add* `add i/ITEM_ID n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
+* *Add* `add i/PARCEL_ID n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
 e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 * *Clear* : `clear`
 * *Delete* : `delete INDEX` +
 e.g. `delete 3`
-* *Edit* : `edit INDEX [i/ITEM_ID] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
+* *Edit* : `edit INDEX [i/PARCEL_ID] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
 e.g. `edit 2 i/1111111111111 n/James Lee e/jameslee@example.com`
 * *Find* : `find KEYWORD [MORE_KEYWORDS]` +
 e.g. `find James Jake`
@@ -250,3 +250,32 @@ e.g.`select 2`
 * *History* : `history`
 * *Undo* : `undo`
 * *Redo* : `redo`
+
+== Features Coming in v2.0
+
+In `Ark v2.0`, the delivery vendor will be able to do the following: +
+
+* Add a new `Parcel`
+* Delete a `Parcel`
+* Filter `Parcel` by tags
+* Automatically search for the delivery address of the selected `Parcel` in Google Maps on click.
+* Know the shortest path from one address to a delivery address.
+* Find the shortest path from the current location to a delivery address.
+* Find customer's `Parcel` by `PARCEL_ID`
+* Find customer's `PARCEL_ID`
+* Sort by delivery `deadlines` for the parcel
+* Sort by `PARCEL_ID`
+* Sort by customer's `NAME`
+* Sort by customer's `PHONE`
+* Sort by customer's `ADDRESS`
+* Track status of `Parcel` (i.e. Shipping, Processing, Being Delivered)
+* Update status of `Parcel`
+* Color code `ParcelCard` based on impending deadlines.
+* Generate the optimal route for the day's deliveries, based on shortest time, shortest distance travelled or most parcels delivered.
+* Archive completed deliveries
+* Autocomplete input commands.
+* Add multiple parcels by importing a XML file
+* Store the sender's and receiver's details (i.e. `Name`, `Phone`, `Email Address`, `Address`)
+* Be informed of overdue parcels.
+* Be informed of parcels that can be delivered at a specific location.
+* Assign levels of importance to deliveries.
