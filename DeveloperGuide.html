@@ -1911,23 +1911,23 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="paragraph">
 <p>(For all use cases below, the <strong>System</strong> is the <code>AddressBook</code> and the <strong>Actor</strong> is the <code>user</code>, unless specified otherwise)</p>
 </div>
-<h3 id="use-case-delete-person" class="discrete">Use case: Delete person</h3>
+<h3 id="use-case-delete-parcel" class="discrete">Use case: Delete parcel</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User requests to list persons</p>
+<p>User requests to list parcels</p>
 </li>
 <li>
-<p>AddressBook shows a list of persons</p>
+<p>AddressBook shows a list of parcels</p>
 </li>
 <li>
-<p>User requests to delete a specific person in the list</p>
+<p>User requests to delete a specific parcel in the list</p>
 </li>
 <li>
-<p>AddressBook deletes the person</p>
+<p>AddressBook deletes the parcel</p>
 <div class="paragraph">
 <p>Use case ends</p>
 </div>
@@ -1960,53 +1960,53 @@ for <code>RemarkCommandParser</code>.</p>
 </li>
 </ul>
 </div>
-<h3 id="use-case-add-person-by-prompt" class="discrete">Use case: Add person by prompt</h3>
+<h3 id="use-case-add-parcel-by-prompt" class="discrete">Use case: Add parcel by prompt</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User requests to add persons without further details</p>
+<p>User requests to add parcels without further details</p>
 </li>
 <li>
-<p>AddressBook prompts user to input name of person of person to add</p>
+<p>AddressBook prompts user to input parcel identification number of parcel to add</p>
 </li>
 <li>
-<p>User inputs name of person as requested</p>
+<p>User inputs identification number as requested</p>
 </li>
 <li>
-<p>AddressBook prompts user to input phone number of person to add</p>
+<p>AddressBook prompts user to input name of recipient of parcel to add</p>
+</li>
+<li>
+<p>User inputs name of recipient as requested</p>
+</li>
+<li>
+<p>AddressBook prompts user to input phone number of recipient of parcel to add</p>
 </li>
 <li>
 <p>User inputs phone number as requested</p>
 </li>
 <li>
-<p>AddressBook prompts user to input email of person to add</p>
+<p>AddressBook prompts user to input email of recipient of parcel to add</p>
 </li>
 <li>
 <p>User inputs email as requested</p>
 </li>
 <li>
-<p>AddressBook prompts user to input address of person to add</p>
+<p>AddressBook prompts user to input delivery address of parcel to add</p>
 </li>
 <li>
 <p>User inputs address as requested</p>
 </li>
 <li>
-<p>AddressBook prompts user to input tags of person to add</p>
+<p>AddressBook prompts user to input tags of parcel to add</p>
 </li>
 <li>
-<p>User inputs tags as requested (optional)</p>
+<p>User inputs tags as requested [optional]</p>
 </li>
 <li>
-<p>AddressBook prompts user to input birthday of person to add</p>
-</li>
-<li>
-<p>User inputs birthday as requested</p>
-</li>
-<li>
-<p>AddressBook adds person (optional)</p>
+<p>AddressBook adds parcel</p>
 <div class="paragraph">
 <p>Use case ends</p>
 </div>
@@ -2019,7 +2019,7 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>3a. The user does not input a name</p>
+<p>3a. The user does not input a parcel identification number</p>
 <div class="ulist none">
 <ul class="none">
 <li>
@@ -2031,8 +2031,12 @@ for <code>RemarkCommandParser</code>.</p>
 </ul>
 </div>
 </li>
+</ul>
+</div>
+<div class="ulist none">
+<ul class="none">
 <li>
-<p>5a. The user does not input a valid phone number</p>
+<p>5a. The user does not input a name</p>
 <div class="ulist none">
 <ul class="none">
 <li>
@@ -2044,12 +2048,8 @@ for <code>RemarkCommandParser</code>.</p>
 </ul>
 </div>
 </li>
-</ul>
-</div>
-<div class="ulist none">
-<ul class="none">
 <li>
-<p>7a. The user does not input a valid email</p>
+<p>7a. The user does not input a valid phone number</p>
 <div class="ulist none">
 <ul class="none">
 <li>
@@ -2061,8 +2061,12 @@ for <code>RemarkCommandParser</code>.</p>
 </ul>
 </div>
 </li>
+</ul>
+</div>
+<div class="ulist none">
+<ul class="none">
 <li>
-<p>9a. The user does not input a valid address</p>
+<p>9a. The user does not input a valid email</p>
 <div class="ulist none">
 <ul class="none">
 <li>
@@ -2075,24 +2079,24 @@ for <code>RemarkCommandParser</code>.</p>
 </div>
 </li>
 <li>
-<p>11a. The user does not input a tag</p>
+<p>11a. The user does not input a valid address</p>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>11a1. AddressBook shows that no tag has been entered</p>
+<p>11a1. AddressBook shows an error message</p>
 <div class="paragraph">
-<p>Use case resumes at step 12</p>
+<p>Use case resumes at step 10</p>
 </div>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p>13a. The user does not input a birthday</p>
+<p>13a. The user does not input a tag</p>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>13a1. AddressBook shows that no birthday has been entered</p>
+<p>13a1. AddressBook shows that no tag has been entered</p>
 <div class="paragraph">
 <p>Use case resumes at step 14</p>
 </div>
@@ -2105,27 +2109,27 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>14a. AddressBook shows error message if same person found</p>
+<p>14. AddressBook shows error message if same parcel found</p>
 <div class="paragraph">
 <p>Use case ends</p>
 </div>
 </li>
 </ul>
 </div>
-<h3 id="use-case-upload-image-of-person-from-local-files" class="discrete">Use case: Upload image of Person from local files</h3>
+<h3 id="use-case-upload-image-of-parcel-from-local-files" class="discrete">Use case: Upload image of Parcel from local files</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User requests to list persons</p>
+<p>User requests to list parcels</p>
 </li>
 <li>
-<p>AddressBook shows a list of persons</p>
+<p>AddressBook shows a list of parcels</p>
 </li>
 <li>
-<p>User requests to upload image of a specific person in the list</p>
+<p>User requests to upload image of a specific parcel in the list</p>
 </li>
 <li>
 <p>AddressBook prompts for location of image</p>
@@ -2196,110 +2200,6 @@ for <code>RemarkCommandParser</code>.</p>
 </div>
 </li>
 </ol>
-</div>
-<h3 id="use-case-generate-encoded-contact-details" class="discrete">Use case: Generate encoded contact details</h3>
-<div class="paragraph">
-<p><strong>MSS</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>User requests to list persons</p>
-</li>
-<li>
-<p>AddressBook shows a list of persons</p>
-</li>
-<li>
-<p>User requests to select specific person</p>
-</li>
-<li>
-<p>AddressBook prompts for which details to not encode</p>
-</li>
-<li>
-<p>User inputs flags of details to not encode</p>
-</li>
-<li>
-<p>AddressBook returns encoded string</p>
-<div class="paragraph">
-<p>Use case ends</p>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><strong>Extensions</strong></p>
-</div>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>2a. The list is empty</p>
-<div class="paragraph">
-<p>Use case ends</p>
-</div>
-</li>
-<li>
-<p>6a. The flags given are invalid.</p>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>6a1. AddressBook shows an error message</p>
-<div class="paragraph">
-<p>Use case resumes at step 4</p>
-</div>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<h3 id="use-case-generate-decoded-contact-details" class="discrete">Use case: Generate decoded contact details</h3>
-<div class="paragraph">
-<p><strong>MSS</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>User requests to decode person details</p>
-</li>
-<li>
-<p>AddressBook shows decoded details and prompts user on whether to save contact</p>
-</li>
-<li>
-<p>User accepts save</p>
-</li>
-<li>
-<p>AddressBook saves decoded person&#8217;s contact</p>
-<div class="paragraph">
-<p>Use case ends</p>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><strong>Extensions</strong></p>
-</div>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>4a. User rejects save</p>
-<div class="paragraph">
-<p>Use case ends</p>
-</div>
-</li>
-<li>
-<p>2a. Encoded details are invalid</p>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>2a1. AddressBook shows an error message.</p>
-<div class="paragraph">
-<p>Use case ends</p>
-</div>
-</li>
-</ul>
-</div>
-</li>
-</ul>
 </div>
 <div class="paragraph">
 <p>{More to be added}</p>
@@ -2373,22 +2273,6 @@ for <code>RemarkCommandParser</code>.</p>
 <pre>JPEG, PNG, BMP</pre>
 </div>
 </div>
-<div id="private-contact-detail" class="paragraph">
-<p>Private contact detail</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>A contact detail that is not meant to be shared with others</pre>
-</div>
-</div>
-<div id="hash-string" class="paragraph">
-<p>Hash String</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>An encoded string that contains the contact details of a particular person</pre>
-</div>
-</div>
 </div>
 </div>
 <div class="sect1">
@@ -2431,7 +2315,7 @@ for <code>RemarkCommandParser</code>.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-10-12 16:16:42 +00:00
+Last updated 2017-10-12 17:39:57 +00:00
 </div>
 </div>
 </body>
