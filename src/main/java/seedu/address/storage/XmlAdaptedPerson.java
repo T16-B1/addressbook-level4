@@ -49,7 +49,7 @@ public class XmlAdaptedPerson {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
-        address = source.getAddress().value;
+        address = source.getAddress().toString();
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));

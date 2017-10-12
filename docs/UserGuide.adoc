@@ -222,10 +222,22 @@ Format: `clear`
 Exits the program. +
 Format: `exit`
 
+=== Autocomplete
+
+Address book comes with tab autocompletion which unix users will be familiar with. +
+To make use of this feature, simply key in the first few characters of the command you with to enter and press the `Tab` key. Address book will then fill in the rest of the command for you.
+
 === Saving the data
 
 Address book data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
+
+=== Backing up the data
+
+Address book data are backed up in the hard disk automatically at the start of every session of the program. +
+There is no need to back up the data manually. +
+The backup file is appended with `-backup.xml` and is stored in the same folder as the main storage file. +
+The data from the backup file has to be loaded manually by copying the contents of the backup file into your main storage file.
 
 == FAQ
 

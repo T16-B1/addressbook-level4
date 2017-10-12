@@ -25,6 +25,8 @@ public class CommandBox extends UiPart<Region> {
 
     private final Logger logger = LogsCenter.getLogger(CommandBox.class);
     private final Logic logic;
+    private final String[] commandList = {"add", "clear", "delete", "edit", "find", "help", "history", "list", "redo",
+        "select", "undo"};
     private ListElementPointer historySnapshot;
 
     @FXML
@@ -48,15 +50,33 @@ public class CommandBox extends UiPart<Region> {
             // As up and down buttons will alter the position of the caret,
             // consuming it causes the caret's position to remain unchanged
             keyEvent.consume();
-
             navigateToPreviousInput();
             break;
         case DOWN:
             keyEvent.consume();
             navigateToNextInput();
             break;
+        case TAB:
+            keyEvent.consume();
+            selectClosestResultBasedOnTextFieldValue();
+            break;
         default:
             // let JavaFx handle the keypress
+        }
+    }
+
+    /**
+     * Updates the text field with the command that is the closest to the current text field string
+     */
+    private void selectClosestResultBasedOnTextFieldValue() {
+        String currentText = commandTextField.getText().toLowerCase();
+        if (currentText.length() != 0) {
+            for (String commandWord : commandList) {
+                if (currentText.length() <= commandWord.length()
+                        && currentText.equals(commandWord.substring(0, currentText.length()))) {
+                    replaceText(commandWord);
+                }
+            }
         }
     }
 

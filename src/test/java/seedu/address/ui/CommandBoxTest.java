@@ -9,6 +9,8 @@ import org.junit.Test;
 
 import guitests.guihandles.CommandBoxHandle;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
 import seedu.address.logic.commands.ListCommand;
@@ -123,6 +125,37 @@ public class CommandBoxTest extends GuiUnitTest {
         commandBoxHandle.run(thirdCommand);
         assertInputHistory(KeyCode.DOWN, "");
         assertInputHistory(KeyCode.UP, thirdCommand);
+    }
+
+    @Test
+    public void tabAutoCompleteTest_withNoMatchingCommands() {
+        // text field is empty
+        assertInputHistory(KeyCode.TAB, "");
+
+        // one letter in text field
+        guiRobot.push(KeyCode.Y);
+        assertInputHistory(KeyCode.TAB, "y");
+
+        // two letters in text field
+        guiRobot.push(KeyCode.T);
+        assertInputHistory(KeyCode.TAB, "yt");
+
+        // current text in text field is longer than some commands
+        guiRobot.push(KeyCode.Y);
+        guiRobot.push(KeyCode.SPACE);
+        guiRobot.push(KeyCode.Y);
+        assertInputHistory(KeyCode.TAB, "yty y");
+    }
+
+    @Test
+    public void tabAutoCompleteTest_withMatchingCommand() {
+        guiRobot.push(KeyCode.L);
+        assertInputHistory(KeyCode.TAB, COMMAND_THAT_SUCCEEDS);
+        guiRobot.push(KeyCode.ENTER);
+
+        // text in text filed is in uppercase
+        guiRobot.push(new KeyCodeCombination(KeyCode.A, KeyCombination.SHIFT_DOWN));
+        assertInputHistory(KeyCode.TAB, "add");
     }
 
     /**

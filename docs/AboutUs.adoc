@@ -56,37 +56,37 @@ Responsibilities: UI
 '''
 
 === Lee Jun Yao Francis
-image::francis.jpg[width="150", align="left"]
+image::fustilio.jpg[width="150", align="left"]
 {empty}[https://github.com/fustilio[github]] [<<francislee#, portfolio>>]
 
-Role: Code Monkey +
+Role: Code Quality, Documentation, Testing, Developer in charge of Modelling Component +
 Responsibilities: TBA
 
 '''
 
 === Kyle Timothy Ng Chu
-image::kowalski.jpg[width="150", align="left"]
+image::kowalski95.jpg[width="150", align="left"]
 {empty}[http://github.com/kowalski985[github]] [<<kylechu#, portfolio>>]
 
-Role: Developer +
+Role: Team Lead, Integration, Scheduling and Tracking, Developer in charge of Logic Component +
 Responsibilities: TBA
 
 '''
 
 === Kennard Ng Pool Hua
-image::kennard.jpg[width="150", align="left"]
+image::kennard123661.jpg[width="150", align="left"]
 {empty}[https://github.com/Kennard123661[github]] [<<kennardngpoolhua#, portfolio>>]
 
-Role: Developer +
+Role: Testing, Scheduling and Tracking, Deliverables and Deadlines, Documentation, Developer in charge of Storage Component +
 Responsibilities: TBA
 
 '''
 
 === Victoria Lim Yan Hui
-image::beanie.jpg[width="150", align="left"]
+image::vicisapotato.jpg[width="150", align="left"]
 {empty}[https://github.com/vicisapotato[github]] [<<victorialimyanhui#, portfolio>>]
 
-Role: Developer +
+Role: Documentation, Deliverables and Deadlines, Ui Designer, Developer in charge of Ui Component +
 Responsibilities: TBA
 
 '''

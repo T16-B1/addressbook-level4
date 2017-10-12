@@ -723,6 +723,8 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |Priority |As a ... |I want to ... |So that I can...
 |`* * *` |new user |see usage instructions |refer to instructions when I forget how to use the App
 
+|`* * *` |onging user |have a backup of my addressbook data |restore my addressbook if the storage file becomes corrupted
+
 |`* * *` |user |add a new person |
 
 |`* * *` |user |delete a person |remove entries that I no longer need
@@ -733,7 +735,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |user |filter contacts by tags |view specific contacts that are assigned with specific tags
 
-|`* * *` |user |the browser to automatically search for the address of the selected person in Google Maps |
+|`* * *` |user |the browser to automatically search for the address of the selected person in Google Maps | so that I can automatically get information on how to get to an address automatically, on click.
 
 |`* * *` |user who travels a lot |to know the shortest distance from one contact's address to another |
 
@@ -744,8 +746,6 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |`* *` |user |have a default picture for contacts without profile pictures |know which contact does not have a profile picture
 
 |`* *` |user |update the profile pictures of contacts |
-
-|`* *` |new user |input instructions into a chatbot interface |I do not need to remember the format of commands
 
 |`* *` |new user |to have an autocomplete for the commands |I do not need to remember the format of commands
 
@@ -767,8 +767,6 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* *` |thoughtful user |view the birthdays of my contacts in sorted order |know whose birthday is coming up
 
-|`* *` |user involved in many group projects or activities |create telegram group chats of contacts tagged with the same tag |add contacts into a group chat easily
-
 |`* *` |user |share details with contacts with a specific tag |minimize chance of someone else seeing them by accident
 
 |`* *` |busy user |add and remove tasks |use addressbook as a task manager
@@ -788,6 +786,10 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |`* *` |forgetful user |view daily tasks |keep track of daily tasks
 
 |`* *` |user |retrieve my exact location on my device |remember the current address and store my location
+
+|`*` |new user |input instructions into a chatbot interface |I do not need to remember the format of commands
+
+|`*` |user involved in many group projects or activities |create telegram group chats of contacts tagged with the same tag |add contacts into a group chat easily
 
 |`*` |user with many persons in the address book |sort persons by name |locate a person easily
 |=======================================================================
@@ -978,8 +980,7 @@ Use case resumes at step 4
 *MSS*
 
 1.  User requests to decode person details
-2.  AddressBook shows decoded details
-3.  AddressBook prompts user on whether to save contact
+2.  AddressBook shows decoded details and prompts user on whether to save contact
 4.  User accepts save
 5.  AddressBook saves decoded person's contact
 +
