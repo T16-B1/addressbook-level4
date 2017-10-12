@@ -2,31 +2,45 @@ package seedu.address.storage;
 
 import static junit.framework.TestCase.assertNotNull;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.io.IOException;
+import java.text.MessageFormat;
+import java.util.Optional;
+import java.util.logging.Formatter;
+import java.util.logging.Level;
+import java.util.logging.LogRecord;
 
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
 
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
+import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
+import seedu.address.testutil.TestLogger;
 import seedu.address.ui.testutil.EventsCollectorRule;
 
 public class StorageManagerTest {
 
     @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
+    @Rule
     public TemporaryFolder testFolder = new TemporaryFolder();
+
     @Rule
     public final EventsCollectorRule eventsCollectorRule = new EventsCollectorRule();
 
     private StorageManager storageManager;
+    private TestLogger testLogger;
 
     @Before
     public void setUp() {
@@ -39,6 +53,83 @@ public class StorageManagerTest {
         return testFolder.getRoot().getPath() + fileName;
     }
 
+    @Test
+    public void testPrefFilePath() {
+        assertEquals(getTempFilePath("prefs"), storageManager.getUserPrefsFilePath());
+    }
+
+    @Test
+    public void onInitialStartupNoBackupTest() throws DataConversionException, IOException {
+        testLogger = new TestLogger(storageManager.getClass(), Level.WARNING);
+        storageManager = new StorageManager(new XmlAddressBookStorage("NotXmlFormatAddressBook.xml"),
+                new JsonUserPrefsStorage("random.json"));
+
+        // test for log message.
+        String capturedLog = testLogger.getTestCapturedLog();
+        String expectedLogMessage = "WARNING - AddressBook not present, backup not possible\n";
+        assertEquals(capturedLog, expectedLogMessage);
+
+        // testing if backup exists
+        Optional<ReadOnlyAddressBook> backupAddressBookOptional = storageManager
+                .readAddressBook(storageManager.getBackupStorageFilePath());
+        assertFalse(backupAddressBookOptional.isPresent());
+    }
+
+    @Test
+    public void backupAddressBook() throws Exception {
+        // set up
+        AddressBook original = getTypicalAddressBook();
+        storageManager.saveAddressBook(original);
+
+        // create new backup by loading another Storage Manager
+        XmlAddressBookStorage addressBookStorage = new XmlAddressBookStorage(getTempFilePath("ab"));
+        JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
+        testLogger = new TestLogger(StorageManager.class, Level.INFO);
+        StorageManager backupStorageManager = new StorageManager(addressBookStorage, userPrefsStorage);
+
+        String capturedLog = testLogger.getTestCapturedLog();
+        String expectedLog = "INFO - AddressBook present, back up success\n";
+        assertEquals(capturedLog, expectedLog);
+
+        // checks that the backup properly backups the new file.
+        Optional<ReadOnlyAddressBook> backupAddressBookOptional = backupStorageManager
+                .readAddressBook(backupStorageManager.getBackupStorageFilePath());
+        AddressBook backupAddressBook = new AddressBook(backupAddressBookOptional.get());
+        assertEquals(backupAddressBook, original);
+
+        // checks that the file does not backup on every save
+        AddressBook editedBook = new AddressBook();
+        backupStorageManager.saveAddressBook(editedBook);
+        Optional<ReadOnlyAddressBook> mainAddressBookOptional = backupStorageManager
+                .readAddressBook(backupStorageManager.getAddressBookFilePath());
+
+        AddressBook mainAddressBook = new AddressBook(mainAddressBookOptional.get());
+        assertFalse(mainAddressBook.equals(backupAddressBook));
+
+        // checks that the backup only saves on the initialization of another storage manager.
+        StorageManager anotherStorageManager = new StorageManager(addressBookStorage, userPrefsStorage);
+        backupAddressBookOptional = anotherStorageManager
+                .readAddressBook(backupStorageManager.getBackupStorageFilePath());
+        backupAddressBook = new AddressBook(backupAddressBookOptional.get());
+        assertEquals(editedBook, backupAddressBook);
+    }
+
+    @Test
+    public void backUpUrlTest() {
+        String expectedUrl = storageManager.getAddressBookFilePath() + "-backup.xml";
+        String actualUrl = storageManager.getBackupStorageFilePath();
+        assertEquals(expectedUrl, actualUrl);
+    }
+
+    @Test
+    public void backUpCommandTest() throws IOException, DataConversionException {
+        AddressBook original = getTypicalAddressBook();
+        storageManager.backupAddressBook(original);
+        Optional<ReadOnlyAddressBook> backupAddressBookOptional = storageManager
+                .readAddressBook(storageManager.getBackupStorageFilePath());
+        AddressBook backupAddressBook = new AddressBook(backupAddressBookOptional.get());
+        assertEquals(backupAddressBook, original);
+    }
 
     @Test
     public void prefsReadSave() throws Exception {
@@ -95,7 +186,19 @@ public class StorageManagerTest {
         public void saveAddressBook(ReadOnlyAddressBook addressBook, String filePath) throws IOException {
             throw new IOException("dummy exception");
         }
+
     }
 
+    public class testLogFormatter extends Formatter {
+
+        /**
+         * @see java.util.logging.Formatter#format(java.util.logging.LogRecord)
+         */
+        @Override
+        public String format(final LogRecord record) {
+            return MessageFormat.format("{0} - {1}", record.getLevel(), record.getMessage(),
+                    record.getParameters());
+        }
+    }
 
 }

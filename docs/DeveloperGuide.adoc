@@ -10,7 +10,7 @@ ifdef::env-github[]
 :note-caption: :information_source:
 endif::[]
 ifdef::env-github,env-browser[:outfilesuffix: .adoc]
-:repoURL: https://github.com/T16-B1/addressbook-level4/tree/master
+:repoURL: https://github.com/CS2103AUG2017-T16-B1/main
 
 By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
 
@@ -723,13 +723,73 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |Priority |As a ... |I want to ... |So that I can...
 |`* * *` |new user |see usage instructions |refer to instructions when I forget how to use the App
 
+|`* * *` |onging user |have a backup of my addressbook data |restore my addressbook if the storage file becomes corrupted
+
 |`* * *` |user |add a new person |
 
 |`* * *` |user |delete a person |remove entries that I no longer need
 
 |`* * *` |user |find a person by name |locate details of persons without having to go through the entire list
 
-|`* *` |user |hide link:#private-contact-detail[private contact details] by default |minimize chance of someone else seeing them by accident
+|`* * *` |user |add a new location |store important locations and establishments
+
+|`* * *` |user |filter contacts by tags |view specific contacts that are assigned with specific tags
+
+|`* * *` |user |the browser to automatically search for the address of the selected person in Google Maps | so that I can automatically get information on how to get to an address automatically, on click.
+
+|`* * *` |user who travels a lot |to know the shortest distance from one contact's address to another |
+
+|`* * *` |user who travels a lot |set a reference location |find the shortest distance from my reference location to a contact's location
+
+|`* *` |user |add profile pictures to contacts |
+
+|`* *` |user |have a default picture for contacts without profile pictures |know which contact does not have a profile picture
+
+|`* *` |user |update the profile pictures of contacts |
+
+|`* *` |new user |to have an autocomplete for the commands |I do not need to remember the format of commands
+
+|`* *` |secretive user |hide link:#private-contact-detail[private contact details] by default |minimize chance of someone else seeing them by accident
+
+|`* *` |lazy user |filter contacts by distance from my reference location |see a list of contacts that are at a specific radial distance from me
+
+|`* *` |user |store my work and home addresses |use these addresses as destinations/sources of my journeys
+
+|`* *` |lazy user |send and receive contact details to and from my friends |minimize the amount of data inputs
+
+|`* *` |careful user |specify the type contact details I send to friends |protect my privacy
+
+|`* *` |user |import profile pictures of contacts from their social media |upload profile pictures of contacts easily
+
+|`* *` |user |have the option of adding a birthday to a contact |store the addresses of my contacts
+
+|`* *` |forgetful user |be reminded of a person's birthday (if valid) |in case I forget the date
+
+|`* *` |thoughtful user |view the birthdays of my contacts in sorted order |know whose birthday is coming up
+
+|`* *` |user |share details with contacts with a specific tag |minimize chance of someone else seeing them by accident
+
+|`* *` |busy user |add and remove tasks |use addressbook as a task manager
+
+|`* *` |user with a changing schedule |edit created tasks |change the details of task
+
+|`* *` |user |assign contacts and locations to tasks |link my tasks with people and places
+
+|`* *` |user |assign an expiry date to tasks |tasks are deleted automatically
+
+|`* *` |lazy user |to be notified of the most optimal path of completing my tasks based on travelling distance |
+
+|`* *` |user |add and remove events |keep track of events happening near me
+
+|`* *` |user |filter tasks according to location |be notified of tasks I have at a specific (contact) location
+
+|`* *` |forgetful user |view daily tasks |keep track of daily tasks
+
+|`* *` |user |retrieve my exact location on my device |remember the current address and store my location
+
+|`*` |new user |input instructions into a chatbot interface |I do not need to remember the format of commands
+
+|`*` |user involved in many group projects or activities |create telegram group chats of contacts tagged with the same tag |add contacts into a group chat easily
 
 |`*` |user with many persons in the address book |sort persons by name |locate a person easily
 |=======================================================================
@@ -751,21 +811,194 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 3.  User requests to delete a specific person in the list
 4.  AddressBook deletes the person
 +
-Use case ends.
+Use case ends
 
 *Extensions*
 
 [none]
-* 2a. The list is empty.
+* 2a. The list is empty
 +
-Use case ends.
+Use case ends
 
-* 3a. The given index is invalid.
+* 3a. The given index is invalid
 +
 [none]
 ** 3a1. AddressBook shows an error message.
 +
-Use case resumes at step 2.
+Use case resumes at step 2
+
+[discrete]
+=== Use case: Add person by prompt
+
+*MSS*
+
+1.  User requests to add persons without further details
+2.  AddressBook prompts user to input name of person of person to add
+3.  User inputs name of person as requested
+4.  AddressBook prompts user to input phone number of person to add
+5.  User inputs phone number as requested
+6.  AddressBook prompts user to input email of person to add
+7.  User inputs email as requested
+8.  AddressBook prompts user to input address of person to add
+9.  User inputs address as requested
+10.  AddressBook prompts user to input tags of person to add
+11.  User inputs tags as requested (optional)
+12.  AddressBook prompts user to input birthday of person to add
+13.  User inputs birthday as requested
+14.  AddressBook adds person (optional)
++
+Use case ends
+
+*Extensions*
+
+[none]
+* 3a. The user does not input a name
++
+[none]
+** 3a1. AddressBook shows an error message
++
+Use case resumes at step 2
+
+* 5a. The user does not input a valid phone number
++
+[none]
+** 5a1. AddressBook shows an error message
++
+Use case resumes at step 4
+
+[none]
+* 7a. The user does not input a valid email
++
+[none]
+** 7a1. AddressBook shows an error message
++
+Use case resumes at step 6
+
+* 9a. The user does not input a valid address
++
+[none]
+** 9a1. AddressBook shows an error message
++
+Use case resumes at step 8
+
+* 11a. The user does not input a tag
++
+[none]
+** 11a1. AddressBook shows that no tag has been entered
++
+Use case resumes at step 12
+
+* 13a. The user does not input a birthday
++
+[none]
+** 13a1. AddressBook shows that no birthday has been entered
++
+Use case resumes at step 14
+
+[none]
+* 14a. AddressBook shows error message if same person found
++
+Use case ends
+
+
+[discrete]
+=== Use case: Upload image of Person from local files
+
+*MSS*
+
+1.  User requests to list persons
+2.  AddressBook shows a list of persons
+3.  User requests to upload image of a specific person in the list
+4.  AddressBook prompts for location of image
+5.  User inputs file path
+6.  AddressBook updates image
++
+Use case ends
+
+*Extensions*
+
+[none]
+* 2a. The list is empty
++
+Use case ends.
+
+* 6a. The file path given is invalid
++
+[none]
+** 6a1. AddressBook shows an error message
++
+Use case resumes at step 4
+
+* 6b. The file type of file given is invalid
++
+[none]
+** 6b1. AddressBook shows an error message
++
+Use case resumes at step 4
+
+[discrete]
+=== Use case: Set user reference location
+
+*MSS*
+
+1.  User requests to set reference location
+2.  AddressBook updates reference location
++
+Use case ends
+
+[discrete]
+=== Use case: Generate encoded contact details
+
+*MSS*
+
+1.  User requests to list persons
+2.  AddressBook shows a list of persons
+3.  User requests to select specific person
+4.  AddressBook prompts for which details to not encode
+5.  User inputs flags of details to not encode
+6.  AddressBook returns encoded string
++
+Use case ends
+
+*Extensions*
+
+[none]
+* 2a. The list is empty
++
+Use case ends
+
+* 6a. The flags given are invalid.
++
+[none]
+** 6a1. AddressBook shows an error message
++
+Use case resumes at step 4
+
+[discrete]
+=== Use case: Generate decoded contact details
+
+*MSS*
+
+1.  User requests to decode person details
+2.  AddressBook shows decoded details and prompts user on whether to save contact
+4.  User accepts save
+5.  AddressBook saves decoded person's contact
++
+Use case ends
+
+*Extensions*
+
+[none]
+* 4a. User rejects save
++
+Use case ends
+
+* 2a. Encoded details are invalid
++
+[none]
+** 2a1. AddressBook shows an error message.
++
+Use case ends
 
 {More to be added}
 
@@ -775,6 +1008,15 @@ Use case resumes at step 2.
 .  Should work on any link:#mainstream-os[mainstream OS] as long as it has Java `1.8.0_60` or higher installed.
 .  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 .  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+.  Each Command should take at most 1 second to finish execution.
+.  Should be able to handle any valid or invalid user input.
+.  Should back up data inside the address book each time the user makes changes to the data.
+.  Commands that do not require internet connection should still work when the user is not connected to the internet.
+.  Should come with automated unit tests.
+.  A new user should be able to use basic commands like add and delete without needing to refer to the help window after their first time using the application.
+.  Should allow the user to upload images of any link:#mainstream-image-format[mainstream image format].
+.  link:#hash-string[Hash String] of the users personal contact information should only be made up of alphanumeric characters.
+.  Should update the map automatically when the user changes their starting location.
 
 {More to be added}
 
@@ -788,11 +1030,25 @@ Mainstream OS
 Windows, Linux, Unix, OS-X
 ....
 
+[[mainstream-image-format]]
+Mainstream Image Format
+
+....
+JPEG, PNG, BMP
+....
+
 [[private-contact-detail]]
 Private contact detail
 
 ....
 A contact detail that is not meant to be shared with others
+....
+
+[[hash-string]]
+Hash String
+
+....
+An encoded string that contains the contact details of a particular person
 ....
 
 [appendix]

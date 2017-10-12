@@ -10,7 +10,7 @@ ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
 endif::[]
-:repoURL: https://github.com/se-edu/addressbook-level4
+:repoURL: https://github.com/CS2103AUG2017-T16-B1/main
 
 By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
 
@@ -226,6 +226,13 @@ Format: `exit`
 
 Address book data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
+
+=== Backing up the data
+
+Address book data are backed up in the hard disk automatically at the start of every session of the program. +
+There is no need to back up the data manually. +
+The backup file is appended with `-backup.xml` and is stored in the same folder as the main storage file. +
+The data from the backup file has to be loaded manually by copying the contents of the backup file into your main storage file.
 
 == FAQ
 

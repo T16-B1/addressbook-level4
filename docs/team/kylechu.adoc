@@ -1,4 +1,4 @@
-= Victoria Lim Yan Hui - Project Portfolio
+= Kyle Timothy Ng Chu - Project Portfolio
 ifdef::env-github,env-browser[:outfilesuffix: .adoc]
 :imagesDir: ../images
 :stylesDir: ../stylesheets

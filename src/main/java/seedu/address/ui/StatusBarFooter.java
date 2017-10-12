@@ -39,9 +39,9 @@ public class StatusBarFooter extends UiPart<Region> {
     @FXML
     private StatusBar syncStatus;
     @FXML
-    private StatusBar totalPersons;
-    @FXML
     private StatusBar saveLocationStatus;
+    @FXML
+    private StatusBar totalPersons;
 
 
     public StatusBarFooter(String saveLocation, int totalPersons) {
@@ -75,7 +75,7 @@ public class StatusBarFooter extends UiPart<Region> {
     }
 
     private void setTotalPersons(int totalPersons) {
-        this.totalPersons.setText(totalPersons + " person(s) total");
+        Platform.runLater(() -> this.totalPersons.setText(totalPersons + " person(s) total"));
     }
 
     @Subscribe

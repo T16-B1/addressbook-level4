@@ -1,4 +1,4 @@
-= Victoria Lim Yan Hui - Project Portfolio
+= Lee Jun Yao Francis - Project Portfolio
 ifdef::env-github,env-browser[:outfilesuffix: .adoc]
 :imagesDir: ../images
 :stylesDir: ../stylesheets
@@ -8,14 +8,14 @@ AddressBook - Level 4 is a desktop address book application used for teaching So
 
 *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] {give links to collated code files}
 
-=== Enhancement Added: Undo/Redo
+=== Enhancement Added: Exit
 
 ==== External behavior
 
 ---
 #Start of Extract [from: User Guide]#
 
-include::../UserGuide.adoc[tag=undoredo]
+include::../UserGuide.adoc[tag=exit]
 
 #End of Extract#
 
@@ -30,7 +30,7 @@ include::../UserGuide.adoc[tag=undoredo]
 ---
 #Start of Extract [from: Developer Guide]#
 
-include::../DeveloperGuide.adoc[tag=undoredo]
+//include::../DeveloperGuide.adoc[tag=exit]
 
 #End of Extract#
 
@@ -45,6 +45,6 @@ include::../DeveloperGuide.adoc[tag=undoredo]
 * Updated the GUI color scheme (Pull requests https://github.com[#33], https://github.com[#34])
 * Wrote additional tests to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
 
-== Project: Modulus
+== Project: PowerPointLabs
 
 {Optionally (not graded), you may include other projects in your portfolio.}
