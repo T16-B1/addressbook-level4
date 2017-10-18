@@ -160,16 +160,16 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <div class="ulist">
 <ul>
 <li>
-<p>Words in <code>UPPER_CASE</code> are the parameters to be supplied by the user e.g. in <code>add i/PARCEL_ID</code>, <code>PARCEL_ID</code> is a parameter which can be used as <code>add i/1110201700000001</code>.</p>
+<p>Words in <code>UPPER_CASE</code> are the parameters to be supplied by the user e.g. in <code>add #/PARCEL_ID</code>, <code>PARCEL_ID</code> is a parameter which can be used as <code>add i/1110201700000001</code>.</p>
 </li>
 <li>
-<p>Items in square brackets are optional e.g <code>i/PARCEL_ID [t/TAG]</code> can be used as <code>i/1110201700000001 t/fragile</code> or as <code>i/1110201700000001</code>.</p>
+<p>Items in square brackets are optional e.g <code>i/PARCEL_ID [t/TAG]</code> can be used as <code><mark>/1110201700000001 t/fragile</code> or as <code></mark>/1110201700000001</code>.</p>
 </li>
 <li>
 <p>Items with <code>…</code>​ after them can be used multiple times including zero times e.g. <code>[t/TAG]&#8230;&#8203;</code> can be used as <code>&#160;</code> (i.e. 0 times), <code>t/fragile</code>, <code>t/keepDry t/frozen</code> etc.</p>
 </li>
 <li>
-<p>Parameters can be in any order e.g. if the command specifies <code>i/PARCEL_ID p/PHONE_NUMBER</code>, <code>p/PHONE_NUMBER i/PARCEL_ID</code> is also acceptable.</p>
+<p>Parameters can be in any order e.g. if the command specifies <code>#/PARCEL_ID p/PHONE_NUMBER</code>, <code>p/PHONE_NUMBER #/PARCEL_ID</code> is also acceptable.</p>
 </li>
 </ul>
 </div>
@@ -184,8 +184,8 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <div class="sect2">
 <h3 id="adding-a-parcel-code-add-code"><a class="link" href="#adding-a-parcel-code-add-code">4.2. Adding a parcel: <code>add</code></a></h3>
 <div class="paragraph">
-<p>Adds a parcel to the Ark<br>
-Format: <code>add i/PARCEL_ID n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]&#8230;&#8203;</code></p>
+<p>Adds a parcel to Ark<br>
+Format: <code>add #/TRACKING_ID n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]&#8230;&#8203;</code></p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -205,10 +205,10 @@ A parcel can have any number of tags (including 0)
 <div class="ulist">
 <ul>
 <li>
-<p><code>add i/11111111111 n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 S123121</code></p>
+<p><code>add #/11111111111 n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 S123121</code></p>
 </li>
 <li>
-<p><code>add i/11111112222 n/Betsy Crowe t/friend e/betsycrowe@example.com a/22 Crowe road S123123 p/1234567 t/fragile</code></p>
+<p><code>add #/11111112222 n/Betsy Crowe t/friend e/betsycrowe@example.com a/22 Crowe road S123123 p/1234567 t/fragile</code></p>
 </li>
 </ul>
 </div>
@@ -216,15 +216,15 @@ A parcel can have any number of tags (including 0)
 <div class="sect2">
 <h3 id="listing-all-parcels-code-list-code"><a class="link" href="#listing-all-parcels-code-list-code">4.3. Listing all parcels : <code>list</code></a></h3>
 <div class="paragraph">
-<p>Shows a list of all parcels in the Ark.<br>
+<p>Shows a list of all parcels in Ark.<br>
 Format: <code>list</code></p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="editing-a-parcel-code-edit-code"><a class="link" href="#editing-a-parcel-code-edit-code">4.4. Editing a parcel : <code>edit</code></a></h3>
 <div class="paragraph">
-<p>Edits an existing parcel in the Ark.<br>
-Format: <code>edit INDEX [i/PARCEL_ID] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]&#8230;&#8203;</code></p>
+<p>Edits an existing parcel in Ark.<br>
+Format: <code>edit INDEX [#/PARCEL_ID] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]&#8230;&#8203;</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -268,7 +268,7 @@ Edits the recipient&#8217;s name of the 2nd parcel to be <code>Betsy Crower</cod
 <div class="sect2">
 <h3 id="locating-parcels-by-name-code-find-code"><a class="link" href="#locating-parcels-by-name-code-find-code">4.5. Locating parcels by name: <code>find</code></a></h3>
 <div class="paragraph">
-<p>Finds parcels whose names contain any of the given keywords.<br>
+<p>Finds parcels whose recipient name contain any of the given keywords.<br>
 Format: <code>find KEYWORD [MORE_KEYWORDS]</code></p>
 </div>
 <div class="sidebarblock">
@@ -429,7 +429,7 @@ the previous and next input respectively in the command box.</p>
 <div class="sect2">
 <h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">4.9. Undoing previous command : <code>undo</code></a></h3>
 <div class="paragraph">
-<p>Restores the Ark to the state before the previous <em>undoable</em> command was executed.<br>
+<p>Restores Ark to the state before the previous <em>undoable</em> command was executed.<br>
 Format: <code>undo</code></p>
 </div>
 <div class="admonitionblock note">
@@ -440,7 +440,7 @@ Format: <code>undo</code></p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Commands that can be undone: those commands that modify the Ark&#8217;s content
+<p>Commands that can be undone: those commands that modify Ark&#8217;s content
 (<code>add</code>, <code>delete</code>, <code>edit</code> and <code>clear</code>).</p>
 </div>
 </td>
@@ -507,7 +507,7 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 <div class="sect2">
 <h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">4.11. Clearing all entries : <code>clear</code></a></h3>
 <div class="paragraph">
-<p>Clears all entries from the Ark.<br>
+<p>Clears all entries from Ark.<br>
 Format: <code>clear</code></p>
 </div>
 </div>
@@ -571,7 +571,7 @@ The data from the backup file has to be loaded manually by copying the contents 
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Add</strong> <code>add i/PARCEL_ID n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]&#8230;&#8203;</code><br>
+<p><strong>Add</strong> <code>add #/PARCEL_ID n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]&#8230;&#8203;</code><br>
 e.g. <code>add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague</code></p>
 </li>
 <li>
@@ -582,8 +582,8 @@ e.g. <code>add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1
 e.g. <code>delete 3</code></p>
 </li>
 <li>
-<p><strong>Edit</strong> : <code>edit INDEX [i/PARCEL_ID] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]&#8230;&#8203;</code><br>
-e.g. <code>edit 2 i/1111111111111 n/James Lee e/jameslee@example.com</code></p>
+<p><strong>Edit</strong> : <code>edit INDEX [#/PARCEL_ID] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]&#8230;&#8203;</code><br>
+e.g. <code>edit 2 #/1111111111111 n/James Lee e/jameslee@example.com</code></p>
 </li>
 <li>
 <p><strong>Find</strong> : <code>find KEYWORD [MORE_KEYWORDS]</code><br>
@@ -616,7 +616,7 @@ e.g.<code>select 2</code></p>
 <h2 id="features-coming-in-v2-0"><a class="link" href="#features-coming-in-v2-0">7. Features Coming in v2.0</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In <code>ARK v2.0</code>, the delivery vendor will be able to do the following:<br></p>
+<p>In <code>Ark v2.0</code>, the delivery vendor will be able to do the following:<br></p>
 </div>
 <div class="ulist">
 <ul>
@@ -699,7 +699,7 @@ e.g.<code>select 2</code></p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-10-18 06:31:19 +00:00
+Last updated 2017-10-18 07:07:23 +00:00
 </div>
 </div>
 </body>
