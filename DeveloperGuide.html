@@ -54,6 +54,7 @@
 <li><a href="#logging">4.2. Logging</a></li>
 <li><a href="#configuration">4.3. Configuration</a></li>
 <li><a href="#delete-tag-mechanism">4.4. Delete Tag mechanism</a></li>
+<li><a href="#backup-mechanism">4.5. Backup Mechanism</a></li>
 </ul>
 </li>
 <li><a href="#documentation">5. Documentation</a>
@@ -650,9 +651,9 @@ The following diagram shows the inheritance diagram for commands:</p>
 <div class="paragraph">
 <p>As you can see from the diagram, <code>UndoableCommand</code> adds an extra layer between the abstract <code>Command</code> class and
 concrete commands that can be undone, such as the <code>DeleteCommand</code>. Note that extra tasks need to be done when executing
-a command in an <em>undoable</em> way, such as saving the state of the address book before execution. <code>UndoableCommand</code> contains the
-high-level algorithm for those extra tasks while the child classes implements the details of how to execute the
-specific command. Note that this technique of putting the high-level algorithm in the parent class and lower-level
+a command in an <em>undoable</em> way, such as saving the state of the address book before execution. <code>UndoableCommand</code>
+contains the high-level algorithm for those extra tasks while the child classes implements the details of how to execute
+the specific command. Note that this technique of putting the high-level algorithm in the parent class and lower-level
 steps of the algorithm in child classes is also known as the
 <a href="https://www.tutorialspoint.com/design_pattern/template_pattern.htm">template pattern</a>.</p>
 </div>
@@ -928,6 +929,62 @@ Tag to delete them.<br>
 <strong>Pros:</strong> Computationally quicker to just find the tag and remove the tag from every parcel in the list of tags<br>
 <strong>Cons:</strong> More difficult to implement as we have to store an additional list of tags which is linked to each parcel
 and has to be updated whenever we edit other parcel details as well.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="backup-mechanism"><a class="link" href="#backup-mechanism">4.5. Backup Mechanism</a></h3>
+<div class="paragraph">
+<p>The back up mechanism is facilitated by a <code>backupAddressBook</code> method within the <code>StorageManager</code>. It supports the
+backing up of AddressBook data in Ark.<br></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/BackupSequenceDiagram.png" alt="BackupSequenceDiagram" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>backupAddressBook</code> method is called automatically when <code>storageManager</code> is initialised in <code>MainApp#init()</code>,
+a method that is called when <code>Ark</code> is launched. The method utilises the <code>StorageManager#saveAddressBook()</code> method and
+stores the backup in the same directory as the main <code>AddressBook</code> storage file. The backup file is saved and named with
+the name of the main <code>AddressBook</code> storage file appended with <code>-backup.xml</code>. i.e. If the main <code>AddressBook</code> storage file
+ is named as <code>addressbook.xml</code>, the backup storage file will be saved as <code>addressbook.xml-backup.xml</code>.</p>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">4.5.1. Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Implementation of <code>StorageManager#backupAddressBook</code><br>
+<strong>Alternative 1 (current choice):</strong> use the <code>StorageManger#saveAddressBook()</code> method to implement logic.<br>
+<strong>Pros:</strong> It becomes easier to implement method rather than writing out a separate logic for saveAddressBook. It
+makes updates easier since enhancements to <code>saveAddressBook()</code> will also enhance <code>backupAddressBook()</code>.<br>
+<strong>Cons:</strong> This implementation increases the coupling of <code>StorageManager#backupAddressBook()</code> and
+<code>StorageManager#saveAddressBook()</code> where changes in <code>saveAddressBook()</code> will cause changes in <code>backupAddressBook()</code>.<br>
+<strong>Alternative 2:</strong> Separate the implemnetation of <code>Storage#backupAddressBook()</code> from <code>StorageManager#saveAddressBook()</code>
+<br>
+<strong>Pros:</strong> Reduced coupling of saveAddressBook() and backupAddressBook() and allows the backup file to be saved at a
+different location from the main save file. This prevents the backup file from being corrupted if the folder of the
+main save file becomes corrupted.<br>
+<strong>Cons:</strong> More tedious to implement and maintain <code>backupAddressBook()</code> since enhancements to the saving feature has to
+be implemented in both <code>saveAddressBook()</code> and <code>backupAddressBook()</code><br></p>
+</div>
+<hr>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Trigger to execute <code>StorageManager#backupAddressBook</code><br>
+<strong>Alternative 1 (current choice):</strong> Automatically backup data on Ark on launch of the software.<br>
+<strong>Pros:</strong> This implementation ensures that the if the user corrupts the data of Ark during a session. The user will be
+able to revert to the start of the session, which is ensured to be a workable instance of the Ark software.<br>
+<strong>Cons:</strong> This does not give the most recent copy of the data of the Ark if many changes were made in a single session.
+<br>
+<strong>Alternative 2:</strong> Backup data on Ark every few minutes<br>
+<strong>Pros:</strong> Provides a very recent copy of the data on Ark.<br>
+<strong>Cons:</strong> More tedious and difficult to implement. User may also be running another process at that point of time. It
+could cause a bottleneck if there is a lot of data to be saved, and multiple backup calls are queued one after the
+other.<br>
+<strong>Alternative 3:</strong> Backup data after a fixed number of `UndoableCommand`s.<br>
+<strong>Pros:</strong> Provides a very recent copy of the data on Ark.<br>
+<strong>Cons:</strong> More tedious and difficult to implement. Difficult to determine the optimal amount of data to restore. If
+the corruption of the data is caused by a several of commands, it becomes difficult to ensure that the backup file
+provides a workable copy of the data of Ark.</p>
 </div>
 </div>
 </div>
@@ -1824,7 +1881,7 @@ characters.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-10-18 12:26:57 +00:00
+Last updated 2017-10-18 12:31:31 +00:00
 </div>
 </div>
 </body>

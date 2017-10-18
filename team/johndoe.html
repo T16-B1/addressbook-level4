@@ -148,9 +148,9 @@ The following diagram shows the inheritance diagram for commands:</p>
 <div class="paragraph">
 <p>As you can see from the diagram, <code>UndoableCommand</code> adds an extra layer between the abstract <code>Command</code> class and
 concrete commands that can be undone, such as the <code>DeleteCommand</code>. Note that extra tasks need to be done when executing
-a command in an <em>undoable</em> way, such as saving the state of the address book before execution. <code>UndoableCommand</code> contains the
-high-level algorithm for those extra tasks while the child classes implements the details of how to execute the
-specific command. Note that this technique of putting the high-level algorithm in the parent class and lower-level
+a command in an <em>undoable</em> way, such as saving the state of the address book before execution. <code>UndoableCommand</code>
+contains the high-level algorithm for those extra tasks while the child classes implements the details of how to execute
+the specific command. Note that this technique of putting the high-level algorithm in the parent class and lower-level
 steps of the algorithm in child classes is also known as the
 <a href="https://www.tutorialspoint.com/design_pattern/template_pattern.htm">template pattern</a>.</p>
 </div>
@@ -388,7 +388,7 @@ things.<br></p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-10-18 12:26:57 +00:00
+Last updated 2017-10-18 12:31:31 +00:00
 </div>
 </div>
 </body>
