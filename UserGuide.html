@@ -5,14 +5,14 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.3">
-<title>AddressBook Level 4 - User Guide</title>
+<title>Ark - User Guide</title>
 <link rel="stylesheet" href="stylesheets/gh-pages.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="stylesheets/coderay-asciidoctor.css">
 </head>
 <body class="article">
 <div id="header">
-<h1>AddressBook Level 4 - User Guide</h1>
+<h1>Ark - User Guide</h1>
 </div>
 <div id="content">
 <div id="preamble">
@@ -24,34 +24,68 @@
 <div id="toc" class="toc">
 <div id="toctitle"></div>
 <ul class="sectlevel1">
-<li><a href="#quick-start">1. Quick Start</a></li>
-<li><a href="#features">2. Features</a>
+<li><a href="#introduction">1. Introduction</a></li>
+<li><a href="#about">2. About</a></li>
+<li><a href="#quick-start">3. Quick Start</a></li>
+<li><a href="#features">4. Features</a>
 <ul class="sectlevel2">
-<li><a href="#viewing-help-code-help-code">2.1. Viewing help : <code>help</code></a></li>
-<li><a href="#adding-a-parcel-code-add-code">2.2. Adding a parcel: <code>add</code></a></li>
-<li><a href="#listing-all-parcels-code-list-code">2.3. Listing all parcels : <code>list</code></a></li>
-<li><a href="#editing-a-parcel-code-edit-code">2.4. Editing a parcel : <code>edit</code></a></li>
-<li><a href="#locating-parcels-by-name-code-find-code">2.5. Locating parcels by name: <code>find</code></a></li>
-<li><a href="#deleting-a-parcel-code-delete-code">2.6. Deleting a parcel : <code>delete</code></a></li>
-<li><a href="#selecting-a-parcel-code-select-code">2.7. Selecting a parcel : <code>select</code></a></li>
-<li><a href="#listing-entered-commands-code-history-code">2.8. Listing entered commands : <code>history</code></a></li>
-<li><a href="#undoing-previous-command-code-undo-code">2.9. Undoing previous command : <code>undo</code></a></li>
-<li><a href="#redoing-the-previously-undone-command-code-redo-code">2.10. Redoing the previously undone command : <code>redo</code></a></li>
-<li><a href="#clearing-all-entries-code-clear-code">2.11. Clearing all entries : <code>clear</code></a></li>
-<li><a href="#exiting-the-program-code-exit-code">2.12. Exiting the program : <code>exit</code></a></li>
-<li><a href="#autocomplete">2.13. Autocomplete</a></li>
-<li><a href="#saving-the-data">2.14. Saving the data</a></li>
-<li><a href="#backing-up-the-data">2.15. Backing up the data</a></li>
+<li><a href="#viewing-help-code-help-code">4.1. Viewing help : <code>help</code></a></li>
+<li><a href="#adding-a-parcel-code-add-code">4.2. Adding a parcel: <code>add</code></a></li>
+<li><a href="#listing-all-parcels-code-list-code">4.3. Listing all parcels : <code>list</code></a></li>
+<li><a href="#editing-a-parcel-code-edit-code">4.4. Editing a parcel : <code>edit</code></a></li>
+<li><a href="#locating-parcels-by-name-code-find-code">4.5. Locating parcels by name: <code>find</code></a></li>
+<li><a href="#deleting-a-parcel-code-delete-code">4.6. Deleting a parcel : <code>delete</code></a></li>
+<li><a href="#selecting-a-parcel-code-select-code">4.7. Selecting a parcel : <code>select</code></a></li>
+<li><a href="#listing-entered-commands-code-history-code">4.8. Listing entered commands : <code>history</code></a></li>
+<li><a href="#undoing-previous-command-code-undo-code">4.9. Undoing previous command : <code>undo</code></a></li>
+<li><a href="#redoing-the-previously-undone-command-code-redo-code">4.10. Redoing the previously undone command : <code>redo</code></a></li>
+<li><a href="#clearing-all-entries-code-clear-code">4.11. Clearing all entries : <code>clear</code></a></li>
+<li><a href="#exiting-the-program-code-exit-code">4.12. Exiting the program : <code>exit</code></a></li>
+<li><a href="#autocomplete">4.13. Autocomplete</a></li>
+<li><a href="#saving-the-data">4.14. Saving the data</a></li>
+<li><a href="#backing-up-the-data">4.15. Backing up the data</a></li>
 </ul>
 </li>
-<li><a href="#faq">3. FAQ</a></li>
-<li><a href="#command-summary">4. Command Summary</a></li>
-<li><a href="#features-coming-in-v2-0">5. Features Coming in v2.0</a></li>
+<li><a href="#faq">5. FAQ</a></li>
+<li><a href="#command-summary">6. Command Summary</a></li>
+<li><a href="#features-coming-in-v2-0">7. Features Coming in v2.0</a></li>
 </ul>
 </div>
 </div>
 <div class="sect1">
-<h2 id="quick-start"><a class="link" href="#quick-start">1. Quick Start</a></h2>
+<h2 id="introduction"><a class="link" href="#introduction">1. Introduction</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Unable to keep track of all your deliveries?
+Unsure which parcel is a more urgent delivery?
+Did you ever wish there was a way you could easily plan your delivery route?
+Now with Ark, you no longer need to worry about late deliveries and route planning.
+Leave the heavy thinking to us and just deliver away!<br></p>
+</div>
+<div class="paragraph">
+<p>Ark is a delivery parcel manager with the ability to keep track of your delivery details.
+These details include recipient&#8217;s names, delivery due dates, locations, and tags.
+Ark is also able to help you plan out your delivery route by using google maps
+to help you get from one destination to another.<br></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="about"><a class="link" href="#about">2. About</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This user guide gives you an overall view of the features of Ark and how to get started using Ark.
+The user guide includes all of Arks functions and how to use them,
+as well as providing you examples for easy reference.<br></p>
+</div>
+<div class="paragraph">
+<p>Ark assumes that you already have the postal codes of the delivery locations
+of every parcel and bases its route planning base on postal codes only.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="quick-start"><a class="link" href="#quick-start">3. Quick Start</a></h2>
 <div class="sectionbody">
 <div class="olist arabic">
 <ol class="arabic">
@@ -72,10 +106,10 @@ This app will not work with earlier versions of Java 8.
 </div>
 </li>
 <li>
-<p>Download the latest <code>addressbook.jar</code> <a href="https://github.com/CS2103AUG2017-T16-B1/main/releases">here</a>.</p>
+<p>Download the latest <code>ark.jar</code> <a href="https://github.com/CS2103AUG2017-T16-B1/main/releases">here</a>.</p>
 </li>
 <li>
-<p>Copy the file to the folder you want to use as the home folder for your Address Book.</p>
+<p>Copy the file to the folder you want to use as the home folder for your Ark application.</p>
 </li>
 <li>
 <p>Double-click the file to start the app. The GUI should appear in a few seconds.</p>
@@ -94,16 +128,16 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <div class="ulist">
 <ul>
 <li>
-<p><strong><code>list</code></strong> : lists all parcels</p>
+<p><strong><code>list</code></strong> : lists all parcels.</p>
 </li>
 <li>
 <p><strong><code>clear</code></strong>` : clears the list of parcels.</p>
 </li>
 <li>
-<p><strong><code>delete</code></strong><code>3</code> : deletes the 3rd parcel shown in the current list</p>
+<p><strong><code>delete</code></strong><code>3</code> : deletes the 3rd parcel shown in the current list.</p>
 </li>
 <li>
-<p><strong><code>exit</code></strong> : exits the app</p>
+<p><strong><code>exit</code></strong> : exits the app.</p>
 </li>
 </ul>
 </div>
@@ -116,7 +150,7 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 </div>
 </div>
 <div class="sect1">
-<h2 id="features"><a class="link" href="#features">2. Features</a></h2>
+<h2 id="features"><a class="link" href="#features">4. Features</a></h2>
 <div class="sectionbody">
 <div class="exampleblock">
 <div class="content">
@@ -129,10 +163,10 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <p>Words in <code>UPPER_CASE</code> are the parameters to be supplied by the user e.g. in <code>add i/PARCEL_ID</code>, <code>PARCEL_ID</code> is a parameter which can be used as <code>add i/1110201700000001</code>.</p>
 </li>
 <li>
-<p>Items in square brackets are optional e.g <code>i/PARCEL_ID [t/TAG]</code> can be used as <code>i/1110201700000001 t/friend</code> or as <code>i/1110201700000001</code>.</p>
+<p>Items in square brackets are optional e.g <code>i/PARCEL_ID [t/TAG]</code> can be used as <code>i/1110201700000001 t/fragile</code> or as <code>i/1110201700000001</code>.</p>
 </li>
 <li>
-<p>Items with <code>…</code>​ after them can be used multiple times including zero times e.g. <code>[t/TAG]&#8230;&#8203;</code> can be used as <code>&#160;</code> (i.e. 0 times), <code>t/friend</code>, <code>t/friend t/family</code> etc.</p>
+<p>Items with <code>…</code>​ after them can be used multiple times including zero times e.g. <code>[t/TAG]&#8230;&#8203;</code> can be used as <code>&#160;</code> (i.e. 0 times), <code>t/fragile</code>, <code>t/keepDry t/frozen</code> etc.</p>
 </li>
 <li>
 <p>Parameters can be in any order e.g. if the command specifies <code>i/PARCEL_ID p/PHONE_NUMBER</code>, <code>p/PHONE_NUMBER i/PARCEL_ID</code> is also acceptable.</p>
@@ -142,15 +176,15 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 </div>
 </div>
 <div class="sect2">
-<h3 id="viewing-help-code-help-code"><a class="link" href="#viewing-help-code-help-code">2.1. Viewing help : <code>help</code></a></h3>
+<h3 id="viewing-help-code-help-code"><a class="link" href="#viewing-help-code-help-code">4.1. Viewing help : <code>help</code></a></h3>
 <div class="paragraph">
 <p>Format: <code>help</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="adding-a-parcel-code-add-code"><a class="link" href="#adding-a-parcel-code-add-code">2.2. Adding a parcel: <code>add</code></a></h3>
+<h3 id="adding-a-parcel-code-add-code"><a class="link" href="#adding-a-parcel-code-add-code">4.2. Adding a parcel: <code>add</code></a></h3>
 <div class="paragraph">
-<p>Adds a parcel to the address book<br>
+<p>Adds a parcel to the Ark<br>
 Format: <code>add i/PARCEL_ID n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]&#8230;&#8203;</code></p>
 </div>
 <div class="admonitionblock tip">
@@ -174,22 +208,22 @@ A parcel can have any number of tags (including 0)
 <p><code>add i/11111111111 n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 S123121</code></p>
 </li>
 <li>
-<p><code>add i/11111112222 n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison S123123 p/1234567 t/criminal</code></p>
+<p><code>add i/11111112222 n/Betsy Crowe t/friend e/betsycrowe@example.com a/22 Crowe road S123123 p/1234567 t/fragile</code></p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="listing-all-parcels-code-list-code"><a class="link" href="#listing-all-parcels-code-list-code">2.3. Listing all parcels : <code>list</code></a></h3>
+<h3 id="listing-all-parcels-code-list-code"><a class="link" href="#listing-all-parcels-code-list-code">4.3. Listing all parcels : <code>list</code></a></h3>
 <div class="paragraph">
-<p>Shows a list of all parcels in the address book.<br>
+<p>Shows a list of all parcels in the Ark.<br>
 Format: <code>list</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="editing-a-parcel-code-edit-code"><a class="link" href="#editing-a-parcel-code-edit-code">2.4. Editing a parcel : <code>edit</code></a></h3>
+<h3 id="editing-a-parcel-code-edit-code"><a class="link" href="#editing-a-parcel-code-edit-code">4.4. Editing a parcel : <code>edit</code></a></h3>
 <div class="paragraph">
-<p>Edits an existing parcel in the address book.<br>
+<p>Edits an existing parcel in the Ark.<br>
 Format: <code>edit INDEX [i/PARCEL_ID] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]&#8230;&#8203;</code></p>
 </div>
 <div class="sidebarblock">
@@ -226,13 +260,13 @@ Edits the phone number and email address of the 1st parcel to be <code>91234567<
 </li>
 <li>
 <p><code>edit 2 n/Betsy Crower t/</code><br>
-Edits the name of the 2nd parcel to be <code>Betsy Crower</code> and clears all existing tags.</p>
+Edits the recipient&#8217;s name of the 2nd parcel to be <code>Betsy Crower</code> and clears all existing tags.</p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="locating-parcels-by-name-code-find-code"><a class="link" href="#locating-parcels-by-name-code-find-code">2.5. Locating parcels by name: <code>find</code></a></h3>
+<h3 id="locating-parcels-by-name-code-find-code"><a class="link" href="#locating-parcels-by-name-code-find-code">4.5. Locating parcels by name: <code>find</code></a></h3>
 <div class="paragraph">
 <p>Finds parcels whose names contain any of the given keywords.<br>
 Format: <code>find KEYWORD [MORE_KEYWORDS]</code></p>
@@ -248,7 +282,7 @@ Format: <code>find KEYWORD [MORE_KEYWORDS]</code></p>
 <p>The order of the keywords does not matter. e.g. <code>Hans Bo</code> will match <code>Bo Hans</code></p>
 </li>
 <li>
-<p>Only the name is searched.</p>
+<p>Only the recipients&#8217;s name is searched.</p>
 </li>
 <li>
 <p>Only full words will be matched e.g. <code>Han</code> will not match <code>Hans</code></p>
@@ -277,9 +311,9 @@ Returns any parcel belonging to people with names <code>Betsy</code>, <code>Tim<
 </div>
 </div>
 <div class="sect2">
-<h3 id="deleting-a-parcel-code-delete-code"><a class="link" href="#deleting-a-parcel-code-delete-code">2.6. Deleting a parcel : <code>delete</code></a></h3>
+<h3 id="deleting-a-parcel-code-delete-code"><a class="link" href="#deleting-a-parcel-code-delete-code">4.6. Deleting a parcel : <code>delete</code></a></h3>
 <div class="paragraph">
-<p>Deletes the specified parcel from the address book.<br>
+<p>Deletes the specified parcel from the Ark.<br>
 Format: <code>delete INDEX</code></p>
 </div>
 <div class="sidebarblock">
@@ -307,7 +341,7 @@ Format: <code>delete INDEX</code></p>
 <li>
 <p><code>list</code><br>
 <code>delete 2</code><br>
-Deletes the 2nd parcel in the address book.</p>
+Deletes the 2nd parcel in the Ark.</p>
 </li>
 <li>
 <p><code>find Betsy</code><br>
@@ -318,17 +352,29 @@ Deletes the 1st parcel in the results of the <code>find</code> command.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="selecting-a-parcel-code-select-code"><a class="link" href="#selecting-a-parcel-code-select-code">2.7. Selecting a parcel : <code>select</code></a></h3>
+<h3 id="selecting-a-parcel-code-select-code"><a class="link" href="#selecting-a-parcel-code-select-code">4.7. Selecting a parcel : <code>select</code></a></h3>
 <div class="paragraph">
 <p>Selects the parcel identified by the index number used in the last parcel listing.<br>
 Format: <code>select INDEX</code></p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+A parcel can also be selected by mousing over and clicking on the parcel card in the parcel list.
+</td>
+</tr>
+</table>
 </div>
 <div class="sidebarblock">
 <div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p>Selects the parcel and loads the Google map page showing the location of the receiver of the parcel at the specified <code>INDEX</code>.</p>
+<p>Selects the parcel and loads the Google map page showing the delivery location of the parcel at the specified <code>INDEX</code>.</p>
 </li>
 <li>
 <p>The index refers to the index number shown in the most recent listing.</p>
@@ -348,7 +394,7 @@ Format: <code>select INDEX</code></p>
 <li>
 <p><code>list</code><br>
 <code>select 2</code><br>
-Selects the 2nd parcel in the address book.</p>
+Selects the 2nd parcel in the Ark.</p>
 </li>
 <li>
 <p><code>find Betsy</code><br>
@@ -359,7 +405,7 @@ Selects the 1st parcel in the results of the <code>find</code> command.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="listing-entered-commands-code-history-code"><a class="link" href="#listing-entered-commands-code-history-code">2.8. Listing entered commands : <code>history</code></a></h3>
+<h3 id="listing-entered-commands-code-history-code"><a class="link" href="#listing-entered-commands-code-history-code">4.8. Listing entered commands : <code>history</code></a></h3>
 <div class="paragraph">
 <p>Lists all the commands that you have entered in reverse chronological order.<br>
 Format: <code>history</code></p>
@@ -372,7 +418,8 @@ Format: <code>history</code></p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Pressing the <kbd>&uarr;</kbd> and <kbd>&darr;</kbd> arrows will display the previous and next input respectively in the command box.</p>
+<p>Pressing the <kbd>&uarr;</kbd> and <kbd>&darr;</kbd> arrows will display
+the previous and next input respectively in the command box.</p>
 </div>
 </td>
 </tr>
@@ -380,9 +427,9 @@ Format: <code>history</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">2.9. Undoing previous command : <code>undo</code></a></h3>
+<h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">4.9. Undoing previous command : <code>undo</code></a></h3>
 <div class="paragraph">
-<p>Restores the address book to the state before the previous <em>undoable</em> command was executed.<br>
+<p>Restores the Ark to the state before the previous <em>undoable</em> command was executed.<br>
 Format: <code>undo</code></p>
 </div>
 <div class="admonitionblock note">
@@ -393,7 +440,8 @@ Format: <code>undo</code></p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Undoable commands: those commands that modify the address book&#8217;s content (<code>add</code>, <code>delete</code>, <code>edit</code> and <code>clear</code>).</p>
+<p>Commands that can be undone: those commands that modify the Ark&#8217;s content
+(<code>add</code>, <code>delete</code>, <code>edit</code> and <code>clear</code>).</p>
 </div>
 </td>
 </tr>
@@ -425,7 +473,7 @@ The <code>undo</code> command fails as there are no undoable commands executed p
 </div>
 </div>
 <div class="sect2">
-<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">2.10. Redoing the previously undone command : <code>redo</code></a></h3>
+<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">4.10. Redoing the previously undone command : <code>redo</code></a></h3>
 <div class="paragraph">
 <p>Reverses the most recent <code>undo</code> command.<br>
 Format: <code>redo</code></p>
@@ -457,37 +505,50 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 </div>
 </div>
 <div class="sect2">
-<h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">2.11. Clearing all entries : <code>clear</code></a></h3>
+<h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">4.11. Clearing all entries : <code>clear</code></a></h3>
 <div class="paragraph">
-<p>Clears all entries from the address book.<br>
+<p>Clears all entries from the Ark.<br>
 Format: <code>clear</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">2.12. Exiting the program : <code>exit</code></a></h3>
+<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">4.12. Exiting the program : <code>exit</code></a></h3>
 <div class="paragraph">
 <p>Exits the program.<br>
 Format: <code>exit</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="autocomplete"><a class="link" href="#autocomplete">2.13. Autocomplete</a></h3>
+<h3 id="autocomplete"><a class="link" href="#autocomplete">4.13. Autocomplete</a></h3>
 <div class="paragraph">
-<p>Address book comes with tab autocompletion which unix users will be familiar with.<br>
-To make use of this feature, simply key in the first few characters of the command you with to enter and press the <code>Tab</code> key. Address book will then fill in the rest of the command for you.</p>
+<p>Ark comes with tab autocompletion which is able to complete a command for you
+without requiring you to type out the command fully.<br>
+To make use of this feature, simply key in the first few characters of the command you with to enter and press the <kbd>Tab</kbd> key.
+Ark will then fill in the rest of the command for you.
+Then press <kbd>Enter</kbd> key to enter the command.</p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>e</code> + <kbd>Tab</kbd> (auto-completes with <code>exit</code> in the command line input)</p>
+</li>
+</ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-the-data"><a class="link" href="#saving-the-data">2.14. Saving the data</a></h3>
+<h3 id="saving-the-data"><a class="link" href="#saving-the-data">4.14. Saving the data</a></h3>
 <div class="paragraph">
-<p>Address book data are saved in the hard disk automatically after any command that changes the data.<br>
+<p>Ark data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="backing-up-the-data"><a class="link" href="#backing-up-the-data">2.15. Backing up the data</a></h3>
+<h3 id="backing-up-the-data"><a class="link" href="#backing-up-the-data">4.15. Backing up the data</a></h3>
 <div class="paragraph">
-<p>Address book data are backed up in the hard disk automatically at the start of every session of the program.<br>
+<p>Ark data are backed up in the hard disk automatically at the start of every session of the program.<br>
 There is no need to back up the data manually.<br>
 The backup file is appended with <code>-backup.xml</code> and is stored in the same folder as the main storage file.<br>
 The data from the backup file has to be loaded manually by copying the contents of the backup file into your main storage file.</p>
@@ -496,7 +557,7 @@ The data from the backup file has to be loaded manually by copying the contents 
 </div>
 </div>
 <div class="sect1">
-<h2 id="faq"><a class="link" href="#faq">3. FAQ</a></h2>
+<h2 id="faq"><a class="link" href="#faq">5. FAQ</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p><strong>Q</strong>: How do I transfer my data to another Computer?<br>
@@ -505,7 +566,7 @@ The data from the backup file has to be loaded manually by copying the contents 
 </div>
 </div>
 <div class="sect1">
-<h2 id="command-summary"><a class="link" href="#command-summary">4. Command Summary</a></h2>
+<h2 id="command-summary"><a class="link" href="#command-summary">6. Command Summary</a></h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
@@ -552,10 +613,10 @@ e.g.<code>select 2</code></p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="features-coming-in-v2-0"><a class="link" href="#features-coming-in-v2-0">5. Features Coming in v2.0</a></h2>
+<h2 id="features-coming-in-v2-0"><a class="link" href="#features-coming-in-v2-0">7. Features Coming in v2.0</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In <code>Ark v2.0</code>, the delivery vendor will be able to do the following:<br></p>
+<p>In <code>ARK v2.0</code>, the delivery vendor will be able to do the following:<br></p>
 </div>
 <div class="ulist">
 <ul>
@@ -638,7 +699,7 @@ e.g.<code>select 2</code></p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-10-16 10:57:01 +00:00
+Last updated 2017-10-18 06:31:19 +00:00
 </div>
 </div>
 </body>
