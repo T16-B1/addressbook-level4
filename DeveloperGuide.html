@@ -53,8 +53,9 @@
 <li><a href="#undo-redo-mechanism">4.1. Undo/Redo mechanism</a></li>
 <li><a href="#logging">4.2. Logging</a></li>
 <li><a href="#configuration">4.3. Configuration</a></li>
-<li><a href="#delete-tag-mechanism">4.4. Delete Tag mechanism</a></li>
-<li><a href="#backup-mechanism">4.5. Backup Mechanism</a></li>
+<li><a href="#google-maps-search-browser">4.4. Google Maps Search Browser</a></li>
+<li><a href="#delete-tag-mechanism">4.5. Delete Tag mechanism</a></li>
+<li><a href="#backup-mechanism">4.6. Backup Mechanism</a></li>
 </ul>
 </li>
 <li><a href="#documentation">5. Documentation</a>
@@ -905,7 +906,28 @@ just its size</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="delete-tag-mechanism"><a class="link" href="#delete-tag-mechanism">4.4. Delete Tag mechanism</a></h3>
+<h3 id="google-maps-search-browser"><a class="link" href="#google-maps-search-browser">4.4. Google Maps Search Browser</a></h3>
+<div class="paragraph">
+<p>The google maps search browser enhancement resides within the <code>BrowserPanel</code>.
+It takes in a <code>ReadOnlyParcel</code> 's postal code number substring of the parcel&#8217;s address and concatenates it
+to the back of Google Map&#8217;s search URL prefix to get a URL for the browser to load.</p>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">4.4.1. Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Implementation of Google Maps Search Browser<br>
+<strong>Alternative 1 (current choice):</strong> Change browser loadPage URL to Google Map search URL<br>
+<strong>Pros:</strong> Its easy to implement new methods to load a new URLs if required to display a different URL.<br>
+<strong>Cons:</strong> The map has no other functionality besides searching for the postal code.<br>
+<strong>Alternative 2 (future implementation choice):</strong> Implementing through Google Maps API<br>
+<strong>Pros:</strong> Makes it easier for implementing additional features that utilizes the Maps API which would be required<br>
+ in future versions of the Ark application.<br>
+<strong>Cons:</strong> More difficult to implement and integrate into a command line interface.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="delete-tag-mechanism"><a class="link" href="#delete-tag-mechanism">4.5. Delete Tag mechanism</a></h3>
 <div class="paragraph">
 <p>The delete tag mechanism is facilitated by a <code>deleteTag</code> method within the <code>ModelManager</code>. It supports the deletion
 of tags from every single parcel in Ark.</p>
@@ -917,7 +939,7 @@ present, we remove it, otherwise, we do nothing. We then update the old parcel i
 updated list of tags.</p>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">4.4.1. Design Considerations</a></h4>
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">4.5.1. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of <code>deleteTagCommand</code><br>
 <strong>Alternative 1 (current choice):</strong> Add method to delete tags in <code>ModelManager</code><br>
@@ -933,7 +955,7 @@ and has to be updated whenever we edit other parcel details as well.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="backup-mechanism"><a class="link" href="#backup-mechanism">4.5. Backup Mechanism</a></h3>
+<h3 id="backup-mechanism"><a class="link" href="#backup-mechanism">4.6. Backup Mechanism</a></h3>
 <div class="paragraph">
 <p>The back up mechanism is facilitated by a <code>backupAddressBook</code> method within the <code>StorageManager</code>. It supports the
 backing up of AddressBook data in Ark.<br></p>
@@ -951,7 +973,7 @@ the name of the main <code>AddressBook</code> storage file appended with <code>-
  is named as <code>addressbook.xml</code>, the backup storage file will be saved as <code>addressbook.xml-backup.xml</code>.</p>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">4.5.1. Design Considerations</a></h4>
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">4.6.1. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of <code>StorageManager#backupAddressBook</code><br>
 <strong>Alternative 1 (current choice):</strong> use the <code>StorageManger#saveAddressBook()</code> method to implement logic.<br>
@@ -1881,7 +1903,7 @@ characters.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-10-18 12:31:31 +00:00
+Last updated 2017-10-19 03:25:27 +00:00
 </div>
 </div>
 </body>
