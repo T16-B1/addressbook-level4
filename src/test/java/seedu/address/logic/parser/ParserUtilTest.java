@@ -3,6 +3,8 @@ package seedu.address.logic.parser;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static seedu.address.logic.parser.ParserUtil.MESSAGE_FILE_NOT_FOUND;
+import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_DATA;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PARCEL;
 
@@ -17,6 +19,8 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.commons.util.FileUtil;
+import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.parcel.Address;
 import seedu.address.model.parcel.Email;
 import seedu.address.model.parcel.Name;
@@ -31,6 +35,10 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
+
+    private static final String TEST_DATA_FOLDER = FileUtil.getPath("src/test/data/XmlUtilTest/");
+    private static final String TEST_MISSING_FILEPATH = TEST_DATA_FOLDER + "missing.xml";
+    private static final String TEST_VALID_FILEPATH = TEST_DATA_FOLDER + "validAddressBook.xml";
 
     private static final String VALID_TRACKING_NUMBER = "RR123456999SG";
     private static final String VALID_NAME = "Rachel Walker";
@@ -63,6 +71,36 @@ public class ParserUtilTest {
 
         // Leading and trailing whitespaces
         assertEquals(INDEX_FIRST_PARCEL, ParserUtil.parseIndex("  1  "));
+    }
+
+    @Test
+    public void parseImportFilePath_invalidInput_throwsIllegalValueException() throws Exception {
+        thrown.expect(IllegalValueException.class);
+        thrown.expectMessage(MESSAGE_FILE_NOT_FOUND);
+        ParserUtil.parseImportFilePath(TEST_MISSING_FILEPATH);
+    }
+
+    @Test
+    public void parseImportFilePath_notXmlFormat_throwsIllegalValueException() throws Exception {
+        thrown.expect(IllegalValueException.class);
+        thrown.expectMessage(String.format(MESSAGE_INVALID_DATA,
+                "./src/test/data/XmlAddressBookStorageTest/NotXmlFormatAddressBook.xml"));
+        ParserUtil.parseImportFilePath("./src/test/data/XmlAddressBookStorageTest/NotXmlFormatAddressBook.xml");
+    }
+
+    @Test
+    public void parseImportFilePath_validInput_success() throws Exception {
+        ReadOnlyAddressBook importedAddressBook = ParserUtil.parseImportFilePath(TEST_VALID_FILEPATH);
+
+        assertTrue(importedAddressBook instanceof ReadOnlyAddressBook);
+        assertEquals(importedAddressBook.getParcelList().size(), 9);
+        assertEquals(importedAddressBook.getTagList().size(), 2);
+
+        // ensure same addressbook
+        ReadOnlyAddressBook importedAddressBookWithWhiteSpace = ParserUtil.parseImportFilePath(" "
+                + TEST_VALID_FILEPATH + "  ");
+        assertEquals(importedAddressBook.getParcelList(), importedAddressBookWithWhiteSpace.getParcelList());
+        assertEquals(importedAddressBook.getTagList(), importedAddressBookWithWhiteSpace.getTagList());
     }
 
     @Test

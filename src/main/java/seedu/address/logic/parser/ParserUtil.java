@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.io.FileNotFoundException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Optional;
@@ -10,15 +11,15 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
-
+import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.parcel.Address;
 import seedu.address.model.parcel.DeliveryDate;
 import seedu.address.model.parcel.Email;
 import seedu.address.model.parcel.Name;
 import seedu.address.model.parcel.Phone;
 import seedu.address.model.parcel.TrackingNumber;
-
 import seedu.address.model.tag.Tag;
+import seedu.address.storage.XmlAddressBookStorage;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -31,8 +32,9 @@ import seedu.address.model.tag.Tag;
  */
 public class ParserUtil {
 
+    public static final String MESSAGE_FILE_NOT_FOUND = "File to import not found.";
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-    public static final String MESSAGE_INSUFFICIENT_PARTS = "Number of parts must be more than 1.";
+    public static final String MESSAGE_INVALID_DATA = "Xml file to import at %1$s is not in the correct format.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -45,6 +47,32 @@ public class ParserUtil {
             throw new IllegalValueException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
+     * Parses {@code filePath} and retrieve an {@code ReadOnlyAddressBook} from the filepath and returns it.
+     * Leading and trailing whitespaces will be trimmed.
+     * @throws IllegalValueException if the specified file cannot be formed or it is not the proper addressbook xml
+     * format.
+     */
+    public static ReadOnlyAddressBook parseImportFilePath(String filePath) throws IllegalValueException {
+        requireNonNull(filePath);
+        String trimmedFilePath = filePath.trim();
+
+        try {
+            Optional<ReadOnlyAddressBook> addressBookOptional = new XmlAddressBookStorage(trimmedFilePath)
+                    .readAddressBook();
+
+            if (addressBookOptional.isPresent()) {
+                return addressBookOptional.get();
+            } else {
+                throw new FileNotFoundException();
+            }
+        } catch (FileNotFoundException e) {
+            throw new IllegalValueException(MESSAGE_FILE_NOT_FOUND);
+        } catch (Exception e) {
+            throw new IllegalValueException(String.format(MESSAGE_INVALID_DATA, filePath));
+        }
     }
 
     /**

@@ -1,19 +1,24 @@
 package seedu.address.model;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PARCELS;
 import static seedu.address.testutil.TypicalParcels.ALICE;
 import static seedu.address.testutil.TypicalParcels.BENSON;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.model.parcel.NameContainsKeywordsPredicate;
+import seedu.address.model.parcel.ReadOnlyParcel;
 import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.TypicalParcels;
 
 public class ModelManagerTest {
     @Rule
@@ -24,6 +29,34 @@ public class ModelManagerTest {
         ModelManager modelManager = new ModelManager();
         thrown.expect(UnsupportedOperationException.class);
         modelManager.getFilteredParcelList().remove(0);
+    }
+
+    @Test
+    public void addAllPersonsTest() {
+        AddressBook addressBook = new AddressBookBuilder().withParcel(ALICE).withParcel(BENSON).build();
+        UserPrefs userPrefs = new UserPrefs();
+
+        ModelManager modelManager = new ModelManager(addressBook, userPrefs);
+
+        List<ReadOnlyParcel> parcels = TypicalParcels.getTypicalParcels();
+        List<ReadOnlyParcel> parcelsAdded = new ArrayList<>();
+        List<ReadOnlyParcel> duplicateParcels = new ArrayList<>();
+        List<ReadOnlyParcel> expectedParcels = TypicalParcels.getTypicalParcels();
+
+        // logic test
+        modelManager.addAllParcels(parcels, parcelsAdded, duplicateParcels);
+        assertEquals(7, parcels.size());
+        assertEquals(5, parcelsAdded.size());
+        assertEquals(2, duplicateParcels.size());
+
+        // elements in parcels test
+        for (int i = 0; i < expectedParcels.size(); i++) {
+            assertEquals(expectedParcels.get(i), parcels.get(i));
+        }
+
+        // ensure that addressbook updated
+        assertEquals(3, modelManager.getAddressBook().getTagList().size());
+        assertEquals(7, modelManager.getAddressBook().getParcelList().size());
     }
 
     @Test

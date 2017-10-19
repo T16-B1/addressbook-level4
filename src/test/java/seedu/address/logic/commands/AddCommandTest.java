@@ -7,6 +7,7 @@ import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.Rule;
@@ -98,6 +99,12 @@ public class AddCommandTest {
     private class ModelStub implements Model {
         @Override
         public void addParcel(ReadOnlyParcel parcel) throws DuplicateParcelException {
+            fail("This method should not be called.");
+        }
+
+        @Override
+        public void addAllParcels(List<ReadOnlyParcel> parcels, List<ReadOnlyParcel> parcelsAdded,
+                                  List<ReadOnlyParcel> duplicateParcels) {
             fail("This method should not be called.");
         }
 

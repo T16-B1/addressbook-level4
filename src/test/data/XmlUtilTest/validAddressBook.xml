@@ -6,7 +6,7 @@
         <phone>9482424</phone>
         <email isPrivate="false">hans@example.com</email>
         <address isPrivate="false">4th street S123111</address>
-        <deliveryDate>01-01-2001</deliveryDate>
+        <deliveryDate>05-05-2017</deliveryDate>
     </parcels>
     <parcels>
         <trackingNumber>RR123456799SG</trackingNumber>
@@ -14,7 +14,7 @@
         <phone isPrivate="false">87249245</phone>
         <email isPrivate="false">ruth@example.com</email>
         <address isPrivate="false">81th street S123112</address>
-        <deliveryDate>02-02-2002</deliveryDate>
+        <deliveryDate>05-05-2017</deliveryDate>
     </parcels>
     <parcels>
         <trackingNumber>RR123457789SG</trackingNumber>
@@ -22,7 +22,7 @@
         <phone isPrivate="false">95352563</phone>
         <email isPrivate="false">heinz@example.com</email>
         <address isPrivate="false">wall street S123113</address>
-        <deliveryDate>03-03-2003</deliveryDate>
+        <deliveryDate>05-05-2017</deliveryDate>
     </parcels>
     <parcels>
         <trackingNumber>RR123356789SG</trackingNumber>
@@ -30,7 +30,7 @@
         <phone isPrivate="false">87652533</phone>
         <email isPrivate="false">cornelia@example.com</email>
         <address isPrivate="false">10th street S123114</address>
-        <deliveryDate>04-04-2004</deliveryDate>
+        <deliveryDate>05-05-2017</deliveryDate>
     </parcels>
     <parcels>
         <trackingNumber>RR123326789SG</trackingNumber>
@@ -38,7 +38,7 @@
         <phone isPrivate="false">9482224</phone>
         <email isPrivate="false">werner@example.com</email>
         <address isPrivate="false">michegan ave S123115</address>
-        <deliveryDate>05-05-2005</deliveryDate>
+        <deliveryDate>05-05-2017</deliveryDate>
     </parcels>
     <parcels>
         <trackingNumber>RR123477789SG</trackingNumber>
@@ -46,7 +46,7 @@
         <phone isPrivate="false">9482427</phone>
         <email isPrivate="false">lydia@example.com</email>
         <address isPrivate="false">little tokyo S123116</address>
-        <deliveryDate>06-06-2006</deliveryDate>
+        <deliveryDate>05-05-2017</deliveryDate>
     </parcels>
     <parcels>
         <trackingNumber>RR123456888SG</trackingNumber>
@@ -54,7 +54,8 @@
         <phone isPrivate="false">9482442</phone>
         <email isPrivate="false">anna@example.com</email>
         <address isPrivate="false">4th street S123127</address>
-        <deliveryDate>07-07-2007</deliveryDate>
+        <deliveryDate>05-05-2017</deliveryDate>
+        <tagged>friends</tagged>
     </parcels>
     <parcels>
         <trackingNumber>RR123444789SG</trackingNumber>
@@ -62,14 +63,18 @@
         <phone isPrivate="false">8482424</phone>
         <email isPrivate="false">stefan@example.com</email>
         <address isPrivate="false">little india S123123</address>
-        <deliveryDate>08-08-2008</deliveryDate>
+        <deliveryDate>05-05-2017</deliveryDate>
+        <tagged>owesMoney</tagged>
+        <tagged>friends</tagged>
     </parcels>
     <parcels>
         <trackingNumber>RR123666789SG</trackingNumber>
         <name>Martin Mueller</name>
         <phone isPrivate="false">8482131</phone>
         <email isPrivate="false">hans@example.com</email>
+        <deliveryDate>05-05-2017</deliveryDate>
         <address isPrivate="false">chicago ave S123123</address>
-        <deliveryDate>09-09-2009</deliveryDate>
     </parcels>
+    <tags>owesMoney</tags>
+    <tags>friends</tags>
 </addressbook>
