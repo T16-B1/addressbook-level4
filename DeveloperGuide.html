@@ -56,6 +56,7 @@
 <li><a href="#google-maps-search-browser">4.4. Google Maps Search Browser</a></li>
 <li><a href="#delete-tag-mechanism">4.5. Delete Tag mechanism</a></li>
 <li><a href="#backup-mechanism">4.6. Backup Mechanism</a></li>
+<li><a href="#tab-autocomplete-mechanism">4.7. Tab autocomplete mechanism</a></li>
 </ul>
 </li>
 <li><a href="#documentation">5. Documentation</a>
@@ -981,7 +982,7 @@ the name of the main <code>AddressBook</code> storage file appended with <code>-
 makes updates easier since enhancements to <code>saveAddressBook()</code> will also enhance <code>backupAddressBook()</code>.<br>
 <strong>Cons:</strong> This implementation increases the coupling of <code>StorageManager#backupAddressBook()</code> and
 <code>StorageManager#saveAddressBook()</code> where changes in <code>saveAddressBook()</code> will cause changes in <code>backupAddressBook()</code>.<br>
-<strong>Alternative 2:</strong> Separate the implemnetation of <code>Storage#backupAddressBook()</code> from <code>StorageManager#saveAddressBook()</code>
+<strong>Alternative 2:</strong> Separate the implementation of <code>Storage#backupAddressBook()</code> from <code>StorageManager#saveAddressBook()</code>
 <br>
 <strong>Pros:</strong> Reduced coupling of saveAddressBook() and backupAddressBook() and allows the backup file to be saved at a
 different location from the main save file. This prevents the backup file from being corrupted if the folder of the
@@ -1007,6 +1008,51 @@ other.<br>
 <strong>Cons:</strong> More tedious and difficult to implement. Difficult to determine the optimal amount of data to restore. If
 the corruption of the data is caused by a several of commands, it becomes difficult to ensure that the backup file
 provides a workable copy of the data of Ark.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="tab-autocomplete-mechanism"><a class="link" href="#tab-autocomplete-mechanism">4.7. Tab autocomplete mechanism</a></h3>
+<div class="paragraph">
+<p>The tab autocomplete mechanism is facilitated by the <code>autocomplete</code> method residing inside the <code>Autocompleter</code>.
+It supports the tab autocompletion for possible commands that that match the text in the CommandBox.<br></p>
+</div>
+<div class="paragraph">
+<p>A new <code>Autocompleter</code> is initialized when the <code>CommandBox</code> is initialized as an attribute of the <code>CommandBox</code>. When
+the <code>tab</code> key is pressed by the user, <code>CommandBox#processAutocomplete</code> retrieves the text that is currently in
+the <code>commandTextField</code> and passes it into the <code>Autocompleter#autocomplete</code> as a string. If the string is empty,
+<code>autocomplete</code> raises a <code>NewResultAvailableEvent</code> to prompt the user to use the help command and returns
+an empty string.<br></p>
+</div>
+<div class="paragraph">
+<p>If the string is not empty, the text in <code>commandTextField</code> will be converted into an array and stored in
+<code>commandBoxTextArray</code>. If there is only one word in the <code>commandBoxTextArray</code>,
+<code>AutoCompleter#processOneWordAutocomplete</code> will be called and the only word in commandBoxTextArray is passed in as a
+string <code>commandBoxText</code>. <code>processOneWordAutocomplete</code> will then pass <code>commandBoxText</code> into <code>getClosestCommands</code>.
+<code>getClosestCommands</code> then iterates through all the possible commands in <code>commandList</code> and compares them with
+<code>commandBoxText</code> using  <code>AutoComplete#isPossibleMatch</code> . If <code>isPossibleMatch</code> returns true, the command is then stored
+inside the arrayList <code>possibleResults</code>. After iterating through <code>commandList</code>, <code>getClosestCommands</code> then returns
+<code>possibleResults</code>. If there is only one item inside <code>possibleResults</code>, <code>processOneWordAutoComplete</code> will return it to
+<code>autocomplete</code> which then returns it to <code>processAutocomplete</code>. If there is more than one item, a
+<code>NewResultAvailableEvent</code> is raised which prompts the user on the possible autocomplete commands available and returns
+the original value of <code>commandBoxText</code>.<br></p>
+</div>
+<div class="paragraph">
+<p>After <code>autocomplete</code> returns a string to <code>processAutocomplete</code>, it then passes the string into <code>CommandBox#replaceText</code>
+to replace the text in <code>commandFieldText</code> with the string.<br></p>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">4.7.1. Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Implementation of <code>autocomplete</code><br>
+<strong>Alternative 1 (current choice):</strong> Create a new <code>Autocompleter</code> class to implement <code>autocomplete</code> and its helper
+functions.<br>
+<strong>Pros:</strong> Single Responsibility Principle (SRP) is maintained<br>
+<strong>Cons:</strong> More tedious to implement and test since the feature is implemented in both <code>Autocompleter</code> and <code>CommandBox</code>.
+Also creates coupling between the <code>Autocompleter</code> and <code>CommandBox</code>.<br>
+<strong>Alternative 2:</strong> Implement <code>autocomplete</code> inside <code>CommandBox</code>
+<strong>Pros:</strong> Easier to test since <code>CommandBoxTest</code> has already been set up and implemented.<br>
+<strong>Cons:</strong> <code>CommandBox</code> class now has multiple responsibilities, which violates SRP.<br></p>
 </div>
 </div>
 </div>
@@ -1903,7 +1949,7 @@ characters.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-10-19 06:02:57 +00:00
+Last updated 2017-10-19 06:05:19 +00:00
 </div>
 </div>
 </body>
