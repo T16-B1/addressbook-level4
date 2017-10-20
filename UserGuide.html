@@ -167,16 +167,20 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <div class="ulist">
 <ul>
 <li>
-<p>Words in <code>UPPER_CASE</code> are the parameters to be supplied by the user e.g. in <code>add #/PARCEL_ID</code>, <code>PARCEL_ID</code> is a parameter which can be used as <code>add i/1110201700000001</code>.</p>
+<p>Words in <code>UPPER_CASE</code> are the parameters to be supplied by the user e.g. in <code>add #/TRACKING_NUMBER</code>,
+<code>TRACKING_NUMBER</code> is a parameter which can be used as <code>add #/RR000000000SG</code>.</p>
 </li>
 <li>
-<p>Items in square brackets are optional e.g <code>i/PARCEL_ID [t/TAG]</code> can be used as <code><mark>/1110201700000001 t/fragile</code> or as <code></mark>/1110201700000001</code>.</p>
+<p>Items in square brackets are optional e.g <code><mark>/TRACKING_NUMBER [t/TAG]</code> can be used as <code></mark>/RR000000000SG t/fragile</code> or as
+<code>#/RR000000000SG</code>.</p>
 </li>
 <li>
-<p>Items with <code>…</code>​ after them can be used multiple times including zero times e.g. <code>[t/TAG]&#8230;&#8203;</code> can be used as <code>&#160;</code> (i.e. 0 times), <code>t/fragile</code>, <code>t/keepDry t/frozen</code> etc.</p>
+<p>Items with <code>…</code>​ after them can be used multiple times including zero times e.g. <code>[t/TAG]&#8230;&#8203;</code> can be used as <code>&#160;</code>
+(i.e. 0 times), <code>t/fragile</code>, <code>t/keepDry t/frozen</code> etc.</p>
 </li>
 <li>
-<p>Parameters can be in any order e.g. if the command specifies <code>#/PARCEL_ID p/PHONE_NUMBER</code>, <code>p/PHONE_NUMBER #/PARCEL_ID</code> is also acceptable.</p>
+<p>Parameters can be in any order e.g. if the command specifies <code>#/TRACKING_NUMBER p/PHONE_NUMBER</code>,
+<code>p/PHONE_NUMBER #/TRACKING_NUMBER</code> is also acceptable.</p>
 </li>
 </ul>
 </div>
@@ -212,10 +216,11 @@ A parcel can have any number of tags (including 0)
 <div class="ulist">
 <ul>
 <li>
-<p><code>add #/11111111111 n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 S123121 d/01-01-2001</code></p>
+<p><code>add #/RR000000000SG n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 S123121 d/01-01-2001</code></p>
 </li>
 <li>
-<p><code>add #/11111112222 n/Betsy Crowe t/friend d/02-02-2002 e/betsycrowe@example.com a/22 Crowe road S123123 p/1234567 t/fragile</code></p>
+<p><code>add #/RR000000000SG n/Betsy Crowe t/friend d/02-02-2002 e/betsycrowe@example.com a/22 Crowe road S123123 p/1234567
+t/fragile</code></p>
 </li>
 </ul>
 </div>
@@ -231,14 +236,15 @@ Format: <code>list</code></p>
 <h3 id="editing-a-parcel-code-edit-code"><a class="link" href="#editing-a-parcel-code-edit-code">4.4. Editing a parcel : <code>edit</code></a></h3>
 <div class="paragraph">
 <p>Edits an existing parcel in Ark.<br>
-Format: <code>edit INDEX [#/PARCEL_ID] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [d/DELIVERYDATE] [t/TAG]&#8230;&#8203;</code></p>
+Format: <code>edit INDEX [#/TRACKING_NUMBER] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [d/DELIVERY_DATE] [t/TAG]&#8230;&#8203;</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p>Edits the parcel at the specified <code>INDEX</code>. The index refers to the index number shown in the last parcel listing. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+<p>Edits the parcel at the specified <code>INDEX</code>. The index refers to the index number shown in the last parcel listing.
+The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
 </li>
 <li>
 <p>At least one of the optional fields must be provided.</p>
@@ -299,7 +305,8 @@ Format: <code>find KEYWORD [MORE_KEYWORDS]</code></p>
 <p>Only full words will be matched e.g. <code>Han</code> will not match <code>Hans</code></p>
 </li>
 <li>
-<p>Persons matching at least one keyword will be returned (i.e. <code>OR</code> search). e.g. <code>Hans Bo</code> will return <code>Hans Gruber</code>, <code>Bo Yang</code></p>
+<p>Persons matching at least one keyword will be returned (i.e. <code>OR</code> search). e.g. <code>Hans Bo</code> will return <code>Hans Gruber</code>,
+<code>Bo Yang</code></p>
 </li>
 </ul>
 </div>
@@ -534,7 +541,8 @@ Format: <code>exit</code></p>
 <div class="paragraph">
 <p>Ark comes with tab autocompletion which is able to complete a command for you
 without requiring you to type out the command fully.<br>
-To make use of this feature, simply key in the first few characters of the command you with to enter and press the <kbd>Tab</kbd> key.
+To make use of this feature, simply key in the first few characters of the command you with to enter and press the
+ <kbd>Tab</kbd> key.
 Ark will then fill in the rest of the command for you.
 Then press <kbd>Enter</kbd> key to enter the command.</p>
 </div>
@@ -562,7 +570,8 @@ There is no need to save manually.</p>
 <p>Ark data are backed up in the hard disk automatically at the start of every session of the program.<br>
 There is no need to back up the data manually.<br>
 The backup file is appended with <code>-backup.xml</code> and is stored in the same folder as the main storage file.<br>
-The data from the backup file has to be loaded manually by copying the contents of the backup file into your main storage file.</p>
+The data from the backup file has to be loaded manually by copying the contents of the backup file into your main
+ storage file.</p>
 </div>
 </div>
 </div>
@@ -572,7 +581,8 @@ The data from the backup file has to be loaded manually by copying the contents 
 <div class="sectionbody">
 <div class="paragraph">
 <p><strong>Q</strong>: How do I transfer my data to another Computer?<br>
-<strong>A</strong>: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.</p>
+<strong>A</strong>: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the
+ data of your previous Address Book folder.</p>
 </div>
 </div>
 </div>
@@ -582,7 +592,7 @@ The data from the backup file has to be loaded manually by copying the contents 
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Add</strong> <code>add #/PARCEL_ID n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS d/DELIVERYDATE [t/TAG]&#8230;&#8203;</code><br>
+<p><strong>Add</strong> <code>add #/TRACKING_NUMBER n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS d/DELIVERY_DATE [t/TAG]&#8230;&#8203;</code><br>
 e.g. <code>add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 d/12-12-2012 t/friend t/colleague</code></p>
 </li>
 <li>
@@ -593,8 +603,8 @@ e.g. <code>add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1
 e.g. <code>delete 3</code></p>
 </li>
 <li>
-<p><strong>Edit</strong> : <code>edit INDEX [#/PARCEL_ID] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [d/DELIVERYDATE] [t/TAG]&#8230;&#8203;</code><br>
-e.g. <code>edit 2 #/1111111111111 n/James Lee e/jameslee@example.com</code></p>
+<p><strong>Edit</strong> : <code>edit INDEX [#/TRACKING_NUMBER] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [d/DELIVERY_DATE] [t/TAG]&#8230;&#8203;</code><br>
+e.g. <code>edit 2 #/RR000000000SG n/James Lee e/jameslee@example.com</code></p>
 </li>
 <li>
 <p><strong>Find</strong> : <code>find KEYWORD [MORE_KEYWORDS]</code><br>
@@ -702,16 +712,16 @@ e.g.<code>select 2</code></p>
 <p>Find the shortest path from the current location to a delivery address.</p>
 </li>
 <li>
-<p>Find customer&#8217;s <code>Parcel</code> by <code>PARCEL_ID</code></p>
+<p>Find customer&#8217;s <code>Parcel</code> by <code>TRACKING_NUMBER</code></p>
 </li>
 <li>
-<p>Find customer&#8217;s <code>PARCEL_ID</code></p>
+<p>Find customer&#8217;s <code>TRACKING_NUMBER</code></p>
 </li>
 <li>
 <p>Sort by delivery <code>deadlines</code> for the parcel</p>
 </li>
 <li>
-<p>Sort by <code>PARCEL_ID</code></p>
+<p>Sort by <code>TRACKING_NUMBER</code></p>
 </li>
 <li>
 <p>Sort by customer&#8217;s <code>NAME</code></p>
@@ -732,7 +742,8 @@ e.g.<code>select 2</code></p>
 <p>Color code <code>ParcelCard</code> based on impending deadlines.</p>
 </li>
 <li>
-<p>Generate the optimal route for the day&#8217;s deliveries, based on shortest time, shortest distance travelled or most parcels delivered.</p>
+<p>Generate the optimal route for the day&#8217;s deliveries, based on shortest time, shortest distance travelled or most
+parcels delivered.</p>
 </li>
 <li>
 <p>Archive completed deliveries</p>
@@ -762,7 +773,7 @@ e.g.<code>select 2</code></p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-10-19 07:21:42 +00:00
+Last updated 2017-10-20 04:49:26 +00:00
 </div>
 </div>
 </body>
