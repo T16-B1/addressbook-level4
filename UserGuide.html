@@ -35,15 +35,16 @@
 <li><a href="#editing-a-parcel-code-edit-code">4.4. Editing a parcel : <code>edit</code></a></li>
 <li><a href="#locating-parcels-by-name-code-find-code">4.5. Locating parcels by name: <code>find</code></a></li>
 <li><a href="#deleting-a-parcel-code-delete-code">4.6. Deleting a parcel : <code>delete</code></a></li>
-<li><a href="#selecting-a-parcel-code-select-code">4.7. Selecting a parcel : <code>select</code></a></li>
-<li><a href="#listing-entered-commands-code-history-code">4.8. Listing entered commands : <code>history</code></a></li>
-<li><a href="#undoing-previous-command-code-undo-code">4.9. Undoing previous command : <code>undo</code></a></li>
-<li><a href="#redoing-the-previously-undone-command-code-redo-code">4.10. Redoing the previously undone command : <code>redo</code></a></li>
-<li><a href="#clearing-all-entries-code-clear-code">4.11. Clearing all entries : <code>clear</code></a></li>
-<li><a href="#exiting-the-program-code-exit-code">4.12. Exiting the program : <code>exit</code></a></li>
-<li><a href="#autocomplete">4.13. Autocomplete</a></li>
-<li><a href="#saving-the-data">4.14. Saving the data</a></li>
-<li><a href="#backing-up-the-data">4.15. Backing up the data</a></li>
+<li><a href="#deleting-a-tag-code-deletetag-code">4.7. Deleting a tag : <code>deleteTag</code></a></li>
+<li><a href="#selecting-a-parcel-code-select-code">4.8. Selecting a parcel : <code>select</code></a></li>
+<li><a href="#listing-entered-commands-code-history-code">4.9. Listing entered commands : <code>history</code></a></li>
+<li><a href="#undoing-previous-command-code-undo-code">4.10. Undoing previous command : <code>undo</code></a></li>
+<li><a href="#redoing-the-previously-undone-command-code-redo-code">4.11. Redoing the previously undone command : <code>redo</code></a></li>
+<li><a href="#clearing-all-entries-code-clear-code">4.12. Clearing all entries : <code>clear</code></a></li>
+<li><a href="#exiting-the-program-code-exit-code">4.13. Exiting the program : <code>exit</code></a></li>
+<li><a href="#autocomplete">4.14. Autocomplete</a></li>
+<li><a href="#saving-the-data">4.15. Saving the data</a></li>
+<li><a href="#backing-up-the-data">4.16. Backing up the data</a></li>
 </ul>
 </li>
 <li><a href="#faq">5. FAQ</a></li>
@@ -370,7 +371,39 @@ Deletes the 1st parcel in the results of the <code>find</code> command.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="selecting-a-parcel-code-select-code"><a class="link" href="#selecting-a-parcel-code-select-code">4.7. Selecting a parcel : <code>select</code></a></h3>
+<h3 id="deleting-a-tag-code-deletetag-code"><a class="link" href="#deleting-a-tag-code-deletetag-code">4.7. Deleting a tag : <code>deleteTag</code></a></h3>
+<div class="paragraph">
+<p>Deletes the specified tag from all parcels in Ark.<br>
+Format: <code>deleteTag TAG</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>The tag to delete is case sensitive.</p>
+</li>
+<li>
+<p>The tag to delete must actually be tagged to a parcel.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>deleteTag urgent</code>
+Deletes the tag "urgent" from each parcel in the address book.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="selecting-a-parcel-code-select-code"><a class="link" href="#selecting-a-parcel-code-select-code">4.8. Selecting a parcel : <code>select</code></a></h3>
 <div class="paragraph">
 <p>Selects the parcel identified by the index number used in the last parcel listing.<br>
 Format: <code>select INDEX</code></p>
@@ -423,7 +456,7 @@ Selects the 1st parcel in the results of the <code>find</code> command.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="listing-entered-commands-code-history-code"><a class="link" href="#listing-entered-commands-code-history-code">4.8. Listing entered commands : <code>history</code></a></h3>
+<h3 id="listing-entered-commands-code-history-code"><a class="link" href="#listing-entered-commands-code-history-code">4.9. Listing entered commands : <code>history</code></a></h3>
 <div class="paragraph">
 <p>Lists all the commands that you have entered in reverse chronological order.<br>
 Format: <code>history</code></p>
@@ -445,7 +478,7 @@ the previous and next input respectively in the command box.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">4.9. Undoing previous command : <code>undo</code></a></h3>
+<h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">4.10. Undoing previous command : <code>undo</code></a></h3>
 <div class="paragraph">
 <p>Restores Ark to the state before the previous <em>undoable</em> command was executed.<br>
 Format: <code>undo</code></p>
@@ -491,7 +524,7 @@ The <code>undo</code> command fails as there are no undoable commands executed p
 </div>
 </div>
 <div class="sect2">
-<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">4.10. Redoing the previously undone command : <code>redo</code></a></h3>
+<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">4.11. Redoing the previously undone command : <code>redo</code></a></h3>
 <div class="paragraph">
 <p>Reverses the most recent <code>undo</code> command.<br>
 Format: <code>redo</code></p>
@@ -523,21 +556,21 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 </div>
 </div>
 <div class="sect2">
-<h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">4.11. Clearing all entries : <code>clear</code></a></h3>
+<h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">4.12. Clearing all entries : <code>clear</code></a></h3>
 <div class="paragraph">
 <p>Clears all entries from Ark.<br>
 Format: <code>clear</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">4.12. Exiting the program : <code>exit</code></a></h3>
+<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">4.13. Exiting the program : <code>exit</code></a></h3>
 <div class="paragraph">
 <p>Exits the program.<br>
 Format: <code>exit</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="autocomplete"><a class="link" href="#autocomplete">4.13. Autocomplete</a></h3>
+<h3 id="autocomplete"><a class="link" href="#autocomplete">4.14. Autocomplete</a></h3>
 <div class="paragraph">
 <p>Ark comes with tab autocompletion which is able to complete a command for you
 without requiring you to type out the command fully.<br>
@@ -558,14 +591,14 @@ Then press <kbd>Enter</kbd> key to enter the command.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-the-data"><a class="link" href="#saving-the-data">4.14. Saving the data</a></h3>
+<h3 id="saving-the-data"><a class="link" href="#saving-the-data">4.15. Saving the data</a></h3>
 <div class="paragraph">
 <p>Ark data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="backing-up-the-data"><a class="link" href="#backing-up-the-data">4.15. Backing up the data</a></h3>
+<h3 id="backing-up-the-data"><a class="link" href="#backing-up-the-data">4.16. Backing up the data</a></h3>
 <div class="paragraph">
 <p>Ark data are backed up in the hard disk automatically at the start of every session of the program.<br>
 There is no need to back up the data manually.<br>
@@ -773,7 +806,7 @@ parcels delivered.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-10-21 16:23:16 +00:00
+Last updated 2017-10-22 05:49:24 +00:00
 </div>
 </div>
 </body>
