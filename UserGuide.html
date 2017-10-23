@@ -251,7 +251,7 @@ section&#8217;s sizes.</p>
 <h3 id="adding-a-parcel-code-add-code"><a class="link" href="#adding-a-parcel-code-add-code">5.2. Adding a parcel: <code>add</code></a></h3>
 <div class="paragraph">
 <p>Adds a parcel to Ark<br>
-Format: <code>add #/TRACKING_ID n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS d/DELIVERYDATE [t/TAG]&#8230;&#8203;</code></p>
+Format: <code>add #/TRACKING_ID n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS d/DELIVERYDATE s/STATUS [t/TAG]&#8230;&#8203;</code></p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -261,23 +261,18 @@ Format: <code>add #/TRACKING_ID n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS d/DELIVE
 </td>
 <td class="content">
 A parcel can have any number of tags (including 0)
+A parcel can only have one of three <code>STATUS</code> input. i.e. <code>PENDING</code>, <code>DELIVERING</code>, <code>DELIVERED</code>
+If there is no <code>STATUS</code> input, it defaults to <code>PENDING</code>
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>add #/RR000000000SG n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 S123121 d/01-01-2001</code></p>
-</li>
-<li>
-<p><code>add #/RR000000000SG n/Betsy Crowe t/friend d/02-02-2002 e/betsycrowe@example.com a/22 Crowe road S123123 p/1234567
-t/fragile</code></p>
-</li>
-</ul>
+<p>Examples:
+* <code>add #/RR000000000SG n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 S123121 d/01-01-2001
+ s/DELIVERING</code>
+* <code>add #/RR000000000SG n/Betsy Crowe t/friend d/02-02-2002 e/betsycrowe@example.com a/22 Crowe road S123123 p/1234567
+ t/fragile</code></p>
 </div>
 </div>
 <div class="sect2">
@@ -340,7 +335,8 @@ You can see an example in the two pictures below.<br></p>
 <h3 id="editing-a-parcel-code-edit-code"><a class="link" href="#editing-a-parcel-code-edit-code">5.5. Editing a parcel : <code>edit</code></a></h3>
 <div class="paragraph">
 <p>Edits an existing parcel in Ark.<br>
-Format: <code>edit INDEX [#/TRACKING_NUMBER] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [d/DELIVERY_DATE] [t/TAG]&#8230;&#8203;</code></p>
+Format: <code>edit INDEX [#/TRACKING_NUMBER] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [d/DELIVERY_DATE] [s/STATUS]
+[t/TAG]&#8230;&#8203;</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -931,7 +927,7 @@ parcels delivered.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-10-23 02:07:35 +00:00
+Last updated 2017-10-23 02:08:04 +00:00
 </div>
 </div>
 </body>
