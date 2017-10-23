@@ -140,13 +140,13 @@ and redoing of commands that modifies the state of address book (e.g. <code>add<
 <p><code>UndoRedoStack</code> only deals with <code>UndoableCommands</code>. Commands that cannot be undone will inherit from <code>Command</code> instead.
 The following diagram shows the inheritance diagram for commands:</p>
 </div>
-<div class="imageblock">
+<div id="model_class_diagram" class="imageblock">
 <div class="content">
 <img src="../images/LogicCommandClassDiagram.png" alt="LogicCommandClassDiagram" width="800">
 </div>
 </div>
 <div class="paragraph">
-<p>As you can see from the diagram, <code>UndoableCommand</code> adds an extra layer between the abstract <code>Command</code> class and
+<p>As you can see from the diagram above, <code>UndoableCommand</code> adds an extra layer between the abstract <code>Command</code> class and
 concrete commands that can be undone, such as the <code>DeleteCommand</code>. Note that extra tasks need to be done when executing
 a command in an <em>undoable</em> way, such as saving the state of the address book before execution. <code>UndoableCommand</code>
 contains the high-level algorithm for those extra tasks while the child classes implements the details of how to execute
@@ -195,21 +195,23 @@ steps of the algorithm in child classes is also known as the
 <div class="paragraph">
 <p>The user executes a new <code>UndoableCommand</code>, <code>delete 5</code>, to delete the 5th parcel in the address book. The current state
 of the address book is saved before the <code>delete 5</code> command executes. The <code>delete 5</code> command will then be pushed onto
-the <code>undoStack</code> (the current state is saved together with the command).</p>
+the <code>undoStack</code> (the current state is saved together with the command) as seen in the diagram below.</p>
 </div>
-<div class="imageblock">
+<div id="undo_redo_stack_diagram_1" class="imageblock">
 <div class="content">
 <img src="../images/UndoRedoStartingStackDiagram.png" alt="UndoRedoStartingStackDiagram" width="800">
 </div>
+<div class="title">Figure 1. Executing a New Command with an Empty Undo Stack.</div>
 </div>
 <div class="paragraph">
 <p>As the user continues to use the program, more commands are added into the <code>undoStack</code>. For example, the user may
-execute <code>add n/David &#8230;&#8203;</code> to add a new parcel.</p>
+execute <code>add n/David &#8230;&#8203;</code> to add a new parcel as seen in the diagram below.</p>
 </div>
-<div class="imageblock">
+<div id="undo_redo_stack_diagram_2" class="imageblock">
 <div class="content">
 <img src="../images/UndoRedoNewCommand1StackDiagram.png" alt="UndoRedoNewCommand1StackDiagram" width="800">
 </div>
+<div class="title">Figure 2. Executing a New Command with a Non-Empty Undo Stack.</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -228,12 +230,13 @@ If a command fails its execution, it will not be pushed to the <code>UndoRedoSta
 </div>
 <div class="paragraph">
 <p>We will pop the most recent command out of the <code>undoStack</code> and push it back to the <code>redoStack</code>. We will restore the
-address book to the state before the <code>add</code> command executed.</p>
+address book to the state before the <code>add</code> command executed. This can be visualised in the diagram below.</p>
 </div>
-<div class="imageblock">
+<div id="undo_redo_stack_diagram_2" class="imageblock">
 <div class="content">
 <img src="../images/UndoRedoExecuteUndoStackDiagram.png" alt="UndoRedoExecuteUndoStackDiagram" width="800">
 </div>
+<div class="title">Figure 3. Undoing a Previous Command Stored in a Non-Empty Undo Stack.</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -251,10 +254,11 @@ popping the <code>undoStack</code>.
 <div class="paragraph">
 <p>The following sequence diagram shows how the undo operation works:</p>
 </div>
-<div class="imageblock">
+<div id="undo_redo_sequence_diagram" class="imageblock">
 <div class="content">
 <img src="../images/UndoRedoSequenceDiagram.png" alt="UndoRedoSequenceDiagram" width="800">
 </div>
+<div class="title">Figure 4. Undo Redo Sequence Diagram</div>
 </div>
 <div class="paragraph">
 <p>The redo does the exact opposite (pops from <code>redoStack</code>, push to <code>undoStack</code>, and restores the address book to the
@@ -278,77 +282,178 @@ popping the <code>redoStack</code>.
 time the <code>redoStack</code> is no longer empty. It will be purged as it no longer make sense to redo the <code>add n/David</code> command
 (this is the behavior that most modern desktop applications follow).</p>
 </div>
-<div class="imageblock">
+<div id="undo_redo_new_command_stack_digram_3" class="imageblock">
 <div class="content">
 <img src="../images/UndoRedoNewCommand2StackDiagram.png" alt="UndoRedoNewCommand2StackDiagram" width="800">
 </div>
+<div class="title">Figure 5. Executing a Undoable Command Clearing A Non-Empty Redo Stack</div>
 </div>
 <div class="paragraph">
 <p>Commands that are not undoable are not added into the <code>undoStack</code>. For example, <code>list</code>, which inherits from <code>Command</code>
 rather than <code>UndoableCommand</code>, will not be added after execution:</p>
 </div>
-<div class="imageblock">
+<div id="undo_redo_new_command_stack_digram_4" class="imageblock">
 <div class="content">
 <img src="../images/UndoRedoNewCommand3StackDiagram.png" alt="UndoRedoNewCommand3StackDiagram" width="800">
 </div>
+<div class="title">Figure 6. Redo Command Execution fail if Redo Stack is Empty</div>
 </div>
 <div class="paragraph">
 <p>The following activity diagram summarize what happens inside the <code>UndoRedoStack</code> when a user executes a new command:</p>
 </div>
-<div class="imageblock">
+<div id="undo_redo_stack_activity_diagram" class="imageblock">
 <div class="content">
 <img src="../images/UndoRedoActivityDiagram.png" alt="UndoRedoActivityDiagram" width="200">
 </div>
+<div class="title">Figure 7. Undo Redo Command Activity Diagram</div>
 </div>
 <div class="sect3">
 <h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
 <div class="paragraph">
-<p><strong>Aspect:</strong> Implementation of <code>UndoableCommand</code><br>
-<strong>Alternative 1 (current choice):</strong> Add a new abstract method <code>executeUndoableCommand()</code><br>
-<strong>Pros:</strong> We will not lose any undone/redone functionality as it is now part of the default behaviour. Classes that
-deal with <code>Command</code> do not have to know that <code>executeUndoableCommand()</code> exist.<br>
-<strong>Cons:</strong> Hard for new developers to understand the template pattern.<br>
-<strong>Alternative 2:</strong> Just override <code>execute()</code><br>
-<strong>Pros:</strong> Does not involve the template pattern, easier for new developers to understand.<br>
-<strong>Cons:</strong> Classes that inherit from <code>UndoableCommand</code> must remember to call <code>super.execute()</code>, or lose the ability to
+<p><strong>Aspect: Implementation of <code>UndoableCommand</code></strong><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Add a new abstract method <code>executeUndoableCommand()</code><br></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> We will not lose any undone/redone functionality as it is now part of the default behaviour. Classes that
+deal with <code>Command</code> do not have to know that <code>executeUndoableCommand()</code> exist.<br></p>
+</li>
+<li>
+<p><strong>Cons:</strong> Hard for new developers to understand the template pattern.<br></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Just override <code>execute()</code><br></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> Does not involve the template pattern, easier for new developers to understand.<br></p>
+</li>
+<li>
+<p><strong>Cons:</strong> Classes that inherit from <code>UndoableCommand</code> must remember to call <code>super.execute()</code>, or lose the ability to
 undo/redo.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
 </div>
 <hr>
 <div class="paragraph">
-<p><strong>Aspect:</strong> How undo &amp; redo executes<br>
-<strong>Alternative 1 (current choice):</strong> Saves the entire address book.<br>
-<strong>Pros:</strong> Easy to implement.<br>
-<strong>Cons:</strong> May have performance issues in terms of memory usage.<br>
-<strong>Alternative 2:</strong> Individual command knows how to undo/redo by itself.<br>
-<strong>Pros:</strong> Will use less memory (e.g. for <code>delete</code>, just save the parcel being deleted).<br>
-<strong>Cons:</strong> We must ensure that the implementation of each individual command are correct.</p>
+<p><strong>Aspect:</strong> How undo &amp; redo executes<br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Saves the entire address book.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> Easy to implement.<br></p>
+</li>
+<li>
+<p><strong>Cons:</strong> May have performance issues in terms of memory usage.<br></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Individual command knows how to undo/redo by itself.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> Will use less memory (e.g. for <code>delete</code>, just save the parcel being deleted).<br></p>
+</li>
+<li>
+<p><strong>Cons:</strong> We must ensure that the implementation of each individual command are correct.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
 </div>
 <hr>
 <div class="paragraph">
-<p><strong>Aspect:</strong> Type of commands that can be undone/redone<br>
-<strong>Alternative 1 (current choice):</strong> Only include commands that modifies the address book (<code>add</code>, <code>clear</code>, <code>edit</code>).<br>
-<strong>Pros:</strong> We only revert changes that are hard to change back (the view can easily be re-modified as no data are lost).<br>
-<strong>Cons:</strong> User might think that undo also applies when the list is modified (undoing filtering for example), only to
-realize that it does not do that, after executing <code>undo</code>.<br>
-<strong>Alternative 2:</strong> Include all commands.<br>
-<strong>Pros:</strong> Might be more intuitive for the user.<br>
-<strong>Cons:</strong> User have no way of skipping such commands if he or she just want to reset the state of the address book and
-not the view.<br>
-<strong>Additional Info:</strong> See our discussion  <a href="https://github.com/se-edu/addressbook-level4/issues/390#issuecomment-298936672">here</a>.</p>
+<p><strong>Aspect:</strong> Type of commands that can be undone/redone<br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Alternative 1 (current choice):** Only include commands that modifies the address book (<code>add</code>, <code>clear</code>, <code>edit</code>).<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> We only revert changes that are hard to change back (the view can easily be re-modified as no data are lost).<br></p>
+</li>
+<li>
+<p><strong>Cons:</strong> User might think that undo also applies when the list is modified (undoing filtering for example), only to
+realize that it does not do that, after executing <code>undo</code>.<br></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Include all commands.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> Might be more intuitive for the user.<br></p>
+</li>
+<li>
+<p><strong>Cons:</strong> User have no way of skipping such commands if he or she just want to reset the state of the address book and
+not the view.<br></p>
+</li>
+<li>
+<p><strong>Additional Info:</strong> See our discussion  <a href="https://github.com/se-edu/addressbook-level4/issues/390#issuecomment-298936672">here</a>.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
 </div>
 <hr>
 <div class="paragraph">
-<p><strong>Aspect:</strong> Data structure to support the undo/redo commands<br>
-<strong>Alternative 1 (current choice):</strong> Use separate stack for undo and redo<br>
-<strong>Pros:</strong> Easy to understand for new Computer Science student undergraduates to understand, who are likely to be the
-new incoming developers of our project.<br>
-<strong>Cons:</strong> Logic is duplicated twice. For example, when a new command is executed, we must remember to update both
-<code>HistoryManager</code> and <code>UndoRedoStack</code>.<br>
-<strong>Alternative 2:</strong> Use <code>HistoryManager</code> for undo/redo<br>
-<strong>Pros:</strong> We do not need to maintain a separate stack, and just reuse what is already in the codebase.<br>
-<strong>Cons:</strong> Requires dealing with commands that have already been undone: We must remember to skip these commands.
+<p><strong>Aspect:</strong> Data structure to support the undo/redo commands<br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Use separate stack for undo and redo<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> Easy to understand for new Computer Science student undergraduates to understand, who are likely to be the
+new incoming developers of our project.<br></p>
+</li>
+<li>
+<p><strong>Cons:</strong> Logic is duplicated twice. For example, when a new command is executed, we must remember to update both
+<code>HistoryManager</code> and <code>UndoRedoStack</code>.<br></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Use <code>HistoryManager</code> for undo/redo<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> We do not need to maintain a separate stack, and just reuse what is already in the codebase.<br></p>
+</li>
+<li>
+<p><strong>Cons:</strong> Requires dealing with commands that have already been undone: We must remember to skip these commands.
 Violates Single Responsibility Principle and Separation of Concerns as <code>HistoryManager</code> now needs to do two different
 things.<br></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
 </div>
 <div class="paragraph">
 <p><mark>End of Extract</mark></p>
@@ -388,7 +493,7 @@ things.<br></p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-10-23 09:39:11 +00:00
+Last updated 2017-10-23 10:55:56 +00:00
 </div>
 </div>
 </body>

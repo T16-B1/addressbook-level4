@@ -18,7 +18,7 @@
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>By: <code>CS2103AUG2017 Team T16-B1</code>      Since: <code>Jun 2016</code>      Licence: <code>MIT</code></p>
+<p>By: <code>CS2103AUG2017 Team T16-B1</code>      Since: <code>Sept 2017</code>      Licence: <code>MIT</code></p>
 </div>
 </div>
 <div id="toc" class="toc">
@@ -164,7 +164,7 @@ Do not disable them. If you have disabled them, go to <code>File</code> &gt; <co
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Fork this repo, and clone the fork to your computer</p>
+<p>Fork this repo, and clone the fork onto your computer</p>
 </li>
 <li>
 <p>Open IntelliJ (if you are not in the welcome screen, click <code>File</code> &gt; <code>Close Project</code> to close the existing project
@@ -221,7 +221,7 @@ This will generate all resources required by the application and tests.</p>
 <div class="sect3">
 <h4 id="configuring-the-coding-style"><a class="link" href="#configuring-the-coding-style">2.4.1. Configuring the coding style</a></h4>
 <div class="paragraph">
-<p>This project follows <a href="https://github.com/oss-generic/process/blob/master/docs/CodingStandards.md">oss-generic coding
+<p>This project follows <a href="https://oss-generic.github.io/process/codingStandards/CodingStandard-Java.html">oss-generic coding
 standards</a>. IntelliJ&#8217;s default style is mostly compliant with ours but it uses a different import order from ours. To
 rectify,</p>
 </div>
@@ -290,18 +290,8 @@ Having both Travis and AppVeyor ensures your App works on both Unix-based platfo
 <div class="sect3">
 <h4 id="getting-started-with-coding"><a class="link" href="#getting-started-with-coding">2.4.4. Getting started with coding</a></h4>
 <div class="paragraph">
-<p>When you are ready to start coding,</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Get some sense of the overall design by reading the <a href="#architecture">Architecture</a> section.</p>
-</li>
-<li>
-<p>Take a look at the section <a href="#suggested-programming-tasks-to-get-started">Suggested Programming Tasks to Get
-Started</a>.</p>
-</li>
-</ol>
+<p>Before you get ready to start coding, get some sense of the overall design by reading the
+<a href="#architecture">Architecture</a> section.</p>
 </div>
 </div>
 </div>
@@ -312,16 +302,14 @@ Started</a>.</p>
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="architecture"><a class="link" href="#architecture">3.1. Architecture</a></h3>
-<div class="imageblock">
+<div id="architecture_diagram" class="imageblock">
 <div class="content">
 <img src="images/Architecture.png" alt="Architecture" width="600">
 </div>
+<div class="title">Figure 1. Architecture Diagram</div>
 </div>
 <div class="paragraph">
-<p><em>Figure 2.1.1 : Architecture Diagram</em></p>
-</div>
-<div class="paragraph">
-<p>The <strong><em>Architecture Diagram</em></strong> given above explains the high-level design of the App. Given below is a quick overview of
+<p>The <a href="#architecture_diagram">Architecture Diagram</a> given above explains the high-level design of the App. Given below is a quick overview of
 each component.</p>
 </div>
 <div class="admonitionblock tip">
@@ -331,15 +319,16 @@ each component.</p>
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-The <code>.pptx</code> files used to create diagrams in this document can be found in the <a href="https://github.com/CS2103AUG2017-T16-B1/main/docs/diagrams/">diagrams</a>
-folder. To update a diagram, modify the diagram in the pptx file, select the objects of the diagram, and choose <code>Save
-as picture</code>.
+The <code>.pptx</code> files used to create diagrams in this document can be found in the <a href="https://github.com/CS2103AUG2017-T16-B1/main/tree/master/docs/diagrams/">diagrams</a>
+folder. To update a diagram, modify the diagram in the powerpoint files located in the
+<a href="https://github.com/CS2103AUG2017-T16-B1/main/tree/master/docs/diagrams/">diagrams</a> folder, select the objects of the diagram, 'right click`, and choose
+<code>Save as picture</code>.
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p><code>Main</code> has only one class called <a href="https://github.com/CS2103AUG2017-T16-B1/main/src/main/java/seedu/address/MainApp.java"><code>MainApp</code></a>. It is responsible
+<p><code>Main</code> has only one class called <a href="https://github.com/CS2103AUG2017-T16-B1/main/tree/master/src/main/java/seedu/address/MainApp.java"><code>MainApp</code></a>. It is responsible
 for,</p>
 </div>
 <div class="ulist">
@@ -395,34 +384,30 @@ library</a>) is used by components to communicate with other components using ev
 <p>Defines its <em>API</em> in an <code>interface</code> with the same name as the Component.</p>
 </li>
 <li>
-<p>Exposes its functionality using a <code>{Component Name}Manager</code> class.</p>
+<p>Exposes its functionality using a <code>{Component Name}Manager</code> class. i.e. <code>LogicManager</code></p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>For example, the <code>Logic</code> component (see the class diagram given below) defines it&#8217;s API in the <code>Logic.java</code> interface
-and exposes its functionality using the <code>LogicManager.java</code> class.</p>
+<p>For example, the <code>Logic</code> component (see the <a href="#logic_class_diagram">Logic Class Diagram</a> given below) defines it&#8217;s API in the <code>Logic.java</code>
+interface and exposes its functionality using the <code>LogicManager.java</code> class.</p>
 </div>
-<div class="imageblock">
+<div id="logic_class_diagram" class="imageblock">
 <div class="content">
 <img src="images/LogicClassDiagram.png" alt="LogicClassDiagram" width="800">
 </div>
-</div>
-<div class="paragraph">
-<p><em>Figure 2.1.2 : Class Diagram of the Logic Component</em></p>
+<div class="title">Figure 2. Logic Class Diagram</div>
 </div>
 <h4 id="events-driven-nature-of-the-design" class="discrete">Events-Driven nature of the design</h4>
 <div class="paragraph">
-<p>The <em>Sequence Diagram</em> below shows how the components interact for the scenario where the user issues the command
-<code>delete 1</code>.</p>
+<p>The <a href="#sequence_diagram_for_delete_person">Component Interactions for <code>delete 1</code> Command (Part 1)</a> diagram below shows how the components interact for the scenario where the
+user issues the command <code>delete 1</code>.</p>
 </div>
-<div class="imageblock">
+<div id="sequence_diagram_for_delete_person" class="imageblock">
 <div class="content">
 <img src="images/SDforDeletePerson.png" alt="SDforDeletePerson" width="800">
 </div>
-</div>
-<div class="paragraph">
-<p><em>Figure 2.1.3a : Component interactions for <code>delete 1</code> command (part 1)</em></p>
+<div class="title">Figure 3. Component Interactions for <code>delete 1</code> Command (Part 1)</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -441,13 +426,11 @@ asking the <code>Storage</code> to save the updates to the hard disk.
 <p>The diagram below shows how the <code>EventsCenter</code> reacts to that event, which eventually results in the updates being
 saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time.</p>
 </div>
-<div class="imageblock">
+<div id="sequence_diagram_for_delete_person_event_handling" class="imageblock">
 <div class="content">
 <img src="images/SDforDeletePersonEventHandling.png" alt="SDforDeletePersonEventHandling" width="800">
 </div>
-</div>
-<div class="paragraph">
-<p><em>Figure 2.1.3b : Component interactions for <code>delete 1</code> command (part 2)</em></p>
+<div class="title">Figure 4. Component Interactions for <code>delete 1</code> Command (Part 2)</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -457,8 +440,8 @@ saved to the hard disk and the status bar of the UI being updated to reflect the
 </td>
 <td class="content">
 Note how the event is propagated through the <code>EventsCenter</code> to the <code>Storage</code> and <code>UI</code> without <code>Model</code> having to be
-coupled to either of them. This is an example of how this Event Driven approach helps us reduce direct coupling between
-components.
+coupled to either of them in the <a href="#sequence_diagram_for_delete_person_event_handling">Component Interactions for <code>delete 1</code> Command (Part 2)</a>. This is an example of how this
+Event Driven approach helps us reduce direct coupling between components.
 </td>
 </tr>
 </table>
@@ -469,26 +452,25 @@ components.
 </div>
 <div class="sect2">
 <h3 id="ui-component"><a class="link" href="#ui-component">3.2. UI component</a></h3>
-<div class="imageblock">
+<div id="ui_class_diagram" class="imageblock">
 <div class="content">
 <img src="images/UiClassDiagram.png" alt="UiClassDiagram" width="800">
 </div>
+<div class="title">Figure 5. Structure of the UI Component</div>
 </div>
 <div class="paragraph">
-<p><em>Figure 2.2.1 : Structure of the UI Component</em></p>
+<p><strong>API</strong> : <a href="https://github.com/CS2103AUG2017-T16-B1/main/tree/master/src/main/java/seedu/address/ui/Ui.java"><code>Ui.java</code></a></p>
 </div>
 <div class="paragraph">
-<p><strong>API</strong> : <a href="https://github.com/CS2103AUG2017-T16-B1/main/src/main/java/seedu/address/ui/Ui.java"><code>Ui.java</code></a></p>
-</div>
-<div class="paragraph">
-<p>The UI consists of a <code>MainWindow</code> that is made up of parts e.g.<code>CommandBox</code>, <code>ResultDisplay</code>, <code>ParcelListPanel</code>,
-<code>StatusBarFooter</code>, <code>BrowserPanel</code> etc. All these, including the <code>MainWindow</code>, inherit from the abstract <code>UiPart</code> class.</p>
+<p>From <a href="#ui_class_diagram">Structure of the UI Component</a>, the UI consists of a <code>MainWindow</code> that is made up of parts e.g.<code>CommandBox</code>, <code>ResultDisplay</code>,
+ <code>ParcelListPanel</code>, <code>StatusBarFooter</code>, <code>BrowserPanel</code> etc. All these, including the <code>MainWindow</code>, inherit from the
+ abstract <code>UiPart</code> class.</p>
 </div>
 <div class="paragraph">
 <p>The <code>UI</code> component uses JavaFx UI framework. The layout of these UI parts are defined in matching <code>.fxml</code> files that
 are in the <code>src/main/resources/view</code> folder. For example, the layout of the
-<a href="https://github.com/CS2103AUG2017-T16-B1/main/src/main/java/seedu/address/ui/MainWindow.java"><code>MainWindow</code></a> is specified in
-<a href="https://github.com/CS2103AUG2017-T16-B1/main/src/main/resources/view/MainWindow.fxml"><code>MainWindow.fxml</code></a></p>
+<a href="https://github.com/CS2103AUG2017-T16-B1/main/tree/master/src/main/java/seedu/address/ui/MainWindow.java"><code>MainWindow</code></a> is specified in
+<a href="https://github.com/CS2103AUG2017-T16-B1/main/tree/master/src/main/resources/view/MainWindow.fxml"><code>MainWindow.fxml</code></a></p>
 </div>
 <div class="paragraph">
 <p>The <code>UI</code> component,</p>
@@ -509,26 +491,21 @@ are in the <code>src/main/resources/view</code> folder. For example, the layout 
 </div>
 <div class="sect2">
 <h3 id="logic-component"><a class="link" href="#logic-component">3.3. Logic component</a></h3>
-<div class="imageblock">
+<div id="logic_class_diagram" class="imageblock">
 <div class="content">
 <img src="images/LogicClassDiagram.png" alt="LogicClassDiagram" width="800">
 </div>
+<div class="title">Figure 6. Structure of the Logic Component</div>
 </div>
-<div class="paragraph">
-<p><em>Figure 2.3.1 : Structure of the Logic Component</em></p>
-</div>
-<div class="imageblock">
+<div id="logic_command_class_diagram" class="imageblock">
 <div class="content">
 <img src="images/LogicCommandClassDiagram.png" alt="LogicCommandClassDiagram" width="800">
 </div>
-</div>
-<div class="paragraph">
-<p><em>Figure 2.3.2 : Structure of Commands in the Logic Component. This diagram shows finer details concerning <code>XYZCommand</code>
-and <code>Command</code> in Figure 2.3.1</em></p>
+<div class="title">Figure 7. Structure of Commands in the Logic Component</div>
 </div>
 <div class="paragraph">
 <p><strong>API</strong> :
-<a href="https://github.com/CS2103AUG2017-T16-B1/main/src/main/java/seedu/address/logic/Logic.java"><code>Logic.java</code></a></p>
+<a href="https://github.com/CS2103AUG2017-T16-B1/main/tree/master/src/main/java/seedu/address/logic/Logic.java"><code>Logic.java</code></a></p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -550,27 +527,23 @@ and <code>Command</code> in Figure 2.3.1</em></p>
 <p>Given below is the Sequence Diagram for interactions within the <code>Logic</code> component for the <code>execute("delete 1")</code> API
 call.</p>
 </div>
-<div class="imageblock">
+<div id="delete_parcel_sequence_diagram_for_logic" class="imageblock">
 <div class="content">
 <img src="images/DeleteParcelSdForLogic.png" alt="DeleteParcelSdForLogic" width="800">
 </div>
-</div>
-<div class="paragraph">
-<p><em>Figure 2.3.1 : Interactions Inside the Logic Component for the <code>delete 1</code> Command</em></p>
+<div class="title">Figure 8. Interactions Inside the Logic Component for the <code>delete 1</code> Command</div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="model-component"><a class="link" href="#model-component">3.4. Model component</a></h3>
-<div class="imageblock">
+<div id="model_class_diagram" class="imageblock">
 <div class="content">
 <img src="images/ModelClassDiagram.png" alt="ModelClassDiagram" width="800">
 </div>
+<div class="title">Figure 9. Structure of the Model Component</div>
 </div>
 <div class="paragraph">
-<p><em>Figure 2.4.1 : Structure of the Model Component</em></p>
-</div>
-<div class="paragraph">
-<p><strong>API</strong> : <a href="https://github.com/CS2103AUG2017-T16-B1/main/src/main/java/seedu/address/model/Model.java"><code>Model.java</code></a></p>
+<p><strong>API</strong> : <a href="https://github.com/CS2103AUG2017-T16-B1/main/tree/master/src/main/java/seedu/address/model/Model.java"><code>Model.java</code></a></p>
 </div>
 <div class="paragraph">
 <p>The <code>Model</code>,</p>
@@ -595,16 +568,14 @@ so that the UI automatically updates when the data in the list change.</p>
 </div>
 <div class="sect2">
 <h3 id="storage-component"><a class="link" href="#storage-component">3.5. Storage component</a></h3>
-<div class="imageblock">
+<div id="model_class_diagram" class="imageblock">
 <div class="content">
 <img src="images/StorageClassDiagram.png" alt="StorageClassDiagram" width="800">
 </div>
+<div class="title">Figure 10. Structure of the Storage Component</div>
 </div>
 <div class="paragraph">
-<p><em>Figure 2.5.1 : Structure of the Storage Component</em></p>
-</div>
-<div class="paragraph">
-<p><strong>API</strong> : <a href="https://github.com/CS2103AUG2017-T16-B1/main/src/main/java/seedu/address/storage/Storage.java"><code>Storage.java</code></a></p>
+<p><strong>API</strong> : <a href="https://github.com/CS2103AUG2017-T16-B1/main/tree/master/src/main/java/seedu/address/storage/Storage.java"><code>Storage.java</code></a></p>
 </div>
 <div class="paragraph">
 <p>The <code>Storage</code> component,</p>
@@ -645,13 +616,13 @@ and redoing of commands that modifies the state of address book (e.g. <code>add<
 <p><code>UndoRedoStack</code> only deals with <code>UndoableCommands</code>. Commands that cannot be undone will inherit from <code>Command</code> instead.
 The following diagram shows the inheritance diagram for commands:</p>
 </div>
-<div class="imageblock">
+<div id="model_class_diagram" class="imageblock">
 <div class="content">
 <img src="images/LogicCommandClassDiagram.png" alt="LogicCommandClassDiagram" width="800">
 </div>
 </div>
 <div class="paragraph">
-<p>As you can see from the diagram, <code>UndoableCommand</code> adds an extra layer between the abstract <code>Command</code> class and
+<p>As you can see from the diagram above, <code>UndoableCommand</code> adds an extra layer between the abstract <code>Command</code> class and
 concrete commands that can be undone, such as the <code>DeleteCommand</code>. Note that extra tasks need to be done when executing
 a command in an <em>undoable</em> way, such as saving the state of the address book before execution. <code>UndoableCommand</code>
 contains the high-level algorithm for those extra tasks while the child classes implements the details of how to execute
@@ -700,21 +671,23 @@ steps of the algorithm in child classes is also known as the
 <div class="paragraph">
 <p>The user executes a new <code>UndoableCommand</code>, <code>delete 5</code>, to delete the 5th parcel in the address book. The current state
 of the address book is saved before the <code>delete 5</code> command executes. The <code>delete 5</code> command will then be pushed onto
-the <code>undoStack</code> (the current state is saved together with the command).</p>
+the <code>undoStack</code> (the current state is saved together with the command) as seen in the diagram below.</p>
 </div>
-<div class="imageblock">
+<div id="undo_redo_stack_diagram_1" class="imageblock">
 <div class="content">
 <img src="images/UndoRedoStartingStackDiagram.png" alt="UndoRedoStartingStackDiagram" width="800">
 </div>
+<div class="title">Figure 11. Executing a New Command with an Empty Undo Stack.</div>
 </div>
 <div class="paragraph">
 <p>As the user continues to use the program, more commands are added into the <code>undoStack</code>. For example, the user may
-execute <code>add n/David &#8230;&#8203;</code> to add a new parcel.</p>
+execute <code>add n/David &#8230;&#8203;</code> to add a new parcel as seen in the diagram below.</p>
 </div>
-<div class="imageblock">
+<div id="undo_redo_stack_diagram_2" class="imageblock">
 <div class="content">
 <img src="images/UndoRedoNewCommand1StackDiagram.png" alt="UndoRedoNewCommand1StackDiagram" width="800">
 </div>
+<div class="title">Figure 12. Executing a New Command with a Non-Empty Undo Stack.</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -733,12 +706,13 @@ If a command fails its execution, it will not be pushed to the <code>UndoRedoSta
 </div>
 <div class="paragraph">
 <p>We will pop the most recent command out of the <code>undoStack</code> and push it back to the <code>redoStack</code>. We will restore the
-address book to the state before the <code>add</code> command executed.</p>
+address book to the state before the <code>add</code> command executed. This can be visualised in the diagram below.</p>
 </div>
-<div class="imageblock">
+<div id="undo_redo_stack_diagram_2" class="imageblock">
 <div class="content">
 <img src="images/UndoRedoExecuteUndoStackDiagram.png" alt="UndoRedoExecuteUndoStackDiagram" width="800">
 </div>
+<div class="title">Figure 13. Undoing a Previous Command Stored in a Non-Empty Undo Stack.</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -756,10 +730,11 @@ popping the <code>undoStack</code>.
 <div class="paragraph">
 <p>The following sequence diagram shows how the undo operation works:</p>
 </div>
-<div class="imageblock">
+<div id="undo_redo_sequence_diagram" class="imageblock">
 <div class="content">
 <img src="images/UndoRedoSequenceDiagram.png" alt="UndoRedoSequenceDiagram" width="800">
 </div>
+<div class="title">Figure 14. Undo Redo Sequence Diagram</div>
 </div>
 <div class="paragraph">
 <p>The redo does the exact opposite (pops from <code>redoStack</code>, push to <code>undoStack</code>, and restores the address book to the
@@ -783,77 +758,178 @@ popping the <code>redoStack</code>.
 time the <code>redoStack</code> is no longer empty. It will be purged as it no longer make sense to redo the <code>add n/David</code> command
 (this is the behavior that most modern desktop applications follow).</p>
 </div>
-<div class="imageblock">
+<div id="undo_redo_new_command_stack_digram_3" class="imageblock">
 <div class="content">
 <img src="images/UndoRedoNewCommand2StackDiagram.png" alt="UndoRedoNewCommand2StackDiagram" width="800">
 </div>
+<div class="title">Figure 15. Executing a Undoable Command Clearing A Non-Empty Redo Stack</div>
 </div>
 <div class="paragraph">
 <p>Commands that are not undoable are not added into the <code>undoStack</code>. For example, <code>list</code>, which inherits from <code>Command</code>
 rather than <code>UndoableCommand</code>, will not be added after execution:</p>
 </div>
-<div class="imageblock">
+<div id="undo_redo_new_command_stack_digram_4" class="imageblock">
 <div class="content">
 <img src="images/UndoRedoNewCommand3StackDiagram.png" alt="UndoRedoNewCommand3StackDiagram" width="800">
 </div>
+<div class="title">Figure 16. Redo Command Execution fail if Redo Stack is Empty</div>
 </div>
 <div class="paragraph">
 <p>The following activity diagram summarize what happens inside the <code>UndoRedoStack</code> when a user executes a new command:</p>
 </div>
-<div class="imageblock">
+<div id="undo_redo_stack_activity_diagram" class="imageblock">
 <div class="content">
 <img src="images/UndoRedoActivityDiagram.png" alt="UndoRedoActivityDiagram" width="200">
 </div>
+<div class="title">Figure 17. Undo Redo Command Activity Diagram</div>
 </div>
 <div class="sect3">
 <h4 id="design-considerations"><a class="link" href="#design-considerations">4.1.1. Design Considerations</a></h4>
 <div class="paragraph">
-<p><strong>Aspect:</strong> Implementation of <code>UndoableCommand</code><br>
-<strong>Alternative 1 (current choice):</strong> Add a new abstract method <code>executeUndoableCommand()</code><br>
-<strong>Pros:</strong> We will not lose any undone/redone functionality as it is now part of the default behaviour. Classes that
-deal with <code>Command</code> do not have to know that <code>executeUndoableCommand()</code> exist.<br>
-<strong>Cons:</strong> Hard for new developers to understand the template pattern.<br>
-<strong>Alternative 2:</strong> Just override <code>execute()</code><br>
-<strong>Pros:</strong> Does not involve the template pattern, easier for new developers to understand.<br>
-<strong>Cons:</strong> Classes that inherit from <code>UndoableCommand</code> must remember to call <code>super.execute()</code>, or lose the ability to
+<p><strong>Aspect: Implementation of <code>UndoableCommand</code></strong><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Add a new abstract method <code>executeUndoableCommand()</code><br></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> We will not lose any undone/redone functionality as it is now part of the default behaviour. Classes that
+deal with <code>Command</code> do not have to know that <code>executeUndoableCommand()</code> exist.<br></p>
+</li>
+<li>
+<p><strong>Cons:</strong> Hard for new developers to understand the template pattern.<br></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Just override <code>execute()</code><br></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> Does not involve the template pattern, easier for new developers to understand.<br></p>
+</li>
+<li>
+<p><strong>Cons:</strong> Classes that inherit from <code>UndoableCommand</code> must remember to call <code>super.execute()</code>, or lose the ability to
 undo/redo.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
 </div>
 <hr>
 <div class="paragraph">
-<p><strong>Aspect:</strong> How undo &amp; redo executes<br>
-<strong>Alternative 1 (current choice):</strong> Saves the entire address book.<br>
-<strong>Pros:</strong> Easy to implement.<br>
-<strong>Cons:</strong> May have performance issues in terms of memory usage.<br>
-<strong>Alternative 2:</strong> Individual command knows how to undo/redo by itself.<br>
-<strong>Pros:</strong> Will use less memory (e.g. for <code>delete</code>, just save the parcel being deleted).<br>
-<strong>Cons:</strong> We must ensure that the implementation of each individual command are correct.</p>
+<p><strong>Aspect:</strong> How undo &amp; redo executes<br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Saves the entire address book.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> Easy to implement.<br></p>
+</li>
+<li>
+<p><strong>Cons:</strong> May have performance issues in terms of memory usage.<br></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Individual command knows how to undo/redo by itself.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> Will use less memory (e.g. for <code>delete</code>, just save the parcel being deleted).<br></p>
+</li>
+<li>
+<p><strong>Cons:</strong> We must ensure that the implementation of each individual command are correct.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
 </div>
 <hr>
 <div class="paragraph">
-<p><strong>Aspect:</strong> Type of commands that can be undone/redone<br>
-<strong>Alternative 1 (current choice):</strong> Only include commands that modifies the address book (<code>add</code>, <code>clear</code>, <code>edit</code>).<br>
-<strong>Pros:</strong> We only revert changes that are hard to change back (the view can easily be re-modified as no data are lost).<br>
-<strong>Cons:</strong> User might think that undo also applies when the list is modified (undoing filtering for example), only to
-realize that it does not do that, after executing <code>undo</code>.<br>
-<strong>Alternative 2:</strong> Include all commands.<br>
-<strong>Pros:</strong> Might be more intuitive for the user.<br>
-<strong>Cons:</strong> User have no way of skipping such commands if he or she just want to reset the state of the address book and
-not the view.<br>
-<strong>Additional Info:</strong> See our discussion  <a href="https://github.com/se-edu/addressbook-level4/issues/390#issuecomment-298936672">here</a>.</p>
+<p><strong>Aspect:</strong> Type of commands that can be undone/redone<br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Alternative 1 (current choice):** Only include commands that modifies the address book (<code>add</code>, <code>clear</code>, <code>edit</code>).<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> We only revert changes that are hard to change back (the view can easily be re-modified as no data are lost).<br></p>
+</li>
+<li>
+<p><strong>Cons:</strong> User might think that undo also applies when the list is modified (undoing filtering for example), only to
+realize that it does not do that, after executing <code>undo</code>.<br></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Include all commands.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> Might be more intuitive for the user.<br></p>
+</li>
+<li>
+<p><strong>Cons:</strong> User have no way of skipping such commands if he or she just want to reset the state of the address book and
+not the view.<br></p>
+</li>
+<li>
+<p><strong>Additional Info:</strong> See our discussion  <a href="https://github.com/se-edu/addressbook-level4/issues/390#issuecomment-298936672">here</a>.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
 </div>
 <hr>
 <div class="paragraph">
-<p><strong>Aspect:</strong> Data structure to support the undo/redo commands<br>
-<strong>Alternative 1 (current choice):</strong> Use separate stack for undo and redo<br>
-<strong>Pros:</strong> Easy to understand for new Computer Science student undergraduates to understand, who are likely to be the
-new incoming developers of our project.<br>
-<strong>Cons:</strong> Logic is duplicated twice. For example, when a new command is executed, we must remember to update both
-<code>HistoryManager</code> and <code>UndoRedoStack</code>.<br>
-<strong>Alternative 2:</strong> Use <code>HistoryManager</code> for undo/redo<br>
-<strong>Pros:</strong> We do not need to maintain a separate stack, and just reuse what is already in the codebase.<br>
-<strong>Cons:</strong> Requires dealing with commands that have already been undone: We must remember to skip these commands.
+<p><strong>Aspect:</strong> Data structure to support the undo/redo commands<br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Use separate stack for undo and redo<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> Easy to understand for new Computer Science student undergraduates to understand, who are likely to be the
+new incoming developers of our project.<br></p>
+</li>
+<li>
+<p><strong>Cons:</strong> Logic is duplicated twice. For example, when a new command is executed, we must remember to update both
+<code>HistoryManager</code> and <code>UndoRedoStack</code>.<br></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Use <code>HistoryManager</code> for undo/redo<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> We do not need to maintain a separate stack, and just reuse what is already in the codebase.<br></p>
+</li>
+<li>
+<p><strong>Cons:</strong> Requires dealing with commands that have already been undone: We must remember to skip these commands.
 Violates Single Responsibility Principle and Separation of Concerns as <code>HistoryManager</code> now needs to do two different
 things.<br></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -916,14 +992,38 @@ to the back of Google Map&#8217;s search URL prefix to get a URL for the browser
 <div class="sect3">
 <h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">4.4.1. Design Considerations</a></h4>
 <div class="paragraph">
-<p><strong>Aspect:</strong> Implementation of Google Maps Search Browser<br>
-<strong>Alternative 1 (current choice):</strong> Change browser loadPage URL to Google Map search URL<br>
-<strong>Pros:</strong> Its easy to implement new methods to load a new URLs if required to display a different URL.<br>
-<strong>Cons:</strong> The map has no other functionality besides searching for the postal code.<br>
-<strong>Alternative 2 (future implementation choice):</strong> Implementing through Google Maps API<br>
-<strong>Pros:</strong> Makes it easier for implementing additional features that utilizes the Maps API which would be required<br>
- in future versions of the Ark application.<br>
-<strong>Cons:</strong> More difficult to implement and integrate into a command line interface.</p>
+<p><strong>Aspect: Implementation of Google Maps Search Browser</strong><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Change browser loadPage URL to Google Map search URL<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> Its easy to implement new methods to load a new URLs if required to display a different URL.<br></p>
+</li>
+<li>
+<p><strong>Cons:</strong> The map has no other functionality besides searching for the postal code.<br></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2 (future implementation choice):</strong> Implementing through Google Maps API<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> Makes it easier for implementing additional features that utilizes the Maps API which would be required<br>
+in future versions of the Ark application.<br></p>
+</li>
+<li>
+<p><strong>Cons:</strong> More difficult to implement and integrate into a command line interface.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -942,16 +1042,40 @@ updated list of tags.</p>
 <div class="sect3">
 <h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">4.5.1. Design Considerations</a></h4>
 <div class="paragraph">
-<p><strong>Aspect:</strong> Implementation of <code>deleteTagCommand</code><br>
-<strong>Alternative 1 (current choice):</strong> Add method to delete tags in <code>ModelManager</code><br>
-<strong>Pros:</strong> It is easy to implement a method to remove every instance where the Tag appears, we only have to be able to
-correctly iterate through all the lists of tags.<br>
-<strong>Cons:</strong> Might be computationally expensive for large number of parcels as Ark will need to iterate through every
-Tag to delete them.<br>
-<strong>Alternative 2:</strong> Maintain a list of tags and where the tags are located+
-<strong>Pros:</strong> Computationally quicker to just find the tag and remove the tag from every parcel in the list of tags<br>
-<strong>Cons:</strong> More difficult to implement as we have to store an additional list of tags which is linked to each parcel
+<p><strong>Aspect: Implementation of <code>deleteTagCommand</code></strong><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Add method to delete tags in <code>ModelManager</code><br></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> It is easy to implement a method to remove every instance where the Tag appears, we only have to be able to
+correctly iterate through all the lists of tags.<br></p>
+</li>
+<li>
+<p><strong>Cons:</strong> Might be computationally expensive for large number of parcels as Ark will need to iterate through every
+Tag to delete them.<br></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Maintain a list of tags and where the tags are located+</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> Computationally quicker to just find the tag and remove the tag from every parcel in the list of tags<br></p>
+</li>
+<li>
+<p><strong>Cons:</strong> More difficult to implement as we have to store an additional list of tags which is linked to each parcel
 and has to be updated whenever we edit other parcel details as well.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -961,10 +1085,11 @@ and has to be updated whenever we edit other parcel details as well.</p>
 <p>The back up mechanism is facilitated by a <code>backupAddressBook</code> method within the <code>StorageManager</code>. It supports the
 backing up of AddressBook data in Ark.<br></p>
 </div>
-<div class="imageblock">
+<div id="back_up_sequence_diagram" class="imageblock">
 <div class="content">
 <img src="images/BackupSequenceDiagram.png" alt="BackupSequenceDiagram" width="600">
 </div>
+<div class="title">Figure 18. Backup Sequence Diagram</div>
 </div>
 <div class="paragraph">
 <p>The <code>backupAddressBook</code> method is called automatically when <code>storageManager</code> is initialised in <code>MainApp#init()</code>,
@@ -976,38 +1101,95 @@ the name of the main <code>AddressBook</code> storage file appended with <code>-
 <div class="sect3">
 <h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">4.6.1. Design Considerations</a></h4>
 <div class="paragraph">
-<p><strong>Aspect:</strong> Implementation of <code>StorageManager#backupAddressBook</code><br>
-<strong>Alternative 1 (current choice):</strong> use the <code>StorageManger#saveAddressBook()</code> method to implement logic.<br>
-<strong>Pros:</strong> It becomes easier to implement method rather than writing out a separate logic for saveAddressBook. It
-makes updates easier since enhancements to <code>saveAddressBook()</code> will also enhance <code>backupAddressBook()</code>.<br>
-<strong>Cons:</strong> This implementation increases the coupling of <code>StorageManager#backupAddressBook()</code> and
-<code>StorageManager#saveAddressBook()</code> where changes in <code>saveAddressBook()</code> will cause changes in <code>backupAddressBook()</code>.<br>
-<strong>Alternative 2:</strong> Separate the implementation of <code>Storage#backupAddressBook()</code> from <code>StorageManager#saveAddressBook()</code>
-<br>
-<strong>Pros:</strong> Reduced coupling of saveAddressBook() and backupAddressBook() and allows the backup file to be saved at a
-different location from the main save file. This prevents the backup file from being corrupted if the folder of the
-main save file becomes corrupted.<br>
-<strong>Cons:</strong> More tedious to implement and maintain <code>backupAddressBook()</code> since enhancements to the saving feature has to
-be implemented in both <code>saveAddressBook()</code> and <code>backupAddressBook()</code><br></p>
+<p><strong>Aspect: Implementation of <code>StorageManager#backupAddressBook</code></strong><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> use the <code>StorageManger#saveAddressBook()</code> method to implement logic.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> It becomes easier to implement method rather than writing out a separate logic for saveAddressBook. It
+makes updates easier since enhancements to <code>saveAddressBook()</code> will also enhance <code>backupAddressBook()</code>.<br></p>
+</li>
+<li>
+<p><strong>Cons:</strong> This implementation increases the coupling of <code>#backupAddressBook()</code> and <code>#saveAddressBook()</code> where changes
+in <code>saveAddressBook()</code> will cause changes in <code>backupAddressBook()</code>.<br></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Separate the implementation of <code>backupAddressBook()</code> from <code>#saveAddressBook()</code><br></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> Reduced coupling of <code>saveAddressBook()</code> and <code>backupAddressBook()</code> and allows the backup file to be saved at
+ a different location from the main save file. This prevents the backup file from being corrupted if the folder of the
+main save file becomes corrupted.<br></p>
+</li>
+<li>
+<p><strong>Cons:</strong> More tedious to implement and maintain <code>backupAddressBook()</code> since enhancements to the saving feature has
+to be implemented in both <code>saveAddressBook()</code> and <code>backupAddressBook()</code><br></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
 </div>
 <hr>
 <div class="paragraph">
-<p><strong>Aspect:</strong> Trigger to execute <code>StorageManager#backupAddressBook</code><br>
-<strong>Alternative 1 (current choice):</strong> Automatically backup data on Ark on launch of the software.<br>
-<strong>Pros:</strong> This implementation ensures that the if the user corrupts the data of Ark during a session. The user will be
-able to revert to the start of the session, which is ensured to be a workable instance of the Ark software.<br>
-<strong>Cons:</strong> This does not give the most recent copy of the data of the Ark if many changes were made in a single session.
-<br>
-<strong>Alternative 2:</strong> Backup data on Ark every few minutes<br>
-<strong>Pros:</strong> Provides a very recent copy of the data on Ark.<br>
-<strong>Cons:</strong> More tedious and difficult to implement. User may also be running another process at that point of time. It
+<p><strong>Aspect:</strong> Trigger to execute <code>StorageManager#backupAddressBook</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Automatically backup data on Ark on launch of the software.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> This implementation ensures that the if the user corrupts the data of Ark during a session. The user will be
+able to revert to the start of the session, which is ensured to be a workable instance of the Ark software.<br></p>
+</li>
+<li>
+<p><strong>Cons:</strong> This does not give the most recent copy of the data of the Ark if many changes were made in a single session.
++</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Backup data on Ark every few minutes<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> Provides a very recent copy of the data on Ark.<br></p>
+</li>
+<li>
+<p><strong>Cons:</strong> More tedious and difficult to implement. User may also be running another process at that point of time. It
 could cause a bottleneck if there is a lot of data to be saved, and multiple backup calls are queued one after the
-other.<br>
-<strong>Alternative 3:</strong> Backup data after a fixed number of `UndoableCommand`s.<br>
-<strong>Pros:</strong> Provides a very recent copy of the data on Ark.<br>
-<strong>Cons:</strong> More tedious and difficult to implement. Difficult to determine the optimal amount of data to restore. If
+other.<br></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 3:</strong> Backup data after a fixed number of `UndoableCommand`s.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> Provides a very recent copy of the data on Ark.<br></p>
+</li>
+<li>
+<p><strong>Cons:</strong> More tedious and difficult to implement. Difficult to determine the optimal amount of data to restore. If
 the corruption of the data is caused by a several of commands, it becomes difficult to ensure that the backup file
 provides a workable copy of the data of Ark.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -1049,15 +1231,39 @@ to replace the text in <code>commandFieldText</code> with the string.<br></p>
 <div class="sect3">
 <h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">4.7.1. Design Considerations</a></h4>
 <div class="paragraph">
-<p><strong>Aspect:</strong> Implementation of <code>autocomplete</code><br>
-<strong>Alternative 1 (current choice):</strong> Create a new <code>Autocompleter</code> class to implement <code>autocomplete</code> and its helper
-functions.<br>
-<strong>Pros:</strong> Single Responsibility Principle (SRP) is maintained<br>
-<strong>Cons:</strong> More tedious to implement and test since the feature is implemented in both <code>Autocompleter</code> and <code>CommandBox</code>.
-Also creates coupling between the <code>Autocompleter</code> and <code>CommandBox</code>.<br>
-<strong>Alternative 2:</strong> Implement <code>autocomplete</code> inside <code>CommandBox</code>
-<strong>Pros:</strong> Easier to test since <code>CommandBoxTest</code> has already been set up and implemented.<br>
-<strong>Cons:</strong> <code>CommandBox</code> class now has multiple responsibilities, which violates SRP.<br></p>
+<p><strong>Aspect: Implementation of <code>autocomplete</code></strong><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Create a new <code>Autocompleter</code> class to implement <code>autocomplete</code> and its helper
+functions.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> Single Responsibility Principle (SRP) is maintained<br></p>
+</li>
+<li>
+<p><strong>Cons:</strong> More tedious to implement and test since the feature is implemented in both <code>Autocompleter</code> and <code>CommandBox</code>.
+Also creates coupling between the <code>Autocompleter</code> and <code>CommandBox</code>.<br></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Implement <code>autocomplete</code> inside <code>CommandBox</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> Easier to test since <code>CommandBoxTest</code> has already been set up and implemented.<br></p>
+</li>
+<li>
+<p><strong>Cons:</strong> <code>CommandBox</code> class now has multiple responsibilities, which violates SRP.<br></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -1124,13 +1330,11 @@ use the settings indicated in the screenshot below.</p>
 </li>
 </ol>
 </div>
-<div class="imageblock">
+<div id="model_class_diagram" class="imageblock">
 <div class="content">
 <img src="images/chrome_save_as_pdf.png" alt="chrome save as pdf" width="300">
 </div>
-</div>
-<div class="paragraph">
-<p><em>Figure 5.6.1 : Saving documentation as PDF files in Chrome</em></p>
+<div class="title">Figure 19. Saving Documentation as PDF files in Chrome</div>
 </div>
 </div>
 </div>
@@ -1290,7 +1494,7 @@ our projects. See <a href="UsingTravis.html">UsingTravis.adoc</a> and <a href="U
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Update the version number in <a href="https://github.com/CS2103AUG2017-T16-B1/main/src/main/java/seedu/address/MainApp.java"><code>MainApp.java</code></a>.</p>
+<p>Update the version number in <a href="https://github.com/CS2103AUG2017-T16-B1/main/tree/master/src/main/java/seedu/address/MainApp.java"><code>MainApp.java</code></a>.</p>
 </li>
 <li>
 <p>Generate a JAR file <a href="UsingGradle.html#creating-the-jar-file">using Gradle</a>.</p>
@@ -1323,12 +1527,12 @@ b. Require developers to download those libraries manually (this creates extra w
 <div class="paragraph">
 <p>Priorities: High (must have) - <code>* * *</code>, Medium (nice to have) - <code>* *</code>, Low (unlikely to have) - <code>*</code></p>
 </div>
-<table class="tableblock frame-all grid-all" style="width: 59%;">
+<table class="tableblock frame-all grid-all spread">
 <colgroup>
-<col style="width: 22%;">
-<col style="width: 23%;">
-<col style="width: 25%;">
+<col style="width: 8%;">
+<col style="width: 17%;">
 <col style="width: 30%;">
+<col style="width: 45%;">
 </colgroup>
 <thead>
 <tr>
@@ -1545,7 +1749,7 @@ information from other sources</p></td>
 <h2 id="use-cases"><a class="link" href="#use-cases">Appendix B: Use Cases</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>(For all use cases below, the <strong>System</strong> is the <code>AddressBook</code> and the <strong>Actor</strong> is the <code>user</code>, unless specified otherwise)</p>
+<p>(For all use cases below, the <strong>System</strong> is the <code>Ark</code> and the <strong>Actor</strong> is the <code>user</code>, unless specified otherwise)</p>
 </div>
 <h3 id="use-case-delete-parcel" class="discrete">Use case: Delete parcel</h3>
 <div class="paragraph">
@@ -1954,7 +2158,7 @@ characters.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-10-23 09:39:11 +00:00
+Last updated 2017-10-23 10:55:56 +00:00
 </div>
 </div>
 </body>
