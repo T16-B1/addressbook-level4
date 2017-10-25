@@ -44,10 +44,13 @@
 <li><a href="#redoing-the-previously-undone-command-code-redo-code">5.12. Redoing the previously undone command : <code>redo</code></a></li>
 <li><a href="#clearing-all-entries-code-clear-code">5.13. Clearing all entries : <code>clear</code></a></li>
 <li><a href="#exiting-the-program-code-exit-code">5.14. Exiting the program : <code>exit</code></a></li>
-<li><a href="#google-maps-browser">5.15. Google Maps Browser</a></li>
-<li><a href="#autocomplete">5.16. Autocomplete</a></li>
-<li><a href="#saving-the-data">5.17. Saving the data</a></li>
-<li><a href="#backing-up-the-data">5.18. Backing up the data</a></li>
+<li><a href="#tracking-number-recognition">5.15. Tracking Number Recognition</a></li>
+<li><a href="#postal-code-recognition">5.16. Postal Code Recognition</a></li>
+<li><a href="#status-field">5.17. Status field</a></li>
+<li><a href="#google-maps-browser">5.18. Google Maps Browser</a></li>
+<li><a href="#autocomplete">5.19. Autocomplete</a></li>
+<li><a href="#saving-the-data">5.20. Saving the data</a></li>
+<li><a href="#backing-up-the-data">5.21. Backing up the data</a></li>
 </ul>
 </li>
 <li><a href="#faq">6. FAQ</a></li>
@@ -282,6 +285,9 @@ numbers include two `R`s followed by nine digits and ending with `SG`. +
 Support for other delivery companies will come in future patches.</pre>
 </div>
 </div>
+<div class="paragraph">
+<p>tag::import[]</p>
+</div>
 </div>
 <div class="sect2">
 <h3 id="import-multiple-parcels-stored-in-an-xml-storage-file-code-import-code"><a class="link" href="#import-multiple-parcels-stored-in-an-xml-storage-file-code-import-code">5.3. Import multiple parcels stored in an xml storage file: <code>import</code></a></h3>
@@ -316,6 +322,9 @@ Non alphanumeric file names will not be accepted. i.e. <code>$addressbook#!@,xml
 </td>
 </tr>
 </table>
+</div>
+<div class="paragraph">
+<p>end::import[]</p>
 </div>
 </div>
 <div class="sect2">
@@ -684,9 +693,98 @@ Format: <code>clear</code></p>
 <p>Exits the program.<br>
 Format: <code>exit</code></p>
 </div>
+<div class="paragraph">
+<p>tag::trackingNumber[]</p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="google-maps-browser"><a class="link" href="#google-maps-browser">5.15. Google Maps Browser</a></h3>
+<h3 id="tracking-number-recognition"><a class="link" href="#tracking-number-recognition">5.15. Tracking Number Recognition</a></h3>
+<div class="paragraph">
+<p>Parcels have tracking numbers for delivery vendors to keep track of the parcels that they send out on a daily basis.
+This feature is important because a single person can have many parcels belonging to him. Tracking numbers are used
+to differentiate between the different parcels that are going to be delivered to the same person. Tracking numbers also
+serve as a better way of narrowing down and pinpointing parcels of interest since these numbers are more unique</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Presently, the <code>Tracking Number</code> Field only has support for Registered Article tracking numbers belonging to SingPost.
+You can read more about their Registered Article tracking number
+ <a href="http://www.singpost.com/send-receive/sending-within-singapore/registered-article-local">here</a>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>end::trackingNumber[]</p>
+</div>
+<div class="paragraph">
+<p>tag::postalCode[]</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="postal-code-recognition"><a class="link" href="#postal-code-recognition">5.16. Postal Code Recognition</a></h3>
+<div class="paragraph">
+<p>Ark can store the postal address of locations in Singapore. It only accepts values of <code>s</code> or <code>S</code> followed by 6 digits.
+The postal code of a parcel is used to query Google Maps when the <code>select</code> command is executed.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Presently, the <code>PostalCode</code> field still does a very relaxed validation and does not completely ensure that the postal
+code exists even though it might meet the criteria above. The team is working on producing a database of postal codes
+ in Singapore by quering the Google Maps Distance Matrix API. In the meantime, it is assumed that users will enter
+ the correct postal code.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>end::postalCode[]</p>
+</div>
+<div class="paragraph">
+<p>tag::status[]</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="status-field"><a class="link" href="#status-field">5.17. Status field</a></h3>
+<div class="paragraph">
+<p><code>Status</code> is used to indicate the current stage of delivery that a parcel is at. It has 4 possible states:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>PENDING</code> - This means that the parcel has not been delivered and has not passed the date it is supposed to be
+delivered by.<br></p>
+</li>
+<li>
+<p><code>DELIVERING</code> - This means that the parcel is currently working being delivered to its destination address.</p>
+</li>
+<li>
+<p><code>COMPLETED</code> - This indicates that the parcel has been successfully delivered to its destination.</p>
+</li>
+<li>
+<p><code>OVERDUE</code> - This state indicates that the parcel has not been delivered and has passed its due date.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>These states have different colours codes to allow you to differentiate the <code>Status</code> values more easily.</p>
+</div>
+<div class="paragraph">
+<p>end::status[]</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="google-maps-browser"><a class="link" href="#google-maps-browser">5.18. Google Maps Browser</a></h3>
 <div class="paragraph">
 <p>Ark has an in-built Google Maps browser section in the main window and can be used to show you the locations
 of the delivery addresses of each parcel. This feature will be automatically used whenever you type <code>select</code>
@@ -695,7 +793,7 @@ browser section of the main window.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="autocomplete"><a class="link" href="#autocomplete">5.16. Autocomplete</a></h3>
+<h3 id="autocomplete"><a class="link" href="#autocomplete">5.19. Autocomplete</a></h3>
 <div class="paragraph">
 <p>Ark comes with tab autocompletion which is able to complete a command for you
 without requiring you to type out the command fully.<br>
@@ -725,20 +823,26 @@ Then press <kbd>Enter</kbd> key to enter the command.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-the-data"><a class="link" href="#saving-the-data">5.17. Saving the data</a></h3>
+<h3 id="saving-the-data"><a class="link" href="#saving-the-data">5.20. Saving the data</a></h3>
 <div class="paragraph">
 <p>Ark data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.</p>
 </div>
+<div class="paragraph">
+<p>tag::backup[]</p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="backing-up-the-data"><a class="link" href="#backing-up-the-data">5.18. Backing up the data</a></h3>
+<h3 id="backing-up-the-data"><a class="link" href="#backing-up-the-data">5.21. Backing up the data</a></h3>
 <div class="paragraph">
 <p>Ark data are backed up in the hard disk automatically at the start of every session of the program.<br>
 There is no need to back up the data manually.<br>
 The backup file is appended with <code>-backup.xml</code> and is stored in the same folder as the main storage file.<br>
 The data from the backup file has to be loaded manually by copying the contents of the backup file into your main
- storage file.</p>
+ storage file. i.e. <code>./data/</code> folder</p>
+</div>
+<div class="paragraph">
+<p>end::backup[]</p>
 </div>
 </div>
 </div>
@@ -944,7 +1048,7 @@ parcels delivered.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-10-24 13:54:47 +00:00
+Last updated 2017-10-25 02:19:56 +00:00
 </div>
 </div>
 </body>

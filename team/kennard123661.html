@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 1.5.3">
+<title>Kennard Ng Pool Hua - Project Portfolio</title>
+<link rel="stylesheet" href="../stylesheets/gh-pages.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="../stylesheets/coderay-asciidoctor.css">
+</head>
+<body class="article">
+<div id="header">
+<h1>Kennard Ng Pool Hua - Project Portfolio</h1>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="project-addressbook-level-4"><a class="link" href="#project-addressbook-level-4">Project: AddressBook - Level 4</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>AddressBook - Level 4 is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 6 kLoC.</p>
+</div>
+<div class="paragraph">
+<p><strong>Code contributed</strong>: [<a href="https://github.com">Functional code</a>] [<a href="https://github.com">Test code</a>] {give links to collated code files}</p>
+</div>
+<div class="sect2">
+<h3 id="enhancement-added-import-feature"><a class="link" href="#enhancement-added-import-feature">Enhancement Added: Import Feature</a></h3>
+<div class="sect3">
+<h4 id="external-behavior"><a class="link" href="#external-behavior">External behavior</a></h4>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="import-multiple-parcels-stored-in-an-xml-storage-file-code-import-code"><a class="link" href="#import-multiple-parcels-stored-in-an-xml-storage-file-code-import-code">Import multiple parcels stored in an xml storage file: <code>import</code></a></h3>
+<div class="paragraph">
+<p>Imports the parcels in an Ark storage <code>.xml</code> file stored in <code>/data/import/</code> folder to Ark<br>
+Format: <code>import FILE_NAME</code></p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>import addressBook.xml</code></p>
+</li>
+<li>
+<p><code>import addressBook123661.xml</code></p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>File names should be alphanumeric i.e. <code>addressBook12.xml</code>, <code>12.xml</code>
+Non alphanumeric file names will not be accepted. i.e. <code>$addressbook#!@,xml</code></p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<hr>
+<div class="sect3">
+<h4 id="justification"><a class="link" href="#justification">Justification</a></h4>
+<div class="paragraph">
+<p>{Justify the need for, and the current design (i.e. external behavior) of, the feature}</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implementation"><a class="link" href="#implementation">Implementation</a></h4>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="import-mechanism"><a class="link" href="#import-mechanism">Import Mechanism</a></h3>
+<div class="paragraph">
+<p>To use this command, type <code>import (FILE_NAME)</code> into the <code>CommandBox</code>.</p>
+</div>
+<div class="paragraph">
+<p>The <code>Import</code> mechanism allows users to import parcels from valid <code>Ark</code> storage files stored as <code>.xml</code> files into the
+current instance of <code>Ark</code>. This mecahnism is facilitated by a <code>readAddressBook</code> method within`XmlAddressBookStorage` to
+load the parcels stored in the <code>xml</code> file and an <code>addAllParcels</code> method defined in <code>ModelManager</code> to add the parcels in
+the storage file into the current instance of <code>Ark</code>.<br></p>
+</div>
+<div class="paragraph">
+<p>Since the <code>Import</code> mechanism modifies the state of the data in <code>Ark</code>, it has to be undoable. Thus, it inherits from
+<code>UndoableCommands</code> interface rather than inheriting from the <code>Command</code> interface directly.<br></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The file to be imported has to be stored in the <code>./data/import</code> folder. i.e. calling <code>import ark.xml</code> will import the
+file <code>./data/import/ark.xml</code>.<br>
+If the user enters a file name that is not alphanumeric or a file name that is not in a <code>.xml</code> format, the parcel will
+throw an Exception. This is to prevent a directory traversal attack on Ark. Read more about directory traversal
+attacks <a href="https://www.acunetix.com/websitesecurity/directory-traversal/">here</a><br>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The following sequence diagram shows how the <code>import</code> operation works:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/ImportSequenceDiagram.png" alt="ImportSequenceDiagram" width="1000">
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The <code>ImportCommand</code> will only add parcels non-duplicate parcels. Duplicate parcels are ignored. If all the parcels to be
+ imported into Ark are duplicates, then no parcels are imported and an Exception is thrown.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect: Implementation of <code>ImportCommand</code></strong><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice): using <code>readAddressBook()</code> to implement the logic <code>ImportCommand</code></strong><br></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> It becomes easier to implement method rather than writing out a separate logic to import files. It
+makes updates easier since enhancements to <code>readAddressBook()</code> will also enhance the import command such as
+more supported save file formats.<br></p>
+</li>
+<li>
+<p><strong>Cons:</strong> This implementation increases the coupling of the <code>readAddressBook()</code> and <code>ImportCommand</code> such that changes
+in <code>readAddressBook()</code> is likely to cause a change in <code>ImportCommand</code>.<br></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Implement a parsing logic for <code>ImportCommand</code>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> Reduced coupling of <code>readAddressBook()</code> and <code>ImportCommand</code>. This gives the developers more freedom on
+adding more file formats that can be imported.<br></p>
+</li>
+<li>
+<p><strong>Cons:</strong> More tedious to implement and maintain <code>ImportCommand</code> since enhancements to the <code>readAddressBook()</code>
+feature has to be manually implemented in <code>ImportCommand</code> as well.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<hr>
+<div class="paragraph">
+<p><strong>Aspect: Arguments to import files</strong><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Backup save files from only one location<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> User will only stored his save files at one location, he will not store them at random locations and lose
+track of them. User only has to type the name of the file and does not need to type the full file path to locate
+the file. i.e. the user does not need to type <code>./data/import/Ark.xml</code>.<br></p>
+</li>
+<li>
+<p><strong>Cons:</strong> The user has restrictions on where he can import files from.<br></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> User can load the files from any directory<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> Allows user to import from his own archived folders anywhere in this computer.<br></p>
+</li>
+<li>
+<p><strong>Cons:</strong> More tedious for the user to type in the full file path to locate the .xml file that he wants to import.<br></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<hr>
+<div class="paragraph">
+<p><strong>Aspect: Allowed file names that can be imported</strong><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> File Names can only be alphanumeric and be in the <code>.xml</code> format.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> Ark is protected from directory traversal attacks.<br></p>
+</li>
+<li>
+<p><strong>Cons:</strong> The user has restrictions on the file naming conventions he can use to name his import files<br></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> No file name check<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> Allows user to name his files following any conventions and be successfully imported into Ark.<br></p>
+</li>
+<li>
+<p><strong>Cons:</strong> Makes Ark vulnerable to simple directory traversal attack where user can access files outside the
+<code>data/import/</code> directory.<br></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="enhancement-added-backup-feature"><a class="link" href="#enhancement-added-backup-feature">Enhancement Added: Backup Feature</a></h3>
+<div class="sect3">
+<h4 id="external-behavior-2"><a class="link" href="#external-behavior-2">External behavior</a></h4>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="backing-up-the-data"><a class="link" href="#backing-up-the-data">Backing up the data</a></h3>
+<div class="paragraph">
+<p>Ark data are backed up in the hard disk automatically at the start of every session of the program.<br>
+There is no need to back up the data manually.<br>
+The backup file is appended with <code>-backup.xml</code> and is stored in the same folder as the main storage file.<br>
+The data from the backup file has to be loaded manually by copying the contents of the backup file into your main
+ storage file. i.e. <code>./data/</code> folder</p>
+</div>
+<hr>
+<div class="sect3">
+<h4 id="justification-2"><a class="link" href="#justification-2">Justification</a></h4>
+<div class="paragraph">
+<p>{Justify the need for, and the current design (i.e. external behavior) of, the feature}</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implementation-2"><a class="link" href="#implementation-2">Implementation</a></h4>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="backup-mechanism"><a class="link" href="#backup-mechanism">Backup Mechanism</a></h3>
+<div class="paragraph">
+<p>The back up mechanism is facilitated by a <code>backupAddressBook()</code> method within the <code>StorageManager</code>. It supports the
+backing up of AddressBook data in Ark.<br></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/BackupSequenceDiagram.png" alt="BackupSequenceDiagram" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>backupAddressBook()</code> method is called automatically when <code>storageManager</code> is initialised in <code>MainApp#init()</code>,
+a method that is called when <code>Ark</code> is launched. The method utilises the <code>StorageManager#saveAddressBook()</code> method and
+stores the backup in the same directory as the main <code>AddressBook</code> storage file. The backup file is saved and named with
+the name of the main <code>AddressBook</code> storage file appended with <code>-backup.xml</code>. i.e. If the main <code>AddressBook</code> storage file
+ is named as <code>addressbook.xml</code>, the backup storage file will be saved as <code>addressbook.xml-backup.xml</code>.</p>
+</div>
+<hr>
+</div>
+<div class="sect2">
+<h3 id="enhancement-added-status-feature"><a class="link" href="#enhancement-added-status-feature">Enhancement Added: Status Feature</a></h3>
+<div class="sect3">
+<h4 id="external-behavior-3"><a class="link" href="#external-behavior-3">External behavior</a></h4>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="status-field"><a class="link" href="#status-field">Status field</a></h3>
+<div class="paragraph">
+<p><code>Status</code> is used to indicate the current stage of delivery that a parcel is at. It has 4 possible states:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>PENDING</code> - This means that the parcel has not been delivered and has not passed the date it is supposed to be
+delivered by.<br></p>
+</li>
+<li>
+<p><code>DELIVERING</code> - This means that the parcel is currently working being delivered to its destination address.</p>
+</li>
+<li>
+<p><code>COMPLETED</code> - This indicates that the parcel has been successfully delivered to its destination.</p>
+</li>
+<li>
+<p><code>OVERDUE</code> - This state indicates that the parcel has not been delivered and has passed its due date.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>These states have different colours codes to allow you to differentiate the <code>Status</code> values more easily.</p>
+</div>
+<hr>
+<div class="sect3">
+<h4 id="justification-3"><a class="link" href="#justification-3">Justification</a></h4>
+<div class="paragraph">
+<p>{Justify the need for, and the current design (i.e. external behavior) of, the feature}</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implementation-3"><a class="link" href="#implementation-3">Implementation</a></h4>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="status-field-2"><a class="link" href="#status-field-2">Status field</a></h3>
+<div class="paragraph">
+<p><code>Status</code> is used to indicate the current stage of delivery that a parcel is at. It has 4 possible states:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>PENDING</code> - This means that the parcel has not been delivered and has not passed the date it is supposed to be
+delivered by.<br></p>
+</li>
+<li>
+<p><code>DELIVERING</code> - This means that the parcel is currently working being delivered to its destination address.</p>
+</li>
+<li>
+<p><code>COMPLETED</code> - This indicates that the parcel has been successfully delivered to its destination.</p>
+</li>
+<li>
+<p><code>OVERDUE</code> - This state indicates that the parcel has not been delivered and has passed its due date.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>These states have different colours codes to allow users to differentiate the <code>Status</code> values more easily.</p>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">Design Considerations</a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Implementation of Status</code>**</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Status is an enum class.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Pros:</strong> <code>Status</code> should only have fixed values. The user should also not be allowed to create new <code>Status</code> objects.</p>
+</li>
+<li>
+<p><strong>Cons:</strong> Less options for the user to alter the <code>Status</code> values<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 2:</strong> Allow the user to define any <code>Status</code> they wish.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Pros:</strong> Users have more versatility on naming conventions</p>
+</li>
+<li>
+<p><strong>Cons:</strong> It becomes more difficult to import data files since different users may use different terminologies to
+describe the same status of the parcel.</p>
+</li>
+</ul>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="enhancement-added-tracking-number-feature"><a class="link" href="#enhancement-added-tracking-number-feature">Enhancement Added: Tracking Number Feature</a></h3>
+<div class="sect3">
+<h4 id="external-behavior-4"><a class="link" href="#external-behavior-4">External behavior</a></h4>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="tracking-number-recognition"><a class="link" href="#tracking-number-recognition">Tracking Number Recognition</a></h3>
+<div class="paragraph">
+<p>Parcels have tracking numbers for delivery vendors to keep track of the parcels that they send out on a daily basis.
+This feature is important because a single person can have many parcels belonging to him. Tracking numbers are used
+to differentiate between the different parcels that are going to be delivered to the same person. Tracking numbers also
+serve as a better way of narrowing down and pinpointing parcels of interest since these numbers are more unique</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Presently, the <code>Tracking Number</code> Field only has support for Registered Article tracking numbers belonging to SingPost.
+You can read more about their Registered Article tracking number
+ <a href="http://www.singpost.com/send-receive/sending-within-singapore/registered-article-local">here</a>.
+</td>
+</tr>
+</table>
+</div>
+<hr>
+<div class="sect3">
+<h4 id="justification-4"><a class="link" href="#justification-4">Justification</a></h4>
+<div class="paragraph">
+<p>{Justify the need for, and the current design (i.e. external behavior) of, the feature}</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implementation-4"><a class="link" href="#implementation-4">Implementation</a></h4>
+<hr>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="enhancement-added-postal-code-feature"><a class="link" href="#enhancement-added-postal-code-feature">Enhancement Added: Postal Code Feature</a></h3>
+<div class="sect3">
+<h4 id="external-behavior-5"><a class="link" href="#external-behavior-5">External behavior</a></h4>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="postal-code-recognition"><a class="link" href="#postal-code-recognition">Postal Code Recognition</a></h3>
+<div class="paragraph">
+<p>Ark can store the postal address of locations in Singapore. It only accepts values of <code>s</code> or <code>S</code> followed by 6 digits.
+The postal code of a parcel is used to query Google Maps when the <code>select</code> command is executed.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Presently, the <code>PostalCode</code> field still does a very relaxed validation and does not completely ensure that the postal
+code exists even though it might meet the criteria above. The team is working on producing a database of postal codes
+ in Singapore by quering the Google Maps Distance Matrix API. In the meantime, it is assumed that users will enter
+ the correct postal code.
+</td>
+</tr>
+</table>
+</div>
+<hr>
+<div class="sect3">
+<h4 id="justification-5"><a class="link" href="#justification-5">Justification</a></h4>
+<div class="paragraph">
+<p>{Justify the need for, and the current design (i.e. external behavior) of, the feature}</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implementation-5"><a class="link" href="#implementation-5">Implementation</a></h4>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="postalcode-field"><a class="link" href="#postalcode-field">PostalCode Field</a></h3>
+<div class="paragraph">
+<p>The <code>PostalCode</code> field is implemented as part of Address. This class stores the postal address of locations in Singapore.
+It only accepts values of <code>s</code> or <code>S</code> followed by 6 digits. The value stored in this class is used to store the postal
+code of the address. The value is used to query Google Maps when the <code>select</code> command is executed.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Presently, the <code>PostalCode</code> field still does a very relaxed validation and does not completely ensure that the postal
+code exists even though it might meet the criteria above. The team is working on producing a database of postal codes
+ in Singapore by quering the Google Maps Distance Matrix API. In the meantime, it is assumed that users will enter
+ the correct postal code.
+</td>
+</tr>
+</table>
+</div>
+<hr>
+</div>
+<div class="sect2">
+<h3 id="enhancement-proposed-add-command-code-remark-code"><a class="link" href="#enhancement-proposed-add-command-code-remark-code">Enhancement Proposed: Add command <code>remark</code></a></h3>
+<div class="paragraph">
+<p>{Explain similar to the Undo/Redo feature above.}</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="other-contributions"><a class="link" href="#other-contributions">Other contributions</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Updated the GUI color scheme (Pull requests <a href="https://github.com">#33</a>, <a href="https://github.com">#34</a>)</p>
+</li>
+<li>
+<p>Wrote additional tests to increase coverage from 88% to 92% (Pull requests <a href="https://github.com">#36</a>, <a href="https://github.com">#38</a>)</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="project-powerpointlabs"><a class="link" href="#project-powerpointlabs">Project: PowerPointLabs</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>{Optionally (not graded), you may include other projects in your portfolio.}</p>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2017-10-25 02:19:56 +00:00
+</div>
+</div>
+</body>
+</html>

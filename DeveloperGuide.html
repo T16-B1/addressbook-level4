@@ -56,8 +56,10 @@
 <li><a href="#google-maps-search-browser">4.4. Google Maps Search Browser</a></li>
 <li><a href="#delete-tag-mechanism">4.5. Delete Tag mechanism</a></li>
 <li><a href="#backup-mechanism">4.6. Backup Mechanism</a></li>
-<li><a href="#import-mechanism">4.7. Import Mechanism</a></li>
-<li><a href="#tab-autocomplete-mechanism">4.8. Tab autocomplete mechanism</a></li>
+<li><a href="#tab-autocomplete-mechanism">4.7. Tab autocomplete mechanism</a></li>
+<li><a href="#trackingnumber-field">4.8. TrackingNumber Field</a></li>
+<li><a href="#postalcode-field">4.9. PostalCode Field</a></li>
+<li><a href="#status-field">4.10. Status field</a></li>
 </ul>
 </li>
 <li><a href="#documentation">5. Documentation</a>
@@ -1098,6 +1100,9 @@ and has to be updated whenever we edit other parcel details as well.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p>tag::backup[]</p>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -1117,6 +1122,9 @@ a method that is called when <code>Ark</code> is launched. The method utilises t
 stores the backup in the same directory as the main <code>AddressBook</code> storage file. The backup file is saved and named with
 the name of the main <code>AddressBook</code> storage file appended with <code>-backup.xml</code>. i.e. If the main <code>AddressBook</code> storage file
  is named as <code>addressbook.xml</code>, the backup storage file will be saved as <code>addressbook.xml-backup.xml</code>.</p>
+</div>
+<div class="paragraph">
+<p>end::backup[]</p>
 </div>
 <div class="sect3">
 <h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">4.6.1. Design Considerations</a></h4>
@@ -1176,10 +1184,10 @@ other.<br>
 the corruption of the data is caused by a several of commands, it becomes difficult to ensure that the backup file
 provides a workable copy of the data of Ark.</p>
 </div>
+<div class="paragraph">
+<p>tag::import[]
+=== Import Mechanism</p>
 </div>
-</div>
-<div class="sect2">
-<h3 id="import-mechanism"><a class="link" href="#import-mechanism">4.7. Import Mechanism</a></h3>
 <div class="paragraph">
 <p>To use this command, type <code>import (FILE_NAME)</code> into the <code>CommandBox</code>.</p>
 </div>
@@ -1230,8 +1238,9 @@ The <code>ImportCommand</code> will only add parcels non-duplicate parcels. Dupl
 </tr>
 </table>
 </div>
+</div>
 <div class="sect3">
-<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">4.7.1. Design Considerations</a></h4>
+<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">4.6.2. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect: Implementation of <code>ImportCommand</code></strong><br></p>
 </div>
@@ -1334,7 +1343,8 @@ the file. i.e. the user does not need to type <code>./data/import/Ark.xml</code>
 </li>
 <li>
 <p><strong>Cons:</strong> Makes Ark vulnerable to simple directory traversal attack where user can access files outside the
-<code>data/import/</code> directory.<br></p>
+<code>data/import/</code> directory.<br>
+end::import[]</p>
 </li>
 </ul>
 </div>
@@ -1344,7 +1354,7 @@ the file. i.e. the user does not need to type <code>./data/import/Ark.xml</code>
 </div>
 </div>
 <div class="sect2">
-<h3 id="tab-autocomplete-mechanism"><a class="link" href="#tab-autocomplete-mechanism">4.8. Tab autocomplete mechanism</a></h3>
+<h3 id="tab-autocomplete-mechanism"><a class="link" href="#tab-autocomplete-mechanism">4.7. Tab autocomplete mechanism</a></h3>
 <div class="imageblock">
 <div class="content">
 <img src="images/SDforTabAutocomplete.png" alt="SDforTabAutocomplete" width="900">
@@ -1379,7 +1389,7 @@ the original value of <code>commandBoxText</code>.<br></p>
 to replace the text in <code>commandFieldText</code> with the string.<br></p>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">4.8.1. Design Considerations</a></h4>
+<h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">4.7.1. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect: Implementation of <code>autocomplete</code></strong><br></p>
 </div>
@@ -1408,12 +1418,139 @@ Also creates coupling between the <code>Autocompleter</code> and <code>CommandBo
 <p><strong>Pros:</strong> Easier to test since <code>CommandBoxTest</code> has already been set up and implemented.<br></p>
 </li>
 <li>
-<p><strong>Cons:</strong> <code>CommandBox</code> class now has multiple responsibilities, which violates SRP.<br></p>
+<p><strong>Cons:</strong> <code>CommandBox</code> class now has multiple responsibilities, which violates SRP. +=== Tab autocomplete mechanism</p>
 </li>
 </ul>
 </div>
 </li>
 </ul>
+</div>
+<div class="paragraph">
+<p>start::trackingNumber[]</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="trackingnumber-field"><a class="link" href="#trackingnumber-field">4.8. TrackingNumber Field</a></h3>
+<div class="paragraph">
+<p>Parcels have tracking numbers for delivery vendors to keep track of the parcels that they send out on a daily basis.
+This feature is important because a single person can have many parcels belonging to him. Tracking numbers are used
+to differentiate between the different parcels that are going to be delivered to the same person. Tracking numbers also
+serve as a better way of narrowing down and pinpointing parcels of interest since these numbers are more unique</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Presently, the <code>Tracking Number</code> Field only has support for Registered Article tracking numbers belonging to SingPost.
+You can read more about their Registered Article tracking number
+ <a href="http://www.singpost.com/send-receive/sending-within-singapore/registered-article-local">here</a>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>end::trackingNumber[]</p>
+</div>
+<div class="paragraph">
+<p>tag::postalCode[]</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="postalcode-field"><a class="link" href="#postalcode-field">4.9. PostalCode Field</a></h3>
+<div class="paragraph">
+<p>The <code>PostalCode</code> field is implemented as part of Address. This class stores the postal address of locations in Singapore.
+It only accepts values of <code>s</code> or <code>S</code> followed by 6 digits. The value stored in this class is used to store the postal
+code of the address. The value is used to query Google Maps when the <code>select</code> command is executed.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Presently, the <code>PostalCode</code> field still does a very relaxed validation and does not completely ensure that the postal
+code exists even though it might meet the criteria above. The team is working on producing a database of postal codes
+ in Singapore by quering the Google Maps Distance Matrix API. In the meantime, it is assumed that users will enter
+ the correct postal code.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>end::postalCode[]</p>
+</div>
+<div class="paragraph">
+<p>tag::status[]</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="status-field"><a class="link" href="#status-field">4.10. Status field</a></h3>
+<div class="paragraph">
+<p><code>Status</code> is used to indicate the current stage of delivery that a parcel is at. It has 4 possible states:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>PENDING</code> - This means that the parcel has not been delivered and has not passed the date it is supposed to be
+delivered by.<br></p>
+</li>
+<li>
+<p><code>DELIVERING</code> - This means that the parcel is currently working being delivered to its destination address.</p>
+</li>
+<li>
+<p><code>COMPLETED</code> - This indicates that the parcel has been successfully delivered to its destination.</p>
+</li>
+<li>
+<p><code>OVERDUE</code> - This state indicates that the parcel has not been delivered and has passed its due date.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>These states have different colours codes to allow users to differentiate the <code>Status</code> values more easily.</p>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-7"><a class="link" href="#design-considerations-7">4.10.1. Design Considerations</a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Implementation of Status</code>**</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Status is an enum class.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Pros:</strong> <code>Status</code> should only have fixed values. The user should also not be allowed to create new <code>Status</code> objects.</p>
+</li>
+<li>
+<p><strong>Cons:</strong> Less options for the user to alter the <code>Status</code> values<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 2:</strong> Allow the user to define any <code>Status</code> they wish.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Pros:</strong> Users have more versatility on naming conventions</p>
+</li>
+<li>
+<p><strong>Cons:</strong> It becomes more difficult to import data files since different users may use different terminologies to
+describe the same status of the parcel.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>end::status[]</p>
 </div>
 </div>
 </div>
@@ -2302,7 +2439,7 @@ characters.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-10-24 13:54:47 +00:00
+Last updated 2017-10-25 02:19:56 +00:00
 </div>
 </div>
 </body>
