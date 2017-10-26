@@ -25,20 +25,224 @@
 <p><strong>Code contributed</strong>: [<a href="https://github.com">Functional code</a>] [<a href="https://github.com">Test code</a>] {give links to collated code files}</p>
 </div>
 <div class="sect2">
-<h3 id="enhancement-added-exit"><a class="link" href="#enhancement-added-exit">Enhancement Added: Exit</a></h3>
+<h3 id="enhancement-added-deletetagcommand"><a class="link" href="#enhancement-added-deletetagcommand">Enhancement Added: deleteTagCommand</a></h3>
 <div class="sect3">
 <h4 id="external-behavior"><a class="link" href="#external-behavior">External behavior</a></h4>
 <hr>
-<div class="paragraph">
-<p><mark>Start of Extract [from: User Guide]</mark></p>
-</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">Undoing previous command : <code>undo</code></a></h3>
+<h3 id="deleting-a-tag-code-deletetag-code"><a class="link" href="#deleting-a-tag-code-deletetag-code">Deleting a tag : <code>deleteTag</code></a></h3>
 <div class="paragraph">
-<p>Restores Ark to the state before the previous <em>undoable</em> command was executed.<br>
-Format: <code>undo</code></p>
+<p>Deletes the specified tag from all parcels in Ark.<br>
+Format: <code>deleteTag TAG</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>The tag to delete is case sensitive.</p>
+</li>
+<li>
+<p>The tag to delete must actually be tagged to a parcel.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>deleteTag urgent</code>
+Deletes the tag "urgent" from each parcel in the address book.</p>
+</li>
+</ul>
+</div>
+<hr>
+<div class="sect3">
+<h4 id="justification"><a class="link" href="#justification">Justification</a></h4>
+<div class="paragraph">
+<p>The deleteTag command is useful to have when dealing with large numbers of parcels.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implementation"><a class="link" href="#implementation">Implementation</a></h4>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="delete-tag-mechanism"><a class="link" href="#delete-tag-mechanism">Delete Tag mechanism</a></h3>
+<div class="paragraph">
+<p>The delete tag mechanism is facilitated by a <code>deleteTag</code> method within the <code>ModelManager</code>. It supports the deletion
+of tags from every single parcel in Ark.</p>
+</div>
+<div class="paragraph">
+<p>We first retrieve the list of parcels in Ark and iterate through each parcel and recreate the parcel object using the
+original parcel. We then check if tag we want to remove is present in the new parcel&#8217;s list of tags. If the tag is
+present, we remove it, otherwise, we do nothing. We then update the old parcel in Ark with the new parcel with the
+updated list of tags.</p>
+</div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect: Implementation of <code>deleteTagCommand</code></strong><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Add method to delete tags in <code>ModelManager</code><br></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> It is easy to implement a method to remove every instance where the Tag appears, we only have to be able to
+correctly iterate through all the lists of tags.<br></p>
+</li>
+<li>
+<p><strong>Cons:</strong> Might be computationally expensive for large number of parcels as Ark will need to iterate through every
+Tag to delete them.<br></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Maintain a list of tags and where the tags are located+</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> Computationally quicker to just find the tag and remove the tag from every parcel in the list of tags<br></p>
+</li>
+<li>
+<p><strong>Cons:</strong> More difficult to implement as we have to store an additional list of tags which is linked to each parcel
+and has to be updated whenever we edit other parcel details as well.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="enhancement-added-delivery-dates-field"><a class="link" href="#enhancement-added-delivery-dates-field">Enhancement Added: Delivery Dates field</a></h3>
+<div class="sect3">
+<h4 id="external-behavior-2"><a class="link" href="#external-behavior-2">External behavior</a></h4>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="delivery-date-recognition"><a class="link" href="#delivery-date-recognition">Delivery Date Recognition</a></h3>
+<div class="paragraph">
+<p>Ark can store the scheduled delivery date of parcels. It only accepts valid dates,
+including valid leap years and days.<br>
+Additionally, the dates should be in the following formal: DD-MM-YYYY<br>
+The list of Parcels is kept in sorted order according to the delivery dates, with the earliest dates in front.</p>
+</div>
+<hr>
+<div class="sect3">
+<h4 id="justification-2"><a class="link" href="#justification-2">Justification</a></h4>
+<div class="paragraph">
+<p>The delivery dates field is important as the list of parcels are sorted by delivery date
+with the earliest at the top. This allows for the user to look at the more pertinent deliveries
+immediately on start up.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implementation-2"><a class="link" href="#implementation-2">Implementation</a></h4>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="delivery-date-field"><a class="link" href="#delivery-date-field">Delivery Date field</a></h3>
+<div class="paragraph">
+<p><code>Delivery Date</code> is used to indicate the delivery date that the parcel must be delivered by.
+The dates are only accepted if they are valid. The parcel list is maintained in sorted order by comparing
+their delivery dates, with the earliest on top.</p>
+</div>
+<hr>
+</div>
+<div class="sect2">
+<h3 id="enhancement-added-maintain-sorted-order-mechanism"><a class="link" href="#enhancement-added-maintain-sorted-order-mechanism">Enhancement Added: Maintain Sorted Order Mechanism</a></h3>
+<div class="sect3">
+<h4 id="external-behavior-3"><a class="link" href="#external-behavior-3">External behavior</a></h4>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="maintaining-a-sorted-list"><a class="link" href="#maintaining-a-sorted-list">Maintaining a Sorted List</a></h3>
+<div class="paragraph">
+<p>The list of parcels stored in Ark is maintained to be sorted according to the delivery date of
+the parcels, with the earliest delivery date at the top. This allows the more pertinent
+deliveries to be shown quickly.<br>
+The list is sorted whenever there is a change in the list that may potentially disrupt the order
+of the list so that the user does not have to manually do so.</p>
+</div>
+<hr>
+<div class="sect3">
+<h4 id="justification-3"><a class="link" href="#justification-3">Justification</a></h4>
+<div class="paragraph">
+<p>Having the list in sorted order allows the user to look at the more pertinent deliveries
+more easily.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implementation-3"><a class="link" href="#implementation-3">Implementation</a></h4>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="maintain-sorted-mechanism"><a class="link" href="#maintain-sorted-mechanism">Maintain sorted mechanism</a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="../images/AddParcelSdForLOgic.png" alt="AddParcelSdForLOgic" width="300">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 4.9.1 : Adding Alice to Ark, maintainSorted is actually called and returns void.</em></p>
+</div>
+<div class="paragraph">
+<p>The list of parcels in Ark is maintained to be always in sorted order according to delivery dates,
+with the earliest being on the top. This is so that the user will be able to look at the more
+pertinent deliveries.<br></p>
+</div>
+<div class="paragraph">
+<p>The list is sorted whenever a parcel is added, edited or if a redo command is made. This is
+because these commands are the ones that might possibly cause the new parcel to be placed
+in the wrong position.<br></p>
+</div>
+<div class="paragraph">
+<p>To maintain the selected element despite sorting however, we require a way to track which parcel
+is selected. Static variables to track which card has been selected has been added to the Model
+class. The Model class now has the following methods: <code>select</code>, <code>unselect</code>, <code>getPrevIndex</code>,
+<code>hasSelected</code> and <code>forceSelect</code>. Whenever we select an item, we will use <code>select</code> to indicate that
+we have selected a parcel card and we will then re-select that particular card after we have sorted.<br></p>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Implementation of <code>maintainSorted</code><br>
+<strong>Alternative 1 (current choice):</strong> Constant sort the list of parcels whenever there is a change that
+potentially could disrupt the order of the list.<br>
+<strong>Pros:</strong> Intuitive and guarantees that list is sorted in the right order<br>
+<strong>Cons:</strong> Many commands have to be changed<br>
+<strong>Alternative 2:</strong> Insert the new / edited parcel to fit into the sorted list.<br>
+<strong>Pros:</strong> Use less computation as the list of parcels is already sorted.<br>
+<strong>Cons:</strong> More difficult to implement as we&#8217;ll need to implement our own sorting algorithm as opposed to
+just using the built in sorting methods.<br></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="documentation"><a class="link" href="#documentation">Documentation</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>We use asciidoc for writing documentation.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -47,110 +251,875 @@ Format: <code>undo</code></p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-<div class="paragraph">
-<p>Commands that can be undone: those commands that modify Ark&#8217;s content
-(<code>add</code>, <code>delete</code>, <code>edit</code> and <code>clear</code>).</p>
+We chose asciidoc over Markdown because asciidoc, although a bit more complex than Markdown, provides more flexibility
+in formatting.
+</td>
+</tr>
+</table>
 </div>
+<div class="sect2">
+<h3 id="editing-documentation"><a class="link" href="#editing-documentation">Editing Documentation</a></h3>
+<div class="paragraph">
+<p>See <a href="UsingGradle.html#rendering-asciidoc-files">UsingGradle.adoc</a> to learn how to render <code>.adoc</code> files locally to preview
+the end result of your edits. Alternatively, you can download the AsciiDoc plugin for IntelliJ, which allows you to
+preview the changes you have made to your <code>.adoc</code> files in real-time.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="publishing-documentation"><a class="link" href="#publishing-documentation">Publishing Documentation</a></h3>
+<div class="paragraph">
+<p>See <a href="UsingTravis.html#deploying-github-pages">UsingTravis.adoc</a> to learn how to deploy GitHub Pages using Travis.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="converting-documentation-to-pdf-format"><a class="link" href="#converting-documentation-to-pdf-format">Converting Documentation to PDF format</a></h3>
+<div class="paragraph">
+<p>We use <a href="https://www.google.com/chrome/browser/desktop/">Google Chrome</a> for converting documentation to PDF format, as
+Chrome&#8217;s PDF engine preserves hyperlinks used in webpages.</p>
+</div>
+<div class="paragraph">
+<p>Here are the steps to convert the project documentation files to PDF format.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Follow the instructions in <a href="UsingGradle.html#rendering-asciidoc-files">UsingGradle.adoc</a> to convert the AsciiDoc files
+in the <code>docs/</code> directory to HTML format.</p>
+</li>
+<li>
+<p>Go to your generated HTML files in the <code>build/docs</code> folder, right click on them and select <code>Open with</code> &#8594;
+<code>Google Chrome</code>.</p>
+</li>
+<li>
+<p>Within Chrome, click on the <code>Print</code> option in Chrome&#8217;s menu.</p>
+</li>
+<li>
+<p>Set the destination to <code>Save as PDF</code>, then click <code>Save</code> to save a copy of the file in PDF format. For best results,
+use the settings indicated in the screenshot below.</p>
+</li>
+</ol>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/chrome_save_as_pdf.png" alt="chrome save as pdf" width="300">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 5.6.1 : Saving documentation as PDF files in Chrome</em></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="testing"><a class="link" href="#testing">Testing</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="running-tests"><a class="link" href="#running-tests">Running Tests</a></h3>
+<div class="paragraph">
+<p>There are three ways to run tests.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+The most reliable way to run tests is the 3rd one. The first two methods might fail some GUI tests due to
+platform/resolution-specific idiosyncrasies.
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Examples:</p>
+<p><strong>Method 1: Using IntelliJ JUnit test runner</strong></p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>delete 1</code><br>
-<code>list</code><br>
-<code>undo</code> (reverses the <code>delete 1</code> command)<br></p>
+<p>To run all tests, right-click on the <code>src/test/java</code> folder and choose <code>Run 'All Tests'</code></p>
 </li>
 <li>
-<p><code>select 1</code><br>
-<code>list</code><br>
-<code>undo</code><br>
-The <code>undo</code> command fails as there are no undoable commands executed previously.</p>
-</li>
-<li>
-<p><code>delete 1</code><br>
-<code>clear</code><br>
-<code>undo</code> (reverses the <code>clear</code> command)<br>
-<code>undo</code> (reverses the <code>delete 1</code> command)<br></p>
+<p>To run a subset of tests, you can right-click on a test package, test class, or a test and choose <code>Run 'ABC'</code></p>
 </li>
 </ul>
 </div>
-</div>
-<div class="sect2">
-<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">Redoing the previously undone command : <code>redo</code></a></h3>
 <div class="paragraph">
-<p>Reverses the most recent <code>undo</code> command.<br>
-Format: <code>redo</code></p>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
+<p><strong>Method 2: Using Gradle</strong></p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>delete 1</code><br>
-<code>undo</code> (reverses the <code>delete 1</code> command)<br>
-<code>redo</code> (reapplies the <code>delete 1</code> command)<br></p>
+<p>Open a console and run the command <code>gradlew clean allTests</code> (Mac/Linux: <code>./gradlew clean allTests</code>)</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+See <a href="UsingGradle.html">UsingGradle.adoc</a> for more info on how to run tests using Gradle.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>Method 3: Using Gradle (headless)</strong></p>
+</div>
+<div class="paragraph">
+<p>Thanks to the <a href="https://github.com/TestFX/TestFX">TestFX</a> library we use, our GUI tests can be run in the <em>headless</em> mode.
+In the headless mode, GUI tests do not show up on the screen. That means the developer can do other things on the
+Computer while the tests are running.</p>
+</div>
+<div class="paragraph">
+<p>To run tests in headless mode, open a console and run the command <code>gradlew clean headless allTests</code> (Mac/Linux:
+<code>./gradlew clean headless allTests</code>)</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="types-of-tests"><a class="link" href="#types-of-tests">Types of tests</a></h3>
+<div class="paragraph">
+<p>We have two types of tests:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>GUI Tests</strong> - These are tests involving the GUI. They include,</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p><em>System Tests</em> that test the entire App by simulating user actions on the GUI. These are in the <code>systemtests</code> package.</p>
 </li>
 <li>
-<p><code>delete 1</code><br>
-<code>redo</code><br>
-The <code>redo</code> command fails as there are no <code>undo</code> commands executed previously.</p>
+<p><em>Unit tests</em> that test the individual components. These are in <code>seedu.address.ui</code> package.</p>
+</li>
+</ol>
+</div>
 </li>
 <li>
-<p><code>delete 1</code><br>
-<code>clear</code><br>
-<code>undo</code> (reverses the <code>clear</code> command)<br>
-<code>undo</code> (reverses the <code>delete 1</code> command)<br>
-<code>redo</code> (reapplies the <code>delete 1</code> command)<br>
-<code>redo</code> (reapplies the <code>clear</code> command)<br></p>
+<p><strong>Non-GUI Tests</strong> - These are tests not involving the GUI. They include,</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p><em>Unit tests</em> targeting the lowest level methods/classes.<br>
+e.g. <code>seedu.address.commons.StringUtilTest</code></p>
+</li>
+<li>
+<p><em>Integration tests</em> that are checking the integration of multiple code units (those code units are assumed to be
+working).<br>
+e.g. <code>seedu.address.storage.StorageManagerTest</code></p>
+</li>
+<li>
+<p>Hybrids of unit and integration tests. These test are checking multiple code units as well as how the are connected
+together.<br>
+e.g. <code>seedu.address.logic.LogicManagerTest</code></p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="troubleshooting-testing"><a class="link" href="#troubleshooting-testing">Troubleshooting Testing</a></h3>
+<div class="paragraph">
+<p><strong>Problem: <code>HelpWindowTest</code> fails with a <code>NullPointerException</code>.</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Reason: One of its dependencies, <code>UserGuide.html</code> in <code>src/main/resources/docs</code> is missing.</p>
+</li>
+<li>
+<p>Solution: Execute Gradle task <code>processResources</code>.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="dev-ops"><a class="link" href="#dev-ops">Dev Ops</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="build-automation"><a class="link" href="#build-automation">Build Automation</a></h3>
+<div class="paragraph">
+<p>See <a href="UsingGradle.html">UsingGradle.adoc</a> to learn how to use Gradle for build automation.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="continuous-integration"><a class="link" href="#continuous-integration">Continuous Integration</a></h3>
+<div class="paragraph">
+<p>We use <a href="https://travis-ci.org/">Travis CI</a> and <a href="https://www.appveyor.com/">AppVeyor</a> to perform <em>Continuous Integration</em> on
+our projects. See <a href="UsingTravis.html">UsingTravis.adoc</a> and <a href="UsingAppVeyor.html">UsingAppVeyor.adoc</a> for more details.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="making-a-release"><a class="link" href="#making-a-release">Making a Release</a></h3>
+<div class="paragraph">
+<p>Here are the steps to create a new release.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Update the version number in <a href="{repoURL}/src/main/java/seedu/address/MainApp.java"><code>MainApp.java</code></a>.</p>
+</li>
+<li>
+<p>Generate a JAR file <a href="UsingGradle.html#creating-the-jar-file">using Gradle</a>.</p>
+</li>
+<li>
+<p>Tag the repo with the version number. e.g. <code>v0.1</code></p>
+</li>
+<li>
+<p><a href="https://help.github.com/articles/creating-releases/">Create a new release using GitHub</a> and upload the JAR file you
+created.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="managing-dependencies"><a class="link" href="#managing-dependencies">Managing Dependencies</a></h3>
+<div class="paragraph">
+<p>A project often depends on third-party libraries. For example, Address Book depends on the
+<a href="http://wiki.fasterxml.com/JacksonHome">Jackson library</a> for XML parsing. Managing these <em>dependencies</em> can be automated
+using Gradle. For example, Gradle can download the dependencies automatically, which is better than these alternatives.<br>
+a. Include those libraries in the repo (this bloats the repo size)<br>
+b. Require developers to download those libraries manually (this creates extra work for developers)</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="user-stories"><a class="link" href="#user-stories">Appendix A: User Stories</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Priorities: High (must have) - <code>* * *</code>, Medium (nice to have) - <code>* *</code>, Low (unlikely to have) - <code>*</code></p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 8%;">
+<col style="width: 17%;">
+<col style="width: 30%;">
+<col style="width: 45%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Priority</th>
+<th class="tableblock halign-left valign-top">As a &#8230;&#8203;</th>
+<th class="tableblock halign-left valign-top">I want to &#8230;&#8203;</th>
+<th class="tableblock halign-left valign-top">So that I can&#8230;&#8203;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">new user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">see usage instructions</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">refer to instructions when I forget how to use the App</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">onging user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">have a backup of my addressbook data</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">restore my addressbook if the storage file becomes corrupted</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">add a new parcel</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">delete a parcel</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">find a parcel by name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">locate details of parcels without having to go through the entire list</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">filter parcels by tags</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">view specific parcels that are assigned with specific tags</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">the browser to automatically search for the address of the selected parcel in Google Maps</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">so that
+I can automatically get information on how to get to an address automatically, on click.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">delivery man who travels a lot</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">to know the shortest distance from one contact&#8217;s address to another</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">delivery man who travels a lot</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">set a reference location</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">find the shortest distance from my reference
+location to a parcel&#8217;s delivery location</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">delivery company</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">be able to keep track of my deliveries</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">deliver the packages on time</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">delivery company</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">be alerted for any deliveries to be done today</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">deliver the packages on time</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">delivery company</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sort my deliveries by date</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">know which packages are more urgent to handle</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">delivery man</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">generate deliver route based on my list of deliveries</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">know schedule for the day</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">delivery company</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">add a list of deliveries in one shot using Comma Separated Values</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">conveniently parse
+information from other sources</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">delivery company</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">add deliveries individually</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">delivery company</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">check for deliveries close to deadline</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">better prepare for busy periods</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">delivery company</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">archive completed deliveries</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">refer to them in the future</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">new user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">to have an autocomplete for the commands</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">I do not need to remember the format of commands</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">store the sender and receiver addresses</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">use these addresses as destinations/sources of my deliveries</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">lazy user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">send and receive parcel details to and from other companies</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">minimize the amount of data inputs</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">forgetful user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">be reminded of a parcel&#8217;s delivery date (if valid)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in case I forget the date</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">share details with contacts with a specific tag</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">minimize chance of someone else seeing them by accident</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">busy user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">add and remove tasks</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">use addressbook as a task manager</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user with a changing schedule</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">edit created tasks</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">change the details of task</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">assign contacts and locations to tasks</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">link my tasks with people and places</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">assign an expiry date to tasks</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">tasks are deleted automatically</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">lazy user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">to be notified of the most optimal path of completing my deliveries based on travelling distance</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">filter tasks according to location</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">be notified of deliveries I have at a specific location</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">forgetful user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">view daily deliveries</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">keep track of daily deliveries</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">retrieve my exact location on my device</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">remember the current address and store my location</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">new user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">input instructions into a chatbot interface</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">I do not need to remember the format of commands</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user with many parcels in the address book</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sort parcels by name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">locate a parcel easily</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>{More to be added}</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="use-cases"><a class="link" href="#use-cases">Appendix B: Use Cases</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>(For all use cases below, the <strong>System</strong> is the <code>AddressBook</code> and the <strong>Actor</strong> is the <code>user</code>, unless specified otherwise)</p>
+</div>
+<h3 id="use-case-delete-parcel" class="discrete">Use case: Delete parcel</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to list parcels</p>
+</li>
+<li>
+<p>AddressBook shows a list of parcels</p>
+</li>
+<li>
+<p>User requests to delete a specific parcel in the list</p>
+</li>
+<li>
+<p>AddressBook deletes the parcel</p>
+<div class="paragraph">
+<p>Use case ends</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a. The list is empty</p>
+<div class="paragraph">
+<p>Use case ends</p>
+</div>
+</li>
+<li>
+<p>3a. The given index is invalid</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>3a1. AddressBook shows an error message.</p>
+<div class="paragraph">
+<p>Use case resumes at step 2</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="use-case-add-parcel-by-prompt" class="discrete">Use case: Add parcel by prompt</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to add parcels without further details</p>
+</li>
+<li>
+<p>AddressBook prompts user to input parcel identification number of parcel to add</p>
+</li>
+<li>
+<p>User inputs identification number as requested</p>
+</li>
+<li>
+<p>AddressBook prompts user to input name of recipient of parcel to add</p>
+</li>
+<li>
+<p>User inputs name of recipient as requested</p>
+</li>
+<li>
+<p>AddressBook prompts user to input phone number of recipient of parcel to add</p>
+</li>
+<li>
+<p>User inputs phone number as requested</p>
+</li>
+<li>
+<p>AddressBook prompts user to input email of recipient of parcel to add</p>
+</li>
+<li>
+<p>User inputs email as requested</p>
+</li>
+<li>
+<p>AddressBook prompts user to input delivery address of parcel to add</p>
+</li>
+<li>
+<p>User inputs address as requested</p>
+</li>
+<li>
+<p>AddressBook prompts user to input tags of parcel to add</p>
+</li>
+<li>
+<p>User inputs tags as requested [optional]</p>
+</li>
+<li>
+<p>AddressBook adds parcel</p>
+<div class="paragraph">
+<p>Use case ends</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>3a. The user does not input a parcel identification number</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>3a1. AddressBook shows an error message</p>
+<div class="paragraph">
+<p>Use case resumes at step 2</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>5a. The user does not input a name</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>5a1. AddressBook shows an error message</p>
+<div class="paragraph">
+<p>Use case resumes at step 4</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>7a. The user does not input a valid phone number</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>7a1. AddressBook shows an error message</p>
+<div class="paragraph">
+<p>Use case resumes at step 6</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>9a. The user does not input a valid email</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>9a1. AddressBook shows an error message</p>
+<div class="paragraph">
+<p>Use case resumes at step 8</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>11a. The user does not input a valid address</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>11a1. AddressBook shows an error message</p>
+<div class="paragraph">
+<p>Use case resumes at step 10</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>13a. The user does not input a tag</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>13a1. AddressBook shows that no tag has been entered</p>
+<div class="paragraph">
+<p>Use case resumes at step 14</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>14. AddressBook shows error message if same parcel found</p>
+<div class="paragraph">
+<p>Use case ends</p>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="use-case-upload-image-of-parcel-from-local-files" class="discrete">Use case: Upload image of Parcel from local files</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to list parcels</p>
+</li>
+<li>
+<p>AddressBook shows a list of parcels</p>
+</li>
+<li>
+<p>User requests to upload image of a specific parcel in the list</p>
+</li>
+<li>
+<p>AddressBook prompts for location of image</p>
+</li>
+<li>
+<p>User inputs file path</p>
+</li>
+<li>
+<p>AddressBook updates image</p>
+<div class="paragraph">
+<p>Use case ends</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a. The list is empty</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+<li>
+<p>6a. The file path given is invalid</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>6a1. AddressBook shows an error message</p>
+<div class="paragraph">
+<p>Use case resumes at step 4</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>6b. The file type of file given is invalid</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>6b1. AddressBook shows an error message</p>
+<div class="paragraph">
+<p>Use case resumes at step 4</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="use-case-set-user-reference-location" class="discrete">Use case: Set user reference location</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to set reference location</p>
+</li>
+<li>
+<p>AddressBook updates reference location</p>
+<div class="paragraph">
+<p>Use case ends</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>{More to be added}</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="non-functional-requirements"><a class="link" href="#non-functional-requirements">Appendix C: Non Functional Requirements</a></h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Should work on any <a href="#mainstream-os">mainstream OS</a> as long as it has Java <code>1.8.0_60</code> or higher installed.</p>
+</li>
+<li>
+<p>Should be able to hold up to 1000 parcels without a noticeable sluggishness in performance for typical usage.</p>
+</li>
+<li>
+<p>A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be
+able to accomplish most of the tasks faster using commands than using the mouse.</p>
+</li>
+<li>
+<p>Each Command should take at most 1 second to finish execution.</p>
+</li>
+<li>
+<p>Should be able to handle any valid or invalid user input.</p>
+</li>
+<li>
+<p>Should back up data inside the address book each time the user makes changes to the data.</p>
+</li>
+<li>
+<p>Commands that do not require internet connection should still work when the user is not connected to the internet.</p>
+</li>
+<li>
+<p>Should come with automated unit tests.</p>
+</li>
+<li>
+<p>A new user should be able to use basic commands like add and delete without needing to refer to the help window
+after their first time using the application.</p>
+</li>
+<li>
+<p>Should allow the user to upload images of any <a href="#mainstream-image-format">mainstream image format</a>.</p>
+</li>
+<li>
+<p><a href="#hash-string">Hash String</a> of the users personal contact information should only be made up of alphanumeric
+characters.</p>
+</li>
+<li>
+<p>Should update the map automatically when the user changes their starting location.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>{More to be added}</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="glossary"><a class="link" href="#glossary">Appendix D: Glossary</a></h2>
+<div class="sectionbody">
+<div id="mainstream-os" class="paragraph">
+<p>Mainstream OS</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Windows, Linux, Unix, OS-X</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="product-survey"><a class="link" href="#product-survey">Appendix E: Product Survey</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Product Name</strong></p>
+</div>
+<div class="paragraph">
+<p>Author: &#8230;&#8203;</p>
+</div>
+<div class="paragraph">
+<p>Pros:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>&#8230;&#8203;</p>
+</li>
+<li>
+<p>&#8230;&#8203;</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p><mark>End of Extract</mark></p>
+<p>Cons:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>&#8230;&#8203;</p>
+</li>
+<li>
+<p>&#8230;&#8203;</p>
+</li>
+</ul>
 </div>
 <hr>
-<div class="sect3">
-<h4 id="justification"><a class="link" href="#justification">Justification</a></h4>
-<div class="paragraph">
-<p>{Justify the need for, and the current design (i.e. external behavior) of, the feature}</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="implementation"><a class="link" href="#implementation">Implementation</a></h4>
-<hr>
-<div class="paragraph">
-<p><mark>Start of Extract [from: Developer Guide]</mark></p>
-</div>
-<div class="paragraph">
-<p><mark>End of Extract</mark></p>
-</div>
-<hr>
-</div>
-</div>
-<div class="sect2">
-<h3 id="enhancement-proposed-add-command-code-remark-code"><a class="link" href="#enhancement-proposed-add-command-code-remark-code">Enhancement Proposed: Add command <code>remark</code></a></h3>
-<div class="paragraph">
-<p>{Explain similar to the Undo/Redo feature above.}</p>
-</div>
-</div>
 <div class="sect2">
 <h3 id="other-contributions"><a class="link" href="#other-contributions">Other contributions</a></h3>
-<div class="ulist">
-<ul>
-<li>
-<p>Updated the GUI color scheme (Pull requests <a href="https://github.com">#33</a>, <a href="https://github.com">#34</a>)</p>
-</li>
-<li>
-<p>Wrote additional tests to increase coverage from 88% to 92% (Pull requests <a href="https://github.com">#36</a>, <a href="https://github.com">#38</a>)</p>
-</li>
-</ul>
-</div>
+
 </div>
 </div>
 </div>
@@ -165,7 +1134,7 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-10-26 03:50:31 +00:00
+Last updated 2017-10-26 03:59:24 +00:00
 </div>
 </div>
 </body>

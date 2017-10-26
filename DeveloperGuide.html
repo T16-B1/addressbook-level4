@@ -60,6 +60,8 @@
 <li><a href="#trackingnumber-field">4.8. TrackingNumber Field</a></li>
 <li><a href="#postalcode-field">4.9. PostalCode Field</a></li>
 <li><a href="#status-field">4.10. Status field</a></li>
+<li><a href="#delivery-date-field">4.11. Delivery Date field</a></li>
+<li><a href="#maintain-sorted-mechanism">4.12. Maintain sorted mechanism</a></li>
 </ul>
 </li>
 <li><a href="#documentation">5. Documentation</a>
@@ -1513,8 +1515,16 @@ delivered by.<br></p>
 <div class="paragraph">
 <p>These states have different colours codes to allow users to differentiate the <code>Status</code> values more easily.</p>
 </div>
+</div>
+<div class="sect2">
+<h3 id="delivery-date-field"><a class="link" href="#delivery-date-field">4.11. Delivery Date field</a></h3>
+<div class="paragraph">
+<p><code>Delivery Date</code> is used to indicate the delivery date that the parcel must be delivered by.
+The dates are only accepted if they are valid. The parcel list is maintained in sorted order by comparing
+their delivery dates, with the earliest on top.</p>
+</div>
 <div class="sect3">
-<h4 id="design-considerations-7"><a class="link" href="#design-considerations-7">4.10.1. Design Considerations</a></h4>
+<h4 id="design-considerations-7"><a class="link" href="#design-considerations-7">4.11.1. Design Considerations</a></h4>
 <div class="ulist">
 <ul>
 <li>
@@ -1551,6 +1561,48 @@ describe the same status of the parcel.</p>
 </div>
 <div class="paragraph">
 <p>end::status[]</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="maintain-sorted-mechanism"><a class="link" href="#maintain-sorted-mechanism">4.12. Maintain sorted mechanism</a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="images/AddParcelSdForLOgic.png" alt="AddParcelSdForLOgic" width="300">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 4.9.1 : Adding Alice to Ark, maintainSorted is actually called and returns void.</em></p>
+</div>
+<div class="paragraph">
+<p>The list of parcels in Ark is maintained to be always in sorted order according to delivery dates,
+with the earliest being on the top. This is so that the user will be able to look at the more
+pertinent deliveries.<br></p>
+</div>
+<div class="paragraph">
+<p>The list is sorted whenever a parcel is added, edited or if a redo command is made. This is
+because these commands are the ones that might possibly cause the new parcel to be placed
+in the wrong position.<br></p>
+</div>
+<div class="paragraph">
+<p>To maintain the selected element despite sorting however, we require a way to track which parcel
+is selected. Static variables to track which card has been selected has been added to the Model
+class. The Model class now has the following methods: <code>select</code>, <code>unselect</code>, <code>getPrevIndex</code>,
+<code>hasSelected</code> and <code>forceSelect</code>. Whenever we select an item, we will use <code>select</code> to indicate that
+we have selected a parcel card and we will then re-select that particular card after we have sorted.<br></p>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-8"><a class="link" href="#design-considerations-8">4.12.1. Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Implementation of <code>maintainSorted</code><br>
+<strong>Alternative 1 (current choice):</strong> Constant sort the list of parcels whenever there is a change that
+potentially could disrupt the order of the list.<br>
+<strong>Pros:</strong> Intuitive and guarantees that list is sorted in the right order<br>
+<strong>Cons:</strong> Many commands have to be changed<br>
+<strong>Alternative 2:</strong> Insert the new / edited parcel to fit into the sorted list.<br>
+<strong>Pros:</strong> Use less computation as the list of parcels is already sorted.<br>
+<strong>Cons:</strong> More difficult to implement as we&#8217;ll need to implement our own sorting algorithm as opposed to
+just using the built in sorting methods.<br></p>
 </div>
 </div>
 </div>
@@ -2439,7 +2491,7 @@ characters.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-10-26 03:50:31 +00:00
+Last updated 2017-10-26 03:59:24 +00:00
 </div>
 </div>
 </body>

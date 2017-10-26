@@ -37,20 +37,21 @@
 <li><a href="#editing-a-parcel-code-edit-code">5.5. Editing a parcel : <code>edit</code></a></li>
 <li><a href="#locating-parcels-by-name-code-find-code">5.6. Locating parcels by name: <code>find</code></a></li>
 <li><a href="#deleting-a-parcel-code-delete-code">5.7. Deleting a parcel : <code>delete</code></a></li>
-<li><a href="#deleting-a-tag-code-deletetag-code">5.8. Deleting a tag : <code>deleteTag</code></a></li>
-<li><a href="#selecting-a-parcel-code-select-code">5.9. Selecting a parcel : <code>select</code></a></li>
-<li><a href="#listing-entered-commands-code-history-code">5.10. Listing entered commands : <code>history</code></a></li>
-<li><a href="#undoing-previous-command-code-undo-code">5.11. Undoing previous command : <code>undo</code></a></li>
-<li><a href="#redoing-the-previously-undone-command-code-redo-code">5.12. Redoing the previously undone command : <code>redo</code></a></li>
-<li><a href="#clearing-all-entries-code-clear-code">5.13. Clearing all entries : <code>clear</code></a></li>
-<li><a href="#exiting-the-program-code-exit-code">5.14. Exiting the program : <code>exit</code></a></li>
-<li><a href="#tracking-number-recognition">5.15. Tracking Number Recognition</a></li>
-<li><a href="#postal-code-recognition">5.16. Postal Code Recognition</a></li>
-<li><a href="#status-field">5.17. Status field</a></li>
-<li><a href="#google-maps-browser">5.18. Google Maps Browser</a></li>
-<li><a href="#autocomplete">5.19. Autocomplete</a></li>
-<li><a href="#saving-the-data">5.20. Saving the data</a></li>
-<li><a href="#backing-up-the-data">5.21. Backing up the data</a></li>
+<li><a href="#selecting-a-parcel-code-select-code">5.8. Selecting a parcel : <code>select</code></a></li>
+<li><a href="#listing-entered-commands-code-history-code">5.9. Listing entered commands : <code>history</code></a></li>
+<li><a href="#undoing-previous-command-code-undo-code">5.10. Undoing previous command : <code>undo</code></a></li>
+<li><a href="#redoing-the-previously-undone-command-code-redo-code">5.11. Redoing the previously undone command : <code>redo</code></a></li>
+<li><a href="#clearing-all-entries-code-clear-code">5.12. Clearing all entries : <code>clear</code></a></li>
+<li><a href="#exiting-the-program-code-exit-code">5.13. Exiting the program : <code>exit</code></a></li>
+<li><a href="#tracking-number-recognition">5.14. Tracking Number Recognition</a></li>
+<li><a href="#postal-code-recognition">5.15. Postal Code Recognition</a></li>
+<li><a href="#status-field">5.16. Status field</a></li>
+<li><a href="#google-maps-browser">5.17. Google Maps Browser</a></li>
+<li><a href="#autocomplete">5.18. Autocomplete</a></li>
+<li><a href="#saving-the-data">5.19. Saving the data</a></li>
+<li><a href="#backing-up-the-data">5.20. Backing up the data</a></li>
+<li><a href="#delivery-date-recognition">5.21. Delivery Date Recognition</a></li>
+<li><a href="#maintaining-a-sorted-list">5.22. Maintaining a Sorted List</a></li>
 </ul>
 </li>
 <li><a href="#faq">6. FAQ</a></li>
@@ -511,9 +512,10 @@ Deletes the 1st parcel in the results of the <code>find</code> command.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p>tag::deleteTag[]
+=== Deleting a tag : <code>deleteTag</code></p>
 </div>
-<div class="sect2">
-<h3 id="deleting-a-tag-code-deletetag-code"><a class="link" href="#deleting-a-tag-code-deletetag-code">5.8. Deleting a tag : <code>deleteTag</code></a></h3>
 <div class="paragraph">
 <p>Deletes the specified tag from all parcels in Ark.<br>
 Format: <code>deleteTag TAG</code></p>
@@ -539,13 +541,14 @@ Format: <code>deleteTag TAG</code></p>
 <ul>
 <li>
 <p><code>deleteTag urgent</code>
-Deletes the tag "urgent" from each parcel in the address book.</p>
+Deletes the tag "urgent" from each parcel in the address book.
+end::deleteTag[]</p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="selecting-a-parcel-code-select-code"><a class="link" href="#selecting-a-parcel-code-select-code">5.9. Selecting a parcel : <code>select</code></a></h3>
+<h3 id="selecting-a-parcel-code-select-code"><a class="link" href="#selecting-a-parcel-code-select-code">5.8. Selecting a parcel : <code>select</code></a></h3>
 <div class="paragraph">
 <p>Selects the parcel identified by the index number used in the last parcel listing
 and expands the Browser section in the main window. The Browser section will then show a google map search
@@ -607,7 +610,7 @@ Selects the 1st parcel in the results of the <code>find</code> command.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="listing-entered-commands-code-history-code"><a class="link" href="#listing-entered-commands-code-history-code">5.10. Listing entered commands : <code>history</code></a></h3>
+<h3 id="listing-entered-commands-code-history-code"><a class="link" href="#listing-entered-commands-code-history-code">5.9. Listing entered commands : <code>history</code></a></h3>
 <div class="paragraph">
 <p>Lists all the commands that you have entered in reverse chronological order.<br>
 Format: <code>history</code></p>
@@ -629,7 +632,7 @@ the previous and next input respectively in the command box.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">5.11. Undoing previous command : <code>undo</code></a></h3>
+<h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">5.10. Undoing previous command : <code>undo</code></a></h3>
 <div class="paragraph">
 <p>Restores Ark to the state before the previous <em>undoable</em> command was executed.<br>
 Format: <code>undo</code></p>
@@ -675,7 +678,7 @@ The <code>undo</code> command fails as there are no undoable commands executed p
 </div>
 </div>
 <div class="sect2">
-<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">5.12. Redoing the previously undone command : <code>redo</code></a></h3>
+<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">5.11. Redoing the previously undone command : <code>redo</code></a></h3>
 <div class="paragraph">
 <p>Reverses the most recent <code>undo</code> command.<br>
 Format: <code>redo</code></p>
@@ -707,14 +710,14 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 </div>
 </div>
 <div class="sect2">
-<h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">5.13. Clearing all entries : <code>clear</code></a></h3>
+<h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">5.12. Clearing all entries : <code>clear</code></a></h3>
 <div class="paragraph">
 <p>Clears all entries from Ark.<br>
 Format: <code>clear</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">5.14. Exiting the program : <code>exit</code></a></h3>
+<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">5.13. Exiting the program : <code>exit</code></a></h3>
 <div class="paragraph">
 <p>Exits the program.<br>
 Format: <code>exit</code></p>
@@ -724,7 +727,7 @@ Format: <code>exit</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="tracking-number-recognition"><a class="link" href="#tracking-number-recognition">5.15. Tracking Number Recognition</a></h3>
+<h3 id="tracking-number-recognition"><a class="link" href="#tracking-number-recognition">5.14. Tracking Number Recognition</a></h3>
 <div class="paragraph">
 <p>Parcels have tracking numbers for delivery vendors to keep track of the parcels that they send out on a daily basis.
 This feature is important because a single person can have many parcels belonging to him. Tracking numbers are used
@@ -753,7 +756,7 @@ You can read more about their Registered Article tracking number
 </div>
 </div>
 <div class="sect2">
-<h3 id="postal-code-recognition"><a class="link" href="#postal-code-recognition">5.16. Postal Code Recognition</a></h3>
+<h3 id="postal-code-recognition"><a class="link" href="#postal-code-recognition">5.15. Postal Code Recognition</a></h3>
 <div class="paragraph">
 <p>Ark can store the postal address of locations in Singapore. It only accepts values of <code>s</code> or <code>S</code> followed by 6 digits.
 The postal code of a parcel is used to query Google Maps when the <code>select</code> command is executed.</p>
@@ -781,7 +784,7 @@ code exists even though it might meet the criteria above. The team is working on
 </div>
 </div>
 <div class="sect2">
-<h3 id="status-field"><a class="link" href="#status-field">5.17. Status field</a></h3>
+<h3 id="status-field"><a class="link" href="#status-field">5.16. Status field</a></h3>
 <div class="paragraph">
 <p><code>Status</code> is used to indicate the current stage of delivery that a parcel is at. It has 4 possible states:</p>
 </div>
@@ -810,7 +813,7 @@ delivered by.<br></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="google-maps-browser"><a class="link" href="#google-maps-browser">5.18. Google Maps Browser</a></h3>
+<h3 id="google-maps-browser"><a class="link" href="#google-maps-browser">5.17. Google Maps Browser</a></h3>
 <div class="paragraph">
 <p>Ark has an in-built Google Maps browser section in the main window and can be used to show you the locations
 of the delivery addresses of each parcel. This feature will be automatically used whenever you type <code>select</code>
@@ -819,7 +822,7 @@ browser section of the main window.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="autocomplete"><a class="link" href="#autocomplete">5.19. Autocomplete</a></h3>
+<h3 id="autocomplete"><a class="link" href="#autocomplete">5.18. Autocomplete</a></h3>
 <div class="paragraph">
 <p>Ark comes with tab autocompletion which is able to complete a command for you
 without requiring you to type out the command fully.<br>
@@ -849,7 +852,7 @@ Then press <kbd>Enter</kbd> key to enter the command.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-the-data"><a class="link" href="#saving-the-data">5.20. Saving the data</a></h3>
+<h3 id="saving-the-data"><a class="link" href="#saving-the-data">5.19. Saving the data</a></h3>
 <div class="paragraph">
 <p>Ark data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.</p>
@@ -859,7 +862,7 @@ There is no need to save manually.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="backing-up-the-data"><a class="link" href="#backing-up-the-data">5.21. Backing up the data</a></h3>
+<h3 id="backing-up-the-data"><a class="link" href="#backing-up-the-data">5.20. Backing up the data</a></h3>
 <div class="paragraph">
 <p>Ark data are backed up in the hard disk automatically at the start of every session of the program.<br>
 There is no need to back up the data manually.<br>
@@ -869,6 +872,25 @@ The data from the backup file has to be loaded manually by copying the contents 
 </div>
 <div class="paragraph">
 <p>end::backup[]</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="delivery-date-recognition"><a class="link" href="#delivery-date-recognition">5.21. Delivery Date Recognition</a></h3>
+<div class="paragraph">
+<p>Ark can store the scheduled delivery date of parcels. It only accepts valid dates,
+including valid leap years and days.<br>
+Additionally, the dates should be in the following formal: DD-MM-YYYY<br>
+The list of Parcels is kept in sorted order according to the delivery dates, with the earliest dates in front.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="maintaining-a-sorted-list"><a class="link" href="#maintaining-a-sorted-list">5.22. Maintaining a Sorted List</a></h3>
+<div class="paragraph">
+<p>The list of parcels stored in Ark is maintained to be sorted according to the delivery date of
+the parcels, with the earliest delivery date at the top. This allows the more pertinent
+deliveries to be shown quickly.<br>
+The list is sorted whenever there is a change in the list that may potentially disrupt the order
+of the list so that the user does not have to manually do so.</p>
 </div>
 </div>
 </div>
@@ -990,6 +1012,9 @@ e.g.<code>select 2</code></p>
 <li>
 <p>Import parcels stored in an Ark storage file in xml format into Ark.</p>
 </li>
+<li>
+<p>Have Ark maintain a sorted list of parcels according to when they need to be delivered.</p>
+</li>
 </ul>
 </div>
 <div class="paragraph">
@@ -1074,7 +1099,7 @@ parcels delivered.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-10-26 03:50:31 +00:00
+Last updated 2017-10-26 03:59:24 +00:00
 </div>
 </div>
 </body>
