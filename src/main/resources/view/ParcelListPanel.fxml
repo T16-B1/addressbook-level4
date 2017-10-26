@@ -1,8 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefWidth="1544.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
-  <ListView fx:id="parcelListView" VBox.vgrow="ALWAYS" />
+<VBox prefHeight="240.0" prefWidth="1543.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <TabPane fx:id="tabPanePlaceholder" tabClosingPolicy="UNAVAILABLE" styleClass="tab-pane">
+     <tabs>
+       <Tab text="All Parcels">
+            <content>
+              <ListView fx:id="allParcelListView" />
+            </content>
+         </Tab>
+       <Tab text="Completed Parcels" styleClass="tab-header-area">
+            <content>
+               <ListView fx:id="completedParcelListView" prefHeight="200.0" prefWidth="200.0" />
+            </content>
+         </Tab>
+     </tabs>
+   </TabPane>
 </VBox>

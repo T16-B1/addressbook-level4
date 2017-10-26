@@ -28,6 +28,7 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.commands.TabCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.parcel.NameContainsKeywordsPredicate;
 import seedu.address.model.parcel.Parcel;

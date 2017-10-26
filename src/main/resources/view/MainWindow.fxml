@@ -43,12 +43,7 @@
           <Insets bottom="10" left="10" right="10" top="10" />
         </padding>
       </StackPane>
-      <VBox fx:id="parcelList">
-        <padding>
-          <Insets bottom="10" left="10" right="10" top="10" />
-        </padding>
-        <StackPane fx:id="parcelListPanelPlaceholder" VBox.vgrow="ALWAYS" />
-      </VBox>
+     <StackPane fx:id="parcelListPanelPlaceholder" prefHeight="134.0" prefWidth="688.0" />
     </items>
   </SplitPane>
 
