@@ -62,7 +62,8 @@
 <li><a href="#postalcode-field">4.10. PostalCode Field</a></li>
 <li><a href="#status-field">4.11. Status field</a></li>
 <li><a href="#delivery-date-field">4.12. Delivery Date field</a></li>
-<li><a href="#maintain-sorted-mechanism">4.13. Maintain sorted mechanism</a></li>
+<li><a href="#tags">4.13. Tags</a></li>
+<li><a href="#maintain-sorted-mechanism">4.14. Maintain sorted mechanism</a></li>
 </ul>
 </li>
 <li><a href="#documentation">5. Documentation</a>
@@ -115,13 +116,29 @@ high-level details of the Ark software and help them develop code in coherence w
 include the Ark architecture and system, its components and the interaction between these components.<br></p>
 </div>
 <div class="paragraph">
-<p>This guide contains information pertaining to issues such as:<br>
-* Setting up the development environment for Ark.
-* Understanding the high-level components of Ark.
-* Understanding the various features and their implementations in Ark.
-* Adding documentation to document the changes you have made.
-* Running tests for the code in Ark.
-* Details on how to manage the Ark project using Version Control and Continuous Integration.</p>
+<p>This guide contains information pertaining to issues such as:<br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Setting up the development environment for Ark.</p>
+</li>
+<li>
+<p>Understanding the high-level components of Ark.</p>
+</li>
+<li>
+<p>Understanding the various features and their implementations in Ark.</p>
+</li>
+<li>
+<p>Adding documentation to document the changes you have made.</p>
+</li>
+<li>
+<p>Running tests for the code in Ark.</p>
+</li>
+<li>
+<p>Details on how to manage the Ark project using Version Control and Continuous Integration.</p>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -1574,10 +1591,70 @@ their delivery dates, with the earliest on top.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="maintain-sorted-mechanism"><a class="link" href="#maintain-sorted-mechanism">4.13. Maintain sorted mechanism</a></h3>
+<h3 id="tags"><a class="link" href="#tags">4.13. Tags</a></h3>
+<div class="paragraph">
+<p>`Tag`s are used to indicate how the parcel should be handled. Tags can contain one or more of the following `Tag`s:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>FROZEN</code> - This means the parcel should be refrigerated as its contents are temperature sensitive.</p>
+</li>
+<li>
+<p><code>FLAMMABLE</code> - This means that the parcels' contents are highly flammable and should be kept away from heat.</p>
+</li>
+<li>
+<p><code>HEAVY</code> - This indicates that the parcel is heavy and may require additional manpower to deliver.</p>
+</li>
+<li>
+<p><code>FRAGILE</code> - This state indicates that the parcels' contents can be broken easily and
+requires additional care when handling.</p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-8"><a class="link" href="#design-considerations-8">4.13.1. Design Considerations</a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Implementation of Tag</code>**</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Tag is an enum class.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Pros:</strong> <code>Tag`s should only have fixed values. The user should also not be allowed to create new `Tag</code> objects.</p>
+</li>
+<li>
+<p><strong>Cons:</strong> Less options for the user to alter the <code>Tag</code> values<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 2:</strong> Allow the user to define any `Tag`s they wish.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Pros:</strong> Users have more versatility on naming conventions</p>
+</li>
+<li>
+<p><strong>Cons:</strong> It becomes difficult for delivery personnel to keep track of the tags since different personnel might
+use different tag names to refer to the same tag.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="maintain-sorted-mechanism"><a class="link" href="#maintain-sorted-mechanism">4.14. Maintain sorted mechanism</a></h3>
 <div class="imageblock">
 <div class="content">
-<img src="images/AddParcelSdForLOgic.png" alt="AddParcelSdForLOgic" width="300">
+<img src="images/AddParcelSdForLOgic.png" alt="AddParcelSdForLOgic" width="890">
 </div>
 </div>
 <div class="paragraph">
@@ -1601,7 +1678,7 @@ class. The Model class now has the following methods: <code>select</code>, <code
 we have selected a parcel card and we will then re-select that particular card after we have sorted.<br></p>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-8"><a class="link" href="#design-considerations-8">4.13.1. Design Considerations</a></h4>
+<h4 id="design-considerations-9"><a class="link" href="#design-considerations-9">4.14.1. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of <code>maintainSorted</code><br>
 <strong>Alternative 1 (current choice):</strong> Constant sort the list of parcels whenever there is a change that
@@ -2500,7 +2577,7 @@ characters.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-02 06:43:06 +00:00
+Last updated 2017-11-02 07:55:54 +00:00
 </div>
 </div>
 </body>

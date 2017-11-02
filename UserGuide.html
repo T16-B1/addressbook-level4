@@ -27,7 +27,12 @@
 <li><a href="#introduction">1. Introduction</a></li>
 <li><a href="#about">2. About</a></li>
 <li><a href="#quick-start">3. Quick Start</a></li>
-<li><a href="#layout">4. Layout</a></li>
+<li><a href="#layout">4. Layout</a>
+<ul class="sectlevel2">
+<li><a href="#more-about-browser-panel">4.1. More About Browser Panel</a></li>
+<li><a href="#more-about-parcel-list-panel">4.2. More About Parcel List Panel</a></li>
+</ul>
+</li>
 <li><a href="#features">5. Features</a>
 <ul class="sectlevel2">
 <li><a href="#viewing-help-code-help-code">5.1. Viewing help : <code>help</code></a></li>
@@ -39,20 +44,22 @@
 <li><a href="#deleting-a-parcel-code-delete-code">5.7. Deleting a parcel : <code>delete</code></a></li>
 <li><a href="#deleting-a-tag-code-deletetag-code">5.8. Deleting a tag : <code>deleteTag</code></a></li>
 <li><a href="#selecting-a-parcel-code-select-code">5.9. Selecting a parcel : <code>select</code></a></li>
-<li><a href="#listing-entered-commands-code-history-code">5.10. Listing entered commands : <code>history</code></a></li>
-<li><a href="#undoing-previous-command-code-undo-code">5.11. Undoing previous command : <code>undo</code></a></li>
-<li><a href="#redoing-the-previously-undone-command-code-redo-code">5.12. Redoing the previously undone command : <code>redo</code></a></li>
-<li><a href="#clearing-all-entries-code-clear-code">5.13. Clearing all entries : <code>clear</code></a></li>
-<li><a href="#exiting-the-program-code-exit-code">5.14. Exiting the program : <code>exit</code></a></li>
-<li><a href="#tracking-number-recognition">5.15. Tracking Number Recognition</a></li>
-<li><a href="#postal-code-recognition">5.16. Postal Code Recognition</a></li>
-<li><a href="#status-field">5.17. Status field</a></li>
-<li><a href="#google-maps-browser">5.18. Google Maps Browser</a></li>
-<li><a href="#autocomplete">5.19. Autocomplete</a></li>
-<li><a href="#saving-the-data">5.20. Saving the data</a></li>
-<li><a href="#backing-up-the-data">5.21. Backing up the data</a></li>
-<li><a href="#delivery-date-recognition">5.22. Delivery Date Recognition</a></li>
-<li><a href="#maintaining-a-sorted-list">5.23. Maintaining a Sorted List</a></li>
+<li><a href="#selecting-a-tab-code-tab-code">5.10. Selecting a tab : <code>tab</code></a></li>
+<li><a href="#listing-entered-commands-code-history-code">5.11. Listing entered commands : <code>history</code></a></li>
+<li><a href="#undoing-previous-command-code-undo-code">5.12. Undoing previous command : <code>undo</code></a></li>
+<li><a href="#redoing-the-previously-undone-command-code-redo-code">5.13. Redoing the previously undone command : <code>redo</code></a></li>
+<li><a href="#clearing-all-entries-code-clear-code">5.14. Clearing all entries : <code>clear</code></a></li>
+<li><a href="#exiting-the-program-code-exit-code">5.15. Exiting the program : <code>exit</code></a></li>
+<li><a href="#postal-code">5.16. Postal Code</a></li>
+<li><a href="#tracking-number">5.17. Tracking Number</a></li>
+<li><a href="#status">5.18. Status field</a></li>
+<li><a href="#tag">5.19. Tags field</a></li>
+<li><a href="#google-maps-browser">5.20. Google Maps Browser</a></li>
+<li><a href="#autocomplete">5.21. Autocomplete</a></li>
+<li><a href="#saving-the-data">5.22. Saving the data</a></li>
+<li><a href="#backing-up-the-data">5.23. Backing up the data</a></li>
+<li><a href="#delivery-date-recognition">5.24. Delivery Date Recognition</a></li>
+<li><a href="#maintaining-a-sorted-list">5.25. Maintaining a Sorted List</a></li>
 </ul>
 </li>
 <li><a href="#faq">6. FAQ</a></li>
@@ -63,6 +70,7 @@
 <li><a href="#features-added-v1-1">8.2. Features added v1.1</a></li>
 <li><a href="#features-added-in-v1-2">8.3. Features added in v1.2</a></li>
 <li><a href="#features-added-in-v1-3">8.4. Features added in v1.3</a></li>
+<li><a href="#features-added-in-v1-3-2">8.5. Features added in v1.3</a></li>
 </ul>
 </li>
 <li><a href="#features-coming-in-v2-0">9. Features Coming in v2.0</a></li>
@@ -132,11 +140,11 @@ This app will not work with earlier versions of Java 8.
 <p>Double-click the file to start the app. The GUI should appear in a few seconds.</p>
 <div class="imageblock">
 <div class="content">
-<img src="images/Ark_Main_Window.png" alt="Ark Main Window" width="790">
+<img src="images/Ui.png" alt="Ui" width="790">
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 3.1.1 : This is the main window of Ark</em></p>
+<p><em>Figure 3.1.1 : Ark&#8217;s Startup Window</em></p>
 </div>
 </li>
 <li>
@@ -144,7 +152,7 @@ This app will not work with earlier versions of Java 8.
 e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> will open the help window.</p>
 </li>
 <li>
-<p>Some example commands you can try:</p>
+<p>Here are some commands that you can try:</p>
 <div class="ulist">
 <ul>
 <li>
@@ -163,7 +171,7 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 </div>
 </li>
 <li>
-<p>Refer to the <a href="#features">Features</a> section below for details of each command.</p>
+<p>You can refer to the <a href="#features">Features</a> section below for details of each command.</p>
 </li>
 </ol>
 </div>
@@ -173,52 +181,102 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <h2 id="layout"><a class="link" href="#layout">4. Layout</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>What you see in the picture below is an example of what the main window
-of the Ark application looks like separated into it&#8217;s sections.<br></p>
+<p>These are the main components of the Ark user interface that will help you to interact with Ark.<br></p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/Ark_Main_Window_Sections.png" alt="Ark Main Window Sections" width="790">
+<img src="images/Ark_Main_Window_Sections.png" alt="Ark Main Window Sections" width="890">
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 4.1.1 : This is the main window of Ark with each section color coded</em></p>
-</div>
-<div class="paragraph">
-<p>The main window is separated into 8 sections from the top to bottom:</p>
+<p><em>Figure 4 : This is the main window of Ark with each section color coded</em></p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Red - Menu Bar</p>
+<p><strong>Menu Bar</strong> - Click on the tabs here to access the main menu or help menu.</p>
 </li>
 <li>
-<p>Green - Command Box</p>
+<p><strong>Command Box</strong> - You can type commands to interact with Ark here.</p>
 </li>
 <li>
-<p>Pink - Results Box</p>
+<p><strong>Results Box</strong> - Displays the results of the commands you have entered into Ark.</p>
 </li>
 <li>
-<p>Yellow - Browser Panel</p>
+<p><strong>Browser Panel</strong> - Displays the destination address of a parcel when you <kbd>double-click</kbd> (to <code>select</code>)
+on the parcel in the <strong>Parcel List Panel</strong>.</p>
 </li>
 <li>
-<p>Purple - Divider (divides the Browser Panel from the Parcel List)</p>
+<p><strong>Tab Panel</strong> - Click on the <code>All Parcels</code> tab to show list of undelivered parcels. To view the list of delivered
+parcels, click on the <code>Completed Parcels</code> tab.</p>
 </li>
 <li>
-<p>Orange - Parcel List Panel</p>
+<p><strong>Parcel List Panel</strong> - The list of parcels in your inventory is showed here.</p>
 </li>
 <li>
-<p>Blue - Parcel Card</p>
-</li>
-<li>
-<p>Cyan - Status Bar Footer</p>
+<p><strong>Status Bar Footer</strong> - Ark provides a summary of the parcels currently in your inventory here.</p>
 </li>
 </ol>
 </div>
+<div class="sect2">
+<h3 id="more-about-browser-panel"><a class="link" href="#more-about-browser-panel">4.1. More About Browser Panel</a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="images/Browser_Display_After_Selection.png" alt="Browser Display After Selection" width="890">
+</div>
+</div>
 <div class="paragraph">
-<p>The Browser and Parcel List Panel sections sizes can be changed either by commands
-or by dragging the Divider part up or down to either increase or decrease either
-section&#8217;s sizes.</p>
+<p><em>Figure 4.1.1 : Selecting a parcel</em></p>
+</div>
+<div class="paragraph">
+<p>Selecting a parcel activates the Browser Panel. In the diagram above, when the 4th parcel belonging to Cornelia
+Meier is selected, the Browser Panel is activated and displays the destination address of the parcel. Tn this case,
+Cornelia wants his parcel to be delivered to 10th Street Singapore 123114.<br></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="more-about-parcel-list-panel"><a class="link" href="#more-about-parcel-list-panel">4.2. More About Parcel List Panel</a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="images/ParcelCard.png" alt="ParcelCard" width="890">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 4.2.1 : Labelled Parcel Card</em></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Parcel Index</strong> - This is the index number of the parcel in the displayed list.</p>
+</li>
+<li>
+<p><strong>Name</strong> - This is the name of the recipient of the parcel.</p>
+</li>
+<li>
+<p><strong>Phone</strong> - This is the phone number of the recipient of the parcel.</p>
+</li>
+<li>
+<p><strong>Address</strong> - This is the address to deliver the parcel to. The address must end with the postal code of the address.
+Read more about Postal Codes <a href="#postal-code">here</a> .</p>
+</li>
+<li>
+<p><strong>Email</strong> - This is the email address of the recipient of the parcel.</p>
+</li>
+<li>
+<p><strong>Tracking Number</strong> - This is the tracking number of the parcel. You can read more about it
+<a href="#tracking-number">here</a>.</p>
+</li>
+<li>
+<p><strong>Delivery Date</strong> - This is the delivery date of the parcel.</p>
+</li>
+<li>
+<p><strong>Status</strong> - This is the status of the parcel in the delivery workflow. Read more about it <a href="#status">here</a>.</p>
+</li>
+<li>
+<p><strong>Tags</strong> - These are the tags of the parcel i.e. <code>flammable</code> and <code>heavy</code>. Read more about it <a href="#tag">here</a>.</p>
+</li>
+</ol>
+</div>
 </div>
 </div>
 </div>
@@ -611,7 +669,81 @@ Selects the 1st parcel in the results of the <code>find</code> command.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="listing-entered-commands-code-history-code"><a class="link" href="#listing-entered-commands-code-history-code">5.10. Listing entered commands : <code>history</code></a></h3>
+<h3 id="selecting-a-tab-code-tab-code"><a class="link" href="#selecting-a-tab-code-tab-code">5.10. Selecting a tab : <code>tab</code></a></h3>
+<div class="paragraph">
+<p>Selects the tab identified by the index number and switches the tab shown in the Parcel List Panel.
+The selected tab will then display its respective parcel list according to its tab title.</p>
+</div>
+<div class="paragraph">
+<p>The "All Parcels" tab shows all the parcels in Ark with the status of <code>PENDING</code>, <code>DELIVERING</code>, <code>OVERDUE</code> only.
+The "Completed Parcels" tab shows all the parcels with the status <code>COMPLETED</code> only.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>tab INDEX</code></p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+You can also select a tab by clicking on the specified tab you wish to switch to in the Parcel List Panel.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Pressing the <kbd>&larr;</kbd> and <kbd>&rarr;</kbd> arrows when selecting a tab
+will switch to the tab in that respective direction</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Selects the tab of the specified <code>INDEX</code> and switchs the current tab shown to the new selected tab.</p>
+</li>
+<li>
+<p>The index must be within the number of tabs shown.</p>
+</li>
+<li>
+<p>The index <strong>must be a positive integer</strong> <code>1, 2, 3, &#8230;&#8203;</code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>list</code><br>
+<code>tab 2</code><br>
+Selects the second tab "Completed Parcels" in the Parcel List Panel and displays its respective parcel list.</p>
+</li>
+<li>
+<p><code>tab 1</code><br>
+Selects the first tab "All Parcels" in the Parcel List Panel and displays it respective parcel list .</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="listing-entered-commands-code-history-code"><a class="link" href="#listing-entered-commands-code-history-code">5.11. Listing entered commands : <code>history</code></a></h3>
 <div class="paragraph">
 <p>Lists all the commands that you have entered in reverse chronological order.<br>
 Format: <code>history</code></p>
@@ -633,7 +765,7 @@ the previous and next input respectively in the command box.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">5.11. Undoing previous command : <code>undo</code></a></h3>
+<h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">5.12. Undoing previous command : <code>undo</code></a></h3>
 <div class="paragraph">
 <p>Restores Ark to the state before the previous <em>undoable</em> command was executed.<br>
 Format: <code>undo</code></p>
@@ -679,7 +811,7 @@ The <code>undo</code> command fails as there are no undoable commands executed p
 </div>
 </div>
 <div class="sect2">
-<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">5.12. Redoing the previously undone command : <code>redo</code></a></h3>
+<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">5.13. Redoing the previously undone command : <code>redo</code></a></h3>
 <div class="paragraph">
 <p>Reverses the most recent <code>undo</code> command.<br>
 Format: <code>redo</code></p>
@@ -711,21 +843,43 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 </div>
 </div>
 <div class="sect2">
-<h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">5.13. Clearing all entries : <code>clear</code></a></h3>
+<h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">5.14. Clearing all entries : <code>clear</code></a></h3>
 <div class="paragraph">
 <p>Clears all entries from Ark.<br>
 Format: <code>clear</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">5.14. Exiting the program : <code>exit</code></a></h3>
+<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">5.15. Exiting the program : <code>exit</code></a></h3>
 <div class="paragraph">
 <p>Exits the program.<br>
 Format: <code>exit</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="tracking-number-recognition"><a class="link" href="#tracking-number-recognition">5.15. Tracking Number Recognition</a></h3>
+<h3 id="postal-code"><a class="link" href="#postal-code">5.16. Postal Code</a></h3>
+<div class="paragraph">
+<p>Ark can store the postal address of locations in Singapore. It only accepts values of <code>s</code> or <code>S</code> followed by 6 digits.
+The postal code of a parcel is used to query Google Maps when the <code>select</code> command is executed.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Presently, the <code>PostalCode</code> field still does a very relaxed validation and does not completely ensure that the postal
+code exists even though it might meet the criteria above. The team is working on producing a database of postal codes
+ in Singapore by quering the Google Maps Distance Matrix API. In the meantime, it is assumed that users will enter
+ the correct postal code.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="tracking-number"><a class="link" href="#tracking-number">5.17. Tracking Number</a></h3>
 <div class="paragraph">
 <p>Parcels have tracking numbers for delivery vendors to keep track of the parcels that they send out on a daily basis.
 This feature is important because a single person can have many parcels belonging to him. Tracking numbers are used
@@ -748,29 +902,7 @@ You can read more about their Registered Article tracking number
 </div>
 </div>
 <div class="sect2">
-<h3 id="postal-code-recognition"><a class="link" href="#postal-code-recognition">5.16. Postal Code Recognition</a></h3>
-<div class="paragraph">
-<p>Ark can store the postal address of locations in Singapore. It only accepts values of <code>s</code> or <code>S</code> followed by 6 digits.
-The postal code of a parcel is used to query Google Maps when the <code>select</code> command is executed.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Presently, the <code>PostalCode</code> field still does a very relaxed validation and does not completely ensure that the postal
-code exists even though it might meet the criteria above. The team is working on producing a database of postal codes
- in Singapore by quering the Google Maps Distance Matrix API. In the meantime, it is assumed that users will enter
- the correct postal code.
-</td>
-</tr>
-</table>
-</div>
-</div>
-<div class="sect2">
-<h3 id="status-field"><a class="link" href="#status-field">5.17. Status field</a></h3>
+<h3 id="status"><a class="link" href="#status">5.18. Status field</a></h3>
 <div class="paragraph">
 <p><code>Status</code> is used to indicate the current stage of delivery that a parcel is at. It has 4 possible states:</p>
 </div>
@@ -791,12 +923,32 @@ delivered by.<br></p>
 </li>
 </ul>
 </div>
+</div>
+<div class="sect2">
+<h3 id="tag"><a class="link" href="#tag">5.19. Tags field</a></h3>
 <div class="paragraph">
-<p>These states have different colours codes to allow you to differentiate the <code>Status</code> values more easily.</p>
+<p>`Tag`s are used to indicate how the parcel should be handled. Tags can contain one or more of the following `Tag`s:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>FROZEN</code> - This means the parcel should be refrigerated as its contents are temperature sensitive.</p>
+</li>
+<li>
+<p><code>FLAMMABLE</code> - This means that the parcels' contents are highly flammable and should be kept away from heat.</p>
+</li>
+<li>
+<p><code>HEAVY</code> - This indicates that the parcel is heavy and may require additional manpower to deliver.</p>
+</li>
+<li>
+<p><code>FRAGILE</code> - This state indicates that the parcels' contents can be broken easily and
+requires additional care when handling.</p>
+</li>
+</ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="google-maps-browser"><a class="link" href="#google-maps-browser">5.18. Google Maps Browser</a></h3>
+<h3 id="google-maps-browser"><a class="link" href="#google-maps-browser">5.20. Google Maps Browser</a></h3>
 <div class="paragraph">
 <p>Ark has an in-built Google Maps browser section in the main window and can be used to show you the locations
 of the delivery addresses of each parcel. This feature will be automatically used whenever you type <code>select</code>
@@ -805,7 +957,7 @@ browser section of the main window.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="autocomplete"><a class="link" href="#autocomplete">5.19. Autocomplete</a></h3>
+<h3 id="autocomplete"><a class="link" href="#autocomplete">5.21. Autocomplete</a></h3>
 <div class="paragraph">
 <p>Ark comes with tab autocompletion which is able to complete a command for you
 without requiring you to type out the command fully.<br>
@@ -838,14 +990,14 @@ below.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-the-data"><a class="link" href="#saving-the-data">5.20. Saving the data</a></h3>
+<h3 id="saving-the-data"><a class="link" href="#saving-the-data">5.22. Saving the data</a></h3>
 <div class="paragraph">
 <p>Ark data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="backing-up-the-data"><a class="link" href="#backing-up-the-data">5.21. Backing up the data</a></h3>
+<h3 id="backing-up-the-data"><a class="link" href="#backing-up-the-data">5.23. Backing up the data</a></h3>
 <div class="paragraph">
 <p>Ark data are backed up in the hard disk automatically at the start of every session of the program.<br>
 There is no need to back up the data manually.<br>
@@ -855,7 +1007,7 @@ The data from the backup file has to be loaded manually by copying the contents 
 </div>
 </div>
 <div class="sect2">
-<h3 id="delivery-date-recognition"><a class="link" href="#delivery-date-recognition">5.22. Delivery Date Recognition</a></h3>
+<h3 id="delivery-date-recognition"><a class="link" href="#delivery-date-recognition">5.24. Delivery Date Recognition</a></h3>
 <div class="paragraph">
 <p>Ark can store the scheduled delivery date of parcels. It only accepts valid dates,
 including valid leap years and days.<br>
@@ -864,7 +1016,7 @@ The list of Parcels is kept in sorted order according to the delivery dates, wit
 </div>
 </div>
 <div class="sect2">
-<h3 id="maintaining-a-sorted-list"><a class="link" href="#maintaining-a-sorted-list">5.23. Maintaining a Sorted List</a></h3>
+<h3 id="maintaining-a-sorted-list"><a class="link" href="#maintaining-a-sorted-list">5.25. Maintaining a Sorted List</a></h3>
 <div class="paragraph">
 <p>The list of parcels stored in Ark is maintained to be sorted according to the delivery date of
 the parcels, with the earliest delivery date at the top. This allows the more pertinent
@@ -891,8 +1043,8 @@ of the list so that the user does not have to manually do so.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Add</strong> <code>add #/TRACKING_NUMBER n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS d/DELIVERY_DATE [t/TAG]&#8230;&#8203;</code><br>
-e.g. <code>add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 d/12-12-2012 t/friend t/colleague</code></p>
+<p><strong>Add</strong> <code>add #/TRACKING_NUMBER n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS d/DELIVERY_DATE s/[STATUS] [t/TAG]&#8230;&#8203;</code><br>
+e.g. <code>add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 d/12-12-2012 s/pending t/friend t/colleague</code></p>
 </li>
 <li>
 <p><strong>Clear</strong> : <code>clear</code></p>
@@ -902,7 +1054,7 @@ e.g. <code>add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1
 e.g. <code>delete 3</code></p>
 </li>
 <li>
-<p><strong>Edit</strong> : <code>edit INDEX [#/TRACKING_NUMBER] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [d/DELIVERY_DATE] [t/TAG]&#8230;&#8203;</code><br>
+<p><strong>Edit</strong> : <code>edit INDEX [#/TRACKING_NUMBER] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [d/DELIVERY_DATE] s/[STATUS] [t/TAG]&#8230;&#8203;</code><br>
 e.g. <code>edit 2 #/RR000000000SG n/James Lee e/jameslee@example.com</code></p>
 </li>
 <li>
@@ -927,6 +1079,10 @@ e.g.<code>select 2</code></p>
 </li>
 <li>
 <p><strong>Redo</strong> : <code>redo</code></p>
+</li>
+<li>
+<p><strong>Import</strong>: <code>import</code> FILE_NAME<br>
+e.g.<code>import file1.xml</code></p>
 </li>
 </ul>
 </div>
@@ -994,6 +1150,25 @@ e.g.<code>select 2</code></p>
 </li>
 <li>
 <p>Have Ark maintain a sorted list of parcels according to when they need to be delivered.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>{{More to be added}}</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="features-added-in-v1-3-2"><a class="link" href="#features-added-in-v1-3-2">8.5. Features added in v1.3</a></h3>
+<div class="paragraph">
+<p>In version v1.3, users will be able to:<br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Click on tabs to select between two lists, one of which contains undelivered and the other, delivered parcels</p>
+</li>
+<li>
+<p>Add parcel-related tags to inform delivery personnel on additional precautions to take while delivering a parcel.</p>
 </li>
 </ul>
 </div>
@@ -1079,7 +1254,7 @@ parcels delivered.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-02 06:43:06 +00:00
+Last updated 2017-11-02 07:55:54 +00:00
 </div>
 </div>
 </body>
