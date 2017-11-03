@@ -34,7 +34,7 @@ public class TestApp extends MainApp {
             TestUtil.getFilePathInSandboxFolder("pref_testing.json");
     protected static final String ADDRESS_BOOK_NAME = "Test";
     protected Supplier<ReadOnlyAddressBook> initialDataSupplier = () -> null;
-    protected String saveFileLocation = SAVE_LOCATION_FOR_TESTING;
+    private static boolean isCurrentListDelivered = false;
 
     public TestApp() {
     }
@@ -97,6 +97,12 @@ public class TestApp extends MainApp {
         Model copy = new ModelManager((model.getAddressBook()), new UserPrefs());
         ModelHelper.setFilteredList(copy, model.getFilteredParcelList());
         return copy;
+    }
+
+    /**
+     * remembers current active list
+     */
+    public void setActiveList(boolean isDelivered) {
     }
 
     @Override

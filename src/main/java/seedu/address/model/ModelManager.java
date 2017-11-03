@@ -2,6 +2,8 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.ui.ParcelListPanel.INDEX_FIRST_TAB;
+import static seedu.address.ui.ParcelListPanel.INDEX_SECOND_TAB;
 
 import java.util.HashSet;
 import java.util.Iterator;
@@ -276,17 +278,17 @@ public class ModelManager extends ComponentManager implements Model {
         try {
             if (findStatus(targetParcel).equals(Status.getInstance("COMPLETED"))) {
                 System.out.println("I think it's completed.");
-                if (this.getTabIndex().equals(TAB_ALL_PARCELS)) {
+                if (activeFilteredList.equals(filteredUndeliveredParcels)) {
                     System.out.println("But i'm at all parcels tab");
                     setActiveList(true);
-                    EventsCenter.getInstance().post(new JumpToTabRequestEvent(TAB_COMPLETED_PARCELS));
+                    EventsCenter.getInstance().post(new JumpToTabRequestEvent(INDEX_SECOND_TAB));
                 }
             } else {
                 System.out.println("I guess it's not completed");
-                if (this.getTabIndex().equals(TAB_COMPLETED_PARCELS)) {
+                if (activeFilteredList.equals(filteredDeliveredParcels)) {
                     System.out.println("But I'm at completed tab");
                     setActiveList(false);
-                    EventsCenter.getInstance().post(new JumpToTabRequestEvent(TAB_ALL_PARCELS));
+                    EventsCenter.getInstance().post(new JumpToTabRequestEvent(INDEX_FIRST_TAB));
                 }
             }
         } catch (IllegalValueException e) {
@@ -365,8 +367,7 @@ public class ModelManager extends ComponentManager implements Model {
         return addressBook.equals(other.addressBook)
                 && filteredParcels.equals(other.filteredParcels)
                 && filteredDeliveredParcels.equals(other.filteredDeliveredParcels)
-                && filteredUndeliveredParcels.equals(other.filteredUndeliveredParcels)
-                && activeFilteredList.equals(other.activeFilteredList);
+                && filteredUndeliveredParcels.equals(other.filteredUndeliveredParcels);
     }
     //@@author
 
