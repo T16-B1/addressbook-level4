@@ -67,13 +67,11 @@ public class ImportCommandSystemTest extends AddressBookSystemTest {
         /* Case: undo importing testAddressBookForImportSystem.xml data to the list -> Amy and Bob deleted */
         command = UndoCommand.COMMAND_WORD;
         String expectedResultMessage = UndoCommand.MESSAGE_SUCCESS;
-        model.maintainSorted();
         assertCommandSuccess(command, model, expectedResultMessage);
 
         /* Case: redo adding Amy to the list -> Amy added again */
         command = RedoCommand.COMMAND_WORD;
         model.addAllParcels(parcels, new ArrayList<>(), new ArrayList<>());
-        model.maintainSorted();
         expectedResultMessage = RedoCommand.MESSAGE_SUCCESS;
         assertCommandSuccess(command, model, expectedResultMessage);
 

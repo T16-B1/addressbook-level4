@@ -59,12 +59,7 @@ public class AddCommand extends UndoableCommand {
     public CommandResult executeUndoableCommand() throws CommandException {
         requireNonNull(model);
         try {
-            model.addParcel(toAdd);
-            model.maintainSorted();
-            if (model.hasSelected()) {
-                model.reselect(toAdd);
-            }
-
+            model.addParcelCommand(toAdd);
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (DuplicateParcelException e) {
             throw new CommandException(MESSAGE_DUPLICATE_PARCEL);

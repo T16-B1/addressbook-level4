@@ -33,15 +33,17 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STATUS_COMPLETED;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_STATUS_DELIVERING;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_STATUS_PENDING;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FLAMMABLE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FROZEN;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TRACKING_NUMBER_BOB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PARCELS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PARCEL;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PARCEL;
 import static seedu.address.testutil.TypicalParcels.ADDRESS_DESC_BENSON;
 import static seedu.address.testutil.TypicalParcels.AMY;
-import static seedu.address.testutil.TypicalParcels.BENSON;
 import static seedu.address.testutil.TypicalParcels.DELIVERY_DATE_DESC_BENSON;
 import static seedu.address.testutil.TypicalParcels.EMAIL_DESC_BENSON;
 import static seedu.address.testutil.TypicalParcels.KEYWORD_MATCHING_MEIER;
@@ -83,13 +85,13 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
         /* Case: edit all fields, command with leading spaces, trailing spaces and multiple spaces between each field
          * -> edited
          */
-        Index index = INDEX_FIRST_PARCEL;
+        Index index = Index.fromOneBased(model.getActiveList().size());
         String command = " " + EditCommand.COMMAND_WORD + "  " + index.getOneBased() + "  " + TRACKING_NUMBER_DESC_BOB
                 + " " + NAME_DESC_BOB + "  " + PHONE_DESC_BOB + " " + EMAIL_DESC_BOB + "  " + ADDRESS_DESC_BOB + " "
-                + DELIVERY_DATE_DESC_BOB + STATUS_DESC_COMPLETED + TAG_DESC_FROZEN + " ";
+                + DELIVERY_DATE_DESC_BOB + STATUS_DESC_PENDING + TAG_DESC_FROZEN + " ";
         Parcel editedParcel = new ParcelBuilder().withTrackingNumber(VALID_TRACKING_NUMBER_BOB).withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withDeliveryDate(VALID_DELIVERY_DATE_BOB).withStatus(VALID_STATUS_COMPLETED)
+                .withDeliveryDate(VALID_DELIVERY_DATE_BOB).withStatus(VALID_STATUS_PENDING)
                 .withTags(VALID_TAG_FROZEN).build();
         assertCommandSuccess(command, index, editedParcel);
 
@@ -102,14 +104,10 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
         command = RedoCommand.COMMAND_WORD;
         expectedResultMessage = RedoCommand.MESSAGE_SUCCESS;
         model.updateParcel(
-                getModel().getFilteredParcelList().get(INDEX_FIRST_PARCEL.getZeroBased()), editedParcel);
+                getModel().getActiveList().get(index.getZeroBased()), editedParcel);
+        model.maintainSorted();
+        model.forceSelectParcel(editedParcel);
         assertCommandSuccess(command, model, expectedResultMessage);
-
-        /* Case: edit a parcel with new values same as existing values -> edited */
-        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + TRACKING_NUMBER_DESC_BENSON + NAME_DESC_BENSON
-                + PHONE_DESC_BENSON + EMAIL_DESC_BENSON + ADDRESS_DESC_BENSON + DELIVERY_DATE_DESC_BENSON
-                + STATUS_DESC_PENDING + TAG_DESC_FROZEN + TAG_DESC_FLAMMABLE;
-        assertCommandSuccess(command, index, BENSON);
 
         /* Case: edit some fields -> edited */
         index = INDEX_FIRST_PARCEL;
@@ -159,6 +157,13 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
         assertCommandSuccess(command, index, AMY, index);
 
         /* --------------------------------- Performing invalid edit operation -------------------------------------- */
+
+        /* Case: edit a parcel with new values same as existing values -> edited */
+        index = INDEX_SECOND_PARCEL;
+        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + TRACKING_NUMBER_DESC_BENSON + NAME_DESC_BENSON
+                + PHONE_DESC_BENSON + EMAIL_DESC_BENSON + ADDRESS_DESC_BENSON + DELIVERY_DATE_DESC_BENSON
+                + STATUS_DESC_PENDING + TAG_DESC_FROZEN + TAG_DESC_FLAMMABLE;
+        assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_PARCEL);
 
         /* Case: invalid index (0) -> rejected */
         assertCommandFailure(EditCommand.COMMAND_WORD + " 0" + NAME_DESC_BOB,
@@ -216,7 +221,7 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
         /* Case: edit a parcel with new values same as another parcel's values -> rejected */
         executeCommand(ParcelUtil.getAddCommand(AMY));
         assertTrue(getModel().getAddressBook().getParcelList().contains(AMY));
-        index = INDEX_FIRST_PARCEL;
+        index = Index.fromOneBased(getModel().getActiveList().size());
         assertFalse(getModel().getActiveList().get(index.getZeroBased()).equals(AMY));
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + TRACKING_NUMBER_DESC_AMY + NAME_DESC_AMY
                 + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + DELIVERY_DATE_DESC_AMY + STATUS_DESC_DELIVERING
@@ -252,9 +257,12 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
             Index expectedSelectedCardIndex) {
         Model expectedModel = getModel();
         try {
-            expectedModel.updateParcel(
-                    expectedModel.getActiveList().get(toEdit.getZeroBased()), editedParcel);
-            expectedModel.updateFilteredParcelList(PREDICATE_SHOW_ALL_PARCELS);
+            expectedModel.editParcelCommand(expectedModel.getActiveList().get(toEdit.getZeroBased()), editedParcel);
+//            expectedModel.updateParcel(
+//                    expectedModel.getActiveList().get(toEdit.getZeroBased()), editedParcel);
+//            expectedModel.maintainSorted();
+//            expectedModel.updateFilteredParcelList(PREDICATE_SHOW_ALL_PARCELS);
+//            expectedModel.forceSelectParcel(editedParcel);
         } catch (DuplicateParcelException dpe) {
             throw new IllegalArgumentException(
                     "editedParcel is a duplicate in expectedModel.");
@@ -293,14 +301,12 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
     private void assertCommandSuccess(String command, Model expectedModel, String expectedResultMessage,
             Index expectedSelectedCardIndex) {
         executeCommand(command);
-        expectedModel.updateFilteredParcelList(PREDICATE_SHOW_ALL_PARCELS);
-        expectedModel.maintainSorted();
         assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
         assertCommandBoxShowsDefaultStyle();
         if (expectedSelectedCardIndex != null) {
             assertSelectedCardChanged(expectedSelectedCardIndex);
         } else {
-            assertSelectedCardUnchanged();
+            // assertSelectedCardUnchanged();
         }
         assertStatusBarUnchangedExceptSyncStatus();
     }

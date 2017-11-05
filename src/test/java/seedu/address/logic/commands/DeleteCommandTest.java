@@ -91,7 +91,6 @@ public class DeleteCommandTest {
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PARCEL_SUCCESS, parcelToDelete);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.maintainSorted();
         expectedModel.deleteParcel(parcelToDelete);
         showNoParcel(expectedModel);
 

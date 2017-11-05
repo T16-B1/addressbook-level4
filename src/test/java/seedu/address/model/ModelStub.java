@@ -97,6 +97,38 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public void forceSelect(Index target) {
+        fail("This method should not be called.");
+    }
+
+    @Override
+    public void forceSelectParcel(ReadOnlyParcel target) {
+        fail("This method should not be called.");
+    }
+
+    @Override
+    public void setTabIndex(Index index) {
+        fail("This method should not be called.");
+    }
+
+    @Override
+    public Index getTabIndex() {
+        fail("This method should not be called.");
+        return null;
+    }
+
+    @Override
+    public void addParcelCommand(ReadOnlyParcel parcel) throws DuplicateParcelException {
+        fail("This method should not be called.");
+    }
+
+    @Override
+    public void editParcelCommand(ReadOnlyParcel parcelToEdit, ReadOnlyParcel editedParce) throws DuplicateParcelException, ParcelNotFoundException {
+        fail("This method should not be called.");
+    }
+
+    /*
+    @Override
     public boolean hasSelected() {
         fail("This method should not be called.");
         return false;
@@ -113,18 +145,13 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public void setPrevIndex(Index target) {
-        fail("This method should not be called.");
-    }
-
-    @Override
-    public Index getPrevIndex() {
+    public ReadOnlyParcel getPrevSelectedParcel() {
         fail("This method should not be called.");
         return null;
     }
 
     @Override
-    public void forceSelect(Index target) {
+    public void setPrevSelectedParcel(ReadOnlyParcel parcel) {
         fail("This method should not be called.");
     }
 
@@ -132,4 +159,5 @@ public class ModelStub implements Model {
     public void reselect(ReadOnlyParcel parcel) {
         fail("This method should not be called.");
     }
+    */
 }

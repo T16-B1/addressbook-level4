@@ -12,12 +12,16 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TRACKING_NUMBER;
 import static seedu.address.model.ModelManager.getDeliveredPredicate;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -90,6 +94,19 @@ public class CommandTestUtil {
 
     public static final EditCommand.EditParcelDescriptor DESC_AMY;
     public static final EditCommand.EditParcelDescriptor DESC_BOB;
+
+    // list of Delivery Dates
+    public static final DateTimeFormatter DATE_BASIC_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    public static final String DATE_TODAY = LocalDate.now().format(DATE_BASIC_FORMATTER);
+    public static final String DATE_YESTERDAY = LocalDate.now().minus(Period.ofDays(1)).format(DATE_BASIC_FORMATTER);
+    public static final String DATE_TOMORROW = LocalDate.now().plus(Period.ofDays(1)).format(DATE_BASIC_FORMATTER);
+
+    public static final String DELIVERY_DATE_DESC_TODAY = " " + PREFIX_DELIVERY_DATE + DATE_TODAY;
+    public static final String DELIVERY_DATE_DESC_YESTERDAY = " " + PREFIX_DELIVERY_DATE + DATE_YESTERDAY;
+    public static final String DELIVERY_DATE_DESC_TOMORROW = " " + PREFIX_DELIVERY_DATE + DATE_TOMORROW;
+
+    public static final Index TAB_COMPLETED_PARCELS = Index.fromZeroBased(1);
+    public static final Index TAB_ALL_PARCELS = Index.fromZeroBased(0);
 
     static {
         DESC_AMY = new EditParcelDescriptorBuilder().withTrackingNumber(VALID_TRACKING_NUMBER_AMY)
