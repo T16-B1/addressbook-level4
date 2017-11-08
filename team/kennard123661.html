@@ -16,25 +16,44 @@
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="project-addressbook-level-4"><a class="link" href="#project-addressbook-level-4">Project: AddressBook - Level 4</a></h2>
+<h2 id="project-ark"><a class="link" href="#project-ark">Project: Ark</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>AddressBook - Level 4 is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 6 kLoC.</p>
+<p>Ark is a desktop delivery management application that my team and I built for our Software Engineering module in the
+National University of Singapore. We built this application for delivery companies to manage their deliveries.
+The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 14kLoC.
+ You may access the Ark repository <a href="https://github.com/CS2103AUG2017-T16-B1/main">here</a>.</p>
 </div>
 <div class="paragraph">
-<p><strong>Code contributed</strong>: [<a href="https://github.com">Functional code</a>] [<a href="https://github.com">Test code</a>] {give links to collated code files}</p>
+<p>Ark was built on top of <a href=":https://github.com/nus-cs2103-AY1718S1/addressbook-level4">Addressbook - Level 4</a>, an
+addressbook application. A number of features were added and refactoring was done to develop the original codebase
+into the parcel management application, Ark.</p>
+</div>
+<div class="paragraph">
+<p>You may access the links below for a list of more significant contributions I have made to Ark. Functional code
+refers to the code that I have written to enhance the Ark application while Test code refers to the code that I have written
+to automate testing for the Ark application.</p>
+</div>
+<div class="paragraph">
+<p><strong>Code contributed</strong>: [<a href="https://github.com/CS2103AUG2017-T16-B1/main/blob/master/collated/main/kennard123661.md">Functional code</a>][<a href="https://github.com/CS2103AUG2017-T16-B1/main/blob/master/collated/test/kennard123661.md">Test code</a>]</p>
+</div>
+<div class="paragraph">
+<p>The following are my contributions to the project explained in detail:</p>
 </div>
 <div class="sect2">
 <h3 id="enhancement-added-import-feature"><a class="link" href="#enhancement-added-import-feature">Enhancement Added: Import Feature</a></h3>
 <div class="sect3">
 <h4 id="external-behavior"><a class="link" href="#external-behavior">External behavior</a></h4>
 <hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: User Guide]</mark></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="import-multiple-parcels-stored-in-an-xml-storage-file-code-import-code"><a class="link" href="#import-multiple-parcels-stored-in-an-xml-storage-file-code-import-code">Import multiple parcels stored in an xml storage file: <code>import</code></a></h3>
+<h3 id="import"><a class="link" href="#import">Import multiple parcels stored in an xml storage file: <code>import</code></a></h3>
 <div class="paragraph">
-<p>Imports the parcels in an Ark storage <code>.xml</code> file stored in <code>/data/import/</code> folder to Ark<br>
+<p>Imports the parcels in an Ark <code>.xml</code> storage file stored in <code>/data/import/</code> folder of Ark&#8217;s home directory to Ark<br>
 Format: <code>import FILE_NAME</code></p>
 </div>
 <div class="paragraph">
@@ -43,38 +62,56 @@ Format: <code>import FILE_NAME</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>import addressBook.xml</code></p>
+<p><code>import ark</code> - This will import parcels stored in <code>data/import/ark.xml</code> into the current instance of Ark</p>
 </li>
 <li>
-<p><code>import addressBook123661.xml</code></p>
+<p><code>import ark_save</code> - This will import parcels stored in <code>data/import/ark_save.xml</code> into the current instance of Ark.</p>
 </li>
 </ul>
 </div>
-<div class="admonitionblock warning">
+<div class="admonitionblock note">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
+<i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>File names should be alphanumeric i.e. <code>addressBook12.xml</code>, <code>12.xml</code>
-Non alphanumeric file names will not be accepted. i.e. <code>$addressbook#!@,xml</code></p>
+<p>File names should only contain alphanumeric or underscore characters i.e. <code>ark1</code>, <code>ark_save1</code>
+Non alphanumeric file names will not be accepted. i.e. <code>$addressbook#!@,</code></p>
 </div>
 </td>
 </tr>
 </table>
 </div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
 <hr>
 <div class="sect3">
 <h4 id="justification"><a class="link" href="#justification">Justification</a></h4>
 <div class="paragraph">
-<p>{Justify the need for, and the current design (i.e. external behavior) of, the feature}</p>
+<p>Parcel companies manage millions of deliveries on a daily basis. As such, they have to deal with large amounts of
+data and deliveries. Furthermore, adding parcels into Ark individually is time consuming. Hence, I built a
+feature that allows parcel companies to import parcels from same files, and add parcels into Ark more efficiently.</p>
+</div>
+<div class="paragraph">
+<p>Moreover, parcels are usually passed from one delivery company to another (or to another shipping company). Hence, I
+wanted to make it possible for delivery companies to be able to transfer their Ark save files to each other as they
+transfer stewardship of parcels. This would save delivery companies time since they do not need to re-enter data that
+the previous delivery company had already entered.</p>
+</div>
+<div class="paragraph">
+<p>I designed this feature to accept <code>.xml</code> only files since Ark stores its files in <code>.xml</code> format and I wanted the
+ import command to be compatible with its save files so that it can import its save files.</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="implementation"><a class="link" href="#implementation">Implementation</a></h4>
 <hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: Developer Guide]</mark></p>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -243,6 +280,9 @@ the file. i.e. the user does not need to type <code>./data/import/Ark.xml</code>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
 <hr>
 </div>
 </div>
@@ -251,27 +291,75 @@ the file. i.e. the user does not need to type <code>./data/import/Ark.xml</code>
 <div class="sect3">
 <h4 id="external-behavior-2"><a class="link" href="#external-behavior-2">External behavior</a></h4>
 <hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: User Guide]</mark></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="backing-up-the-data"><a class="link" href="#backing-up-the-data">Backing up the data</a></h3>
+<h3 id="back-up"><a class="link" href="#back-up">Backing up the data</a></h3>
 <div class="paragraph">
 <p>Ark data are backed up in the hard disk automatically at the start of every session of the program.<br>
 There is no need to back up the data manually.<br>
-The backup file is appended with <code>-backup.xml</code> and is stored in the same folder as the main storage file.<br>
-The data from the backup file has to be loaded manually by copying the contents of the backup file into your main
- storage file. i.e. <code>./data/</code> folder</p>
+The backup file is appended with <code>-backup.xml</code> and is stored in the same folder as the main storage file.<br></p>
+</div>
+<div class="paragraph">
+<p>To load the backup file into Ark, you can perform the following actions:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Firstly, open the <code>/data/</code> folder in the home directory of Ark.</p>
+</li>
+<li>
+<p>Then, copy the backup file, and paste the copied file into your <code>/data/import</code> directory. i.e. <code>ark-backup.xml</code></p>
+</li>
+<li>
+<p>Open the Ark Application. If Ark fails to start as a result of corrupted data in your Ark save file, simply delete
+the corrupted save file and restart the Ark application.</p>
+</li>
+<li>
+<p>Finally, import the backup save file into Ark by using the <code>import</code> command by typing <code>import (back-up file name)</code> .
+i.e. <code>import ark-backup.xml</code><br></p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Alternatively, you can delete your original save file and rename your backup file to the name of your original save
+ file. However, this approach will result in data being loss if your original save file was not corrupted and contains
+ valuable data.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If Ark is unable to read your save file for reasons such as the save file being of an invalid format or if your save
+file was missing (<strong>gasp</strong>), Ark would not create a backup file for you on start up.<br>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
 </div>
 <hr>
 <div class="sect3">
 <h4 id="justification-2"><a class="link" href="#justification-2">Justification</a></h4>
 <div class="paragraph">
-<p>{Justify the need for, and the current design (i.e. external behavior) of, the feature}</p>
+<p>Delivery information is very important to delivery companies. Since it is impossible to prevent corruption of storage files,
+I developed an alternative measure, a feature that automatically backs up a reasonable recent version of the corrupted
+save file.</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="implementation-2"><a class="link" href="#implementation-2">Implementation</a></h4>
 <hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: User Guide]</mark></p>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -295,6 +383,9 @@ stores the backup in the same directory as the main <code>AddressBook</code> sto
 the name of the main <code>AddressBook</code> storage file appended with <code>-backup.xml</code>. i.e. If the main <code>AddressBook</code> storage file
  is named as <code>addressbook.xml</code>, the backup storage file will be saved as <code>addressbook.xml-backup.xml</code>.</p>
 </div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
 <hr>
 </div>
 <div class="sect2">
@@ -302,12 +393,16 @@ the name of the main <code>AddressBook</code> storage file appended with <code>-
 <div class="sect3">
 <h4 id="external-behavior-3"><a class="link" href="#external-behavior-3">External behavior</a></h4>
 <hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: User Guide]</mark></p>
+</div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="status"><a class="link" href="#status">Status field</a></h3>
 <div class="paragraph">
-<p><code>Status</code> is used to indicate the current stage of delivery that a parcel is at. It has 4 possible states:</p>
+<p><code>Status</code> is used to indicate the current delivery status of a parcel. A parcel can have 4 possible delivery status and
+listed below is a description of these <code>Status</code> values.</p>
 </div>
 <div class="ulist">
 <ul>
@@ -326,16 +421,25 @@ delivered by.<br></p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
 <hr>
 <div class="sect3">
 <h4 id="justification-3"><a class="link" href="#justification-3">Justification</a></h4>
 <div class="paragraph">
-<p>{Justify the need for, and the current design (i.e. external behavior) of, the feature}</p>
+<p>Parcels can be in several stages of a delivery process. They can be pending delivery, or being delivered at a
+particular instance. Hence, it is imperative that delivery companies are able to assign a status to their parcels to
+have a clear idea of the stage of delivery that their parcels are at. Moreover, it allows delivery customers to be
+accountable to their clients when their clients inquire about the delivery status of their parcels.</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="implementation-3"><a class="link" href="#implementation-3">Implementation</a></h4>
 <hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: Developer Guide]</mark></p>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -365,31 +469,28 @@ delivered by.<br></p>
 </div>
 <div class="sect3">
 <h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">Design Considerations</a></h4>
-<div class="ulist">
-<ul>
-<li>
-<p><code>Implementation of Status</code>**</p>
+<div class="paragraph">
+<p><strong><code>Implementation of Status</code></strong></p>
+</div>
 <div class="ulist">
 <ul>
 <li>
 <p><strong>Alternative 1 (current choice):</strong> Status is an enum class.</p>
-</li>
-</ul>
-</div>
-</li>
+<div class="ulist">
+<ul>
 <li>
 <p><strong>Pros:</strong> <code>Status</code> should only have fixed values. The user should also not be allowed to create new <code>Status</code> objects.</p>
 </li>
 <li>
 <p><strong>Cons:</strong> Less options for the user to alter the <code>Status</code> values<br></p>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Alternative 2:</strong> Allow the user to define any <code>Status</code> they wish.</p>
 </li>
 </ul>
 </div>
 </li>
+<li>
+<p><strong>Alternative 2:</strong> Allow the user to define any <code>Status</code> they wish.</p>
+<div class="ulist">
+<ul>
 <li>
 <p><strong>Pros:</strong> Users have more versatility on naming conventions</p>
 </li>
@@ -399,6 +500,12 @@ describe the same status of the parcel.</p>
 </li>
 </ul>
 </div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
 <hr>
 </div>
 </div>
@@ -407,6 +514,9 @@ describe the same status of the parcel.</p>
 <div class="sect3">
 <h4 id="external-behavior-4"><a class="link" href="#external-behavior-4">External behavior</a></h4>
 <hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: User Guide]</mark></p>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -414,8 +524,15 @@ describe the same status of the parcel.</p>
 <div class="paragraph">
 <p>Parcels have tracking numbers for delivery vendors to keep track of the parcels that they send out on a daily basis.
 This feature is important because a single person can have many parcels belonging to him. Tracking numbers are used
-to differentiate between the different parcels that are going to be delivered to the same person. Tracking numbers also
-serve as a better way of narrowing down and pinpointing parcels of interest since these numbers are more unique</p>
+to differentiate between the different parcels that will be be delivered to the same person. Tracking numbers also
+serve as a better way of narrowing down and pinpointing parcels of interest since these numbers are likely to be more
+unique than names.</p>
+</div>
+<div class="paragraph">
+<p>Ark only supports tracking numbers for registered articles managed by SingPost at this instance. These
+numbers include two <code>R`s followed by nine digits and ending with `SG</code>. i.e. <code>RR123456789SG</code><br>
+You can read more about SingPost Registered Article tracking number
+ <a href="http://www.singpost.com/send-receive/sending-within-singapore/registered-article-local">here</a>.<br></p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -424,27 +541,32 @@ serve as a better way of narrowing down and pinpointing parcels of interest sinc
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Presently, the <code>Tracking Number</code> Field only has support for Registered Article tracking numbers belonging to SingPost.
-You can read more about their Registered Article tracking number
- <a href="http://www.singpost.com/send-receive/sending-within-singapore/registered-article-local">here</a>.
+The team is working on adding support for more types of tracking numbers such as those of
+ <a href=":https://www.ups.com/tracking/tracking.html">UPS</a> and <a href=":https://www.fedex.com/sg/">FedEx</a> in the future.
 </td>
 </tr>
 </table>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
 </div>
 <hr>
 <div class="sect3">
 <h4 id="justification-4"><a class="link" href="#justification-4">Justification</a></h4>
 <div class="paragraph">
-<p>{Justify the need for, and the current design (i.e. external behavior) of, the feature}</p>
+<p>{{to be added}}</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="implementation-4"><a class="link" href="#implementation-4">Implementation</a></h4>
 <hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: Developer Guide]</mark></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="trackingnumber-field"><a class="link" href="#trackingnumber-field">TrackingNumber Field</a></h3>
+<h3 id="tracking-number-field"><a class="link" href="#tracking-number-field">Tracking Number Field</a></h3>
 <div class="paragraph">
 <p>Parcels have tracking numbers for delivery vendors to keep track of the parcels that they send out on a daily basis.
 This feature is important because a single person can have many parcels belonging to him. Tracking numbers are used
@@ -464,6 +586,9 @@ You can read more about their Registered Article tracking number
 </td>
 </tr>
 </table>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
 </div>
 <hr>
 </div>
@@ -472,13 +597,36 @@ You can read more about their Registered Article tracking number
 <div class="sect3">
 <h4 id="external-behavior-5"><a class="link" href="#external-behavior-5">External behavior</a></h4>
 <hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: User Guide]</mark></p>
+</div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="postal-code"><a class="link" href="#postal-code">Postal Code</a></h3>
 <div class="paragraph">
 <p>Ark can store the postal address of locations in Singapore. It only accepts values of <code>s</code> or <code>S</code> followed by 6 digits.
-The postal code of a parcel is used to query Google Maps when the <code>select</code> command is executed.</p>
+The postal code of a parcel is used to query Google Maps when the <code>select</code> command is executed or when a parcel in the
+Parcel List Panel is clicked.</p>
+</div>
+<div class="paragraph">
+<p><strong>Postal codes must be appended to the end of the address text.</strong> i.e. Suppose you are adding a new parcel into Ark and
+entered <code>add &#8230;&#8203;(Some info)&#8230;&#8203; a/NUS School of Computing, COM1, 13 Computing Drive, S117417 &#8230;&#8203;(More info required
+in the add command)&#8230;&#8203;</code>. In this case, <code>S11417</code> is the postal code of the above address and is appended to its
+respective address, separated by a space.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+If you did not append the postal code of the address at the end of your address, Ark will not recognize your address
+input as a valid input and would give you an invalid input message.
+</td>
+</tr>
+</table>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -489,11 +637,14 @@ The postal code of a parcel is used to query Google Maps when the <code>select</
 <td class="content">
 Presently, the <code>PostalCode</code> field still does a very relaxed validation and does not completely ensure that the postal
 code exists even though it might meet the criteria above. The team is working on producing a database of postal codes
- in Singapore by quering the Google Maps Distance Matrix API. In the meantime, it is assumed that users will enter
- the correct postal code.
+ in Singapore. In the meantime, we encourage users to take additional precautions when entering the postal codes
+ into Ark and ensure that the postal code inputs are valid.
 </td>
 </tr>
 </table>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
 </div>
 <hr>
 <div class="sect3">
@@ -505,6 +656,9 @@ code exists even though it might meet the criteria above. The team is working on
 <div class="sect3">
 <h4 id="implementation-5"><a class="link" href="#implementation-5">Implementation</a></h4>
 <hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: User Guide]</mark></p>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -529,23 +683,47 @@ code exists even though it might meet the criteria above. The team is working on
 </tr>
 </table>
 </div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
 <hr>
 </div>
 <div class="sect2">
-<h3 id="enhancement-proposed-add-command-code-remark-code"><a class="link" href="#enhancement-proposed-add-command-code-remark-code">Enhancement Proposed: Add command <code>remark</code></a></h3>
-<div class="paragraph">
-<p>{Explain similar to the Undo/Redo feature above.}</p>
-</div>
+<h3 id="enhancement-proposed-optimization-of-delivery-scheduling-based-on-time-or-distance"><a class="link" href="#enhancement-proposed-optimization-of-delivery-scheduling-based-on-time-or-distance">Enhancement Proposed: Optimization of delivery scheduling based on time or distance.</a></h3>
+
 </div>
 <div class="sect2">
 <h3 id="other-contributions"><a class="link" href="#other-contributions">Other contributions</a></h3>
 <div class="ulist">
 <ul>
 <li>
-<p>Updated the GUI color scheme (Pull requests <a href="https://github.com">#33</a>, <a href="https://github.com">#34</a>)</p>
+<p>Made the decision for the team to model the application&#8217;s GUI to be similar to that of iTunes</p>
 </li>
 <li>
-<p>Wrote additional tests to increase coverage from 88% to 92% (Pull requests <a href="https://github.com">#36</a>, <a href="https://github.com">#38</a>)</p>
+<p>Main software developer for the team (you can view a summary of my contributions the github project page
+<a href="https://github.com/CS2103AUG2017-T16-B1/main/graphs/contributors">here</a></p>
+</li>
+<li>
+<p>Refactored all instance of Person to Parcel in the codebase. You can view my pull request
+here <a href="https://github.com/CS2103AUG2017-T16-B1/main/pull/50">here</a></p>
+</li>
+<li>
+<p>Added Tooltip on mouseover of fields in the parcel. This was a necessary change since parts of the field will be
+missing and be replaced if with ellipsis <code>&#8230;&#8203;</code> if it was too long. You can view my pull-request
+<a href="https://github.com/CS2103AUG2017-T16-B1/main/pull/168">here</a></p>
+</li>
+<li>
+<p>Change name and icon of Ark. You can view the pull request <a href="https://github.com/CS2103AUG2017-T16-B1/main/pull/167">here</a></p>
+</li>
+<li>
+<p>Added Travis CI and coveralls to the Ark repository for automated deployment and testing.</p>
+</li>
+<li>
+<p>Made Ark application open in list mode on startup. You can view the pull request <a href="https://github.com/CS2103AUG2017-T16-B1/main/pull/175">here</a></p>
+</li>
+<li>
+<p>Add end-to-end internal logic for parcel tab click (this change is pretty huge).
+You can view the pull request <a href="https://github.com/CS2103AUG2017-T16-B1/main/pull/175">here</a></p>
 </li>
 </ul>
 </div>
@@ -553,17 +731,19 @@ code exists even though it might meet the criteria above. The team is working on
 </div>
 </div>
 <div class="sect1">
-<h2 id="project-powerpointlabs"><a class="link" href="#project-powerpointlabs">Project: PowerPointLabs</a></h2>
+<h2 id="project-nusvisions"><a class="link" href="#project-nusvisions">Project: NUSVisions</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>{Optionally (not graded), you may include other projects in your portfolio.}</p>
+<p>NUSVisions is an application meant to help NUS students plan for the entire 4 years of their studies. It stores your
+sessions to ensure that modules saved in your plans remain after a period of time. I deployed the web application on
+a Heroku server and you can access it by clicking <a href="https://nusvision.herokuapp.com/">here</a></p>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-08 14:23:56 +00:00
+Last updated 2017-11-08 17:18:15 +00:00
 </div>
 </div>
 </body>
