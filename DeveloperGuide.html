@@ -1524,23 +1524,37 @@ code exists even though it might meet the criteria above. The team is working on
 <div class="paragraph">
 <p><code>Status</code> is used to indicate the current stage of delivery that a parcel is at. It has 4 possible states:</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>PENDING</code> - This means that the parcel has not been delivered and has not passed the date it is supposed to be
-delivered by.<br></p>
-</li>
-<li>
-<p><code>DELIVERING</code> - This means that the parcel is currently working being delivered to its destination address.</p>
-</li>
-<li>
-<p><code>COMPLETED</code> - This indicates that the parcel has been successfully delivered to its destination.</p>
-</li>
-<li>
-<p><code>OVERDUE</code> - This state indicates that the parcel has not been delivered and has passed its due date.</p>
-</li>
-</ul>
-</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 80%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Status</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PENDING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This means that the parcel has not been delivered and has not passed the date it is supposed to be
+delivered by.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DELIVERING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This means that the parcel is currently working being delivered to its destination address.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">COMPLETED</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This indicates that the parcel has been successfully delivered to its destination.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">OVERDUE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This state indicates that the parcel has not been delivered and has passed its due date.</p></td>
+</tr>
+</tbody>
+</table>
 <div class="paragraph">
 <p>These states have different colours codes to allow users to differentiate the <code>Status</code> values more easily.</p>
 </div>
@@ -1586,7 +1600,115 @@ describe the same status of the parcel.</p>
 <h3 id="delivery-date-field"><a class="link" href="#delivery-date-field">4.12. Delivery Date field</a></h3>
 <div class="paragraph">
 <p><code>Delivery Date</code> is used to indicate the delivery date that the parcel must be delivered by.
-The dates are only accepted if they are valid. The parcel list is maintained in sorted order by comparing
+The dates are only accepted if they are in the valid format DD-MM-YYYY or understandable by Ark.</p>
+</div>
+<div class="paragraph">
+<p>Ark is able to recognise various forms of dates as shown in the table below but the dates in the Ark are formatted
+as DD-MM-YYYY. However, invalid inputs such as a phone number or symbols still will be rejected.</p>
+</div>
+<div class="paragraph">
+<p>Current date as of writing is 12 November 2017.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 60%;">
+<col style="width: 40%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">User input</th>
+<th class="tableblock halign-left valign-top">Date parsed by Ark</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">01-01-2017</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">01-01-2017</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">01/01/2017</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">01-01-2017</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">01.01.2017</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">01-01-2017</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">01-01-17</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">01-01-2017</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">First day of 2017</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">01-01-2017</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The day before yesterday</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">10-11-2017</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Yesterday</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">11-11-2017</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Today</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">12-11-2017</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tomorrow</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">13-11-2017</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The day after tomorrow</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">14-11-2017</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Three days from now</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">15-11-2017</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Four days later</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">16-11-2017</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Seventeenth of November</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">17-11-2017</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This Friday</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">17-11-2017</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Next Friday</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">24-11-2017</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Christmas Eve</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">24-12-2017</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A week before Christmas Eve</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">17-12-2017</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A year from now</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">12-11-2018</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Friday of the second week of January</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Query too complicated, date defaults to today</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">123456789</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Invalid date error shown</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">!@#$%^&amp;*()</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Invalid date error shown</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The parcel list is maintained in sorted order by comparing
 their delivery dates, with the earliest on top.</p>
 </div>
 </div>
@@ -1595,23 +1717,37 @@ their delivery dates, with the earliest on top.</p>
 <div class="paragraph">
 <p>`Tag`s are used to indicate how the parcel should be handled. Tags can contain one or more of the following `Tag`s:</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>FROZEN</code> - This means the parcel should be refrigerated as its contents are temperature sensitive.</p>
-</li>
-<li>
-<p><code>FLAMMABLE</code> - This means that the parcels' contents are highly flammable and should be kept away from heat.</p>
-</li>
-<li>
-<p><code>HEAVY</code> - This indicates that the parcel is heavy and may require additional manpower to deliver.</p>
-</li>
-<li>
-<p><code>FRAGILE</code> - This state indicates that the parcels' contents can be broken easily and
-requires additional care when handling.</p>
-</li>
-</ul>
-</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 80%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Tag</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">FROZEN</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This means the parcel should be refrigerated as its contents are temperature sensitive.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">FLAMMABLE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This means that the parcels' contents are highly flammable and should be kept away from heat.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HEAVY</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This indicates that the parcel is heavy and may require additional manpower to deliver.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">FRAGILE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This state indicates that the parcels' contents can be broken easily and requires additional care
+when handling.</p></td>
+</tr>
+</tbody>
+</table>
 <div class="sect3">
 <h4 id="design-considerations-8"><a class="link" href="#design-considerations-8">4.13.1. Design Considerations</a></h4>
 <div class="paragraph">
@@ -1654,7 +1790,7 @@ use different tag names to refer to the same tag.</p>
 <h3 id="maintain-sorted-mechanism"><a class="link" href="#maintain-sorted-mechanism">4.14. Maintain sorted mechanism</a></h3>
 <div class="imageblock">
 <div class="content">
-<img src="images/AddParcelSdForLOgic.png" alt="AddParcelSdForLOgic" width="890">
+<img src="images/AddParcelSdForLogic.png" alt="AddParcelSdForLogic" width="890">
 </div>
 </div>
 <div class="paragraph">
@@ -2786,7 +2922,7 @@ characters.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-12 11:56:58 +00:00
+Last updated 2017-11-12 12:25:45 +00:00
 </div>
 </div>
 </body>

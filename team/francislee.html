@@ -137,10 +137,117 @@ and has to be updated whenever we edit other parcel details as well.</p>
 <div class="sect2">
 <h3 id="delivery-date"><a class="link" href="#delivery-date">Due Date Field: Due Date for Parcel Delivery</a></h3>
 <div class="paragraph">
-<p>Ark can store the scheduled delivery date of parcels. It only accepts valid dates,
-including valid leap years and days.<br>
-The dates should be in one of the following formats: DD-MM-YYYY
-The list of Parcels is kept in sorted order according to the delivery dates, with the earliest dates in front.</p>
+<p><code>Delivery Date</code> is used to indicate the delivery date that the parcel must be delivered by.
+The dates are only accepted if they are in the valid format DD-MM-YYYY or understandable by Ark.</p>
+</div>
+<div class="paragraph">
+<p>Ark is able to recognise various forms of dates as shown in the table below but the dates in the Ark are formatted
+as DD-MM-YYYY. However, invalid inputs such as a phone number or symbols still will be rejected.</p>
+</div>
+<div class="paragraph">
+<p>Current date as of writing is 12 November 2017.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 60%;">
+<col style="width: 40%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">User input</th>
+<th class="tableblock halign-left valign-top">Date parsed by Ark</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">01-01-2017</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">01-01-2017</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">01/01/2017</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">01-01-2017</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">01.01.2017</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">01-01-2017</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">01-01-17</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">01-01-2017</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">First day of 2017</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">01-01-2017</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The day before yesterday</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">10-11-2017</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Yesterday</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">11-11-2017</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Today</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">12-11-2017</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tomorrow</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">13-11-2017</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The day after tomorrow</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">14-11-2017</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Three days from now</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">15-11-2017</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Four days later</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">16-11-2017</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Seventeenth of November</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">17-11-2017</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This Friday</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">17-11-2017</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Next Friday</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">24-11-2017</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Christmas Eve</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">24-12-2017</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A week before Christmas Eve</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">17-12-2017</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A year from now</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">12-11-2018</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Friday of the second week of January</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Query too complicated, date defaults to today</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">123456789</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Invalid date error shown</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">!@#$%^&amp;*()</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Invalid date error shown</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The parcel list is maintained in sorted order by comparing
+their delivery dates, with the earliest on top.</p>
 </div>
 <hr>
 <div class="sect3">
@@ -160,7 +267,115 @@ immediately on start up.</p>
 <h3 id="delivery-date-field"><a class="link" href="#delivery-date-field">Delivery Date field</a></h3>
 <div class="paragraph">
 <p><code>Delivery Date</code> is used to indicate the delivery date that the parcel must be delivered by.
-The dates are only accepted if they are valid. The parcel list is maintained in sorted order by comparing
+The dates are only accepted if they are in the valid format DD-MM-YYYY or understandable by Ark.</p>
+</div>
+<div class="paragraph">
+<p>Ark is able to recognise various forms of dates as shown in the table below but the dates in the Ark are formatted
+as DD-MM-YYYY. However, invalid inputs such as a phone number or symbols still will be rejected.</p>
+</div>
+<div class="paragraph">
+<p>Current date as of writing is 12 November 2017.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 60%;">
+<col style="width: 40%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">User input</th>
+<th class="tableblock halign-left valign-top">Date parsed by Ark</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">01-01-2017</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">01-01-2017</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">01/01/2017</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">01-01-2017</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">01.01.2017</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">01-01-2017</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">01-01-17</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">01-01-2017</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">First day of 2017</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">01-01-2017</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The day before yesterday</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">10-11-2017</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Yesterday</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">11-11-2017</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Today</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">12-11-2017</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tomorrow</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">13-11-2017</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The day after tomorrow</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">14-11-2017</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Three days from now</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">15-11-2017</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Four days later</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">16-11-2017</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Seventeenth of November</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">17-11-2017</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This Friday</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">17-11-2017</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Next Friday</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">24-11-2017</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Christmas Eve</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">24-12-2017</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A week before Christmas Eve</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">17-12-2017</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A year from now</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">12-11-2018</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Friday of the second week of January</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Query too complicated, date defaults to today</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">123456789</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Invalid date error shown</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">!@#$%^&amp;*()</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Invalid date error shown</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The parcel list is maintained in sorted order by comparing
 their delivery dates, with the earliest on top.</p>
 </div>
 <hr>
@@ -198,7 +413,7 @@ more easily.</p>
 <h3 id="maintain-sorted-mechanism"><a class="link" href="#maintain-sorted-mechanism">Maintain sorted mechanism</a></h3>
 <div class="imageblock">
 <div class="content">
-<img src="../images/AddParcelSdForLOgic.png" alt="AddParcelSdForLOgic" width="890">
+<img src="../images/AddParcelSdForLogic.png" alt="AddParcelSdForLogic" width="890">
 </div>
 </div>
 <div class="paragraph">
@@ -1343,7 +1558,7 @@ characters.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-12 11:56:58 +00:00
+Last updated 2017-11-12 12:25:46 +00:00
 </div>
 </div>
 </body>
