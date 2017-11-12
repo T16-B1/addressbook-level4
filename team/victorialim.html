@@ -39,8 +39,22 @@
 <div class="paragraph">
 <p>Ark has an in-built Google Maps browser section in the main window and can be used to show you the locations
 of the delivery addresses of each parcel. This feature will be automatically used whenever you type <code>select</code>
-into the command box, and will display a Google Maps search of the postal code of the parcel&#8217;s address in the
-browser section of the main window.</p>
+into the command box or click on a Parcel Card, and will display a Google Maps search of the postal code
+of the parcel&#8217;s address in the browser section of the main window.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/Ark_Browser.png" alt="Ark Browser" width="890">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 4.11.1 : Selecting a parcel</em></p>
+</div>
+<div class="paragraph">
+<p>Every time you select a parcel, the Browser Panel will show as the Parcel List Panel minimizes.
+As seen in figure 4.11.1 above, when the parcel belonging to Cornelia Meier, at index 4, is selected,
+the Parcel List Panel minimizes, showing the Browser Panel and  it displays the delivery destination address
+of the parcel. In this case, Cornelia wants her parcel to be delivered to 10th Street Singapore 123114.</p>
 </div>
 <div class="paragraph">
 <p><mark>End of Extract</mark></p>
@@ -49,8 +63,10 @@ browser section of the main window.</p>
 <div class="sect3">
 <h4 id="justification"><a class="link" href="#justification">Justification</a></h4>
 <div class="paragraph">
-<p>Since Ark is meant to assist in deliveries, it is necessary for Ark to have a Google Maps browser to show to users
-the exact location of parcel delivery addresses.</p>
+<p>Since Ark is meant to assist in deliveries, it is necessary for Ark to have a Google Maps browser implemented
+within the application to show to users the exact location of parcel delivery addresses.
+This would enable our users to continue using Ark without the need to keep switching between our application
+and a web browser, thus saving users time and hassle.</p>
 </div>
 </div>
 <div class="sect3">
@@ -200,8 +216,11 @@ Selects the first tab "All Parcels" in the Parcel List Panel and displays it res
 <div class="sect3">
 <h4 id="justification-2"><a class="link" href="#justification-2">Justification</a></h4>
 <div class="paragraph">
-<p>To improve usability for users of Ark to be able to quickly search between the different parcel statuses.
-A Tab function would enable users of Ark to easily switch between different parcel lists of differing parcel statuses.</p>
+<p>Since Ark has 4 different statuses for parcels, it is essential that our users are able to quickly
+navigate between the different statuses. Hence we have implemented different parcelLists for undelivered and delivered
+parcels. These lists are viewed in separate tabs in the parcelListPanel.
+To improve usability for users of Ark to be able to quickly search between the different parcel statuses
+without the need for a mouse, a <code>tab</code> command is required.</p>
 </div>
 </div>
 <div class="sect3">
@@ -210,6 +229,53 @@ A Tab function would enable users of Ark to easily switch between different parc
 <div class="paragraph">
 <p><mark>Start of Extract [from: Developer Guide]</mark></p>
 </div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="tab-change-mechanism"><a class="link" href="#tab-change-mechanism">Tab change mechanism</a></h3>
+<div class="paragraph">
+<p>The <code>tab</code> command is facilitated by the <code>TabCommand</code> class within <code>logic</code> and is an extension of the abstract class
+<code>Commands</code>. <code>TabCommandParser</code> first checks for valid arguments before returning a new <code>TabCommand</code> and it executes.
+A <code>JumpToTabRequestEvent</code> event is raised upon execution to be handled by the <code>ParcelListPanel</code> to display the
+switch the selected tab on the UI.</p>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect: Implementation of tab command</strong><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1:</strong> Changing the <code>select</code> command to be able to select tabs and parcels<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> Easier for users to understand what the command does by its name alone since
+<code>select tab 2</code> or <code>select index 2</code> is descriptive of the commands actions+</p>
+</li>
+<li>
+<p><strong>Cons:</strong> Harder to implement since it would require a large change of <code>SelectCommand</code> class
+and its related files to take in a third argument, and user would have to type additional word every select <br></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2 (current choice):</strong> Creating a new command called <code>tab</code><br></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> Easier to implement and less words for the user to input<br></p>
+</li>
+<li>
+<p><strong>Cons:</strong> Just the word "tab" alone is not very descriptive of the commands function.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
 <div class="paragraph">
 <p><mark>End of Extract</mark></p>
 </div>
@@ -217,10 +283,115 @@ A Tab function would enable users of Ark to easily switch between different parc
 </div>
 </div>
 <div class="sect2">
-<h3 id="enhancement-proposed-add-command-code-remark-code"><a class="link" href="#enhancement-proposed-add-command-code-remark-code">Enhancement Proposed: Add command <code>remark</code></a></h3>
+<h3 id="enhancement-added-overdue-parcels-popup-window"><a class="link" href="#enhancement-added-overdue-parcels-popup-window">Enhancement Added: Overdue Parcels Popup Window</a></h3>
+<div class="sect3">
+<h4 id="external-behavior-3"><a class="link" href="#external-behavior-3">External behavior</a></h4>
+<hr>
 <div class="paragraph">
-<p>{Explain similar to the Undo/Redo feature above.}</p>
+<p><mark>Start of Extract [from: User Guide]</mark></p>
 </div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="overdue-parcels-popup-window"><a class="link" href="#overdue-parcels-popup-window">Overdue Parcels Popup Window</a></h3>
+<div class="paragraph">
+<p>Every time you startup Ark, if you have any parcels with the status <code>OVERDUE</code> in the parcel list,
+a separate window will popup notifying you of the number of overdue parcels that are in the list.
+The popup window will show for 7 seconds before closing itself. You can also close the window manually by clicking
+the <code>x</code> at the top right of the window. Figure 4.4.1 below is an example of what the popup window looks like:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/Ark_Popup_Window.PNG" alt="Ark Popup Window" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 4.4.1 : Overdue Parcels Popup Window</em></p>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+<div class="sect3">
+<h4 id="justification-3"><a class="link" href="#justification-3">Justification</a></h4>
+<div class="paragraph">
+<p>Since our application is meant to be used as a parcel manager, it is important that our users
+know when they have overdue parcels. Since these parcels are either late for delivery or possibly
+missing, it is important to notify the users of these overdue parcels. A popup window right at the
+startup of the Ark application is the best way to notify users since it would be the first thing
+users see whenever they startup Ark.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implementation-3"><a class="link" href="#implementation-3">Implementation</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: Developer Guide]</mark></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="overdue-parcels-popup-window-2"><a class="link" href="#overdue-parcels-popup-window-2">Overdue parcels popup window</a></h3>
+<div class="paragraph">
+<p>The overdue parcels popup window is facilitated by the <code>PopupOverdueParcelsWindow</code> which extends <code>UiPart&lt;Region&gt;</code>
+within <code>ui</code>. It creates a new <code>dialogStage</code> which is set to always <code>show</code> on top of <code>MainWindow</code>.</p>
+</div>
+<div class="paragraph">
+<p>A new <code>PopupOverdueParcelsWindow</code> is created and set to show in <code>UiManager</code> on <code>start</code> and takes in an
+<code>ObservableList&lt;ReadOnlyParcel&gt;</code> from <code>logic</code> as an argument. This popup window only shows if the method
+<code>hasOverdueParcels</code> in <code>UiManager</code> returns true to signify the presence of parcels with <code>OVERDUE</code> status in the
+uncompleted parcels list. Another method <code>getNumOverdueParcels</code> is then used to get the integer number of
+overdue parcels to display in the popup window.</p>
+</div>
+<div class="paragraph">
+<p><code>Javafx</code> 's animation API for <code>PauseTransition</code> is then used to <code>hide</code> the window after seven seconds.</p>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:  When the popup window shows</strong><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Only at every startup of the Ark application<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> Only needs to check the condition to show the popup once and is easy to implement a single check in <code>UiManager</code>.<br></p>
+</li>
+<li>
+<p><strong>Cons:</strong> Only notifies users once an on startup of Ark only so users would not get any more notifications if they
+keep their application open constantly<br></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Check uncompleted parcel list after every command and show popup if overdue parcels are found<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> Users will be immediately notified of overdue parcels whenever parcel list is changed<br></p>
+</li>
+<li>
+<p><strong>Cons:</strong> May not be necessary since the user themselves would be the ones to <code>add</code> or <code>edit</code> the parcel
+causing the <code>OVERDUE</code> status, hence they would already know of the existence of these overdue parcels.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="enhancement-proposed"><a class="link" href="#enhancement-proposed">Enhancement Proposed:</a></h3>
+
 </div>
 <div class="sect2">
 <h3 id="other-contributions"><a class="link" href="#other-contributions">Other contributions</a></h3>
@@ -239,18 +410,10 @@ A Tab function would enable users of Ark to easily switch between different parc
 </div>
 </div>
 </div>
-<div class="sect1">
-<h2 id="project-modulus"><a class="link" href="#project-modulus">Project: Modulus</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>{Optionally (not graded), you may include other projects in your portfolio.}</p>
-</div>
-</div>
-</div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-12 14:20:28 +00:00
+Last updated 2017-11-12 18:13:08 +00:00
 </div>
 </div>
 </body>

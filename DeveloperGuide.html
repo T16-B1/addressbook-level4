@@ -54,16 +54,18 @@
 <li><a href="#logging">4.2. Logging</a></li>
 <li><a href="#configuration">4.3. Configuration</a></li>
 <li><a href="#google-maps-search-browser">4.4. Google Maps Search Browser</a></li>
-<li><a href="#delete-tag-mechanism">4.5. Delete Tag mechanism</a></li>
-<li><a href="#backup-mechanism">4.6. Backup Mechanism</a></li>
-<li><a href="#import-mechanism">4.7. Import Mechanism</a></li>
-<li><a href="#tab-autocomplete-mechanism">4.8. Tab autocomplete mechanism</a></li>
-<li><a href="#tracking-number-field">4.9. Tracking Number Field</a></li>
-<li><a href="#postalcode-field">4.10. PostalCode Field</a></li>
-<li><a href="#status-field">4.11. Status field</a></li>
-<li><a href="#delivery-date-field">4.12. Delivery Date field</a></li>
-<li><a href="#tags">4.13. Tags</a></li>
-<li><a href="#maintain-sorted-mechanism">4.14. Maintain sorted mechanism</a></li>
+<li><a href="#tab-change-mechanism">4.5. Tab change mechanism</a></li>
+<li><a href="#overdue-parcels-popup-window">4.6. Overdue parcels popup window</a></li>
+<li><a href="#delete-tag-mechanism">4.7. Delete Tag mechanism</a></li>
+<li><a href="#backup-mechanism">4.8. Backup Mechanism</a></li>
+<li><a href="#import-mechanism">4.9. Import Mechanism</a></li>
+<li><a href="#tab-autocomplete-mechanism">4.10. Tab autocomplete mechanism</a></li>
+<li><a href="#tracking-number-field">4.11. Tracking Number Field</a></li>
+<li><a href="#postalcode-field">4.12. PostalCode Field</a></li>
+<li><a href="#status-field">4.13. Status field</a></li>
+<li><a href="#delivery-date-field">4.14. Delivery Date field</a></li>
+<li><a href="#tags">4.15. Tags</a></li>
+<li><a href="#maintain-sorted-mechanism">4.16. Maintain sorted mechanism</a></li>
 </ul>
 </li>
 <li><a href="#documentation">5. Documentation</a>
@@ -1096,7 +1098,109 @@ in future versions of the Ark application.<br></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="delete-tag-mechanism"><a class="link" href="#delete-tag-mechanism">4.5. Delete Tag mechanism</a></h3>
+<h3 id="tab-change-mechanism"><a class="link" href="#tab-change-mechanism">4.5. Tab change mechanism</a></h3>
+<div class="paragraph">
+<p>The <code>tab</code> command is facilitated by the <code>TabCommand</code> class within <code>logic</code> and is an extension of the abstract class
+<code>Commands</code>. <code>TabCommandParser</code> first checks for valid arguments before returning a new <code>TabCommand</code> and it executes.
+A <code>JumpToTabRequestEvent</code> event is raised upon execution to be handled by the <code>ParcelListPanel</code> to display the
+switch the selected tab on the UI.</p>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">4.5.1. Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect: Implementation of tab command</strong><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1:</strong> Changing the <code>select</code> command to be able to select tabs and parcels<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> Easier for users to understand what the command does by its name alone since
+<code>select tab 2</code> or <code>select index 2</code> is descriptive of the commands actions+</p>
+</li>
+<li>
+<p><strong>Cons:</strong> Harder to implement since it would require a large change of <code>SelectCommand</code> class
+and its related files to take in a third argument, and user would have to type additional word every select <br></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2 (current choice):</strong> Creating a new command called <code>tab</code><br></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> Easier to implement and less words for the user to input<br></p>
+</li>
+<li>
+<p><strong>Cons:</strong> Just the word "tab" alone is not very descriptive of the commands function.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="overdue-parcels-popup-window"><a class="link" href="#overdue-parcels-popup-window">4.6. Overdue parcels popup window</a></h3>
+<div class="paragraph">
+<p>The overdue parcels popup window is facilitated by the <code>PopupOverdueParcelsWindow</code> which extends <code>UiPart&lt;Region&gt;</code>
+within <code>ui</code>. It creates a new <code>dialogStage</code> which is set to always <code>show</code> on top of <code>MainWindow</code>.</p>
+</div>
+<div class="paragraph">
+<p>A new <code>PopupOverdueParcelsWindow</code> is created and set to show in <code>UiManager</code> on <code>start</code> and takes in an
+<code>ObservableList&lt;ReadOnlyParcel&gt;</code> from <code>logic</code> as an argument. This popup window only shows if the method
+<code>hasOverdueParcels</code> in <code>UiManager</code> returns true to signify the presence of parcels with <code>OVERDUE</code> status in the
+uncompleted parcels list. Another method <code>getNumOverdueParcels</code> is then used to get the integer number of
+overdue parcels to display in the popup window.</p>
+</div>
+<div class="paragraph">
+<p><code>Javafx</code> 's animation API for <code>PauseTransition</code> is then used to <code>hide</code> the window after seven seconds.</p>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">4.6.1. Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:  When the popup window shows</strong><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Only at every startup of the Ark application<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> Only needs to check the condition to show the popup once and is easy to implement a single check in <code>UiManager</code>.<br></p>
+</li>
+<li>
+<p><strong>Cons:</strong> Only notifies users once an on startup of Ark only so users would not get any more notifications if they
+keep their application open constantly<br></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Check uncompleted parcel list after every command and show popup if overdue parcels are found<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> Users will be immediately notified of overdue parcels whenever parcel list is changed<br></p>
+</li>
+<li>
+<p><strong>Cons:</strong> May not be necessary since the user themselves would be the ones to <code>add</code> or <code>edit</code> the parcel
+causing the <code>OVERDUE</code> status, hence they would already know of the existence of these overdue parcels.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="delete-tag-mechanism"><a class="link" href="#delete-tag-mechanism">4.7. Delete Tag mechanism</a></h3>
 <div class="paragraph">
 <p>The delete tag mechanism is facilitated by a <code>deleteTag</code> method within the <code>ModelManager</code>. It supports the deletion
 of tags from every single parcel in Ark.</p>
@@ -1108,7 +1212,7 @@ present, we remove it, otherwise, we do nothing. We then update the old parcel i
 updated list of tags.</p>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">4.5.1. Design Considerations</a></h4>
+<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">4.7.1. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect: Implementation of <code>deleteTagCommand</code></strong><br></p>
 </div>
@@ -1130,7 +1234,7 @@ Tag to delete them.<br></p>
 </div>
 </li>
 <li>
-<p><strong>Alternative 2:</strong> Maintain a list of tags and where the tags are located+</p>
+<p><strong>Alternative 2:</strong> Maintain a list of tags and where the tags are located<br></p>
 <div class="ulist">
 <ul>
 <li>
@@ -1148,7 +1252,7 @@ and has to be updated whenever we edit other parcel details as well.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="backup-mechanism"><a class="link" href="#backup-mechanism">4.6. Backup Mechanism</a></h3>
+<h3 id="backup-mechanism"><a class="link" href="#backup-mechanism">4.8. Backup Mechanism</a></h3>
 <div class="paragraph">
 <p>The back up mechanism is facilitated by a <code>backupAddressBook()</code> method within the <code>StorageManager</code>. It supports the
 backing up of AddressBook data in Ark.<br></p>
@@ -1169,7 +1273,7 @@ the name of the main <code>AddressBook</code> storage file appended with <code>-
  is named as <code>addressbook.xml</code>, the backup storage file will be saved as <code>addressbook.xml-backup.xml</code>.</p>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">4.6.1. Design Considerations</a></h4>
+<h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">4.8.1. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect: Implementation of <code>StorageManager#backupAddressBook</code></strong><br></p>
 </div>
@@ -1229,7 +1333,7 @@ provides a workable copy of the data of Ark.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="import-mechanism"><a class="link" href="#import-mechanism">4.7. Import Mechanism</a></h3>
+<h3 id="import-mechanism"><a class="link" href="#import-mechanism">4.9. Import Mechanism</a></h3>
 <div class="paragraph">
 <p>To use this command, type <code>import (FILE_NAME)</code> into the <code>CommandBox</code>.</p>
 </div>
@@ -1284,7 +1388,7 @@ The <code>ImportCommand</code> will only add parcels non-duplicate parcels. Dupl
 </table>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">4.7.1. Design Considerations</a></h4>
+<h4 id="design-considerations-7"><a class="link" href="#design-considerations-7">4.9.1. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect: Implementation of <code>ImportCommand</code></strong><br></p>
 </div>
@@ -1397,7 +1501,7 @@ the file. i.e. the user does not need to type <code>./data/import/Ark.xml</code>
 </div>
 </div>
 <div class="sect2">
-<h3 id="tab-autocomplete-mechanism"><a class="link" href="#tab-autocomplete-mechanism">4.8. Tab autocomplete mechanism</a></h3>
+<h3 id="tab-autocomplete-mechanism"><a class="link" href="#tab-autocomplete-mechanism">4.10. Tab autocomplete mechanism</a></h3>
 <div class="imageblock">
 <div class="content">
 <img src="images/SDforTabAutocomplete.png" alt="SDforTabAutocomplete" width="900">
@@ -1435,7 +1539,7 @@ the original value of <code>commandBoxText</code>.<br></p>
 to replace the text in <code>commandFieldText</code> with the string.<br></p>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">4.8.1. Design Considerations</a></h4>
+<h4 id="design-considerations-8"><a class="link" href="#design-considerations-8">4.10.1. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect: Implementation of <code>autocomplete</code></strong><br></p>
 </div>
@@ -1474,7 +1578,7 @@ Also creates coupling between the <code>Autocompleter</code> and <code>CommandBo
 </div>
 </div>
 <div class="sect2">
-<h3 id="tracking-number-field"><a class="link" href="#tracking-number-field">4.9. Tracking Number Field</a></h3>
+<h3 id="tracking-number-field"><a class="link" href="#tracking-number-field">4.11. Tracking Number Field</a></h3>
 <div class="paragraph">
 <p>Parcels have tracking numbers for delivery vendors to keep track of the parcels that they send out on a daily basis.
 This feature is important because a single person can have many parcels belonging to him. Tracking numbers are used
@@ -1497,7 +1601,7 @@ You can read more about their Registered Article tracking number
 </div>
 </div>
 <div class="sect2">
-<h3 id="postalcode-field"><a class="link" href="#postalcode-field">4.10. PostalCode Field</a></h3>
+<h3 id="postalcode-field"><a class="link" href="#postalcode-field">4.12. PostalCode Field</a></h3>
 <div class="paragraph">
 <p>The <code>PostalCode</code> field is implemented as part of Address. This class stores the postal address of locations in Singapore.
 It only accepts values of <code>s</code> or <code>S</code> followed by 6 digits. The value stored in this class is used to store the postal
@@ -1520,7 +1624,7 @@ code exists even though it might meet the criteria above. The team is working on
 </div>
 </div>
 <div class="sect2">
-<h3 id="status-field"><a class="link" href="#status-field">4.11. Status field</a></h3>
+<h3 id="status-field"><a class="link" href="#status-field">4.13. Status field</a></h3>
 <div class="paragraph">
 <p><code>Status</code> is used to indicate the current stage of delivery that a parcel is at. It has 4 possible states:</p>
 </div>
@@ -1559,7 +1663,7 @@ delivered by.</p></td>
 <p>These states have different colours codes to allow users to differentiate the <code>Status</code> values more easily.</p>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-7"><a class="link" href="#design-considerations-7">4.11.1. Design Considerations</a></h4>
+<h4 id="design-considerations-9"><a class="link" href="#design-considerations-9">4.13.1. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong><code>Implementation of Status</code></strong></p>
 </div>
@@ -1597,7 +1701,7 @@ describe the same status of the parcel.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="delivery-date-field"><a class="link" href="#delivery-date-field">4.12. Delivery Date field</a></h3>
+<h3 id="delivery-date-field"><a class="link" href="#delivery-date-field">4.14. Delivery Date field</a></h3>
 <div class="paragraph">
 <p><code>Delivery Date</code> is used to indicate the delivery date that the parcel must be delivered by.
 The dates are only accepted if they are in the valid format DD-MM-YYYY or understandable by Ark.</p>
@@ -1713,7 +1817,7 @@ their delivery dates, with the earliest on top.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="tags"><a class="link" href="#tags">4.13. Tags</a></h3>
+<h3 id="tags"><a class="link" href="#tags">4.15. Tags</a></h3>
 <div class="paragraph">
 <p>`Tag`s are used to indicate how the parcel should be handled. Tags can contain one or more of the following `Tag`s:</p>
 </div>
@@ -1749,7 +1853,7 @@ when handling.</p></td>
 </tbody>
 </table>
 <div class="sect3">
-<h4 id="design-considerations-8"><a class="link" href="#design-considerations-8">4.13.1. Design Considerations</a></h4>
+<h4 id="design-considerations-10"><a class="link" href="#design-considerations-10">4.15.1. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong><code>Implementation of Tag</code></strong></p>
 </div>
@@ -1787,7 +1891,7 @@ use different tag names to refer to the same tag.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="maintain-sorted-mechanism"><a class="link" href="#maintain-sorted-mechanism">4.14. Maintain sorted mechanism</a></h3>
+<h3 id="maintain-sorted-mechanism"><a class="link" href="#maintain-sorted-mechanism">4.16. Maintain sorted mechanism</a></h3>
 <div class="imageblock">
 <div class="content">
 <img src="images/AddParcelSdForLogic.png" alt="AddParcelSdForLogic" width="890">
@@ -1814,7 +1918,7 @@ class. The Model class now has the following methods: <code>select</code>, <code
 we have selected a parcel card and we will then re-select that particular card after we have sorted.<br></p>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-9"><a class="link" href="#design-considerations-9">4.14.1. Design Considerations</a></h4>
+<h4 id="design-considerations-11"><a class="link" href="#design-considerations-11">4.16.1. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of <code>maintainSorted</code><br>
 <strong>Alternative 1 (current choice):</strong> Constant sort the list of parcels whenever there is a change that
@@ -2922,7 +3026,7 @@ characters.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-12 14:20:28 +00:00
+Last updated 2017-11-12 18:13:08 +00:00
 </div>
 </div>
 </body>
