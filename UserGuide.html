@@ -29,8 +29,8 @@
 <li><a href="#quick-start">3. Quick Start</a></li>
 <li><a href="#layout">4. Layout</a>
 <ul class="sectlevel2">
-<li><a href="#more-about-browser-panel">4.1. More About Browser Panel</a></li>
-<li><a href="#more-about-parcel-list-panel">4.2. More About Parcel List Panel</a></li>
+<li><a href="#google-maps-browser">4.1. Google Maps Browser</a></li>
+<li><a href="#more-about-parcel-list-card">4.2. More About Parcel List Card</a></li>
 </ul>
 </li>
 <li><a href="#parcel-fields">5. Parcel Fields</a>
@@ -62,13 +62,11 @@
 <li><a href="#redoing-the-previously-undone-command-code-redo-code">6.13. Redoing the previously undone command : <code>redo</code></a></li>
 <li><a href="#clearing-all-entries-code-clear-code">6.14. Clearing all entries : <code>clear</code></a></li>
 <li><a href="#exiting-the-program-code-exit-code">6.15. Exiting the program : <code>exit</code></a></li>
-<li><a href="#google-maps-browser">6.16. Google Maps Browser</a></li>
-<li><a href="#autocomplete">6.17. Autocomplete</a></li>
-<li><a href="#tool-tip">6.18. Parcel Tooltip</a></li>
-<li><a href="#gui-tab-mechanism">6.19. GUI tab mechanism</a></li>
-<li><a href="#saving-the-data">6.20. Saving the data</a></li>
-<li><a href="#back-up">6.21. Backing up the data</a></li>
-<li><a href="#maintaining-a-sorted-list">6.22. Maintaining a Sorted List</a></li>
+<li><a href="#autocomplete">6.16. Autocomplete</a></li>
+<li><a href="#gui-tab-mechanism">6.17. GUI tab mechanism</a></li>
+<li><a href="#saving-the-data">6.18. Saving the data</a></li>
+<li><a href="#back-up">6.19. Backing up the data</a></li>
+<li><a href="#maintaining-a-sorted-list">6.20. Maintaining a Sorted List</a></li>
 </ul>
 </li>
 <li><a href="#faq">7. FAQ</a></li>
@@ -94,15 +92,15 @@
 <div class="paragraph">
 <p>Unable to keep track of all your deliveries?
 Unsure which parcel is a more urgent delivery?
-Did you ever wish there was a way you could easily plan your delivery route?
-Now with Ark, you no longer need to worry about late deliveries and route planning.
+Did you ever wish there was a way you could easily find your delivery destination?
+Now with Ark, you no longer need to worry about late deliveries and getting lost.
 Leave the heavy thinking to us and just deliver away!<br></p>
 </div>
 <div class="paragraph">
 <p>Ark is a delivery parcel manager with the ability to keep track of your delivery details.
 These details include recipient&#8217;s names, delivery due dates, locations, and tags.
 Ark is also able to help you plan out your delivery route by using google maps
-to help you get from one destination to another.<br></p>
+to help you get to your destination.<br></p>
 </div>
 </div>
 </div>
@@ -116,7 +114,7 @@ as well as providing you examples for easy reference.<br></p>
 </div>
 <div class="paragraph">
 <p>Ark assumes that you already have the postal codes of the delivery locations
-of every parcel and bases its route planning base on postal codes only.</p>
+of every parcel and searches for addresses by postal codes only.</p>
 </div>
 </div>
 </div>
@@ -151,7 +149,7 @@ This app will not work with earlier versions of Java 8.
 <p>Double-click the file to start the app. The GUI should appear in a few seconds.</p>
 <div class="imageblock">
 <div class="content">
-<img src="images/Ui.png" alt="Ui" width="790">
+<img src="images/Ark_Main_Window.png" alt="Ark Main Window" width="790">
 </div>
 </div>
 <div class="paragraph">
@@ -196,7 +194,7 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/Ark_Main_Window_Sections.png" alt="Ark Main Window Sections" width="890">
+<img src="images/Ark_Main_Window_Numbered.png" alt="Ark Main Window Numbered" width="890">
 </div>
 </div>
 <div class="paragraph">
@@ -222,6 +220,9 @@ the particular parcel in the <strong>Parcel List Panel</strong> (Refer to No. 6 
 delivered parcels, click on the <code>Completed Parcels</code> tab.</p>
 </li>
 <li>
+<p><strong>Parcel Card</strong> - The details of a parcel is showed here.</p>
+</li>
+<li>
 <p><strong>Parcel List Panel</strong> - The list of parcels in your inventory is showed here.</p>
 </li>
 <li>
@@ -230,10 +231,18 @@ delivered parcels, click on the <code>Completed Parcels</code> tab.</p>
 </ol>
 </div>
 <div class="sect2">
-<h3 id="more-about-browser-panel"><a class="link" href="#more-about-browser-panel">4.1. More About Browser Panel</a></h3>
+<h3 id="google-maps-browser"><a class="link" href="#google-maps-browser">4.1. Google Maps Browser</a></h3>
+<div class="paragraph">
+<p>Ark has an in-built Google Maps browser section in the main window and can be used to show you the locations
+of the delivery addresses of each parcel. This feature will be automatically used whenever you type <code>select</code>
+into the command box, and will display a Google Maps search of the postal code of the parcel&#8217;s address in the
+browser section of the main window.</p>
+</div>
+<div class="sect3">
+<h4 id="more-about-browser-panel"><a class="link" href="#more-about-browser-panel">4.1.1. More About Browser Panel</a></h4>
 <div class="imageblock">
 <div class="content">
-<img src="images/Browser_Display_After_Selection.png" alt="Browser Display After Selection" width="890">
+<img src="images/Ark_Browser.png" alt="Ark Browser" width="890">
 </div>
 </div>
 <div class="paragraph">
@@ -241,15 +250,16 @@ delivered parcels, click on the <code>Completed Parcels</code> tab.</p>
 </div>
 <div class="paragraph">
 <p>Selecting a parcel activates the Browser Panel. In the diagram above, when the 4th parcel belonging to Cornelia
-Meier is selected, the Browser Panel is activated and displays the destination address of the parcel. Tn this case,
-Cornelia wants his parcel to be delivered to 10th Street Singapore 123114.<br></p>
+Meier, at index 4, is selected, the Browser Panel is activated and displays the destination address of the parcel.
+In this case, Cornelia wants her parcel to be delivered to 10th Street Singapore 123114.</p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="more-about-parcel-list-panel"><a class="link" href="#more-about-parcel-list-panel">4.2. More About Parcel List Panel</a></h3>
+<h3 id="more-about-parcel-list-card"><a class="link" href="#more-about-parcel-list-card">4.2. More About Parcel List Card</a></h3>
 <div class="imageblock">
 <div class="content">
-<img src="images/ParcelCard.png" alt="ParcelCard" width="890">
+<img src="images/Ark_Parcel_Card_Numbered.png" alt="Ark Parcel Card Numbered" width="890">
 </div>
 </div>
 <div class="paragraph">
@@ -261,35 +271,65 @@ Cornelia wants his parcel to be delivered to 10th Street Singapore 123114.<br></
 <p><strong>Parcel Index</strong> - This is the index number of the parcel in the displayed list.</p>
 </li>
 <li>
-<p><strong>Name</strong> - This is the name of the recipient of the parcel.</p>
-</li>
-<li>
-<p><strong>Phone</strong> - This is the phone number of the recipient of the parcel.</p>
-</li>
-<li>
-<p><strong>Address</strong> - This is the address to deliver the parcel to. The address must end with the postal code of the address.
-You can read more about postal codes in Ark in the #postal-code[Postal Code section] below.</p>
-</li>
-<li>
-<p><strong>Email</strong> - This is the email address of the recipient of the parcel.</p>
+<p><strong>Name</strong> - This is the name of the recipient of the parcel. You can read more in the <a href="#name">Name</a> section.</p>
 </li>
 <li>
 <p><strong>Tracking Number</strong> - This is the tracking number of the parcel. You can read more about it Ark&#8217;s parcel tracking
-numbers in the #tracking-number[Tracking Numbers section] below.</p>
+numbers in the <a href="#tracking-number">Tracking Numbers</a> section below.</p>
+</li>
+<li>
+<p><strong>Phone</strong> - This is the phone number of the recipient of the parcel.
+You can read more in the <a href="#phone">Phone</a> section.</p>
+</li>
+<li>
+<p><strong>Address</strong> - This is the address to deliver the parcel to. The address must end with the postal code of the address.
+You can read more about postal codes in Ark in the #postal-code[Postal Code] section below.</p>
+</li>
+<li>
+<p><strong>Email</strong> - This is the email address of the recipient of the parcel.
+You can read more in the <a href="#email">Email</a> section.</p>
 </li>
 <li>
 <p><strong>Delivery Date</strong> - This is the delivery date of the parcel. The parcel should be delivered on dates prior to or on
-this date.</p>
+this date. You can read more in the <a href="#delivery-date">Due Date</a> section.</p>
 </li>
 <li>
 <p><strong>Status</strong> - This is the status of the parcel in the delivery workflow. Read more about parcel delivery status
-in the <a href="#status">Status section</a> below.</p>
+in the <a href="#status">Status</a> section.</p>
 </li>
 <li>
 <p><strong>Tags</strong> - These are the tags of the parcel. They are used to provide more information about a parcel&#8217;s contents.
-Read more about parcel tags in the <a href="#tag">Tags section</a> below.</p>
+Read more about parcel tags in the <a href="#tag">Tags</a> section.</p>
 </li>
 </ol>
+</div>
+<div class="sect3">
+<h4 id="tool-tip"><a class="link" href="#tool-tip">4.2.1. Parcel Tooltip</a></h4>
+<div class="paragraph">
+<p>Ark comes with a tooltip feature that allows you to view parcel details that are too long. Suppose you have entered
+a parcel with really long details into Ark. As seen below, John&#8217;s parcel has a delivery address that is too long,
+and a part of it has been replaced by ellipsis i.e. <code>&#8230;&#8203;</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ParcelWithLongInput.PNG" alt="ParcelWithLongInput" width="1000">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 5.22.1 : Parcel with a long address</em></p>
+</div>
+<div class="paragraph">
+<p>To view the full delivery address, we simply mouseover his address and the full details of his
+address will appear as a tooltip. This can be seen in the diagram below.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/mouse-over-address.png" alt="mouse over address" width="1000">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 5.22.2 : Tooltip to show more of John&#8217;s address</em></p>
+</div>
 </div>
 </div>
 </div>
@@ -1143,16 +1183,7 @@ Format: <code>exit</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="google-maps-browser"><a class="link" href="#google-maps-browser">6.16. Google Maps Browser</a></h3>
-<div class="paragraph">
-<p>Ark has an in-built Google Maps browser section in the main window and can be used to show you the locations
-of the delivery addresses of each parcel. This feature will be automatically used whenever you type <code>select</code>
-into the command box, and will display a Google Maps search of the postal code of the parcel&#8217;s address in the
-browser section of the main window.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="autocomplete"><a class="link" href="#autocomplete">6.17. Autocomplete</a></h3>
+<h3 id="autocomplete"><a class="link" href="#autocomplete">6.16. Autocomplete</a></h3>
 <div class="paragraph">
 <p>Ark comes with tab autocompletion which is able to complete a command for you
 without requiring you to type out the command fully.<br>
@@ -1185,35 +1216,7 @@ below.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="tool-tip"><a class="link" href="#tool-tip">6.18. Parcel Tooltip</a></h3>
-<div class="paragraph">
-<p>Ark comes with a tooltip feature that allows you to view parcel details that are too long. Suppose you have entered
-a parcel with really long details into Ark. As seen below, John&#8217;s parcel has a delivery address that is too long,
-and a part of it has been replaced by ellipsis i.e. <code>&#8230;&#8203;</code>.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/ParcelWithLongInput.PNG" alt="ParcelWithLongInput" width="1000">
-</div>
-</div>
-<div class="paragraph">
-<p><em>Figure 5.22.1 : Parcel with a long address</em></p>
-</div>
-<div class="paragraph">
-<p>To view the full delivery address, we simply mouseover his address and the full details of his
-address will appear as a tooltip. This can be seen in the diagram below.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/mouse-over-address.png" alt="mouse over address" width="1000">
-</div>
-</div>
-<div class="paragraph">
-<p><em>Figure 5.22.2 : Tooltip to show more of John&#8217;s address</em></p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="gui-tab-mechanism"><a class="link" href="#gui-tab-mechanism">6.19. GUI tab mechanism</a></h3>
+<h3 id="gui-tab-mechanism"><a class="link" href="#gui-tab-mechanism">6.17. GUI tab mechanism</a></h3>
 <div class="paragraph">
 <p>To help you organise between the parcels you have delivered and the parcels you have delivered, Ark provides you two
 lists, one containing the parcels you have yet to deliver, and the other, the parcels that you have already delivered.</p>
@@ -1249,14 +1252,14 @@ that do not have a <code>COMPLETED</code> status will  be added to the list of u
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-the-data"><a class="link" href="#saving-the-data">6.20. Saving the data</a></h3>
+<h3 id="saving-the-data"><a class="link" href="#saving-the-data">6.18. Saving the data</a></h3>
 <div class="paragraph">
 <p>Ark data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="back-up"><a class="link" href="#back-up">6.21. Backing up the data</a></h3>
+<h3 id="back-up"><a class="link" href="#back-up">6.19. Backing up the data</a></h3>
 <div class="paragraph">
 <p>Ark data are backed up in the hard disk automatically at the start of every session of the program.<br>
 There is no need to back up the data manually.<br>
@@ -1303,7 +1306,7 @@ file was missing (<strong>gasp</strong>), Ark would not create a backup file for
 </div>
 </div>
 <div class="sect2">
-<h3 id="maintaining-a-sorted-list"><a class="link" href="#maintaining-a-sorted-list">6.22. Maintaining a Sorted List</a></h3>
+<h3 id="maintaining-a-sorted-list"><a class="link" href="#maintaining-a-sorted-list">6.20. Maintaining a Sorted List</a></h3>
 <div class="paragraph">
 <p>The list of parcels stored in Ark is maintained to be sorted according to the delivery date of
 the parcels, with the earliest delivery date at the top. This allows the more pertinent
@@ -1667,7 +1670,7 @@ parcels delivered.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-12 08:20:25 +00:00
+Last updated 2017-11-12 11:56:58 +00:00
 </div>
 </div>
 </body>
