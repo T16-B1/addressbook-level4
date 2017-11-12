@@ -54,16 +54,18 @@
 <li><a href="#logging">4.2. Logging</a></li>
 <li><a href="#configuration">4.3. Configuration</a></li>
 <li><a href="#google-maps-search-browser">4.4. Google Maps Search Browser</a></li>
-<li><a href="#delete-tag-mechanism">4.5. Delete Tag mechanism</a></li>
-<li><a href="#backup-mechanism">4.6. Backup Mechanism</a></li>
-<li><a href="#import-mechanism">4.7. Import Mechanism</a></li>
-<li><a href="#tab-autocomplete-mechanism">4.8. Tab autocomplete mechanism</a></li>
-<li><a href="#tracking-number-field">4.9. Tracking Number Field</a></li>
-<li><a href="#postalcode-field">4.10. PostalCode Field</a></li>
-<li><a href="#status-field">4.11. Status field</a></li>
-<li><a href="#delivery-date-field">4.12. Delivery Date field</a></li>
-<li><a href="#tags">4.13. Tags</a></li>
-<li><a href="#maintain-sorted-mechanism">4.14. Maintain sorted mechanism</a></li>
+<li><a href="#tab-change-mechanism">4.5. Tab change mechanism</a></li>
+<li><a href="#overdue-parcels-popup-window">4.6. Overdue parcels popup window</a></li>
+<li><a href="#delete-tag-mechanism">4.7. Delete Tag mechanism</a></li>
+<li><a href="#backup-mechanism">4.8. Backup Mechanism</a></li>
+<li><a href="#import-mechanism">4.9. Import Mechanism</a></li>
+<li><a href="#tab-autocomplete-mechanism">4.10. Tab autocomplete mechanism</a></li>
+<li><a href="#tracking-number-field">4.11. Tracking Number Field</a></li>
+<li><a href="#postalcode-field">4.12. PostalCode Field</a></li>
+<li><a href="#status-field">4.13. Status field</a></li>
+<li><a href="#delivery-date-field">4.14. Delivery Date field</a></li>
+<li><a href="#tags">4.15. Tags</a></li>
+<li><a href="#maintain-sorted-mechanism">4.16. Maintain sorted mechanism</a></li>
 </ul>
 </li>
 <li><a href="#documentation">5. Documentation</a>
@@ -1096,7 +1098,109 @@ in future versions of the Ark application.<br></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="delete-tag-mechanism"><a class="link" href="#delete-tag-mechanism">4.5. Delete Tag mechanism</a></h3>
+<h3 id="tab-change-mechanism"><a class="link" href="#tab-change-mechanism">4.5. Tab change mechanism</a></h3>
+<div class="paragraph">
+<p>The <code>tab</code> command is facilitated by the <code>TabCommand</code> class within <code>logic</code> and is an extension of the abstract class
+<code>Commands</code>. <code>TabCommandParser</code> first checks for valid arguments before returning a new <code>TabCommand</code> and it executes.
+A <code>JumpToTabRequestEvent</code> event is raised upon execution to be handled by the <code>ParcelListPanel</code> to display the
+switch the selected tab on the UI.</p>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">4.5.1. Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect: Implementation of tab command</strong><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1:</strong> Changing the <code>select</code> command to be able to select tabs and parcels<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> Easier for users to understand what the command does by its name alone since
+<code>select tab 2</code> or <code>select index 2</code> is descriptive of the commands actions+</p>
+</li>
+<li>
+<p><strong>Cons:</strong> Harder to implement since it would require a large change of <code>SelectCommand</code> class
+and its related files to take in a third argument, and user would have to type additional word every select <br></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2 (current choice):</strong> Creating a new command called <code>tab</code><br></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> Easier to implement and less words for the user to input<br></p>
+</li>
+<li>
+<p><strong>Cons:</strong> Just the word "tab" alone is not very descriptive of the commands function.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="overdue-parcels-popup-window"><a class="link" href="#overdue-parcels-popup-window">4.6. Overdue parcels popup window</a></h3>
+<div class="paragraph">
+<p>The overdue parcels popup window is facilitated by the <code>PopupOverdueParcelsWindow</code> which extends <code>UiPart&lt;Region&gt;</code>
+within <code>ui</code>. It creates a new <code>dialogStage</code> which is set to always <code>show</code> on top of <code>MainWindow</code>.</p>
+</div>
+<div class="paragraph">
+<p>A new <code>PopupOverdueParcelsWindow</code> is created and set to show in <code>UiManager</code> on <code>start</code> and takes in an
+<code>ObservableList&lt;ReadOnlyParcel&gt;</code> from <code>logic</code> as an argument. This popup window only shows if the method
+<code>hasOverdueParcels</code> in <code>UiManager</code> returns true to signify the presence of parcels with <code>OVERDUE</code> status in the
+uncompleted parcels list. Another method <code>getNumOverdueParcels</code> is then used to get the integer number of
+overdue parcels to display in the popup window.</p>
+</div>
+<div class="paragraph">
+<p><code>Javafx</code> 's animation API for <code>PauseTransition</code> is then used to <code>hide</code> the window after seven seconds.</p>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">4.6.1. Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:  When the popup window shows</strong><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Only at every startup of the Ark application<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> Only needs to check the condition to show the popup once and is easy to implement a single check in <code>UiManager</code>.<br></p>
+</li>
+<li>
+<p><strong>Cons:</strong> Only notifies users once an on startup of Ark only so users would not get any more notifications if they
+keep their application open constantly<br></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Check uncompleted parcel list after every command and show popup if overdue parcels are found<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> Users will be immediately notified of overdue parcels whenever parcel list is changed<br></p>
+</li>
+<li>
+<p><strong>Cons:</strong> May not be necessary since the user themselves would be the ones to <code>add</code> or <code>edit</code> the parcel
+causing the <code>OVERDUE</code> status, hence they would already know of the existence of these overdue parcels.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="delete-tag-mechanism"><a class="link" href="#delete-tag-mechanism">4.7. Delete Tag mechanism</a></h3>
 <div class="paragraph">
 <p>The delete tag mechanism is facilitated by a <code>deleteTag</code> method within the <code>ModelManager</code>. It supports the deletion
 of tags from every single parcel in Ark.</p>
@@ -1108,7 +1212,7 @@ present, we remove it, otherwise, we do nothing. We then update the old parcel i
 updated list of tags.</p>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">4.5.1. Design Considerations</a></h4>
+<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">4.7.1. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect: Implementation of <code>deleteTagCommand</code></strong><br></p>
 </div>
@@ -1130,7 +1234,7 @@ Tag to delete them.<br></p>
 </div>
 </li>
 <li>
-<p><strong>Alternative 2:</strong> Maintain a list of tags and where the tags are located+</p>
+<p><strong>Alternative 2:</strong> Maintain a list of tags and where the tags are located<br></p>
 <div class="ulist">
 <ul>
 <li>
@@ -1148,7 +1252,7 @@ and has to be updated whenever we edit other parcel details as well.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="backup-mechanism"><a class="link" href="#backup-mechanism">4.6. Backup Mechanism</a></h3>
+<h3 id="backup-mechanism"><a class="link" href="#backup-mechanism">4.8. Backup Mechanism</a></h3>
 <div class="paragraph">
 <p>The back up mechanism is facilitated by a <code>backupAddressBook()</code> method within the <code>StorageManager</code>. It supports the
 backing up of AddressBook data in Ark.<br></p>
@@ -1159,24 +1263,23 @@ backing up of AddressBook data in Ark.<br></p>
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 4.6.1 : Sequence diagram describing the operation of the <code>storageManager</code> when it is initialized</em></p>
+<p><em>Diagram 4.6.1 : Sequence diagram describing the operation of the <code>storageManager</code> when it is initialized</em></p>
 </div>
 <div class="paragraph">
-<p>The <code>backupAddressBook()</code> method is called automatically when <code>storageManager</code> is initialised in <code>MainApp#init()</code>,
-a method that is called when <code>Ark</code> is launched. The method utilises the <code>StorageManager#saveAddressBook()</code> method and
-stores the backup in the same directory as the main <code>AddressBook</code> storage file. The backup file is saved and named with
-the name of the main <code>AddressBook</code> storage file appended with <code>-backup.xml</code>. i.e. If the main <code>AddressBook</code> storage file
- is named as <code>addressbook.xml</code>, the backup storage file will be saved as <code>addressbook.xml-backup.xml</code>.</p>
+<p>As seen in the sequence diagram above, the <code>backupAddressBook()</code> method is called when <code>storageManager</code> is initialised
+in <code>MainApp#init()</code>. This method is called when Ark launches. From the diagram above, the backup() method is called.
+This backup method first checks if there is a save file loaded into Ark. If there is a save file loaded into Ark, a
+backup will be called. Otherwise, Ark does not backup the missing save file.</p>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">4.6.1. Design Considerations</a></h4>
+<h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">4.8.1. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect: Implementation of <code>StorageManager#backupAddressBook</code></strong><br></p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> use the <code>aveAddressBook()</code> method to implement logic.<br></p>
+<p><strong>Alternative 1 (current choice):</strong> use the <code>saveAddressBook()</code> method to implement logic.<br></p>
 <div class="ulist">
 <ul>
 <li>
@@ -1210,54 +1313,107 @@ be implemented in both <code>saveAddressBook()</code> and <code>backupAddressBoo
 </div>
 <hr>
 <div class="paragraph">
-<p><strong>Aspect: Trigger to execute <code>backupAddressBook</code></strong><br>
-* <strong>Alternative 1 (current choice):</strong> Automatically backup data on Ark on launch of the software.<br>
-<strong> </strong>Pros:<strong> This implementation ensures that the if the user corrupts the data of Ark during a session. The user will be
-able to revert to the start of the session, which is ensured to be a workable instance of the Ark software.<br>
-</strong> <strong>Cons:</strong> This does not give the most recent copy of the data of the Ark if many changes were made in a single session.<br>
-* <strong>Alternative 2:</strong> Backup data on Ark every few minutes<br>
-<strong> </strong>Pros:<strong> Provides a very recent copy of the data on Ark.<br>
-</strong> <strong>Cons:</strong> More tedious and difficult to implement. User may also be running another process at that point of time. It
+<p><strong>Aspect: Trigger to execute the backup command</strong><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Automatically backup data on Ark on launch of the software.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> This implementation ensures that the if the user corrupts the data of Ark during a session. The user will be
+able to revert to the start of the session, which is ensured to be a workable instance of the Ark software.<br></p>
+</li>
+<li>
+<p><strong>Cons:</strong> This does not give the most recent copy of the data of the Ark if many changes were made in a single session.<br></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Backup data on Ark every few minutes<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> Provides a very recent copy of the data on Ark.<br></p>
+</li>
+<li>
+<p><strong>Cons:</strong> More tedious and difficult to implement. User may also be running another process at that point of time. This
 could cause a bottleneck if there is a lot of data to be saved, and multiple backup calls are queued one after the
-other.<br>
-* <strong>Alternative 3:</strong> Backup data after a fixed number of `UndoableCommand`s.<br>
-<strong> </strong>Pros:<strong> Provides a very recent copy of the data on Ark.<br>
-</strong> <strong>Cons:</strong> More tedious and difficult to implement. Difficult to determine the optimal amount of data to restore. If
+other.<br></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 3:</strong> Backup data after a fixed number of `UndoableCommand`s.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> Provides a very recent copy of the data on Ark.<br></p>
+</li>
+<li>
+<p><strong>Cons:</strong> More tedious and difficult to implement. Difficult to determine the optimal amount of data to restore. If
 the corruption of the data is caused by a several of commands, it becomes difficult to ensure that the backup file
 provides a workable copy of the data of Ark.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<hr>
+<div class="paragraph">
+<p><strong>Aspect: Choice of backing up if there is no save file.</strong><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Ark does not backup if it cannot read the save file<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> Backup data will not be overwritten in the event that Ark is not able to read the designated save file for
+reasons such as the save file being corrupted/missing+</p>
+</li>
+<li>
+<p><strong>Cons:</strong> Additional overhead to check if Ark is able to read the designated save file.<br></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Ark backs up even if the save file does not exist.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> Less overhead needed to check if Ark is able to read the designated save file.<br></p>
+</li>
+<li>
+<p><strong>Cons:</strong> Backup data could be overwritten in the event the designated save file is corrupted/missing.<br></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="import-mechanism"><a class="link" href="#import-mechanism">4.7. Import Mechanism</a></h3>
+<h3 id="import-mechanism"><a class="link" href="#import-mechanism">4.9. Import Mechanism</a></h3>
 <div class="paragraph">
-<p>To use this command, type <code>import (FILE_NAME)</code> into the <code>CommandBox</code>.</p>
+<p>To use this command, you can type <code>import (FILE_NAME)</code> into the <code>CommandBox</code>. e.g. <code>import ark_save</code></p>
 </div>
 <div class="paragraph">
 <p>The <code>Import</code> mechanism allows users to import parcels from valid <code>Ark</code> storage files stored as <code>.xml</code> files into the
-current instance of <code>Ark</code>. This mecahnism is facilitated by a <code>readAddressBook</code> method within`XmlAddressBookStorage` to
-load the parcels stored in the <code>xml</code> file and an <code>addAllParcels</code> method defined in <code>ModelManager</code> to add the parcels in
+current instance of <code>Ark</code>. This mechanism is facilitated by a <code>readAddressBook</code> method within <code>XmlAddressBookStorage</code> to
+load the parcels stored in the <code>xml</code> file and an <code>ModelManager#addAllParcels</code> to add the parcels in
 the storage file into the current instance of <code>Ark</code>.<br></p>
 </div>
 <div class="paragraph">
-<p>Since the <code>Import</code> mechanism modifies the state of the data in <code>Ark</code>, it has to be undoable. Thus, it inherits from
-<code>UndoableCommands</code> interface rather than inheriting from the <code>Command</code> interface directly.<br></p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-The file to be imported has to be stored in the <code>./data/import</code> folder. i.e. calling <code>import ark.xml</code> will import the
-file <code>./data/import/ark.xml</code>.<br>
-If the user enters a file name that is not alphanumeric or a file name that is not in a <code>.xml</code> format, the parcel will
-throw an Exception. This is to prevent a directory traversal attack on Ark. Read more about directory traversal
-attacks <a href="https://www.acunetix.com/websitesecurity/directory-traversal/">here</a><br>
-</td>
-</tr>
-</table>
+<p>Since the <code>Import</code> mechanism modifies the data stored in <code>Ark</code>, it has to be an undoable command. Thus, it inherits from
+the <code>UndoableCommands</code> interface rather than inheriting direclty from the <code>Command</code> interface.<br></p>
 </div>
 <div class="paragraph">
 <p>The following sequence diagram shows how the <code>import</code> operation works:</p>
@@ -1270,6 +1426,29 @@ attacks <a href="https://www.acunetix.com/websitesecurity/directory-traversal/">
 <div class="paragraph">
 <p><em>Figure 4.7.1 : Sequence diagram describing the operation of <code>import</code> when it is executed</em></p>
 </div>
+<div class="paragraph">
+<p>As seen in the sequence diagram above, the command is first parsed to create an <code>ImportCommandParser</code>. This parser
+takes the arguments of the input as the name of the file to import and converts it to a full file path string to
+locate the file to import. Thereafter, it loads the file to import into Ark and reads the data. This returns a list of
+parcels that are used in create an <code>ImportCommand</code>.</p>
+</div>
+<div class="paragraph">
+<p>When the command is executed, the following sequence of events take place:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ImportCommandExecutionFrame.png" alt="ImportCommandExecutionFrame" width="1200">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 4.7.2 : Reference frame for the execution of the Import Command</em></p>
+</div>
+<div class="paragraph">
+<p>As seen in the diagram above, when the command is executed, the <code>executeUndoableMethod</code> methods calls
+<code>ModelManager#addAllParcels</code> method. In this method, all unique parcels are added into the running instance of Ark.
+If the parcel is not unique such that it will create a duplicate parcel in the inventory, the parcel is ignored and
+the process continues until the last parcel has been added.</p>
+</div>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -1277,14 +1456,30 @@ attacks <a href="https://www.acunetix.com/websitesecurity/directory-traversal/">
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-The <code>ImportCommand</code> will only add parcels non-duplicate parcels. Duplicate parcels are ignored. If all the parcels to be
- imported into Ark are duplicates, then no parcels are imported and an Exception is thrown.
+The file to be imported has to be stored in the <code>./data/import</code> folder. i.e. calling <code>import ark_save</code> will import the
+file <code>./data/import/ark_save.xml</code>.<br>
+If the user enters a file name that contains characters other than alphanumeric characters or a file name that is
+not in a <code>.xml</code> format, the command will throw an Exception.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+The <code>ImportCommand</code> will only add non-duplicate parcels. Duplicate parcels are ignored.<br>
+If all the parcels to be imported into Ark are duplicates, then no parcels are imported and an Exception is thrown.<br>
+If the file to import is either, a <code>CommandException</code> will be thrown
 </td>
 </tr>
 </table>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">4.7.1. Design Considerations</a></h4>
+<h4 id="design-considerations-7"><a class="link" href="#design-considerations-7">4.9.1. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect: Implementation of <code>ImportCommand</code></strong><br></p>
 </div>
@@ -1330,7 +1525,7 @@ feature has to be manually implemented in <code>ImportCommand</code> as well.</p
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Backup save files from only one location<br></p>
+<p><strong>Alternative 1 (current choice):</strong> Imports save files from only one location<br></p>
 <div class="ulist">
 <ul>
 <li>
@@ -1366,11 +1561,13 @@ the file. i.e. the user does not need to type <code>./data/import/Ark.xml</code>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> File Names can only be alphanumeric and be in the <code>.xml</code> format.<br></p>
+<p><strong>Alternative 1 (current choice):</strong> File Names can only contain alphanumeric and underscore characters and be in the
+<code>.xml</code> format.<br></p>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Pros:</strong> Ark is protected from directory traversal attacks.<br></p>
+<p><strong>Pros:</strong> Users will constraint their file naming to contain more semantic names rather than having symbols in their
+naming of Ark save files.<br></p>
 </li>
 <li>
 <p><strong>Cons:</strong> The user has restrictions on the file naming conventions he can use to name his import files<br></p>
@@ -1386,7 +1583,7 @@ the file. i.e. the user does not need to type <code>./data/import/Ark.xml</code>
 <p><strong>Pros:</strong> Allows user to name his files following any conventions and be successfully imported into Ark.<br></p>
 </li>
 <li>
-<p><strong>Cons:</strong> Makes Ark vulnerable to simple directory traversal attack where user can access files outside the
+<p><strong>Cons:</strong> Makes Ark vulnerable to simple directory traversals where user can access files outside the
 <code>data/import/</code> directory.<br></p>
 </li>
 </ul>
@@ -1397,7 +1594,7 @@ the file. i.e. the user does not need to type <code>./data/import/Ark.xml</code>
 </div>
 </div>
 <div class="sect2">
-<h3 id="tab-autocomplete-mechanism"><a class="link" href="#tab-autocomplete-mechanism">4.8. Tab autocomplete mechanism</a></h3>
+<h3 id="tab-autocomplete-mechanism"><a class="link" href="#tab-autocomplete-mechanism">4.10. Tab autocomplete mechanism</a></h3>
 <div class="imageblock">
 <div class="content">
 <img src="images/SDforTabAutocomplete.png" alt="SDforTabAutocomplete" width="900">
@@ -1435,7 +1632,7 @@ the original value of <code>commandBoxText</code>.<br></p>
 to replace the text in <code>commandFieldText</code> with the string.<br></p>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">4.8.1. Design Considerations</a></h4>
+<h4 id="design-considerations-8"><a class="link" href="#design-considerations-8">4.10.1. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect: Implementation of <code>autocomplete</code></strong><br></p>
 </div>
@@ -1474,7 +1671,7 @@ Also creates coupling between the <code>Autocompleter</code> and <code>CommandBo
 </div>
 </div>
 <div class="sect2">
-<h3 id="tracking-number-field"><a class="link" href="#tracking-number-field">4.9. Tracking Number Field</a></h3>
+<h3 id="tracking-number-field"><a class="link" href="#tracking-number-field">4.11. Tracking Number Field</a></h3>
 <div class="paragraph">
 <p>Parcels have tracking numbers for delivery vendors to keep track of the parcels that they send out on a daily basis.
 This feature is important because a single person can have many parcels belonging to him. Tracking numbers are used
@@ -1497,7 +1694,7 @@ You can read more about their Registered Article tracking number
 </div>
 </div>
 <div class="sect2">
-<h3 id="postalcode-field"><a class="link" href="#postalcode-field">4.10. PostalCode Field</a></h3>
+<h3 id="postalcode-field"><a class="link" href="#postalcode-field">4.12. PostalCode Field</a></h3>
 <div class="paragraph">
 <p>The <code>PostalCode</code> field is implemented as part of Address. This class stores the postal address of locations in Singapore.
 It only accepts values of <code>s</code> or <code>S</code> followed by 6 digits. The value stored in this class is used to store the postal
@@ -1520,7 +1717,7 @@ code exists even though it might meet the criteria above. The team is working on
 </div>
 </div>
 <div class="sect2">
-<h3 id="status-field"><a class="link" href="#status-field">4.11. Status field</a></h3>
+<h3 id="status-field"><a class="link" href="#status-field">4.13. Status field</a></h3>
 <div class="paragraph">
 <p><code>Status</code> is used to indicate the current stage of delivery that a parcel is at. It has 4 possible states:</p>
 </div>
@@ -1559,7 +1756,7 @@ delivered by.</p></td>
 <p>These states have different colours codes to allow users to differentiate the <code>Status</code> values more easily.</p>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-7"><a class="link" href="#design-considerations-7">4.11.1. Design Considerations</a></h4>
+<h4 id="design-considerations-9"><a class="link" href="#design-considerations-9">4.13.1. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong><code>Implementation of Status</code></strong></p>
 </div>
@@ -1597,7 +1794,7 @@ describe the same status of the parcel.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="delivery-date-field"><a class="link" href="#delivery-date-field">4.12. Delivery Date field</a></h3>
+<h3 id="delivery-date-field"><a class="link" href="#delivery-date-field">4.14. Delivery Date field</a></h3>
 <div class="paragraph">
 <p><code>Delivery Date</code> is used to indicate the delivery date that the parcel must be delivered by.
 The dates are only accepted if they are in the valid format DD-MM-YYYY or understandable by Ark.</p>
@@ -1713,7 +1910,7 @@ their delivery dates, with the earliest on top.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="tags"><a class="link" href="#tags">4.13. Tags</a></h3>
+<h3 id="tags"><a class="link" href="#tags">4.15. Tags</a></h3>
 <div class="paragraph">
 <p>`Tag`s are used to indicate how the parcel should be handled. Tags can contain one or more of the following `Tag`s:</p>
 </div>
@@ -1749,7 +1946,7 @@ when handling.</p></td>
 </tbody>
 </table>
 <div class="sect3">
-<h4 id="design-considerations-8"><a class="link" href="#design-considerations-8">4.13.1. Design Considerations</a></h4>
+<h4 id="design-considerations-10"><a class="link" href="#design-considerations-10">4.15.1. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong><code>Implementation of Tag</code></strong></p>
 </div>
@@ -1787,7 +1984,7 @@ use different tag names to refer to the same tag.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="maintain-sorted-mechanism"><a class="link" href="#maintain-sorted-mechanism">4.14. Maintain sorted mechanism</a></h3>
+<h3 id="maintain-sorted-mechanism"><a class="link" href="#maintain-sorted-mechanism">4.16. Maintain sorted mechanism</a></h3>
 <div class="imageblock">
 <div class="content">
 <img src="images/AddParcelSdForLogic.png" alt="AddParcelSdForLogic" width="890">
@@ -1814,7 +2011,7 @@ class. The Model class now has the following methods: <code>select</code>, <code
 we have selected a parcel card and we will then re-select that particular card after we have sorted.<br></p>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-9"><a class="link" href="#design-considerations-9">4.14.1. Design Considerations</a></h4>
+<h4 id="design-considerations-11"><a class="link" href="#design-considerations-11">4.16.1. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of <code>maintainSorted</code><br>
 <strong>Alternative 1 (current choice):</strong> Constant sort the list of parcels whenever there is a change that
@@ -2922,7 +3119,7 @@ characters.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-12 18:11:35 +00:00
+Last updated 2017-11-12 19:00:48 +00:00
 </div>
 </div>
 </body>

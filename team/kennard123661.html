@@ -133,33 +133,17 @@ the previous delivery company had already entered.</p>
 <div class="sect2">
 <h3 id="import-mechanism"><a class="link" href="#import-mechanism">Import Mechanism</a></h3>
 <div class="paragraph">
-<p>To use this command, type <code>import (FILE_NAME)</code> into the <code>CommandBox</code>.</p>
+<p>To use this command, you can type <code>import (FILE_NAME)</code> into the <code>CommandBox</code>. e.g. <code>import ark_save</code></p>
 </div>
 <div class="paragraph">
 <p>The <code>Import</code> mechanism allows users to import parcels from valid <code>Ark</code> storage files stored as <code>.xml</code> files into the
-current instance of <code>Ark</code>. This mecahnism is facilitated by a <code>readAddressBook</code> method within`XmlAddressBookStorage` to
-load the parcels stored in the <code>xml</code> file and an <code>addAllParcels</code> method defined in <code>ModelManager</code> to add the parcels in
+current instance of <code>Ark</code>. This mechanism is facilitated by a <code>readAddressBook</code> method within <code>XmlAddressBookStorage</code> to
+load the parcels stored in the <code>xml</code> file and an <code>ModelManager#addAllParcels</code> to add the parcels in
 the storage file into the current instance of <code>Ark</code>.<br></p>
 </div>
 <div class="paragraph">
-<p>Since the <code>Import</code> mechanism modifies the state of the data in <code>Ark</code>, it has to be undoable. Thus, it inherits from
-<code>UndoableCommands</code> interface rather than inheriting from the <code>Command</code> interface directly.<br></p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-The file to be imported has to be stored in the <code>./data/import</code> folder. i.e. calling <code>import ark.xml</code> will import the
-file <code>./data/import/ark.xml</code>.<br>
-If the user enters a file name that is not alphanumeric or a file name that is not in a <code>.xml</code> format, the parcel will
-throw an Exception. This is to prevent a directory traversal attack on Ark. Read more about directory traversal
-attacks <a href="https://www.acunetix.com/websitesecurity/directory-traversal/">here</a><br>
-</td>
-</tr>
-</table>
+<p>Since the <code>Import</code> mechanism modifies the data stored in <code>Ark</code>, it has to be an undoable command. Thus, it inherits from
+the <code>UndoableCommands</code> interface rather than inheriting direclty from the <code>Command</code> interface.<br></p>
 </div>
 <div class="paragraph">
 <p>The following sequence diagram shows how the <code>import</code> operation works:</p>
@@ -172,6 +156,29 @@ attacks <a href="https://www.acunetix.com/websitesecurity/directory-traversal/">
 <div class="paragraph">
 <p><em>Figure 4.7.1 : Sequence diagram describing the operation of <code>import</code> when it is executed</em></p>
 </div>
+<div class="paragraph">
+<p>As seen in the sequence diagram above, the command is first parsed to create an <code>ImportCommandParser</code>. This parser
+takes the arguments of the input as the name of the file to import and converts it to a full file path string to
+locate the file to import. Thereafter, it loads the file to import into Ark and reads the data. This returns a list of
+parcels that are used in create an <code>ImportCommand</code>.</p>
+</div>
+<div class="paragraph">
+<p>When the command is executed, the following sequence of events take place:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/ImportCommandExecutionFrame.png" alt="ImportCommandExecutionFrame" width="1200">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 4.7.2 : Reference frame for the execution of the Import Command</em></p>
+</div>
+<div class="paragraph">
+<p>As seen in the diagram above, when the command is executed, the <code>executeUndoableMethod</code> methods calls
+<code>ModelManager#addAllParcels</code> method. In this method, all unique parcels are added into the running instance of Ark.
+If the parcel is not unique such that it will create a duplicate parcel in the inventory, the parcel is ignored and
+the process continues until the last parcel has been added.</p>
+</div>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -179,8 +186,24 @@ attacks <a href="https://www.acunetix.com/websitesecurity/directory-traversal/">
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-The <code>ImportCommand</code> will only add parcels non-duplicate parcels. Duplicate parcels are ignored. If all the parcels to be
- imported into Ark are duplicates, then no parcels are imported and an Exception is thrown.
+The file to be imported has to be stored in the <code>./data/import</code> folder. i.e. calling <code>import ark_save</code> will import the
+file <code>./data/import/ark_save.xml</code>.<br>
+If the user enters a file name that contains characters other than alphanumeric characters or a file name that is
+not in a <code>.xml</code> format, the command will throw an Exception.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+The <code>ImportCommand</code> will only add non-duplicate parcels. Duplicate parcels are ignored.<br>
+If all the parcels to be imported into Ark are duplicates, then no parcels are imported and an Exception is thrown.<br>
+If the file to import is either, a <code>CommandException</code> will be thrown
 </td>
 </tr>
 </table>
@@ -232,7 +255,7 @@ feature has to be manually implemented in <code>ImportCommand</code> as well.</p
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Backup save files from only one location<br></p>
+<p><strong>Alternative 1 (current choice):</strong> Imports save files from only one location<br></p>
 <div class="ulist">
 <ul>
 <li>
@@ -268,11 +291,13 @@ the file. i.e. the user does not need to type <code>./data/import/Ark.xml</code>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> File Names can only be alphanumeric and be in the <code>.xml</code> format.<br></p>
+<p><strong>Alternative 1 (current choice):</strong> File Names can only contain alphanumeric and underscore characters and be in the
+<code>.xml</code> format.<br></p>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Pros:</strong> Ark is protected from directory traversal attacks.<br></p>
+<p><strong>Pros:</strong> Users will constraint their file naming to contain more semantic names rather than having symbols in their
+naming of Ark save files.<br></p>
 </li>
 <li>
 <p><strong>Cons:</strong> The user has restrictions on the file naming conventions he can use to name his import files<br></p>
@@ -288,7 +313,7 @@ the file. i.e. the user does not need to type <code>./data/import/Ark.xml</code>
 <p><strong>Pros:</strong> Allows user to name his files following any conventions and be successfully imported into Ark.<br></p>
 </li>
 <li>
-<p><strong>Cons:</strong> Makes Ark vulnerable to simple directory traversal attack where user can access files outside the
+<p><strong>Cons:</strong> Makes Ark vulnerable to simple directory traversals where user can access files outside the
 <code>data/import/</code> directory.<br></p>
 </li>
 </ul>
@@ -390,19 +415,146 @@ backing up of AddressBook data in Ark.<br></p>
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 4.6.1 : Sequence diagram describing the operation of the <code>storageManager</code> when it is initialized</em></p>
+<p><em>Diagram 4.6.1 : Sequence diagram describing the operation of the <code>storageManager</code> when it is initialized</em></p>
 </div>
 <div class="paragraph">
-<p>The <code>backupAddressBook()</code> method is called automatically when <code>storageManager</code> is initialised in <code>MainApp#init()</code>,
-a method that is called when <code>Ark</code> is launched. The method utilises the <code>StorageManager#saveAddressBook()</code> method and
-stores the backup in the same directory as the main <code>AddressBook</code> storage file. The backup file is saved and named with
-the name of the main <code>AddressBook</code> storage file appended with <code>-backup.xml</code>. i.e. If the main <code>AddressBook</code> storage file
- is named as <code>addressbook.xml</code>, the backup storage file will be saved as <code>addressbook.xml-backup.xml</code>.</p>
+<p>As seen in the sequence diagram above, the <code>backupAddressBook()</code> method is called when <code>storageManager</code> is initialised
+in <code>MainApp#init()</code>. This method is called when Ark launches. From the diagram above, the backup() method is called.
+This backup method first checks if there is a save file loaded into Ark. If there is a save file loaded into Ark, a
+backup will be called. Otherwise, Ark does not backup the missing save file.</p>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect: Implementation of <code>StorageManager#backupAddressBook</code></strong><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> use the <code>saveAddressBook()</code> method to implement logic.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> It becomes easier to implement method rather than writing out a separate logic for <code>backupAddressBook()</code>. It
+makes updates easier since enhancements to <code>saveAddressBook()</code> will also enhance <code>backupAddressBook()</code>.<br></p>
+</li>
+<li>
+<p><strong>Cons:</strong> This implementation increases the coupling of <code>backupAddressBook()</code> and
+<code>saveAddressBook()</code> where changes in <code>saveAddressBook()</code> are likely to cause changes in <code>backupAddressBook()</code>.<br></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Separate the implementation of <code>backupAddressBook()</code> from <code>saveAddressBook()</code><br></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> Reduced coupling of <code>saveAddressBook()</code> and <code>backupAddressBook()</code> and allows the backup file to be saved at a
+different location from the main save file. This prevents the backup file from being corrupted if the folder of the
+main save file becomes corrupted.<br></p>
+</li>
+<li>
+<p><strong>Cons:</strong> More tedious to implement and maintain <code>backupAddressBook()</code> since enhancements to the saving feature has to
+be implemented in both <code>saveAddressBook()</code> and <code>backupAddressBook()</code><br></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<hr>
+<div class="paragraph">
+<p><strong>Aspect: Trigger to execute the backup command</strong><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Automatically backup data on Ark on launch of the software.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> This implementation ensures that the if the user corrupts the data of Ark during a session. The user will be
+able to revert to the start of the session, which is ensured to be a workable instance of the Ark software.<br></p>
+</li>
+<li>
+<p><strong>Cons:</strong> This does not give the most recent copy of the data of the Ark if many changes were made in a single session.<br></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Backup data on Ark every few minutes<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> Provides a very recent copy of the data on Ark.<br></p>
+</li>
+<li>
+<p><strong>Cons:</strong> More tedious and difficult to implement. User may also be running another process at that point of time. This
+could cause a bottleneck if there is a lot of data to be saved, and multiple backup calls are queued one after the
+other.<br></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 3:</strong> Backup data after a fixed number of `UndoableCommand`s.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> Provides a very recent copy of the data on Ark.<br></p>
+</li>
+<li>
+<p><strong>Cons:</strong> More tedious and difficult to implement. Difficult to determine the optimal amount of data to restore. If
+the corruption of the data is caused by a several of commands, it becomes difficult to ensure that the backup file
+provides a workable copy of the data of Ark.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<hr>
+<div class="paragraph">
+<p><strong>Aspect: Choice of backing up if there is no save file.</strong><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Ark does not backup if it cannot read the save file<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> Backup data will not be overwritten in the event that Ark is not able to read the designated save file for
+reasons such as the save file being corrupted/missing+</p>
+</li>
+<li>
+<p><strong>Cons:</strong> Additional overhead to check if Ark is able to read the designated save file.<br></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Ark backs up even if the save file does not exist.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> Less overhead needed to check if Ark is able to read the designated save file.<br></p>
+</li>
+<li>
+<p><strong>Cons:</strong> Backup data could be overwritten in the event the designated save file is corrupted/missing.<br></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
 </div>
 <div class="paragraph">
 <p><mark>End of Extract</mark></p>
 </div>
 <hr>
+</div>
 </div>
 <div class="sect2">
 <h3 id="enhancement-added-status-feature"><a class="link" href="#enhancement-added-status-feature">Enhancement Added: Status Feature</a></h3>
@@ -528,7 +680,7 @@ delivered by.</p></td>
 <p>These states have different colours codes to allow users to differentiate the <code>Status</code> values more easily.</p>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">Design Considerations</a></h4>
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong><code>Implementation of Status</code></strong></p>
 </div>
@@ -818,7 +970,7 @@ a Heroku server and you can access it by clicking <a href="https://nusvision.her
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-12 18:11:35 +00:00
+Last updated 2017-11-12 19:00:48 +00:00
 </div>
 </div>
 </body>

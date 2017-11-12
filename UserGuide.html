@@ -31,6 +31,8 @@
 <ul class="sectlevel2">
 <li><a href="#google-maps-browser">4.1. Google Maps Browser</a></li>
 <li><a href="#more-about-parcel-list-card">4.2. More About Parcel List Card</a></li>
+<li><a href="#gui-tab-mechanism">4.3. GUI tab mechanism</a></li>
+<li><a href="#overdue-parcels-popup-window">4.4. Overdue Parcels Popup Window</a></li>
 </ul>
 </li>
 <li><a href="#parcel-fields">5. Parcel Fields</a>
@@ -63,10 +65,9 @@
 <li><a href="#clearing-all-entries-code-clear-code">6.14. Clearing all entries : <code>clear</code></a></li>
 <li><a href="#exiting-the-program-code-exit-code">6.15. Exiting the program : <code>exit</code></a></li>
 <li><a href="#autocomplete">6.16. Autocomplete</a></li>
-<li><a href="#gui-tab-mechanism">6.17. GUI tab mechanism</a></li>
-<li><a href="#saving-the-data">6.18. Saving the data</a></li>
-<li><a href="#back-up">6.19. Backing up the data</a></li>
-<li><a href="#maintaining-a-sorted-list">6.20. Maintaining a Sorted List</a></li>
+<li><a href="#saving-the-data">6.17. Saving the data</a></li>
+<li><a href="#back-up">6.18. Backing up the data</a></li>
+<li><a href="#maintaining-a-sorted-list">6.19. Maintaining a Sorted List</a></li>
 </ul>
 </li>
 <li><a href="#faq">7. FAQ</a></li>
@@ -153,7 +154,7 @@ This app will not work with earlier versions of Java 8.
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 3.1.1 : Ark&#8217;s Startup Window</em></p>
+<p><em>Figure 3.1 : Ark&#8217;s Startup Window</em></p>
 </div>
 </li>
 <li>
@@ -235,24 +236,22 @@ delivered parcels, click on the <code>Completed Parcels</code> tab.</p>
 <div class="paragraph">
 <p>Ark has an in-built Google Maps browser section in the main window and can be used to show you the locations
 of the delivery addresses of each parcel. This feature will be automatically used whenever you type <code>select</code>
-into the command box, and will display a Google Maps search of the postal code of the parcel&#8217;s address in the
-browser section of the main window.</p>
+into the command box or click on a Parcel Card, and will display a Google Maps search of the postal code
+of the parcel&#8217;s address in the browser section of the main window.</p>
 </div>
-<div class="sect3">
-<h4 id="more-about-browser-panel"><a class="link" href="#more-about-browser-panel">4.1.1. More About Browser Panel</a></h4>
 <div class="imageblock">
 <div class="content">
 <img src="images/Ark_Browser.png" alt="Ark Browser" width="890">
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 4.1.1 : Selecting a parcel</em></p>
+<p><em>Figure 4.11.1 : Selecting a parcel</em></p>
 </div>
 <div class="paragraph">
-<p>Selecting a parcel activates the Browser Panel. In the diagram above, when the 4th parcel belonging to Cornelia
-Meier, at index 4, is selected, the Browser Panel is activated and displays the destination address of the parcel.
-In this case, Cornelia wants her parcel to be delivered to 10th Street Singapore 123114.</p>
-</div>
+<p>Every time you select a parcel, the Browser Panel will show as the Parcel List Panel minimizes.
+As seen in figure 4.11.1 above, when the parcel belonging to Cornelia Meier, at index 4, is selected,
+the Parcel List Panel minimizes, showing the Browser Panel and  it displays the delivery destination address
+of the parcel. In this case, Cornelia wants her parcel to be delivered to 10th Street Singapore 123114.</p>
 </div>
 </div>
 <div class="sect2">
@@ -308,7 +307,7 @@ Read more about parcel tags in the <a href="#tag">Tags</a> section.</p>
 <div class="paragraph">
 <p>Ark comes with a tooltip feature that allows you to view parcel details that are too long. Suppose you have entered
 a parcel with really long details into Ark. As seen below, John&#8217;s parcel has a delivery address that is too long,
-and a part of it has been replaced by ellipsis i.e. <code>&#8230;&#8203;</code>.</p>
+and a part of it has been replaced by ellipsis i.e. <code>&#8230;&#8203;</code> as seen in figure 4.21.1 below.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -316,11 +315,11 @@ and a part of it has been replaced by ellipsis i.e. <code>&#8230;&#8203;</code>.
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 5.22.1 : Parcel with a long address</em></p>
+<p><em>Figure 4.21.1 : Parcel with a long address</em></p>
 </div>
 <div class="paragraph">
 <p>To view the full delivery address, we simply mouseover his address and the full details of his
-address will appear as a tooltip. This can be seen in the diagram below.</p>
+address will appear as a tooltip. This can be seen in figure 4.22.2 below.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -328,8 +327,61 @@ address will appear as a tooltip. This can be seen in the diagram below.</p>
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 5.22.2 : Tooltip to show more of John&#8217;s address</em></p>
+<p><em>Figure 4.22.2 : Tooltip to show more of John&#8217;s address</em></p>
 </div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="gui-tab-mechanism"><a class="link" href="#gui-tab-mechanism">4.3. GUI tab mechanism</a></h3>
+<div class="paragraph">
+<p>To help you organise between the parcels you have delivered and the parcels you have delivered, Ark provides you two
+lists, one containing the parcels you have yet to deliver, and the other, the parcels that you have already delivered.</p>
+</div>
+<div class="paragraph">
+<p>When you launch the application, Ark will show the list of undelivered parcels in your inventory. To view
+the list of delivered parcels, you can click on the <code>Completed Parcel</code> tab located on the Tab Panel of Ark.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/completed-parcel-list.PNG" alt="completed parcel list" width="1000">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 4.3.1 : Clicking on <code>Completed Parcel</code> tab</em></p>
+</div>
+<div class="paragraph">
+<p>As seen above in figure 4.3.1, the list has changed to the list of parcels that have been delivered. To revert back to the list of
+parcels that have not been delivered, simply click on the <code>All Parcels</code> tab.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Parcels that have a <code>COMPLETED</code> status will be added to the list of delivered parcels directly while Parcels
+that do not have a <code>COMPLETED</code> status will  be added to the list of undelivered parcels.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="overdue-parcels-popup-window"><a class="link" href="#overdue-parcels-popup-window">4.4. Overdue Parcels Popup Window</a></h3>
+<div class="paragraph">
+<p>Every time you startup Ark, if you have any parcels with the status <code>OVERDUE</code> in the parcel list,
+a separate window will popup notifying you of the number of overdue parcels that are in the list.
+The popup window will show for 7 seconds before closing itself. You can also close the window manually by clicking
+the <code>x</code> at the top right of the window. Figure 4.4.1 below is an example of what the popup window looks like:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/Ark_Popup_Window.PNG" alt="Ark Popup Window" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 4.4.1 : Overdue Parcels Popup Window</em></p>
 </div>
 </div>
 </div>
@@ -771,6 +823,10 @@ If your use of Ark requires more tags to be made available, please contact our t
 <div class="sect2">
 <h3 id="viewing-help-code-help-code"><a class="link" href="#viewing-help-code-help-code">6.1. Viewing help : <code>help</code></a></h3>
 <div class="paragraph">
+<p>Whenever you are unsure of Arks functions or commands, you can type <code>help</code> into the command box.
+Ark will then open this user guide in a new window for you to view.</p>
+</div>
+<div class="paragraph">
 <p>Format: <code>help</code></p>
 </div>
 </div>
@@ -895,15 +951,15 @@ Do not include the file type in your file name. The following inputs for the fil
 <div class="paragraph">
 <p>Shows a list of all parcels in Ark and expands the Parcel List Panel section in the main window.
 The Parcel List section is scrollable and shows you all the information of a parcel.
-You can see an example in the picture below.<br></p>
+You can see an example in the figure 6.4.1 below.<br></p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/Ark_Parcel_List.png" alt="Ark Parcel List" width="790">
+<img src="images/Ark_Parcel_List.png" alt="Ark Parcel List" width="1700">
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 5.4.1 : The <code>list</code> command displays the list of all the parcels in Ark</em></p>
+<p><em>Figure 6.4.1 : The <code>list</code> command displays the list of all the parcels in Ark</em></p>
 </div>
 <div class="paragraph">
 <p>Format: <code>list</code></p>
@@ -1503,50 +1559,14 @@ to <code>edit n/</code> on the second tab)</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="gui-tab-mechanism"><a class="link" href="#gui-tab-mechanism">6.17. GUI tab mechanism</a></h3>
-<div class="paragraph">
-<p>To help you organise between the parcels you have delivered and the parcels you have delivered, Ark provides you two
-lists, one containing the parcels you have yet to deliver, and the other, the parcels that you have already delivered.</p>
-</div>
-<div class="paragraph">
-<p>When you launch the application, Ark will show the list of undelivered parcels in your inventory. To view
-the list of delivered parcels, you can click on the <code>Completed Parcel</code> tab located on the Tab Panel of Ark.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/completed-parcel-list.PNG" alt="completed parcel list" width="1000">
-</div>
-</div>
-<div class="paragraph">
-<p><em>Figure 5.23.1 : Clicking on <code>Completed Parcel</code> tab</em></p>
-</div>
-<div class="paragraph">
-<p>As seen above, the list has changed to the list of parcels that have been delivered. To revert back to the list of
-parcels that have not been delivered, simply click on the <code>All Parcels</code> tab.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Parcels that have a <code>COMPLETED</code> status will be added to the list of delivered parcels directly while Parcels
-that do not have a <code>COMPLETED</code> status will  be added to the list of undelivered parcels.
-</td>
-</tr>
-</table>
-</div>
-</div>
-<div class="sect2">
-<h3 id="saving-the-data"><a class="link" href="#saving-the-data">6.18. Saving the data</a></h3>
+<h3 id="saving-the-data"><a class="link" href="#saving-the-data">6.17. Saving the data</a></h3>
 <div class="paragraph">
 <p>Ark data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="back-up"><a class="link" href="#back-up">6.19. Backing up the data</a></h3>
+<h3 id="back-up"><a class="link" href="#back-up">6.18. Backing up the data</a></h3>
 <div class="paragraph">
 <p>Ark data are backed up in the hard disk automatically at the start of every session of the program.<br>
 There is no need to back up the data manually.<br>
@@ -1593,7 +1613,7 @@ file was missing (<strong>gasp</strong>), Ark would not create a backup file for
 </div>
 </div>
 <div class="sect2">
-<h3 id="maintaining-a-sorted-list"><a class="link" href="#maintaining-a-sorted-list">6.20. Maintaining a Sorted List</a></h3>
+<h3 id="maintaining-a-sorted-list"><a class="link" href="#maintaining-a-sorted-list">6.19. Maintaining a Sorted List</a></h3>
 <div class="paragraph">
 <p>The list of parcels stored in Ark is maintained to be sorted according to the delivery date of
 the parcels, with the earliest delivery date at the top. This allows the more pertinent
@@ -1957,7 +1977,7 @@ parcels delivered.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-12 18:11:35 +00:00
+Last updated 2017-11-12 19:00:48 +00:00
 </div>
 </div>
 </body>
