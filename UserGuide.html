@@ -329,11 +329,21 @@ that are in your possession. This field is important because a single person can
 him. Hence, you can use our Tracking Number to differentiate between the different parcels that are allocated to a
 single recipient. You can also use tracking numbers to identify specific parcels to be allocated</p>
 </div>
-<div class="paragraph">
-<p>Ark only supports tracking numbers for registered articles managed by SingPost at this instance. These
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Ark only supports tracking numbers for registered articles managed by SingPost at this instance. These
 numbers include two <code>R`s followed by nine digits and ending with `SG</code>. e.g. <code>RR123456789SG</code><br>
 You can read more about SingPost Registered Article tracking number
- <a href="http://www.singpost.com/send-receive/sending-within-singapore/registered-article-local">here</a>.<br></p>
+ <a href="http://www.singpost.com/send-receive/sending-within-singapore/registered-article-local">here</a>.<br>
+Tracking numbers that do not conform to the above format will be rejected e.g. <code>rr123545679sg</code>; <code>RR#12345678SG</code>;
+</td>
+</tr>
+</table>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -393,6 +403,7 @@ deliver your parcel to.</p>
 The Address field will only allow you to add an address with at least a single character as the text representation of
 the address, and appended with a valid postal code, separated from the text representation of the address with space(s).
 e.g. <code>123, example street #05-26 S012345</code>;<br>
+Invalid address entries include the following: e.g. <code>123, example street #05-26</code>
 You can learn more about valid postal code entries below.<br>
 </td>
 </tr>
@@ -403,7 +414,7 @@ You can learn more about valid postal code entries below.<br>
 <div class="paragraph">
 <p>Ark can store the postal address of locations in Singapore. It only accepts values of <code>s</code> or <code>S</code> followed by 6 digits.
 The postal code of a parcel is used to query Google Maps when the <code>select</code> command is executed or when a parcel in the
-Parcel List Panel is clicked.</p>
+Parcel List Panel is clicked. Invalid values would include the following: <code>213661</code>; <code>s#11122</code>;</p>
 </div>
 <div class="paragraph">
 <p><strong>Postal codes must be appended to the end of the address text.</strong> e.g. Suppose you are adding a new parcel into Ark and
@@ -455,6 +466,7 @@ or the person that you are delivering to the parcel to.</p>
 </td>
 <td class="content">
 The Email field will only allow alphanumeric or periods characters separated by an <code>@</code> character. e.g. <code>John@example.com</code>
+Invalid Email entries include the following: e.g. <code>John_Doe@example.com</code>; <code>JaneDoe.example.com</code>;
 </td>
 </tr>
 </table>
@@ -496,6 +508,18 @@ delivered by.<br></p>
 <p>To input a <code>Status</code>, you can type case-insensitive formats of the above Status. e.g. <code>pending</code> or <code>Pending</code> are valid
 inputs to add a <code>PENDING</code> <code>Status</code>.</p>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Values other than the above values will be rejected. e.g. <code>PROCESSING</code>, <code>PROCESSED</code>;
+</td>
+</tr>
+</table>
+</div>
 </div>
 <div class="sect2">
 <h3 id="tags"><a class="link" href="#tags">5.8. Tags Field: Delivery Tags of Parcel</a></h3>
@@ -530,6 +554,7 @@ to add a <code>FROZEN</code> <code>Tag</code>.</p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
+Values other than the above values will be rejected. e.g. <code>friends</code>, <code>colleagues</code>.
 If your use of Ark requires more tags to be made available, please contact our team and we will see to your request.
 </td>
 </tr>
@@ -1642,7 +1667,7 @@ parcels delivered.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-12 08:14:56 +00:00
+Last updated 2017-11-12 08:20:25 +00:00
 </div>
 </div>
 </body>
