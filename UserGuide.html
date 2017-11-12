@@ -81,6 +81,7 @@
 <li><a href="#features-added-in-v1-3">9.4. Features added in v1.3</a></li>
 <li><a href="#features-added-in-v1-4">9.5. Features added in v1.4</a></li>
 <li><a href="#features-added-in-v1-5rc">9.6. Features added in v1.5rc</a></li>
+<li><a href="#features-added-in-v1-5">9.7. Features added in v1.5</a></li>
 </ul>
 </li>
 <li><a href="#features-coming-in-v2-0">10. Features Coming in v2.0</a></li>
@@ -1318,52 +1319,121 @@ my own copy of Ark. How can I do this?<br>
 <div class="sect1">
 <h2 id="command-summary"><a class="link" href="#command-summary">8. Command Summary</a></h2>
 <div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Add</strong> <code>add #/TRACKING_NUMBER n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS d/DELIVERY_DATE s/[STATUS] [t/TAG]&#8230;&#8203;</code><br>
-e.g. <code>add #/RR906906906SG n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, S123465 d/12-12-2012 s/pending t/frozen t/flammable</code></p>
-</li>
-<li>
-<p><strong>Clear</strong> : <code>clear</code></p>
-</li>
-<li>
-<p><strong>Delete</strong> : <code>delete INDEX</code><br>
-e.g. <code>delete 3</code></p>
-</li>
-<li>
-<p><strong>Edit</strong> : <code>edit INDEX [#/TRACKING_NUMBER] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [d/DELIVERY_DATE] s/[STATUS] [t/TAG]&#8230;&#8203;</code><br>
-e.g. <code>edit 2 #/RR000000000SG n/James Lee e/jameslee@example.com</code></p>
-</li>
-<li>
-<p><strong>Find</strong> : <code>find KEYWORD [MORE_KEYWORDS]</code><br>
-e.g. <code>find James Jake</code></p>
-</li>
-<li>
-<p><strong>List</strong> : <code>list</code></p>
-</li>
-<li>
-<p><strong>Help</strong> : <code>help</code></p>
-</li>
-<li>
-<p><strong>Select</strong> : <code>select INDEX</code><br>
-e.g.<code>select 2</code></p>
-</li>
-<li>
-<p><strong>History</strong> : <code>history</code></p>
-</li>
-<li>
-<p><strong>Undo</strong> : <code>undo</code></p>
-</li>
-<li>
-<p><strong>Redo</strong> : <code>redo</code></p>
-</li>
-<li>
-<p><strong>Import</strong>: <code>import</code> FILE_NAME<br>
-e.g.<code>import ark_save</code></p>
-</li>
-</ul>
-</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Command</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Description</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Compulsory fields</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Optional fields</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Example usage</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Add</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Adds a new parcel to Ark</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>#/TRACKING_NUMBER</code><br>
+                                    <code>n/NAME</code><br>
+                                    <code>p/PHONE_NUMBER</code><br>
+                                    <code>e/EMAIL</code><br>
+                                    <code>a/ADDRESS</code><br>
+                                    <code>d/DELIVERY_DATE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>s/STATUS</code><br>
+                                    <code>t/TAG</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>add #/RR906906906SG n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, S123465 d/12-12-2012 s/pending t/flammable</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Clear</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Deletes <strong>all</strong> parcels from Ark</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>clear</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Delete</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Deletes a particular parcel from Ark</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>INDEX</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>delete 1</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Edit</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Edits the details of a particular parcel in Ark</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>INDEX</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>#/TRACKING_NUMBER</code><br>
+                      <code>n/NAME</code><br>
+                      <code>p/PHONE_NUMBER</code><br>
+                      <code>e/EMAIL</code><br>
+                      <code>a/ADDRESS</code><br>
+                      <code>d/DELIVERY_DATE</code><br>
+                      <code>s/STATUS</code><br>
+                      <code>t/TAG</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>edit 2 #/RR000000000SG n/James Lee e/jameslee@example.com</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Find</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Searches Ark for a parcel containing a particular keyword</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>KEYWORD</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ADDITIONAL KEYWORDS</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>find John</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>List</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Lists all parcels currently in Ark</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>list</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Help</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Opens the help window</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>help</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Select</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Selects a particular parcel in Ark</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>INDEX</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>select 1</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>History</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Displays the history of previous commands executed in Ark</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>history</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Undo</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Undoes the latest command executed in Ark</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>undo</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Redo</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Redoes the latest undone command in Ark</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Redo</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Import</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Imports one or more parcels from an xml file</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>FILE_NAME</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>import ark_save</code></p></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div class="sect1">
@@ -1372,10 +1442,15 @@ e.g.<code>import ark_save</code></p>
 <div class="sect2">
 <h3 id="features-added-in-v1-0"><a class="link" href="#features-added-in-v1-0">9.1. Features added in v1.0</a></h3>
 <div class="paragraph">
-<p>In version v1.0, users will be able to:<br></p>
-</div>
-<div class="paragraph">
-<p>{{More to be added}}</p>
+<p>In version v1.0, users will be able to:<br>
+* Add Parcels to Ark.
+* List Parcels in Ark.
+* Delete Parcels in Ark by list index.
+* Edit Parcels in Ark.
+* Find Parcels in Ark by name.
+* Undo commands
+* Redo commands
+* Display command History</p>
 </div>
 </div>
 <div class="sect2">
@@ -1386,12 +1461,12 @@ e.g.<code>import ark_save</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p>have their data backed up automatically when Ark is launched.</p>
+<p>Have their data backed up automatically when Ark is launched.</p>
+</li>
+<li>
+<p>Delete tag from all parcels in Ark.</p>
 </li>
 </ul>
-</div>
-<div class="paragraph">
-<p>{{More to be added}}</p>
 </div>
 </div>
 <div class="sect2">
@@ -1407,10 +1482,13 @@ e.g.<code>import ark_save</code></p>
 <li>
 <p>Add and edit the tracking numbers of parcels.</p>
 </li>
+<li>
+<p>Use <code>Tab</code> to autocomplete basic commands.</p>
+</li>
+<li>
+<p>Delete tag command deprecated.</p>
+</li>
 </ul>
-</div>
-<div class="paragraph">
-<p>{{More to be added}}</p>
 </div>
 </div>
 <div class="sect2">
@@ -1429,10 +1507,10 @@ e.g.<code>import ark_save</code></p>
 <li>
 <p>Have Ark maintain a sorted list of parcels according to when they need to be delivered.</p>
 </li>
+<li>
+<p>Use <code>Tab</code> to cycle through possible commands if there are multiple options available.</p>
+</li>
 </ul>
-</div>
-<div class="paragraph">
-<p>{{More to be added}}</p>
 </div>
 </div>
 <div class="sect2">
@@ -1448,26 +1526,42 @@ e.g.<code>import ark_save</code></p>
 <li>
 <p>Add parcel-related tags to inform delivery personnel on additional precautions to take while delivering a parcel.</p>
 </li>
+<li>
+<p>Use <code>Tab</code> to fill in the next prefix for <code>add</code> command.</p>
+</li>
 </ul>
-</div>
-<div class="paragraph">
-<p>{{More to be added}}</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="features-added-in-v1-5rc"><a class="link" href="#features-added-in-v1-5rc">9.6. Features added in v1.5rc</a></h3>
 <div class="paragraph">
-<p>In version v1.3, users will be able to:<br></p>
+<p>In version v1.5rc, users will be able to:<br></p>
 </div>
 <div class="ulist">
 <ul>
 <li>
 <p>View a tooltip of parcel details when they mouseover the detail. i.e. <code>address</code></p>
 </li>
+<li>
+<p>Use <code>Tab</code> to cycle through indexes and prefixes for all commands that require them.</p>
+</li>
 </ul>
 </div>
+</div>
+<div class="sect2">
+<h3 id="features-added-in-v1-5"><a class="link" href="#features-added-in-v1-5">9.7. Features added in v1.5</a></h3>
 <div class="paragraph">
-<p>{{More to be added}}</p>
+<p>In version v1.5, users will be able to:<br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Use Telegram Bots to interface with the Ark Software.</p>
+</li>
+<li>
+<p>Upload QR codes of delivery parcels to mark them as completed.</p>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -1548,7 +1642,7 @@ parcels delivered.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-12 07:32:55 +00:00
+Last updated 2017-11-12 08:14:56 +00:00
 </div>
 </div>
 </body>
