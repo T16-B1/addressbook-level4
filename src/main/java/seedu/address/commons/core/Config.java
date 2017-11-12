@@ -14,6 +14,8 @@ public class Config {
     private String appTitle = "Ark";
     private Level logLevel = Level.INFO;
     private String userPrefsFilePath = "preferences.json";
+    private String botToken = "339790464:AAGUN2BmhnU0I2B2ULenDdIudWyv1d4OTqY";
+    private String botUsername = "ArkBot";
 
     public String getAppTitle() {
         return appTitle;
@@ -39,6 +41,22 @@ public class Config {
         this.userPrefsFilePath = userPrefsFilePath;
     }
 
+    public void setBotToken(String botToken) {
+        this.botToken = botToken;
+    }
+
+    public String getBotToken() {
+        return this.botToken;
+    }
+
+    public void setBotUsername(String botUsername) {
+        this.botUsername = botUsername;
+    }
+
+    public String getBotUsername() {
+        return this.botUsername;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -52,7 +70,9 @@ public class Config {
 
         return Objects.equals(appTitle, o.appTitle)
                 && Objects.equals(logLevel, o.logLevel)
-                && Objects.equals(userPrefsFilePath, o.userPrefsFilePath);
+                && Objects.equals(userPrefsFilePath, o.userPrefsFilePath)
+                && Objects.equals(botToken, o.botToken)
+                && Objects.equals(botUsername, o.botUsername);
     }
 
     @Override
@@ -66,6 +86,8 @@ public class Config {
         sb.append("App title : " + appTitle);
         sb.append("\nCurrent log level : " + logLevel);
         sb.append("\nPreference file Location : " + userPrefsFilePath);
+        sb.append("\nBot Authentication Token: " + botToken);
+        sb.append("\nBot Username: " + botUsername);
         return sb.toString();
     }
 

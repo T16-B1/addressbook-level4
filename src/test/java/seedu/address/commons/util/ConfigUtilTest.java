@@ -76,6 +76,8 @@ public class ConfigUtilTest {
         config.setAppTitle("Typical App Title");
         config.setLogLevel(Level.INFO);
         config.setUserPrefsFilePath("C:\\preferences.json");
+        config.setBotToken("123456789thisSimulatesATypicalToken!@#$%^&*()");
+        config.setBotUsername("ArkBot");
         return config;
     }
 
@@ -110,6 +112,8 @@ public class ConfigUtilTest {
         //Try saving when the file exists
         original.setAppTitle("Updated Title");
         original.setLogLevel(Level.FINE);
+        original.setBotToken("123456789updatedToken!@#$%^&*()");
+        original.setBotUsername("Updated ArkBot");
         ConfigUtil.saveConfig(original, configFilePath);
         readBack = ConfigUtil.readConfig(configFilePath).get();
         assertEquals(original, readBack);

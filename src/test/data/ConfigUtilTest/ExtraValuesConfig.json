@@ -2,5 +2,7 @@
   "appTitle" : "Typical App Title",
   "logLevel" : "INFO",
   "userPrefsFilePath" : "C:\\preferences.json",
+  "botToken": "123456789thisSimulatesATypicalToken!@#$%^&*()",
+  "botUsername": "ArkBot",
   "extra" : "extra value"
 }

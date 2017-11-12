@@ -29,6 +29,8 @@ public class TestApp extends MainApp {
 
     public static final String SAVE_LOCATION_FOR_TESTING = TestUtil.getFilePathInSandboxFolder("sampleData.xml");
     public static final String APP_TITLE = "Test App";
+    public static final String BOT_TOKEN = "339790464:AAGUN2BmhnU0I2B2ULenDdIudWyv1d4OTqY";
+    public static final String BOT_USERNAME = "Test ArkBot";
 
     protected static final String DEFAULT_PREF_FILE_LOCATION_FOR_TESTING =
             TestUtil.getFilePathInSandboxFolder("pref_testing.json");
@@ -56,6 +58,8 @@ public class TestApp extends MainApp {
         Config config = super.initConfig(configFilePath);
         config.setAppTitle(APP_TITLE);
         config.setUserPrefsFilePath(DEFAULT_PREF_FILE_LOCATION_FOR_TESTING);
+        config.setBotToken(BOT_TOKEN);
+        config.setBotUsername(BOT_USERNAME);
         return config;
     }
 
