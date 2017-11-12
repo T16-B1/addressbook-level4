@@ -49,7 +49,7 @@
 <ul class="sectlevel2">
 <li><a href="#viewing-help-code-help-code">6.1. Viewing help : <code>help</code></a></li>
 <li><a href="#adding-a-parcel-code-add-code">6.2. Adding a parcel: <code>add</code></a></li>
-<li><a href="#import">6.3. Import multiple parcels stored in an xml storage file: <code>import</code></a></li>
+<li><a href="#import">6.3. Import Multiple Parcels into Ark <code>import</code></a></li>
 <li><a href="#listing-all-parcels-code-list-code">6.4. Listing all parcels : <code>list</code></a></li>
 <li><a href="#editing-a-parcel-code-edit-code">6.5. Editing a parcel : <code>edit</code></a></li>
 <li><a href="#locating-parcels-by-name-code-find-code">6.6. Locating parcels by name: <code>find</code></a></li>
@@ -840,10 +840,38 @@ value for the status field is <code>PENDING</code>.
 </div>
 </div>
 <div class="sect2">
-<h3 id="import"><a class="link" href="#import">6.3. Import multiple parcels stored in an xml storage file: <code>import</code></a></h3>
+<h3 id="import"><a class="link" href="#import">6.3. Import Multiple Parcels into Ark <code>import</code></a></h3>
 <div class="paragraph">
-<p>Imports the parcels in an Ark <code>.xml</code> storage file stored in <code>/data/import/</code> folder of Ark&#8217;s home directory to Ark<br>
-Format: <code>import FILE_NAME</code></p>
+<p>You can import parcels into Ark using the <code>import</code> feature. This feature works with valid save files of Ark. To use
+this feature, you must first copy/move the save file that you want to import into the <code>/data/import/</code> folder of
+Ark&#8217;s home directory. Then you can type the following command into the <code>CommandBox</code>, `import `, followed by the name
+of your file.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Ark will only import files that are stored in the <code>.xml</code> format.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Your file name is should only contain alphanumeric or underscore characters. e.g. <code>ark_save</code>, <code>ark_save1</code>;<br>
+Files name that contain characters other than alphanumeric or underscore characters will be rejected. e.g. <code>ark#1</code>;<br>
+Do not include the file type in your file name. The following inputs for the file name will be rejected. <code>ark_save.xml</code>;<br>
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -858,20 +886,8 @@ Format: <code>import FILE_NAME</code></p>
 </li>
 </ul>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
 <div class="paragraph">
-<p>File names should only contain alphanumeric or underscore characters i.e. <code>ark1</code>, <code>ark_save1</code>
-Non alphanumeric file names will not be accepted. i.e. <code>$addressbook#!@,</code></p>
-</div>
-</td>
-</tr>
-</table>
+<p>Format: <code>import FILE_NAME</code></p>
 </div>
 </div>
 <div class="sect2">
@@ -1320,32 +1336,168 @@ Format: <code>exit</code></p>
 <div class="sect2">
 <h3 id="autocomplete"><a class="link" href="#autocomplete">6.16. Autocomplete</a></h3>
 <div class="paragraph">
-<p>Ark comes with tab autocompletion which is able to complete a command for you
-without requiring you to type out the command fully.<br>
-To make use of this feature, simply key in the first few characters of the command you with to enter and press the
-<kbd>Tab</kbd> key.
-Ark will then fill in the rest of the command for you in the command box.
-Then press <kbd>Enter</kbd> key to enter the command.</p>
+<p>Trying to type in long commands can be quite a hassle. That is why Ark comes with tab autocompletion which is able to
+help fill in commands as well as the prefixes for you without requiring you to fully type out the command
+with the needed fields. Ark autocompletion is smart and knows exactly what field you need, all you have to do is press
+<kbd>Tab</kbd> and let Ark handle the rest!</p>
 </div>
 <div class="paragraph">
-<p>There is more than one possibility for the autocompletion, Ark will display the possible options to you as shown in the
+<p><strong>Autocomplete for commands:</strong><br>
+To make use of the autocomplete feature for commands, simply type in the first few letters of the command you want
+to use:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/autocompleteWithStartOfAddCommand.PNG" alt="autocompleteWithStartOfAddCommand" width="400">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 5.21.1 : Fill in the first few letters of the command you want to use. In this case, we want to use the <code>Add</code>
+ command, so we enter <code>a</code> into the text field</em></p>
+</div>
+<div class="paragraph">
+<p>now press the <kbd>Tab</kbd> key:<br></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/autocompleteWithFullAddCommand.PNG" alt="autocompleteWithFullAddCommand" width="400">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 5.21.2 : After <kbd>Tab</kbd> is pressed Ark will fill in the command for you</em></p>
+</div>
+<div class="paragraph">
+<p>Ark will then fill in the rest for you if there is a match.</p>
+</div>
+<div class="paragraph">
+<p>If there is more than one possibility for the autocompletion, Ark will display the possible options to you as shown in the
 below.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/TabAutocompleteMultipleExample.PNG" alt="TabAutocompleteMultipleExample" width="400">
+<img src="images/autocompleteWithEditCommandCycle.PNG" alt="autocompleteWithEditCommandCycle" width="400">
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 5.21.1 : If there are multiple autocomplete options, the options will be displayed in the result window</em></p>
+<p><em>Figure 5.21.3 : If there are multiple autocomplete options, the options will be displayed in the result window</em></p>
 </div>
 <div class="paragraph">
-<p>Examples:</p>
+<p>In this case, you can press tab to cycle through the different options available.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/autocompleteWithExitCommandCycle.PNG" alt="autocompleteWithExitCommandCycle" width="400">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 5.21.4 : Pressing <kbd>Tab</kbd> again will cycle to the next matching command</em></p>
+</div>
+<div class="paragraph">
+<p><strong>Autocomplete for prefixes:</strong><br>
+For commands that require prefixes, you can press <kbd>Tab</kbd> after filling in the command word. Ark will bring you to the
+next missing prefix for you to fill in. After this, you can then press tab to cycle through the list of prefixes.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/autocompleteWithFullAddCommandAndOnePrefix.PNG" alt="autocompleteWithFullAddCommandAndOnePrefix" width="400">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 5.21.5 : After filling in the command into the text field, pressing <kbd>Tab</kbd> will bring you
+ to the first missing prefix</em></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/autocompleteWithFullAddCommandAndOnePrefixCycle.PNG" alt="autocompleteWithFullAddCommandAndOnePrefixCycle" width="400">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 5.21.6 : Pressing <kbd>Tab</kbd> will cycle to the next missing prefix</em></p>
+</div>
+<div class="paragraph">
+<p>Alternatively, you can also enter the first letter of the prefix you want before you press <kbd>Tab</kbd> and Ark will fill
+in the <code>/</code> character for you.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/autocompleteWithFullAddCommandAndPartOfPrefix.PNG" alt="autocompleteWithFullAddCommandAndPartOfPrefix" width=""400">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 5.21.7 : Fill in the command you want along with the first letter of the prefix you want</em></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/autocompleteWithFullAddCommandAndOnePrefix.PNG" alt="autocompleteWithFullAddCommandAndOnePrefix" width="400">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 5.21.8 : Pressing <kbd>Tab</kbd> append the <code>/</code> character for you</em></p>
+</div>
+<div class="paragraph">
+<p>After you have chosen the prefix you want, simply enter in the details as needed.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/autocompleteWithFullAddCommandAndOnePrefixFilled.PNG" alt="autocompleteWithFullAddCommandAndOnePrefixFilled" width="400">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 5.21.9 : Fill in the needed details as per normal</em></p>
+</div>
+<div class="paragraph">
+<p>After you are done entering the needed details of the prefix, press <kbd>Tab</kbd> to move on to the next prefix. Note
+that if your input ends with the first character of a prefix preceded by a space (e.g " n"),
+you will need to press <kbd>Space</kbd> before you press <kbd>Tab</kbd> to get the outcome you want.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/autocompleteWithFullAddCommandAndOnePrefixFilledNext.PNG" alt="autocompleteWithFullAddCommandAndOnePrefixFilledNext" width="400">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 5.21.10 : Pressing <kbd>Tab</kbd> will fill in the next missing prefix</em></p>
+</div>
+<div class="paragraph">
+<p><strong>Autocomplete for indexes:</strong><br>
+For commands that require indexes, you can press <kbd>Tab</kbd> after filling in the command word. Ark will then
+allow you to cycle through the indexes available by pressing <kbd>Tab</kbd></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/autocompleteWithStartOfSelectCommand.PNG" alt="autocompleteWithStartOfSelectCommand" width="400">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 5.21.11 : After filling in the command into the text field, pressing <kbd>Tab</kbd> will bring you
+ to the first available index</em></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/autocompleteWithStartOfSelectCommandCycle.PNG" alt="autocompleteWithStartOfSelectCommandCycle" width="400">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 5.21.12 : Pressing <kbd>Tab</kbd> will cycle to the next available index</em></p>
+</div>
+<div class="paragraph">
+<p><strong>Examples:</strong></p>
 </div>
 <div class="ulist">
 <ul>
 <li>
 <p><code>a</code> + <kbd>Tab</kbd> (auto-completes with <code>add</code> in the command line input)</p>
+</li>
+<li>
+<p><code>e</code> + <kbd>Tab</kbd> + <kbd>Tab</kbd> (cycles to <code>exit</code> command)</p>
+</li>
+<li>
+<p><code>edit</code> + <kbd>Tab</kbd> + <kbd>Tab</kbd> (auto-completes with <code>edit 1</code> on the first tab and then cycles
+to <code>edit 2</code> on the second tab)</p>
+</li>
+<li>
+<p><code>add</code> + <kbd>Tab</kbd> + <kbd>Tab</kbd> (auto-completes with <code>edit #/</code> on the first tab and then cycles
+to <code>edit n/</code> on the second tab)</p>
 </li>
 </ul>
 </div>
@@ -1805,7 +1957,7 @@ parcels delivered.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-12 12:24:56 +00:00
+Last updated 2017-11-12 14:20:28 +00:00
 </div>
 </div>
 </body>
