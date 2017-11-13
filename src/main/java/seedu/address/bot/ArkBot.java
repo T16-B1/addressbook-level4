@@ -76,8 +76,6 @@ public class ArkBot extends AbilityBot {
                                                 + "Refer to our [User Guide](https://github.com/CS2103AUG2017-T16-B1"
                                                 + "/main/blob/master/docs/UserGuide.adoc) for more information.";
     private static final String BOT_SET_COMPLETED = "s/Completed";
-    private static final String DEFAULT_BOT_TOKEN = "339790464:AAGUN2BmhnU0I2B2ULenDdIudWyv1d4OTqY";
-    private static final String DEFAULT_BOT_USERNAME = "ArkBot";
     private static final Privacy PRIVACY_SETTING = Privacy.PUBLIC;
 
     private static final Logger logger = LogsCenter.getLogger(ArkBot.class);

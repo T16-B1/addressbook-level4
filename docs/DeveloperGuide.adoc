@@ -1020,13 +1020,12 @@ deliveries as complete. This is especially useful for our delivery man.
 Like all Telegram Bots, each command must be prefixed with a `/` character. So if I were to want to trigger the help
 command, I would send `/help` to ArkBot.
 
-If we enter the `complete` command into ArkBot without any parameters, we enter `listen` mode.
+At present, all messages and commands to ArkBot are sent directly to Ark where they are processed and the commands and
+arguments are formatted as Ark commands and subsequently executed.
 
-In `listen` mode, ArkBot is waiting for a QR to be sent to be analysed. The image is then downloaded and using the
+If we enter the `complete` command into ArkBot without any parameters, we enter `listen` mode. In `listen` mode, ArkBot is waiting for a QR to be sent to be analysed. The image is then downloaded and using the
 https://github.com/zxing/zxing[zxing] barcode scanning library for Java, the information is unwrapped and parsed into
 the edit command to change the status of the parcel to `COMPLETED`.
-
-To exit `listen` mode, type `/cancel`.
 
 ==== Design Considerations
 
