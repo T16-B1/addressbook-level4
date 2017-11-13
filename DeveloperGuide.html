@@ -90,6 +90,12 @@
 <li><a href="#managing-dependencies">7.4. Managing Dependencies</a></li>
 </ul>
 </li>
+<li><a href="#known-bugs">8. Known Bugs</a>
+<ul class="sectlevel2">
+<li><a href="#header-scaling-bug">8.1. Header scaling bug</a></li>
+<li><a href="#redo-command-bug">8.2. Redo command bug</a></li>
+</ul>
+</li>
 <li><a href="#user-stories">Appendix A: User Stories</a></li>
 <li><a href="#use-cases">Appendix B: Use Cases</a></li>
 <li><a href="#non-functional-requirements">Appendix C: Non Functional Requirements</a></li>
@@ -1579,7 +1585,7 @@ updates the state of the <code>Autocompleter</code> according to the diagram bel
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/AutoCompleteStateActivityDiagram.PNG" alt="AutoCompleteStateActivityDiagram" width="900">
+<img src="images/AutoCompleteStateActivityDiagram.png" alt="AutoCompleteStateActivityDiagram" width="900">
 </div>
 </div>
 <div class="paragraph">
@@ -1599,7 +1605,7 @@ Command box which then updates the text field according to the diagram below.</p
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/AutoCompleterAutocompleteActivityDiagram.PNG" alt="AutoCompleterAutocompleteActivityDiagram" width="900">
+<img src="images/AutoCompleterAutocompleteActivityDiagram.png" alt="AutoCompleterAutocompleteActivityDiagram" width="900">
 </div>
 </div>
 <div class="paragraph">
@@ -2578,6 +2584,26 @@ b. Require developers to download those libraries manually (this creates extra w
 </div>
 </div>
 <div class="sect1">
+<h2 id="known-bugs"><a class="link" href="#known-bugs">8. Known Bugs</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="header-scaling-bug"><a class="link" href="#header-scaling-bug">8.1. Header scaling bug</a></h3>
+<div class="paragraph">
+<p>Currently, the headers for the Parcel list do not scale with it when the window size is changed,
+a fix for it is in the works and is expected to be out in v1.6.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="redo-command-bug"><a class="link" href="#redo-command-bug">8.2. Redo command bug</a></h3>
+<div class="paragraph">
+<p>If you find (eg find Roy), then do a command (eg delete 1), then go back to the list, then undo and redo, the wrong
+person will be deleted. This bug is from the original address book. A fix for it is in the works and is expected to be
+out in v1.6</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="user-stories"><a class="link" href="#user-stories">Appendix A: User Stories</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
@@ -3415,7 +3441,7 @@ characters.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-13 14:54:19 +00:00
+Last updated 2017-11-13 15:01:59 +00:00
 </div>
 </div>
 </body>
