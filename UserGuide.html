@@ -56,19 +56,18 @@
 <li><a href="#editing-a-parcel-code-edit-code">6.5. Editing a parcel : <code>edit</code></a></li>
 <li><a href="#locating-parcels-by-name-code-find-code">6.6. Locating parcels by name: <code>find</code></a></li>
 <li><a href="#deleting-a-parcel-code-delete-code">6.7. Deleting a parcel : <code>delete</code></a></li>
-<li><a href="#deleting-a-tag-code-deletetag-code">6.8. Deleting a tag : <code>deleteTag</code></a></li>
-<li><a href="#selecting-a-parcel-code-select-code">6.9. Selecting a parcel : <code>select</code></a></li>
-<li><a href="#selecting-a-tab-code-tab-code">6.10. Selecting a tab : <code>tab</code></a></li>
-<li><a href="#listing-entered-commands-code-history-code">6.11. Listing entered commands : <code>history</code></a></li>
-<li><a href="#undoing-previous-command-code-undo-code">6.12. Undoing previous command : <code>undo</code></a></li>
-<li><a href="#redoing-the-previously-undone-command-code-redo-code">6.13. Redoing the previously undone command : <code>redo</code></a></li>
-<li><a href="#clearing-all-entries-code-clear-code">6.14. Clearing all entries : <code>clear</code></a></li>
-<li><a href="#exiting-the-program-code-exit-code">6.15. Exiting the program : <code>exit</code></a></li>
-<li><a href="#autocomplete">6.16. Autocomplete</a></li>
-<li><a href="#saving-the-data">6.17. Saving the data</a></li>
-<li><a href="#back-up">6.18. Backing up the data</a></li>
-<li><a href="#maintaining-a-sorted-list">6.19. Maintaining a Sorted List</a></li>
-<li><a href="#arkbot-telegram-bot-interface-for-ark">6.20. ArkBot: Telegram Bot Interface for Ark</a></li>
+<li><a href="#selecting-a-parcel-code-select-code">6.8. Selecting a parcel : <code>select</code></a></li>
+<li><a href="#selecting-a-tab-code-tab-code">6.9. Selecting a tab : <code>tab</code></a></li>
+<li><a href="#listing-entered-commands-code-history-code">6.10. Listing entered commands : <code>history</code></a></li>
+<li><a href="#undoing-previous-command-code-undo-code">6.11. Undoing previous command : <code>undo</code></a></li>
+<li><a href="#redoing-the-previously-undone-command-code-redo-code">6.12. Redoing the previously undone command : <code>redo</code></a></li>
+<li><a href="#clearing-all-entries-code-clear-code">6.13. Clearing all entries : <code>clear</code></a></li>
+<li><a href="#exiting-the-program-code-exit-code">6.14. Exiting the program : <code>exit</code></a></li>
+<li><a href="#autocomplete">6.15. Autocomplete</a></li>
+<li><a href="#saving-the-data">6.16. Saving the data</a></li>
+<li><a href="#back-up">6.17. Backing up the data</a></li>
+<li><a href="#maintaining-a-sorted-list">6.18. Maintaining a Sorted List</a></li>
+<li><a href="#arkbot-telegram-bot-interface-for-ark">6.19. ArkBot: Telegram Bot Interface for Ark</a></li>
 </ul>
 </li>
 <li><a href="#faq">7. FAQ</a></li>
@@ -1105,39 +1104,7 @@ Deletes the 1st parcel in the results of the <code>find</code> command.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="deleting-a-tag-code-deletetag-code"><a class="link" href="#deleting-a-tag-code-deletetag-code">6.8. Deleting a tag : <code>deleteTag</code></a></h3>
-<div class="paragraph">
-<p>Deletes the specified tag from all parcels in Ark.<br>
-Format: <code>deleteTag TAG</code></p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>The tag to delete is case sensitive.</p>
-</li>
-<li>
-<p>The tag to delete must actually be tagged to a parcel.</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>deleteTag urgent</code>
-Deletes the tag "urgent" from each parcel in the address book.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="selecting-a-parcel-code-select-code"><a class="link" href="#selecting-a-parcel-code-select-code">6.9. Selecting a parcel : <code>select</code></a></h3>
+<h3 id="selecting-a-parcel-code-select-code"><a class="link" href="#selecting-a-parcel-code-select-code">6.8. Selecting a parcel : <code>select</code></a></h3>
 <div class="paragraph">
 <p>Selects the parcel identified by the index number used in the last parcel listing
 and expands the Browser Panel section in the main window.
@@ -1203,7 +1170,7 @@ Selects the 1st parcel in the results of the <code>find</code> command.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="selecting-a-tab-code-tab-code"><a class="link" href="#selecting-a-tab-code-tab-code">6.10. Selecting a tab : <code>tab</code></a></h3>
+<h3 id="selecting-a-tab-code-tab-code"><a class="link" href="#selecting-a-tab-code-tab-code">6.9. Selecting a tab : <code>tab</code></a></h3>
 <div class="paragraph">
 <p>Selects the tab identified by the index number and switches the tab shown in the Parcel List Panel.
 The selected tab will then display its respective parcel list according to its tab title.</p>
@@ -1277,7 +1244,7 @@ Selects the first tab "All Parcels" in the Parcel List Panel and displays it res
 </div>
 </div>
 <div class="sect2">
-<h3 id="listing-entered-commands-code-history-code"><a class="link" href="#listing-entered-commands-code-history-code">6.11. Listing entered commands : <code>history</code></a></h3>
+<h3 id="listing-entered-commands-code-history-code"><a class="link" href="#listing-entered-commands-code-history-code">6.10. Listing entered commands : <code>history</code></a></h3>
 <div class="paragraph">
 <p>Lists all the commands that you have entered in reverse chronological order.<br>
 Format: <code>history</code></p>
@@ -1299,7 +1266,7 @@ the previous and next input respectively in the command box.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">6.12. Undoing previous command : <code>undo</code></a></h3>
+<h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">6.11. Undoing previous command : <code>undo</code></a></h3>
 <div class="paragraph">
 <p>Restores Ark to the state before the previous <em>undoable</em> command was executed.<br>
 Format: <code>undo</code></p>
@@ -1345,7 +1312,7 @@ The <code>undo</code> command fails as there are no undoable commands executed p
 </div>
 </div>
 <div class="sect2">
-<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">6.13. Redoing the previously undone command : <code>redo</code></a></h3>
+<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">6.12. Redoing the previously undone command : <code>redo</code></a></h3>
 <div class="paragraph">
 <p>Reverses the most recent <code>undo</code> command.<br>
 Format: <code>redo</code></p>
@@ -1377,21 +1344,21 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 </div>
 </div>
 <div class="sect2">
-<h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">6.14. Clearing all entries : <code>clear</code></a></h3>
+<h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">6.13. Clearing all entries : <code>clear</code></a></h3>
 <div class="paragraph">
 <p>Clears all entries from Ark.<br>
 Format: <code>clear</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">6.15. Exiting the program : <code>exit</code></a></h3>
+<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">6.14. Exiting the program : <code>exit</code></a></h3>
 <div class="paragraph">
 <p>Exits the program.<br>
 Format: <code>exit</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="autocomplete"><a class="link" href="#autocomplete">6.16. Autocomplete</a></h3>
+<h3 id="autocomplete"><a class="link" href="#autocomplete">6.15. Autocomplete</a></h3>
 <div class="paragraph">
 <p>Trying to type in long commands can be quite a hassle. That is why Ark comes with tab autocompletion which is able to
 help fill in commands as well as the prefixes for you without requiring you to fully type out the command
@@ -1560,14 +1527,14 @@ to <code>edit n/</code> on the second tab)</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-the-data"><a class="link" href="#saving-the-data">6.17. Saving the data</a></h3>
+<h3 id="saving-the-data"><a class="link" href="#saving-the-data">6.16. Saving the data</a></h3>
 <div class="paragraph">
 <p>Ark data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="back-up"><a class="link" href="#back-up">6.18. Backing up the data</a></h3>
+<h3 id="back-up"><a class="link" href="#back-up">6.17. Backing up the data</a></h3>
 <div class="paragraph">
 <p>Ark data are backed up in the hard disk automatically at the start of every session of the program.<br>
 There is no need to back up the data manually.<br>
@@ -1614,7 +1581,7 @@ file was missing (<strong>gasp</strong>), Ark would not create a backup file for
 </div>
 </div>
 <div class="sect2">
-<h3 id="maintaining-a-sorted-list"><a class="link" href="#maintaining-a-sorted-list">6.19. Maintaining a Sorted List</a></h3>
+<h3 id="maintaining-a-sorted-list"><a class="link" href="#maintaining-a-sorted-list">6.18. Maintaining a Sorted List</a></h3>
 <div class="paragraph">
 <p>The list of parcels stored in Ark is maintained to be sorted according to the delivery date of
 the parcels, with the earliest delivery date at the top. This allows the more pertinent
@@ -1624,9 +1591,9 @@ of the list so that the user does not have to manually do so.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="arkbot-telegram-bot-interface-for-ark"><a class="link" href="#arkbot-telegram-bot-interface-for-ark">6.20. ArkBot: Telegram Bot Interface for Ark</a></h3>
+<h3 id="arkbot-telegram-bot-interface-for-ark"><a class="link" href="#arkbot-telegram-bot-interface-for-ark">6.19. ArkBot: Telegram Bot Interface for Ark</a></h3>
 <div class="sect3">
-<h4 id="an-overview"><a class="link" href="#an-overview">6.20.1. An Overview</a></h4>
+<h4 id="an-overview"><a class="link" href="#an-overview">6.19.1. An Overview</a></h4>
 <div class="paragraph">
 <p>As a desktop application, isn&#8217;t it rather cumbersome for a delivery man to check and update information on the go,
 when he is making his deliveries? We thought so to. As such we developed a Telegram Bot Interface for Ark so that the
@@ -1639,7 +1606,7 @@ command, I would send <code>/help</code> to ArkBot. The command formats are iden
 </div>
 </div>
 <div class="sect3">
-<h4 id="arkbot-commands"><a class="link" href="#arkbot-commands">6.20.2. ArkBot Commands</a></h4>
+<h4 id="arkbot-commands"><a class="link" href="#arkbot-commands">6.19.2. ArkBot Commands</a></h4>
 <div class="paragraph">
 <p>Here the commands that are available in ArkBot.</p>
 </div>
@@ -1699,7 +1666,7 @@ command, I would send <code>/help</code> to ArkBot. The command formats are iden
 </table>
 </div>
 <div class="sect3">
-<h4 id="arkbot-listen-mode"><a class="link" href="#arkbot-listen-mode">6.20.3. ArkBot Listen Mode</a></h4>
+<h4 id="arkbot-listen-mode"><a class="link" href="#arkbot-listen-mode">6.19.3. ArkBot Listen Mode</a></h4>
 <div class="paragraph">
 <p>If <code>/complete</code> is entered without a parcel index, ArkBot will enter <code>listen mode</code>. In <code>listen mode</code>, ArkBot will wait
 for an image QR code to be sent. The QR code must contain details of the parcel and the parcel must be present in the
@@ -1723,7 +1690,7 @@ read the information on the QR code and displays it.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="configuring-arkbot"><a class="link" href="#configuring-arkbot">6.20.4. Configuring ArkBot</a></h4>
+<h4 id="configuring-arkbot"><a class="link" href="#configuring-arkbot">6.19.4. Configuring ArkBot</a></h4>
 <div class="paragraph">
 <p>Telegram Bots require an Authorization Token which make them unique. To make the ArkBot respond only
 to your Ark software, head <a href="https://core.telegram.org/bots#generating-an-authorization-token">here</a> to learn
@@ -2089,7 +2056,7 @@ parcels delivered.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-13 11:02:54 +00:00
+Last updated 2017-11-13 11:33:35 +00:00
 </div>
 </div>
 </body>

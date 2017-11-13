@@ -36,60 +36,9 @@ to automatically test the features I&#8217;ve implemented.</p>
 <p><strong>Code contributed</strong>: [<a href="https://github.com/CS2103AUG2017-T16-B1/main/blob/master/collated/main/fustilio.md">Functional code</a>][<a href="https://github.com/CS2103AUG2017-T16-B1/main/blob/master/collated/test/fustilio.md">Test code</a>]</p>
 </div>
 <div class="sect2">
-<h3 id="enhancement-added-deletetagcommand"><a class="link" href="#enhancement-added-deletetagcommand">Enhancement Added: deleteTagCommand</a></h3>
-<div class="sect3">
-<h4 id="external-behavior"><a class="link" href="#external-behavior">External behavior</a></h4>
-<hr>
-</div>
-</div>
-<div class="sect2">
-<h3 id="deleting-a-tag-code-deletetag-code"><a class="link" href="#deleting-a-tag-code-deletetag-code">Deleting a tag : <code>deleteTag</code></a></h3>
-<div class="paragraph">
-<p>Deletes the specified tag from all parcels in Ark.<br>
-Format: <code>deleteTag TAG</code></p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>The tag to delete is case sensitive.</p>
-</li>
-<li>
-<p>The tag to delete must actually be tagged to a parcel.</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>deleteTag urgent</code>
-Deletes the tag "urgent" from each parcel in the address book.</p>
-</li>
-</ul>
-</div>
-<hr>
-<div class="sect3">
-<h4 id="justification"><a class="link" href="#justification">Justification</a></h4>
-<div class="paragraph">
-<p>The deleteTag command is useful to have when dealing with large numbers of parcels.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="implementation"><a class="link" href="#implementation">Implementation</a></h4>
-<hr>
-<hr>
-</div>
-</div>
-<div class="sect2">
 <h3 id="enhancement-added-delivery-dates-field"><a class="link" href="#enhancement-added-delivery-dates-field">Enhancement Added: Delivery Dates field</a></h3>
 <div class="sect3">
-<h4 id="external-behavior-2"><a class="link" href="#external-behavior-2">External behavior</a></h4>
+<h4 id="external-behavior"><a class="link" href="#external-behavior">External behavior</a></h4>
 <hr>
 </div>
 </div>
@@ -210,7 +159,7 @@ their delivery dates, with the earliest on top.</p>
 </div>
 <hr>
 <div class="sect3">
-<h4 id="justification-2"><a class="link" href="#justification-2">Justification</a></h4>
+<h4 id="justification"><a class="link" href="#justification">Justification</a></h4>
 <div class="paragraph">
 <p>The delivery dates field is important as the list of parcels are sorted by delivery date
 with the earliest at the top. This allows for the user to look at the more pertinent deliveries
@@ -218,7 +167,7 @@ immediately on start up.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="implementation-2"><a class="link" href="#implementation-2">Implementation</a></h4>
+<h4 id="implementation"><a class="link" href="#implementation">Implementation</a></h4>
 <hr>
 </div>
 </div>
@@ -362,7 +311,7 @@ subsequently returned to whichever method which called it.</p>
 <div class="sect2">
 <h3 id="enhancement-added-maintain-sorted-order-mechanism"><a class="link" href="#enhancement-added-maintain-sorted-order-mechanism">Enhancement Added: Maintain Sorted Order Mechanism</a></h3>
 <div class="sect3">
-<h4 id="external-behavior-3"><a class="link" href="#external-behavior-3">External behavior</a></h4>
+<h4 id="external-behavior-2"><a class="link" href="#external-behavior-2">External behavior</a></h4>
 <hr>
 </div>
 </div>
@@ -377,14 +326,14 @@ of the list so that the user does not have to manually do so.</p>
 </div>
 <hr>
 <div class="sect3">
-<h4 id="justification-3"><a class="link" href="#justification-3">Justification</a></h4>
+<h4 id="justification-2"><a class="link" href="#justification-2">Justification</a></h4>
 <div class="paragraph">
 <p>Having the list in sorted order allows the user to look at the more pertinent deliveries
 more easily.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="implementation-3"><a class="link" href="#implementation-3">Implementation</a></h4>
+<h4 id="implementation-2"><a class="link" href="#implementation-2">Implementation</a></h4>
 <hr>
 </div>
 </div>
@@ -457,7 +406,7 @@ just using the built in sorting methods.<br></p>
 <div class="sect2">
 <h3 id="enhancement-added-arkbot-a-telegram-bot-interface-for-ark"><a class="link" href="#enhancement-added-arkbot-a-telegram-bot-interface-for-ark">Enhancement Added: ArkBot: A Telegram Bot Interface for Ark</a></h3>
 <div class="sect3">
-<h4 id="external-behavior-4"><a class="link" href="#external-behavior-4">External behavior</a></h4>
+<h4 id="external-behavior-3"><a class="link" href="#external-behavior-3">External behavior</a></h4>
 <hr>
 </div>
 </div>
@@ -573,7 +522,7 @@ by the bot.</p>
 <hr>
 </div>
 <div class="sect3">
-<h4 id="justification-4"><a class="link" href="#justification-4">Justification</a></h4>
+<h4 id="justification-3"><a class="link" href="#justification-3">Justification</a></h4>
 <div class="paragraph">
 <p>Practically speaking, a delivery man would not be able to use Ark on the go since it is a desktop application.
 As such, I developed a <a href="https://core.telegram.org/bots">Telegram Bot</a> interface, enabling Ark to be accessed from
@@ -581,7 +530,7 @@ a mobile phone.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="implementation-4"><a class="link" href="#implementation-4">Implementation</a></h4>
+<h4 id="implementation-3"><a class="link" href="#implementation-3">Implementation</a></h4>
 <hr>
 </div>
 </div>
@@ -675,7 +624,7 @@ course&#8217;s project showcase.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-13 11:02:54 +00:00
+Last updated 2017-11-13 11:33:35 +00:00
 </div>
 </div>
 </body>
