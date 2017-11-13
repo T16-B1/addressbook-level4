@@ -976,7 +976,7 @@ use different tag names to refer to the same tag.
 //end::tags[]
 
 //tag::sortedList[]
-=== Maintain sorted and selection mechanism
+=== Maintain sorted mechanism
 image::AddParcelSdForLogic.png[width="890"]
 _Figure 4.16.1 : Adding Alice to Ark, maintainSorted is actually called and returns void._
 
@@ -984,7 +984,7 @@ The list of parcels in Ark is maintained to be always in sorted order according 
 with the earliest being on the top. This is so that the user will be able to look at the more
 pertinent deliveries. +
 
-The list is sorted whenever a parcel is added, edited. This is
+The list is sorted whenever a parcel is added or edited. This is
 because these commands are the ones that might possibly cause the new parcel to be placed
 in the wrong position. +
 
