@@ -362,8 +362,8 @@ Duplicate parcels are parcels with the same details (every detail except Status 
 *Expected output:* ArkBot should show an error message. +
 
 *Description:* Find command success +
-*Input:* `/find Meier` +
-*Expected output:* ArkBot should show a list of uncompleted parcels that have “Meier” in their names + Changes reflected in Ark as well.
+*Input:* `/find Doe` +
+*Expected output:* ArkBot should show a list of uncompleted parcels that have “Doe” in their names + Changes reflected in Ark as well.
 
 *Description:* Find command failure (missing query)+
 *Input:* `/find` +
@@ -386,10 +386,10 @@ Duplicate parcels are parcels with the same details (every detail except Status 
 *Expected output:* ArkBot show QR code upload cancelled message. +
 
 *Description:* Upload QR code success +
-*Input:* `/complete`, [upload QR code image] +
+*Input:* `/complete`, [upload QR code from below] +
 *Expected output:* ArkBot shows parcel completion message. +
 
-image::sampleQR.png[width="600"]
+image::johnQR.png[width="600"]
 
 
 
