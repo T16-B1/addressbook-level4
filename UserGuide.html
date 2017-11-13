@@ -68,6 +68,7 @@
 <li><a href="#saving-the-data">6.17. Saving the data</a></li>
 <li><a href="#back-up">6.18. Backing up the data</a></li>
 <li><a href="#maintaining-a-sorted-list">6.19. Maintaining a Sorted List</a></li>
+<li><a href="#arkbot-telegram-bot-interface-for-ark">6.20. ArkBot: Telegram Bot Interface for Ark</a></li>
 </ul>
 </li>
 <li><a href="#faq">7. FAQ</a></li>
@@ -1622,6 +1623,117 @@ The list is sorted whenever there is a change in the list that may potentially d
 of the list so that the user does not have to manually do so.</p>
 </div>
 </div>
+<div class="sect2">
+<h3 id="arkbot-telegram-bot-interface-for-ark"><a class="link" href="#arkbot-telegram-bot-interface-for-ark">6.20. ArkBot: Telegram Bot Interface for Ark</a></h3>
+<div class="sect3">
+<h4 id="an-overview"><a class="link" href="#an-overview">6.20.1. An Overview</a></h4>
+<div class="paragraph">
+<p>As a desktop application, isn&#8217;t it rather cumbersome for a delivery man to check and update information on the go,
+when he is making his deliveries? We thought so to. As such we developed a Telegram Bot Interface for Ark so that the
+delivery man would be able to conveniently see which deliveries he has remaining and their addresses. Furthermore,
+he will be able to mark the deliveries as complete easily from the convenience of his phone.</p>
+</div>
+<div class="paragraph">
+<p>Like all Telegram Bots, each command must be prefixed with a <code>/</code> character. So if I were to want to trigger the help
+command, I would send <code>/help</code> to ArkBot. The command formats are identical to that of Ark to make things easy to recall.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="arkbot-commands"><a class="link" href="#arkbot-commands">6.20.2. ArkBot Commands</a></h4>
+<div class="paragraph">
+<p>Here the commands that are available in ArkBot.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 60%;">
+<col style="width: 40%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Command</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">/all #/TRACKING_NUMBER n/NAME [p/PHONE_NUMBER] [e/EMAIL] a/ADDRESS d/DELIVERYDATE [s/STATUS] [t/TAG]&#8230;&#8203;`</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Adds a parcel.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">/list</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Lists uncompleted parcel deliveries.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">/find KEYWORD [MORE_KEYWORDS]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List uncompleted parcels with keywords in names.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">/delete [Parcel Index]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Deletes a parcel.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">/undo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Undo a command.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">/redo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Redo a command.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">/complete [Parcel Index]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Marks a parcel as completed.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">/complete</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Activates listen mode.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">/cancel</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cancels listen mode.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">/help</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Brings up help dialogue with information on commands.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="arkbot-listen-mode"><a class="link" href="#arkbot-listen-mode">6.20.3. ArkBot Listen Mode</a></h4>
+<div class="paragraph">
+<p>If <code>/complete</code> is entered without a parcel index, ArkBot will enter <code>listen mode</code>. In <code>listen mode</code>, ArkBot will wait
+for an image QR code to be sent. The QR code must contain details of the parcel and the parcel must be present in the
+Ark&#8217;s list of parcels.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/QR_Sample_Interaction.png" alt="QR Sample Interaction" width="400">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 6.21.3.1: Sample interaction of sending QR code to ArkBot</em></p>
+</div>
+<div class="paragraph">
+<p>As shown in Figure 6.21.3.1, upon typing <code>/complete</code>, ArkBot will prompt the user for an image. If ArkBot is able to
+recognise the parcel, it will reply with the parcel&#8217;s previous details as shown and mark it as completed on Ark.</p>
+</div>
+<div class="paragraph">
+<p>If ArkBot is not in <code>listen mode</code> and a QR code with parcel details are sent, ArkBot assumes that the user is trying to
+read the information on the QR code and displays it.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="configuring-arkbot"><a class="link" href="#configuring-arkbot">6.20.4. Configuring ArkBot</a></h4>
+<div class="paragraph">
+<p>Telegram Bots require an Authorization Token which make them unique. To make the ArkBot respond only
+to your Ark software, head <a href="https://core.telegram.org/bots#generating-an-authorization-token">here</a> to learn
+how to retrieve an Authorization Token from Telegram. After which, enter the authorization token into
+the config.json file that is created in the same folder you placed the Ark software executable file. This token
+is especially important as anyone with access to it will be able to access the information that is sent and received
+by the bot.</p>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -1977,7 +2089,7 @@ parcels delivered.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-12 19:00:48 +00:00
+Last updated 2017-11-13 03:45:35 +00:00
 </div>
 </div>
 </body>

@@ -16,13 +16,24 @@
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="project-addressbook-level-4"><a class="link" href="#project-addressbook-level-4">Project: AddressBook - Level 4</a></h2>
+<h2 id="project-ark"><a class="link" href="#project-ark">Project: Ark</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>AddressBook - Level 4 is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 6 kLoC.</p>
+<p>Ark is a parcel management software which users can interact with using a Command Line Interface, and it has a GUI
+created with JavaFX. It is written in Java, and has about 14 kLoC.
+You may access the Ark repository <a href="https://github.com/CS2103AUG2017-T16-B1/main">here</a>.</p>
 </div>
 <div class="paragraph">
-<p><strong>Code contributed</strong>: [<a href="https://github.com">Functional code</a>] [<a href="https://github.com">Test code</a>] {give links to collated code files}</p>
+<p>Ark was built on top of <a href=":https://github.com/nus-cs2103-AY1718S1/addressbook-level4">Addressbook - Level 4</a>, an
+addressbook application.</p>
+</div>
+<div class="paragraph">
+<p>Below you can take a look at the segments of Ark that I&#8217;ve written. Functional code refers to code that
+directly affects the performance and usability of Ark. Whereas test code refers to code written
+to automatically test the features I&#8217;ve implemented.</p>
+</div>
+<div class="paragraph">
+<p><strong>Code contributed</strong>: [<a href="https://github.com/CS2103AUG2017-T16-B1/main/blob/master/collated/main/fustilio.md">Functional code</a>][<a href="https://github.com/CS2103AUG2017-T16-B1/main/blob/master/collated/test/fustilio.md">Test code</a>]</p>
 </div>
 <div class="sect2">
 <h3 id="enhancement-added-deletetagcommand"><a class="link" href="#enhancement-added-deletetagcommand">Enhancement Added: deleteTagCommand</a></h3>
@@ -410,14 +421,14 @@ more easily.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="maintain-sorted-mechanism"><a class="link" href="#maintain-sorted-mechanism">Maintain sorted mechanism</a></h3>
+<h3 id="maintain-sorted-and-selection-mechanism"><a class="link" href="#maintain-sorted-and-selection-mechanism">Maintain sorted and selection mechanism</a></h3>
 <div class="imageblock">
 <div class="content">
 <img src="../images/AddParcelSdForLogic.png" alt="AddParcelSdForLogic" width="890">
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 4.13.1 : Adding Alice to Ark, maintainSorted is actually called and returns void.</em></p>
+<p><em>Figure 4.14.1 : Adding Alice to Ark, maintainSorted is actually called and returns void.</em></p>
 </div>
 <div class="paragraph">
 <p>The list of parcels in Ark is maintained to be always in sorted order according to delivery dates,
@@ -425,1122 +436,254 @@ with the earliest being on the top. This is so that the user will be able to loo
 pertinent deliveries.<br></p>
 </div>
 <div class="paragraph">
-<p>The list is sorted whenever a parcel is added, edited or if a redo command is made. This is
+<p>The list is sorted whenever a parcel is added, edited. This is
 because these commands are the ones that might possibly cause the new parcel to be placed
 in the wrong position.<br></p>
 </div>
 <div class="paragraph">
-<p>To maintain the selected element despite sorting however, we require a way to track which parcel
-is selected. Static variables to track which card has been selected has been added to the Model
-class. The Model class now has the following methods: <code>select</code>, <code>unselect</code>, <code>getPrevIndex</code>,
-<code>hasSelected</code> and <code>forceSelect</code>. Whenever we select an item, we will use <code>select</code> to indicate that
-we have selected a parcel card and we will then re-select that particular card after we have sorted.<br></p>
+<p>Ark has two tabs, one for uncompleted parcels, the other for completed parcels. Whenever <code>add</code> and <code>edit</code> commands
+are executed, the newly added or edited parcel gets selected. If the status of the newly added or edited parcel is
+not on the current active list, a tab switch needs to happen. This is taken care off by the selection mechanism within
+the Model Manager class.</p>
 </div>
 <div class="sect3">
 <h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">Design Considerations</a></h4>
 <div class="paragraph">
-<p><strong>Aspect:</strong> Implementation of <code>maintainSorted</code><br>
-<strong>Alternative 1 (current choice):</strong> Constant sort the list of parcels whenever there is a change that
-potentially could disrupt the order of the list.<br>
-<strong>Pros:</strong> Intuitive and guarantees that list is sorted in the right order<br>
-<strong>Cons:</strong> Many commands have to be changed<br>
-<strong>Alternative 2:</strong> Insert the new / edited parcel to fit into the sorted list.<br>
-<strong>Pros:</strong> Use less computation as the list of parcels is already sorted.<br>
-<strong>Cons:</strong> More difficult to implement as we&#8217;ll need to implement our own sorting algorithm as opposed to
+<p><strong>Aspect: Implementation of <code>maintainSorted</code></strong><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Constant sort the list of parcels whenever there is a change that
+potentially could disrupt the order of the list.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> Intuitive and guarantees that list is sorted in the right order<br></p>
+</li>
+<li>
+<p><strong>Cons:</strong> Many commands have to be changed<br></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Insert the new / edited parcel to fit into the sorted list.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> Use less computation as the list of parcels is already sorted.<br></p>
+</li>
+<li>
+<p><strong>Cons:</strong> More difficult to implement as we&#8217;ll need to implement our own sorting algorithm as opposed to
 just using the built in sorting methods.<br></p>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="documentation"><a class="link" href="#documentation">Documentation</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>We use asciidoc for writing documentation.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-We chose asciidoc over Markdown because asciidoc, although a bit more complex than Markdown, provides more flexibility
-in formatting.
-</td>
-</tr>
-</table>
-</div>
-<div class="sect2">
-<h3 id="editing-documentation"><a class="link" href="#editing-documentation">Editing Documentation</a></h3>
-<div class="paragraph">
-<p>See <a href="UsingGradle.html#rendering-asciidoc-files">UsingGradle.adoc</a> to learn how to render <code>.adoc</code> files locally to preview
-the end result of your edits. Alternatively, you can download the AsciiDoc plugin for IntelliJ, which allows you to
-preview the changes you have made to your <code>.adoc</code> files in real-time.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="publishing-documentation"><a class="link" href="#publishing-documentation">Publishing Documentation</a></h3>
-<div class="paragraph">
-<p>See <a href="UsingTravis.html#deploying-github-pages">UsingTravis.adoc</a> to learn how to deploy GitHub Pages using Travis.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="converting-documentation-to-pdf-format"><a class="link" href="#converting-documentation-to-pdf-format">Converting Documentation to PDF format</a></h3>
-<div class="paragraph">
-<p>We use <a href="https://www.google.com/chrome/browser/desktop/">Google Chrome</a> for converting documentation to PDF format, as
-Chrome&#8217;s PDF engine preserves hyperlinks used in webpages.</p>
-</div>
-<div class="paragraph">
-<p>Here are the steps to convert the project documentation files to PDF format.</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Follow the instructions in <a href="UsingGradle.html#rendering-asciidoc-files">UsingGradle.adoc</a> to convert the AsciiDoc files
-in the <code>docs/</code> directory to HTML format.</p>
-</li>
-<li>
-<p>Go to your generated HTML files in the <code>build/docs</code> folder, right click on them and select <code>Open with</code> &#8594;
-<code>Google Chrome</code>.</p>
-</li>
-<li>
-<p>Within Chrome, click on the <code>Print</code> option in Chrome&#8217;s menu.</p>
-</li>
-<li>
-<p>Set the destination to <code>Save as PDF</code>, then click <code>Save</code> to save a copy of the file in PDF format. For best results,
-use the settings indicated in the screenshot below.</p>
-</li>
-</ol>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/chrome_save_as_pdf.png" alt="chrome save as pdf" width="300">
-</div>
-</div>
-<div class="paragraph">
-<p><em>Figure 5.3.1 : Saving documentation as PDF files in Chrome</em></p>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="testing"><a class="link" href="#testing">Testing</a></h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="running-tests"><a class="link" href="#running-tests">Running Tests</a></h3>
-<div class="paragraph">
-<p>There are three ways to run tests.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-The most reliable way to run tests is the 3rd one. The first two methods might fail some GUI tests due to
-platform/resolution-specific idiosyncrasies.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p><strong>Method 1: Using IntelliJ JUnit test runner</strong></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>To run all tests, right-click on the <code>src/test/java</code> folder and choose <code>Run 'All Tests'</code></p>
-</li>
-<li>
-<p>To run a subset of tests, you can right-click on a test package, test class, or a test and choose <code>Run 'ABC'</code></p>
 </li>
 </ul>
 </div>
-<div class="paragraph">
-<p><strong>Method 2: Using Gradle</strong></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Open a console and run the command <code>gradlew clean allTests</code> (Mac/Linux: <code>./gradlew clean allTests</code>)</p>
 </li>
 </ul>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-See <a href="UsingGradle.html">UsingGradle.adoc</a> for more info on how to run tests using Gradle.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p><strong>Method 3: Using Gradle (headless)</strong></p>
-</div>
-<div class="paragraph">
-<p>Thanks to the <a href="https://github.com/TestFX/TestFX">TestFX</a> library we use, our GUI tests can be run in the <em>headless</em> mode.
-In the headless mode, GUI tests do not show up on the screen. That means the developer can do other things on the
-Computer while the tests are running.</p>
-</div>
-<div class="paragraph">
-<p>To run tests in headless mode, open a console and run the command <code>gradlew clean headless allTests</code> (Mac/Linux:
-<code>./gradlew clean headless allTests</code>)</p>
+<hr>
 </div>
 </div>
 <div class="sect2">
-<h3 id="types-of-tests"><a class="link" href="#types-of-tests">Types of tests</a></h3>
-<div class="paragraph">
-<p>We have two types of tests:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><strong>GUI Tests</strong> - These are tests involving the GUI. They include,</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p><em>System Tests</em> that test the entire App by simulating user actions on the GUI. These are in the <code>systemtests</code> package.</p>
-</li>
-<li>
-<p><em>Unit tests</em> that test the individual components. These are in <code>seedu.address.ui</code> package.</p>
-</li>
-</ol>
-</div>
-</li>
-<li>
-<p><strong>Non-GUI Tests</strong> - These are tests not involving the GUI. They include,</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p><em>Unit tests</em> targeting the lowest level methods/classes.<br>
-e.g. <code>seedu.address.commons.StringUtilTest</code></p>
-</li>
-<li>
-<p><em>Integration tests</em> that are checking the integration of multiple code units (those code units are assumed to be
-working).<br>
-e.g. <code>seedu.address.storage.StorageManagerTest</code></p>
-</li>
-<li>
-<p>Hybrids of unit and integration tests. These test are checking multiple code units as well as how the are connected
-together.<br>
-e.g. <code>seedu.address.logic.LogicManagerTest</code></p>
-</li>
-</ol>
-</div>
-</li>
-</ol>
+<h3 id="enhancement-added-arkbot-a-telegram-bot-interface-for-ark"><a class="link" href="#enhancement-added-arkbot-a-telegram-bot-interface-for-ark">Enhancement Added: ArkBot: A Telegram Bot Interface for Ark</a></h3>
+<div class="sect3">
+<h4 id="external-behavior-4"><a class="link" href="#external-behavior-4">External behavior</a></h4>
+<hr>
 </div>
 </div>
 <div class="sect2">
-<h3 id="troubleshooting-testing"><a class="link" href="#troubleshooting-testing">Troubleshooting Testing</a></h3>
+<h3 id="arkbot-telegram-bot-interface-for-ark"><a class="link" href="#arkbot-telegram-bot-interface-for-ark">ArkBot: Telegram Bot Interface for Ark</a></h3>
+<div class="sect3">
+<h4 id="an-overview"><a class="link" href="#an-overview">An Overview</a></h4>
 <div class="paragraph">
-<p><strong>Problem: <code>HelpWindowTest</code> fails with a <code>NullPointerException</code>.</strong></p>
+<p>As a desktop application, isn&#8217;t it rather cumbersome for a delivery man to check and update information on the go,
+when he is making his deliveries? We thought so to. As such we developed a Telegram Bot Interface for Ark so that the
+delivery man would be able to conveniently see which deliveries he has remaining and their addresses. Furthermore,
+he will be able to mark the deliveries as complete easily from the convenience of his phone.</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>Reason: One of its dependencies, <code>UserGuide.html</code> in <code>src/main/resources/docs</code> is missing.</p>
-</li>
-<li>
-<p>Solution: Execute Gradle task <code>processResources</code>.</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="dev-ops"><a class="link" href="#dev-ops">Dev Ops</a></h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="build-automation"><a class="link" href="#build-automation">Build Automation</a></h3>
 <div class="paragraph">
-<p>See <a href="UsingGradle.html">UsingGradle.adoc</a> to learn how to use Gradle for build automation.</p>
+<p>Like all Telegram Bots, each command must be prefixed with a <code>/</code> character. So if I were to want to trigger the help
+command, I would send <code>/help</code> to ArkBot. The command formats are identical to that of Ark to make things easy to recall.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="continuous-integration"><a class="link" href="#continuous-integration">Continuous Integration</a></h3>
+<div class="sect3">
+<h4 id="arkbot-commands"><a class="link" href="#arkbot-commands">ArkBot Commands</a></h4>
 <div class="paragraph">
-<p>We use <a href="https://travis-ci.org/">Travis CI</a> and <a href="https://www.appveyor.com/">AppVeyor</a> to perform <em>Continuous Integration</em> on
-our projects. See <a href="UsingTravis.html">UsingTravis.adoc</a> and <a href="UsingAppVeyor.html">UsingAppVeyor.adoc</a> for more details.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="making-a-release"><a class="link" href="#making-a-release">Making a Release</a></h3>
-<div class="paragraph">
-<p>Here are the steps to create a new release.</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Update the version number in <a href="{repoURL}/src/main/java/seedu/address/MainApp.java"><code>MainApp.java</code></a>.</p>
-</li>
-<li>
-<p>Generate a JAR file <a href="UsingGradle.html#creating-the-jar-file">using Gradle</a>.</p>
-</li>
-<li>
-<p>Tag the repo with the version number. e.g. <code>v0.1</code></p>
-</li>
-<li>
-<p><a href="https://help.github.com/articles/creating-releases/">Create a new release using GitHub</a> and upload the JAR file you
-created.</p>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect2">
-<h3 id="managing-dependencies"><a class="link" href="#managing-dependencies">Managing Dependencies</a></h3>
-<div class="paragraph">
-<p>A project often depends on third-party libraries. For example, Address Book depends on the
-<a href="http://wiki.fasterxml.com/JacksonHome">Jackson library</a> for XML parsing. Managing these <em>dependencies</em> can be automated
-using Gradle. For example, Gradle can download the dependencies automatically, which is better than these alternatives.<br>
-a. Include those libraries in the repo (this bloats the repo size)<br>
-b. Require developers to download those libraries manually (this creates extra work for developers)</p>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="user-stories"><a class="link" href="#user-stories">Appendix A: User Stories</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Priorities: High (must have) - <code>* * *</code>, Medium (nice to have) - <code>* *</code>, Low (unlikely to have) - <code>*</code></p>
+<p>Here the commands that are available in ArkBot.</p>
 </div>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
-<col style="width: 8%;">
-<col style="width: 17%;">
-<col style="width: 30%;">
-<col style="width: 45%;">
+<col style="width: 60%;">
+<col style="width: 40%;">
 </colgroup>
 <thead>
 <tr>
-<th class="tableblock halign-left valign-top">Priority</th>
-<th class="tableblock halign-left valign-top">As a &#8230;&#8203;</th>
-<th class="tableblock halign-left valign-top">I want to &#8230;&#8203;</th>
-<th class="tableblock halign-left valign-top">So that I can&#8230;&#8203;</th>
+<th class="tableblock halign-left valign-top">Command</th>
+<th class="tableblock halign-left valign-top">Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">new user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">see usage instructions</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">refer to instructions when I forget how to use the App</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">/all #/TRACKING_NUMBER n/NAME [p/PHONE_NUMBER] [e/EMAIL] a/ADDRESS d/DELIVERYDATE [s/STATUS] [t/TAG]&#8230;&#8203;`</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Adds a parcel.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">ongoing user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">have a backup of my addressbook data</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">restore my addressbook if the storage file becomes corrupted</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">/list</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Lists uncompleted parcel deliveries.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">add a new parcel</p></td>
-<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">/find KEYWORD [MORE_KEYWORDS]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List uncompleted parcels with keywords in names.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">delete a parcel</p></td>
-<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">/delete [Parcel Index]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Deletes a parcel.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">find a parcel by name</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">locate details of parcels without having to go through the entire list</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">/undo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Undo a command.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">the browser to automatically search for the address of the selected parcel in Google Maps</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">so that
-I can automatically get information on how to get to an address automatically, on click.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">/redo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Redo a command.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">delivery company</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">be able to keep track of my deliveries</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">deliver the packages on time</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">/complete [Parcel Index]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Marks a parcel as completed.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">delivery company</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">be alerted for any deliveries to be done today</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">deliver the packages on time</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">/complete</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Activates listen mode.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">delivery company</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">sort my deliveries by date</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">know which packages are more urgent to handle</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">/cancel</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cancels listen mode.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">delivery company</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">add a list of deliveries in one shot using Comma Separated Values</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">conveniently parse
-information from other sources</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">delivery company</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">check for deliveries close to deadline</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">better prepare for busy periods</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">delivery company</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">archive completed deliveries</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">refer to them in the future</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">new user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">to have an autocomplete for the commands</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">I do not need to remember the format of commands</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">lazy user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">to be notified of the most optimal path of completing my deliveries based on travelling distance</p></td>
-<td class="tableblock halign-left valign-top"></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">lazy user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">send and receive parcel details to and from other companies</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">minimize the amount of data inputs</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">forgetful user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">be reminded of a parcel&#8217;s delivery date (if valid)</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">in case I forget the date</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">forgetful user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">view daily deliveries</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">keep track of daily deliveries</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">busy user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">add and remove tasks</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">use addressbook as a task manager</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">store the sender and receiver addresses</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">use these addresses as destinations/sources of my deliveries</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">share details with contacts with a specific tag</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">minimize chance of someone else seeing them by accident</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">assign contacts and locations to tasks</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">link my tasks with people and places</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">assign an expiry date to tasks</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">tasks are deleted automatically</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">filter parcels by tags</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">view specific parcels that are assigned with specific tags</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">filter tasks according to location</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">be notified of deliveries I have at a specific location</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">retrieve my exact location on my device</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">remember the current address and store my location</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user with a changing schedule</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">edit created tasks</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">change the details of task</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">delivery man</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">be able to check the status of my deliveries on the go</p></td>
-<td class="tableblock halign-left valign-top"></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">delivery man</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">be able to update the status of my deliveries on the go</p></td>
-<td class="tableblock halign-left valign-top"></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">delivery man</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">be able to check the address of the delivery I have to make on the go</p></td>
-<td class="tableblock halign-left valign-top"></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">delivery man</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">generate deliver route based on my list of deliveries</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">know schedule for the day</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">delivery man who travels a lot</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">to know the shortest distance from one contact&#8217;s address to another</p></td>
-<td class="tableblock halign-left valign-top"></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">delivery man who travels a lot</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">set a reference location</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">find the shortest distance from my reference
-location to a parcel&#8217;s delivery location</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">new user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">input instructions into a chatbot interface</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">I do not need to remember the format of commands</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user with many parcels in the address book</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">sort parcels by name</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">locate a parcel easily</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">/help</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Brings up help dialogue with information on commands.</p></td>
 </tr>
 </tbody>
 </table>
 </div>
-</div>
-<div class="sect1">
-<h2 id="use-cases"><a class="link" href="#use-cases">Appendix B: Use Cases</a></h2>
-<div class="sectionbody">
+<div class="sect3">
+<h4 id="arkbot-listen-mode"><a class="link" href="#arkbot-listen-mode">ArkBot Listen Mode</a></h4>
 <div class="paragraph">
-<p>(For all use cases below, the <strong>System</strong> is the <code>AddressBook</code> and the <strong>Actor</strong> is the <code>user</code>, unless specified otherwise)</p>
-</div>
-<h3 id="use-case-delete-parcel" class="discrete">Use case: Delete parcel</h3>
-<div class="paragraph">
-<p><strong>MSS</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>User requests to list parcels</p>
-</li>
-<li>
-<p>Ark shows a list of parcels and maximizes the <code>ParcelListPanel</code> in the <code>MainWindow</code> UI</p>
-</li>
-<li>
-<p>User requests to delete a specific parcel in the list</p>
-</li>
-<li>
-<p>Ark deletes the parcel</p>
-<div class="paragraph">
-<p>Use case ends</p>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><strong>Extensions</strong></p>
-</div>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>2a. The list is empty</p>
-<div class="paragraph">
-<p>Use case ends</p>
-</div>
-</li>
-<li>
-<p>3a. The given index is invalid</p>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>3a1. Ark shows an error message.</p>
-<div class="paragraph">
-<p>Use case resumes at step 2</p>
-</div>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<h3 id="use-case-add-parcel" class="discrete">Use case: Add parcel</h3>
-<div class="paragraph">
-<p><strong>MSS</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Use enters add command with the fields: name, tracking number, email, phone number, delivery date, delivery status
-and tags.</p>
-</li>
-<li>
-<p>Ark validates that fields are correct.</p>
-</li>
-<li>
-<p>Ark adds parcel</p>
-<div class="paragraph">
-<p>Use case ends</p>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><strong>Extensions</strong></p>
-</div>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>2a. Ark detects errors in some fields.</p>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>2a1. Ark shows an error message.</p>
-<div class="paragraph">
-<p>Use case ends</p>
-</div>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>1a. The user does not input an email.</p>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>1a1. Ark adds parcel with <code>NIL</code> in the email field.</p>
-<div class="paragraph">
-<p>Use case ends</p>
-</div>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>1b. The user does not input a phone number.</p>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>1b1. Ark adds parcel with <code>NIL</code> in the phone number field.</p>
-<div class="paragraph">
-<p>Use case ends</p>
-</div>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>1c. The user does not input a status.</p>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>1c1. Ark adds parcel with <code>PENDING</code> in the status field.</p>
-<div class="paragraph">
-<p>Use case ends</p>
-</div>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<h3 id="use-case-add-parcel-by-prompt" class="discrete">Use case: Add parcel by prompt</h3>
-<div class="paragraph">
-<p><strong>MSS</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>User requests to add parcels without further details</p>
-</li>
-<li>
-<p>Ark prompts user to input parcel identification number of parcel to add</p>
-</li>
-<li>
-<p>User inputs identification number as requested</p>
-</li>
-<li>
-<p>Ark prompts user to input name of recipient of parcel to add</p>
-</li>
-<li>
-<p>User inputs name of recipient as requested</p>
-</li>
-<li>
-<p>Ark prompts user to input phone number of recipient of parcel to add</p>
-</li>
-<li>
-<p>User inputs phone number as requested</p>
-</li>
-<li>
-<p>Ark prompts user to input email of recipient of parcel to add</p>
-</li>
-<li>
-<p>User inputs email as requested</p>
-</li>
-<li>
-<p>Ark prompts user to input delivery address of parcel to add</p>
-</li>
-<li>
-<p>User inputs address as requested</p>
-</li>
-<li>
-<p>Ark prompts user to input tags of parcel to add</p>
-</li>
-<li>
-<p>User inputs tags as requested [optional]</p>
-</li>
-<li>
-<p>Ark adds parcel</p>
-<div class="paragraph">
-<p>Use case ends</p>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><strong>Extensions</strong></p>
-</div>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>3a. The user does not input a parcel identification number</p>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>3a1. Ark shows an error message</p>
-<div class="paragraph">
-<p>Use case resumes at step 2</p>
-</div>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>5a. The user does not input a name</p>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>5a1. Ark shows an error message</p>
-<div class="paragraph">
-<p>Use case resumes at step 4</p>
-</div>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>7a. The user does not input a valid phone number</p>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>7a1. Ark shows an error message</p>
-<div class="paragraph">
-<p>Use case resumes at step 6</p>
-</div>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>9a. The user does not input a valid email</p>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>9a1. Ark shows an error message</p>
-<div class="paragraph">
-<p>Use case resumes at step 8</p>
-</div>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>11a. The user does not input a valid address</p>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>11a1. Ark shows an error message</p>
-<div class="paragraph">
-<p>Use case resumes at step 10</p>
-</div>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>13a. The user does not input a tag</p>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>13a1. Ark shows that no tag has been entered</p>
-<div class="paragraph">
-<p>Use case resumes at step 14</p>
-</div>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>14. Ark shows error message if same parcel found</p>
-<div class="paragraph">
-<p>Use case ends</p>
-</div>
-</li>
-</ul>
-</div>
-<h3 id="use-case-understanding-delivery-dates" class="discrete">Use case: Understanding Delivery Dates</h3>
-<div class="paragraph">
-<p><strong>MSS</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>User adds a parcel with valid inputs and with <code>today</code> as input after delivery date prefix <code>d/</code></p>
-</li>
-<li>
-<p>Ark recognises the intent</p>
-</li>
-<li>
-<p>Ark adds parcel with the current date on the user&#8217;s machine</p>
-<div class="paragraph">
-<p>Use case ends</p>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><strong>Extensions</strong></p>
-</div>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>1a. The user inputs an more complicated date query such as <code>the week before christmas eve</code></p>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>1a1. Ark recognises the intent</p>
-</li>
-<li>
-<p>1a2. Ark adds parcel with the date 17-12-2017, with the year being the current year</p>
-<div class="paragraph">
-<p>Use case ends</p>
-</div>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>1b. The user inputs an invalid date query such as <code>pen pineapple apple pen</code></p>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>1b1. Ark does not recognise the intent</p>
-</li>
-<li>
-<p>1b2. Ark shows an error message</p>
-<div class="paragraph">
-<p>Use case ends</p>
-</div>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<h3 id="use-case-upload-image-of-parcel-from-local-files" class="discrete">Use case: Upload image of Parcel from local files</h3>
-<div class="paragraph">
-<p><strong>MSS</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>User requests to list parcels</p>
-</li>
-<li>
-<p>Ark shows a list of parcels and maximizes the <code>ParcelListPanel</code> in the <code>MainWindow</code> UI</p>
-</li>
-<li>
-<p>User requests to upload image of a specific parcel in the list</p>
-</li>
-<li>
-<p>Ark prompts for location of image</p>
-</li>
-<li>
-<p>User inputs file path</p>
-</li>
-<li>
-<p>Ark updates image</p>
-<div class="paragraph">
-<p>Use case ends</p>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><strong>Extensions</strong></p>
-</div>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>2a. The list is empty</p>
-<div class="paragraph">
-<p>Use case ends.</p>
-</div>
-</li>
-<li>
-<p>6a. The file path given is invalid</p>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>6a1. Ark shows an error message</p>
-<div class="paragraph">
-<p>Use case resumes at step 4</p>
-</div>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>6b. The file type of file given is invalid</p>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>6b1. Ark shows an error message</p>
-<div class="paragraph">
-<p>Use case resumes at step 4</p>
-</div>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<h3 id="use-case-set-user-reference-location" class="discrete">Use case: Set user reference location</h3>
-<div class="paragraph">
-<p><strong>MSS</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>User requests to set reference location</p>
-</li>
-<li>
-<p>Ark updates reference location</p>
-<div class="paragraph">
-<p>Use case ends</p>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>{More to be added}</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="non-functional-requirements"><a class="link" href="#non-functional-requirements">Appendix C: Non Functional Requirements</a></h2>
-<div class="sectionbody">
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Should work on any <a href="#mainstream-os">mainstream OS</a> as long as it has Java <code>1.8.0_60</code> or higher installed.</p>
-</li>
-<li>
-<p>Should be able to hold up to 1000 parcels without a noticeable sluggishness in performance for typical usage.</p>
-</li>
-<li>
-<p>A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be
-able to accomplish most of the tasks faster using commands than using the mouse.</p>
-</li>
-<li>
-<p>Each Command should take at most 1 second to finish execution.</p>
-</li>
-<li>
-<p>Should be able to handle any valid or invalid user input.</p>
-</li>
-<li>
-<p>Should back up data inside the address book each time the user makes changes to the data.</p>
-</li>
-<li>
-<p>Commands that do not require internet connection should still work when the user is not connected to the internet.</p>
-</li>
-<li>
-<p>Should come with automated unit tests.</p>
-</li>
-<li>
-<p>A new user should be able to use basic commands like add and delete without needing to refer to the help window
-after their first time using the application.</p>
-</li>
-<li>
-<p>Should allow the user to upload images of any <a href="#mainstream-image-format">mainstream image format</a>.</p>
-</li>
-<li>
-<p><a href="#hash-string">Hash String</a> of the users personal contact information should only be made up of alphanumeric
-characters.</p>
-</li>
-<li>
-<p>Should update the map automatically when the user changes their starting location.</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>{More to be added}</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="glossary"><a class="link" href="#glossary">Appendix D: Glossary</a></h2>
-<div class="sectionbody">
-<div id="mainstream-os" class="paragraph">
-<p>Mainstream OS</p>
-</div>
-<div class="literalblock">
+<p>If <code>/complete</code> is entered without a parcel index, ArkBot will enter <code>listen mode</code>. In <code>listen mode</code>, ArkBot will wait
+for an image QR code to be sent. The QR code must contain details of the parcel and the parcel must be present in the
+Ark&#8217;s list of parcels.</p>
+</div>
+<div class="imageblock">
 <div class="content">
-<pre>Windows, Linux, Unix, OS-X</pre>
+<img src="../images/QR_Sample_Interaction.png" alt="QR Sample Interaction" width="400">
 </div>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="product-survey"><a class="link" href="#product-survey">Appendix E: Product Survey</a></h2>
-<div class="sectionbody">
 <div class="paragraph">
-<p>Table 1. <strong>Swift</strong>, reviewed by A. Pen Gwyn<br></p>
+<p><em>Figure 6.21.3.1: Sample interaction of sending QR code to ArkBot</em></p>
 </div>
-<table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Pros</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Cons</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Clean UI</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Cannot keep track of how parcel is handled e.g Fragile</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Automated dispatching</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Expensive</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Proprietary batching algorithm</p></td>
-<td class="tableblock halign-left valign-top"></td>
-</tr>
-</tbody>
-</table>
 <div class="paragraph">
-<p>Table 2. <strong>Parcel Management Software</strong>, reviewed by P. Tato<br></p>
+<p>As shown in Figure 6.21.3.1, upon typing <code>/complete</code>, ArkBot will prompt the user for an image. If ArkBot is able to
+recognise the parcel, it will reply with the parcel&#8217;s previous details as shown and mark it as completed on Ark.</p>
 </div>
-<table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Pros</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Cons</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Able to keep track of large amounts of data</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Poor UI</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Fast and Reliable</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Cannot add multiple parcels quickly</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Able to generate delivery routes</p></td>
-<td class="tableblock halign-left valign-top"></td>
-</tr>
-</tbody>
-</table>
 <div class="paragraph">
-<p>Table 3. <strong>Journey</strong>, reviewed by John Prodman<br></p>
+<p>If ArkBot is not in <code>listen mode</code> and a QR code with parcel details are sent, ArkBot assumes that the user is trying to
+read the information on the QR code and displays it.</p>
 </div>
-<table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Pros</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Cons</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Clean and Intuitive UI</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Slow response time</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Automated delivery scheduling</p></td>
-<td class="tableblock halign-left valign-top"></td>
-</tr>
-</tbody>
-</table>
+</div>
+<div class="sect3">
+<h4 id="configuring-arkbot"><a class="link" href="#configuring-arkbot">Configuring ArkBot</a></h4>
+<div class="paragraph">
+<p>Telegram Bots require an Authorization Token which make them unique. To make the ArkBot respond only
+to your Ark software, head <a href="https://core.telegram.org/bots#generating-an-authorization-token">here</a> to learn
+how to retrieve an Authorization Token from Telegram. After which, enter the authorization token into
+the config.json file that is created in the same folder you placed the Ark software executable file. This token
+is especially important as anyone with access to it will be able to access the information that is sent and received
+by the bot.</p>
+</div>
 <hr>
+</div>
+<div class="sect3">
+<h4 id="justification-4"><a class="link" href="#justification-4">Justification</a></h4>
+<div class="paragraph">
+<p>Practically speaking, a delivery man would not be able to use Ark on the go since it is a desktop application.
+As such, I developed a <a href="https://core.telegram.org/bots">Telegram Bot</a> interface, enabling Ark to be accessed from
+a mobile phone.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implementation-4"><a class="link" href="#implementation-4">Implementation</a></h4>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="arkbot-telegram-bot-interface-for-ark-2"><a class="link" href="#arkbot-telegram-bot-interface-for-ark-2">ArkBot: Telegram Bot Interface for Ark</a></h3>
+<div class="paragraph">
+<p>ArkBot is written using <a href="https://github.com/rubenlagus/TelegramBots">TelegramBots</a>, a Java library written by
+<a href="https://github.com/rubenlagus">rubenlagus</a> to create bots using <a href="https://core.telegram.org/bots/api">Telegram Bots API</a>.</p>
+</div>
+<div class="paragraph">
+<p>At present the following commands have an equivalent in ArkBot: <code>add</code> <code>delete</code> <code>list</code> <code>find</code> <code>undo</code> <code>redo</code> <code>help</code>.</p>
+</div>
+<div class="paragraph">
+<p>ArkBot also has the added functionality of <code>complete</code> which is merely a wrapper around the <code>edit</code> command to mark parcel
+deliveries as complete. This is especially useful for our delivery man.</p>
+</div>
+<div class="paragraph">
+<p>Like all Telegram Bots, each command must be prefixed with a <code>/</code> character. So if I were to want to trigger the help
+command, I would send <code>/help</code> to ArkBot.</p>
+</div>
+<div class="paragraph">
+<p>If we enter the <code>complete</code> command into ArkBot without any parameters, we enter <code>listen</code> mode.</p>
+</div>
+<div class="paragraph">
+<p>In <code>listen</code> mode, ArkBot is waiting for a QR to be sent to be analysed. The image is then downloaded and using the
+<a href="https://github.com/zxing/zxing">zxing</a> barcode scanning library for Java, the information is unwrapped and parsed into
+the edit command to change the status of the parcel to <code>COMPLETED</code>.</p>
+</div>
+<div class="paragraph">
+<p>To exit <code>listen</code> mode, type <code>/cancel</code>.</p>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect: Implementation of <code>ArkBot</code></strong><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Parse the arguments from the user into various commands as needed. If there any
+errors that surface, reply user with default error message.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> Functions of commands on Ark remain the same, reusing current implementation<br></p>
+</li>
+<li>
+<p><strong>Cons:</strong> Error catching is difficult, it is difficult to test and slower as information is handle by many parties.<br></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Program each command from the Bot to directly interface with Model and Logic Managers on Ark<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> Quicker and more director way of communication. Less reliant on Ark commands.<br></p>
+</li>
+<li>
+<p><strong>Cons:</strong> More difficult to implement as we&#8217;ll need to implement our own version of all the command on Ark.<br></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<hr>
+</div>
+</div>
 <div class="sect2">
 <h3 id="other-contributions"><a class="link" href="#other-contributions">Other contributions</a></h3>
 
@@ -1548,17 +691,23 @@ characters.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="project-powerpointlabs"><a class="link" href="#project-powerpointlabs">Project: PowerPointLabs</a></h2>
+<h2 id="project-goobot"><a class="link" href="#project-goobot">Project: GooBot</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>{Optionally (not graded), you may include other projects in your portfolio.}</p>
+<p>Over the summer of 2017, my partner and I developed a Telegram Bot generating framework using Node.js.
+Our framework allows users without programming experience to create their own Finite State Machine style Telegram bots.
+I specifically worked on data manipulation and created a simple HTML to allow users to manage their bots.</p>
+</div>
+<div class="paragraph">
+<p>Goobot, which was created during the NUS Orbital Programme, won 1st prize in Gemini (Intermediate) category during the
+course&#8217;s project showcase.</p>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-12 19:00:48 +00:00
+Last updated 2017-11-13 03:45:35 +00:00
 </div>
 </div>
 </body>
