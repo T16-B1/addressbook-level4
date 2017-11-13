@@ -61,7 +61,7 @@
 <li><a href="#import-mechanism">4.9. Import Mechanism</a></li>
 <li><a href="#tab-autocomplete-mechanism">4.10. Tab autocomplete mechanism</a></li>
 <li><a href="#tracking-number-field">4.11. Tracking Number Field</a></li>
-<li><a href="#postalcode-field">4.12. PostalCode Field</a></li>
+<li><a href="#postal-code-field">4.12. Postal Code Field</a></li>
 <li><a href="#status-field">4.13. Status field</a></li>
 <li><a href="#delivery-date-field">4.14. Delivery Date field</a></li>
 <li><a href="#tags">4.15. Tags</a></li>
@@ -1677,7 +1677,8 @@ Also creates coupling between the <code>Autocompleter</code> and <code>CommandBo
 <p>Parcels have tracking numbers for delivery vendors to keep track of the parcels that they send out on a daily basis.
 This feature is important because a single person can have many parcels belonging to him. Tracking numbers are used
 to differentiate between the different parcels that are going to be delivered to the same person. Tracking numbers also
-serve as a better way of narrowing down and pinpointing parcels of interest since these numbers are more unique</p>
+serve as a better way of narrowing down and pinpointing parcels of interest since these numbers are likely to be more
+unique than names in a localized region.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1693,13 +1694,54 @@ You can read more about their Registered Article tracking number
 </tr>
 </table>
 </div>
+<div class="sect3">
+<h4 id="design-considerations-9"><a class="link" href="#design-considerations-9">4.11.1. Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Tracking Numbers implementation.</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Ark allows duplicate <code>TrackingNumber</code> entries.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> In the event that the number of parcels in the users' inventory exceeds the number of possible
+<code>TrackingNumber</code> entries, the user will still be able to add the parcel into Ark. There has been instances where
+tracking numbers were reused. Moreover, different delivery companies have different policies on how the tracking
+numbers` are used. Therefore, it is difficult to implement a general policy for <code>TrackingNumber</code> entries.<br></p>
+</li>
+<li>
+<p><strong>Cons:</strong> Less intuitive to users.<br></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Ark only allows non-duplicate <code>TrackingNumber</code> entries.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> More intuitive for users.<br></p>
+</li>
+<li>
+<p><strong>Cons:</strong> Impossible to add parcel with duplicate entry even if the parcel does have that specific <code>Tracking Number</code>.
+This issue can occur during festive periods such as Christmas when the number of parcels can exceed the number of
+<code>TrackingNumber</code> entries.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
 </div>
 <div class="sect2">
-<h3 id="postalcode-field"><a class="link" href="#postalcode-field">4.12. PostalCode Field</a></h3>
+<h3 id="postal-code-field"><a class="link" href="#postal-code-field">4.12. Postal Code Field</a></h3>
 <div class="paragraph">
-<p>The <code>PostalCode</code> field is implemented as part of Address. This class stores the postal address of locations in Singapore.
-It only accepts values of <code>s</code> or <code>S</code> followed by 6 digits. The value stored in this class is used to store the postal
-code of the address. The value is used to query Google Maps when the <code>select</code> command is executed.</p>
+<p>The Postal Code field is implemented as part of Address. The <code>Postal Code</code> class stores the postal address of locations
+in Singapore. It only accepts values of <code>s</code> or <code>S</code> followed by 6 digits. The value stored in this class is used to store
+ the postal code of the address. The value is used to query Google Maps when the <code>select</code> command is executed.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1716,11 +1758,61 @@ code exists even though it might meet the criteria above. The team is working on
 </tr>
 </table>
 </div>
+<div class="sect3">
+<h4 id="design-considerations-10"><a class="link" href="#design-considerations-10">4.12.1. Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Implementation of <code>Postal Code</code></strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> <code>Postal Code</code> is designed as a part of the <code>Address</code> class.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> This composition relationship is more intuitive. If an <code>Address</code> is deleted, its corresponding <code>Postal
+Code</code> is also deleted.</p>
+</li>
+<li>
+<p><strong>Cons:</strong> -<br></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Separate the <code>PostalCode</code> class from the <code>Address</code> class</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> -<br></p>
+</li>
+<li>
+<p><strong>Cons:</strong> When an <code>Address</code> is deleted, its corresponding <code>PostalCode</code> has to be searched and deleted as well. This
+results in more overhead.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="status-field"><a class="link" href="#status-field">4.13. Status field</a></h3>
 <div class="paragraph">
-<p><code>Status</code> is used to indicate the current stage of delivery that a parcel is at. It has 4 possible states:</p>
+<p><code>Status</code> represents the current stage of delivery that a parcel is at. As seen in the class diagram below,
+<code>Status</code> is implemented using <code>Enumeration</code> interface and it has the four possible values:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/StatusClassDiagram.png" alt="width:"250"">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 4.13: Status Class Diagram</em></p>
+</div>
+<div class="paragraph">
+<p>The following are the descriptions for the four possible values of <code>Status</code>:</p>
 </div>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
@@ -1754,21 +1846,32 @@ delivered by.</p></td>
 </tbody>
 </table>
 <div class="paragraph">
-<p>These states have different colours codes to allow users to differentiate the <code>Status</code> values more easily.</p>
+<p>As seen in the class diagram, the <code>getInstance()</code> method retrieves the static instance of <code>Status</code> based on the <code>status</code>
+String input. For example, <code>getInstance("pending")</code> will return the <code>PENDING Status</code>. Additionally, Status is updated
+automatically when a parcel is edited, added. The Status of parcels in Ark will also be updated when Ark first launches.
+This is done through the <code>getUpdatedInstance(s : Status, d : DeliveryDate)</code> method and the overloaded method
+<code>getUpdated(d : DeliveryDate)</code> method.<br></p>
+</div>
+<div class="paragraph">
+<p>The automatic <code>Status</code> update updates based on the comparison of today&#8217;s date to the <code>DeliveryDate</code> object given as the
+parameter of <code>getUpdatedStatus()</code>. If today&#8217;s date is after the date indicated in the <code>DeliveryDate</code> object, the method
+will return an <code>OVERDUE Status</code>. Otherwise, it will return a <code>PENDING Status</code>. The <code>Status</code> update only works for
+<code>Status</code> values of <code>PENDING</code> and <code>OVERDUE</code>. <code>COMPLETED</code> and <code>DELIVERING Status</code> are not updated.</p>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-9"><a class="link" href="#design-considerations-9">4.13.1. Design Considerations</a></h4>
+<h4 id="design-considerations-11"><a class="link" href="#design-considerations-11">4.13.1. Design Considerations</a></h4>
 <div class="paragraph">
-<p><strong><code>Implementation of Status</code></strong></p>
+<p><strong>Implementation of <code>Status</code></strong></p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Status is an enum class.</p>
+<p><strong>Alternative 1 (current choice):</strong> Status implements an Enumeration.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Pros:</strong> <code>Status</code> should only have fixed values. The user should also not be allowed to create new <code>Status</code> objects.</p>
+<p><strong>Pros:</strong> <code>Status</code> has a fixed number of  values. The user should also not be allowed to create new <code>Status</code> objects.
+This also standardizes the naming conventions used to describe the same delivery status in Ark.</p>
 </li>
 <li>
 <p><strong>Cons:</strong> Less options for the user to alter the <code>Status</code> values<br></p>
@@ -1785,7 +1888,45 @@ delivered by.</p></td>
 </li>
 <li>
 <p><strong>Cons:</strong> It becomes more difficult to import data files since different users may use different terminologies to
-describe the same status of the parcel.</p>
+describe the same <code>Status</code> of the parcel.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<hr>
+<div class="paragraph">
+<p><strong>Updating of <code>Status</code></strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Separate <code>Status</code> update from retrieving an instance of Status</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> By separating the update and retrieval, we are using the Separation of Concerns Principle, <code>getInstance()</code>
+checks if the String input is a valid <code>Status</code> and returns it. On the other hand, <code>getUpdatedInstance()</code> receives a
+valid <code>Status</code> and returns an updated <code>Status</code> with respect to the <code>DeliveryDate</code> provided as a parameter. Easier to
+test these methods and integrate the automatic <code>Status</code> update into the codebase.</p>
+</li>
+<li>
+<p><strong>Cons:</strong> More overhead.<br></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Update <code>State</code> in <code>getInstance()</code>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> Less overhead and more intuitive.</p>
+</li>
+<li>
+<p><strong>Cons:</strong> More tedious to code because a <code>DeliveryDate</code> object has to be instantiated before programmer is able to
+retrieve a <code>Status</code>.</p>
 </li>
 </ul>
 </div>
@@ -1947,18 +2088,18 @@ when handling.</p></td>
 </tbody>
 </table>
 <div class="sect3">
-<h4 id="design-considerations-10"><a class="link" href="#design-considerations-10">4.15.1. Design Considerations</a></h4>
+<h4 id="design-considerations-12"><a class="link" href="#design-considerations-12">4.15.1. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong><code>Implementation of Tag</code></strong></p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Tag is an enum class.</p>
+<p><strong>Alternative 1 (current choice):</strong> Tag is implements the Enumeration class.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Pros:</strong> <code>Tag`s should only have fixed values. The user should also not be allowed to create new `Tag</code> objects.</p>
+<p><strong>Pros:</strong> <code>Tag`s has fixed values. The user should also not be allowed to create new `Tag</code> objects.</p>
 </li>
 <li>
 <p><strong>Cons:</strong> Less options for the user to alter the <code>Tag</code> values<br></p>
@@ -2011,7 +2152,7 @@ not on the current active list, a tab switch needs to happen. This is taken care
 the Model Manager class.</p>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-11"><a class="link" href="#design-considerations-11">4.16.1. Design Considerations</a></h4>
+<h4 id="design-considerations-13"><a class="link" href="#design-considerations-13">4.16.1. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect: Implementation of <code>maintainSorted</code></strong><br></p>
 </div>
@@ -2078,7 +2219,7 @@ the edit command to change the status of the parcel to <code>COMPLETED</code>.</
 <p>To exit <code>listen</code> mode, type <code>/cancel</code>.</p>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-12"><a class="link" href="#design-considerations-12">4.17.1. Design Considerations</a></h4>
+<h4 id="design-considerations-14"><a class="link" href="#design-considerations-14">4.17.1. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect: Implementation of <code>ArkBot</code></strong><br></p>
 </div>
@@ -3209,7 +3350,7 @@ characters.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-13 03:45:35 +00:00
+Last updated 2017-11-13 04:30:43 +00:00
 </div>
 </div>
 </body>
