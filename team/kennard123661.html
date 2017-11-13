@@ -19,7 +19,7 @@
 <h2 id="project-ark"><a class="link" href="#project-ark">Project: Ark</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Ark is a desktop delivery management application that my team and I built for our Software Engineering module in the
+<p>Ark is a desktop delivery management application that my team and I had built for our Software Engineering module in the
 National University of Singapore. We built this application for delivery companies to manage their deliveries.
 The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 14kLoC.
  You may access the Ark repository <a href="https://github.com/CS2103AUG2017-T16-B1/main">here</a>.</p>
@@ -109,17 +109,17 @@ Do not include the file type in your file name. The following inputs for the fil
 <div class="paragraph">
 <p>Parcel companies manage millions of deliveries on a daily basis. As such, they have to deal with large amounts of
 data and deliveries. Furthermore, adding parcels into Ark individually is time consuming. Hence, I built a
-feature that allows parcel companies to import parcels from same files, and add parcels into Ark more efficiently.</p>
+feature that allows parcel companies to import parcels from storage files, and add parcels into Ark more efficiently.</p>
 </div>
 <div class="paragraph">
 <p>Moreover, parcels are usually passed from one delivery company to another (or to another shipping company). Hence, I
-wanted to make it possible for delivery companies to be able to transfer their Ark save files to each other as they
+wanted to make it possible for delivery companies to be able to transfer their Ark storage files to each other as they
 transfer stewardship of parcels. This would save delivery companies time since they do not need to re-enter data that
 the previous delivery company had already entered.</p>
 </div>
 <div class="paragraph">
 <p>I designed this feature to accept <code>.xml</code> only files since Ark stores its files in <code>.xml</code> format and I wanted the
- import command to be compatible with its save files so that it can import its save files.</p>
+ import command to be compatible with its storage files so that it can import its storage files.</p>
 </div>
 </div>
 <div class="sect3">
@@ -133,20 +133,22 @@ the previous delivery company had already entered.</p>
 <div class="sect2">
 <h3 id="import-mechanism"><a class="link" href="#import-mechanism">Import Mechanism</a></h3>
 <div class="paragraph">
-<p>To use this command, you can type <code>import (FILE_NAME)</code> into the <code>CommandBox</code>. e.g. <code>import ark_save</code></p>
+<p>To use this command, you can type <code>import</code> and the name of your file into the <code>CommandBox</code>. e.g. <code>import ark_save</code></p>
 </div>
 <div class="paragraph">
-<p>The <code>Import</code> mechanism allows users to import parcels from valid <code>Ark</code> storage files stored as <code>.xml</code> files into the
-current instance of <code>Ark</code>. This mechanism is facilitated by a <code>readAddressBook</code> method within <code>XmlAddressBookStorage</code> to
-load the parcels stored in the <code>xml</code> file and an <code>ModelManager#addAllParcels</code> to add the parcels in
-the storage file into the current instance of <code>Ark</code>.<br></p>
+<p>The <code>import</code> mechanism allows users to import parcels from valid storage files stored in a <code>.xml</code> format. This mechanism
+ allows users to add multiple parcels stored in the imported storage file into the running instance of Ark. This
+ mechanism is facilitated by the <code>readAddressBook()</code> method within <code>AddressBookStorage()</code> to
+load the parcels stored in the storage file and the <code>ModelManager#addAllParcels</code> method to add the parcels in
+the storage file into the running instance of <code>Ark</code>.<br></p>
 </div>
 <div class="paragraph">
-<p>Since the <code>Import</code> mechanism modifies the data stored in <code>Ark</code>, it has to be an undoable command. Thus, it inherits from
-the <code>UndoableCommands</code> interface rather than inheriting direclty from the <code>Command</code> interface.<br></p>
+<p>Since the <code>import</code> mechanism modifies the data stored in <code>Ark</code>, it should be an extension of the <code>UndoCommand</code>. Thus,
+it inherits from the <code>UndoableCommand</code> interface rather than inheriting direclty from the <code>Command</code> interface.<br></p>
 </div>
 <div class="paragraph">
-<p>The following sequence diagram shows how the <code>import</code> operation works:</p>
+<p>The following sequence diagram describes the sequence of events that occur when you enter 'import ark_save' into the
+ <code>CommandBox</code>:</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -158,9 +160,9 @@ the <code>UndoableCommands</code> interface rather than inheriting direclty from
 </div>
 <div class="paragraph">
 <p>As seen in the sequence diagram above, the command is first parsed to create an <code>ImportCommandParser</code>. This parser
-takes the arguments of the input as the name of the file to import and converts it to a full file path string to
-locate the file to import. Thereafter, it loads the file to import into Ark and reads the data. This returns a list of
-parcels that are used in create an <code>ImportCommand</code>.</p>
+takes the arguments of the import command ("ark_save") as the name of the file to import and converts it to a
+full file path string ("./data/import/ark_save.xml") to locate the file to import. Thereafter, it loads the file
+to import into Ark and reads the data. This returns a list of parcels that are used in create an <code>ImportCommand</code>.</p>
 </div>
 <div class="paragraph">
 <p>When the command is executed, the following sequence of events take place:</p>
@@ -176,8 +178,8 @@ parcels that are used in create an <code>ImportCommand</code>.</p>
 <div class="paragraph">
 <p>As seen in the diagram above, when the command is executed, the <code>executeUndoableMethod</code> methods calls
 <code>ModelManager#addAllParcels</code> method. In this method, all unique parcels are added into the running instance of Ark.
-If the parcel is not unique such that it will create a duplicate parcel in the inventory, the parcel is ignored and
-the process continues until the last parcel has been added.</p>
+If the parcel is not unique such that it will create a duplicate parcel in the current instance of Ark,
+the parcel is ignored and the process continues until the last parcel has been added.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -188,7 +190,7 @@ the process continues until the last parcel has been added.</p>
 <td class="content">
 The file to be imported has to be stored in the <code>./data/import</code> folder. i.e. calling <code>import ark_save</code> will import the
 file <code>./data/import/ark_save.xml</code>.<br>
-If the user enters a file name that contains characters other than alphanumeric characters or a file name that is
+If the user enters a file name that contains characters other than alphanumeric characters or imports a file that is
 not in a <code>.xml</code> format, the command will throw an Exception.
 </td>
 </tr>
@@ -203,7 +205,7 @@ not in a <code>.xml</code> format, the command will throw an Exception.
 <td class="content">
 The <code>ImportCommand</code> will only add non-duplicate parcels. Duplicate parcels are ignored.<br>
 If all the parcels to be imported into Ark are duplicates, then no parcels are imported and an Exception is thrown.<br>
-If the file to import is either, a <code>CommandException</code> will be thrown
+If the file to import is missing or empty, a <code>CommandException</code> will be thrown
 </td>
 </tr>
 </table>
@@ -259,7 +261,7 @@ feature has to be manually implemented in <code>ImportCommand</code> as well.</p
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Pros:</strong> User will only stored his save files at one location, he will not store them at random locations and lose
+<p><strong>Pros:</strong> User will only store his save files at one location, he will not store them at random locations and lose
 track of them. User only has to type the name of the file and does not need to type the full file path to locate
 the file. i.e. the user does not need to type <code>./data/import/Ark.xml</code>.<br></p>
 </li>
@@ -296,11 +298,12 @@ the file. i.e. the user does not need to type <code>./data/import/Ark.xml</code>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Pros:</strong> Users will constraint their file naming to contain more semantic names rather than having symbols in their
-naming of Ark save files.<br></p>
+<p><strong>Pros:</strong> Users need to constraint their file naming to contain more semantic names rather than having
+non-alphanumeric or non-underscore characters in their naming of Ark save files.<br></p>
 </li>
 <li>
-<p><strong>Cons:</strong> The user has restrictions on the file naming conventions he can use to name his import files<br></p>
+<p><strong>Cons:</strong> The user has restrictions on the file naming conventions he can use to name the save files that he wants
+to import.<br></p>
 </li>
 </ul>
 </div>
@@ -406,8 +409,8 @@ save file.</p>
 <div class="sect2">
 <h3 id="backup-mechanism"><a class="link" href="#backup-mechanism">Backup Mechanism</a></h3>
 <div class="paragraph">
-<p>The back up mechanism is facilitated by a <code>backupAddressBook()</code> method within the <code>StorageManager</code>. It supports the
-backing up of AddressBook data in Ark.<br></p>
+<p>The back up mechanism is facilitated by a <code>backup(addressBook:AddressBookStorage)</code> method within the <code>StorageManager</code>
+class. It supports the backup of data in Ark.<br></p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -415,18 +418,24 @@ backing up of AddressBook data in Ark.<br></p>
 </div>
 </div>
 <div class="paragraph">
-<p><em>Diagram 4.6.1 : Sequence diagram describing the operation of the <code>storageManager</code> when it is initialized</em></p>
+<p><em>Diagram 4.7.1 : Sequence diagram describing the operation of the <code>storageManager</code> when it is initialized</em></p>
 </div>
 <div class="paragraph">
-<p>As seen in the sequence diagram above, the <code>backupAddressBook()</code> method is called when <code>storageManager</code> is initialised
-in <code>MainApp#init()</code>. This method is called when Ark launches. From the diagram above, the backup() method is called.
-This backup method first checks if there is a save file loaded into Ark. If there is a save file loaded into Ark, a
-backup will be called. Otherwise, Ark does not backup the missing save file.</p>
+<p>As seen in the sequence diagram above, the <code>backup(addressBook:AddressBookStorage)</code> method is called when
+<code>storageManager</code> is initialised in <code>MainApp#init()</code>. The <code>MainApp#init()</code> is called when Ark launches.
+From the diagram above, the <code>backup()</code> method is called when <code>storageManager</code> is initialized. This backup method first
+checks if there is a valid save file loaded into Ark. If there is a save file loaded into Ark,
+the <code>backup(addressBook:AddressBook)</code> method will be called. Otherwise, Ark does not backup the missing save file.</p>
+</div>
+<div class="paragraph">
+<p>To save the backup data, Ark first retrieves the backup file path by calling the <code>getBackupStorageFilePath()</code> method.
+Then, it will call the <code>saveAddressBook(addressBook, backupStoragePath)</code> method to save a backup of Ark at the retrived
+backup file path.</p>
 </div>
 <div class="sect3">
 <h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">Design Considerations</a></h4>
 <div class="paragraph">
-<p><strong>Aspect: Implementation of <code>StorageManager#backupAddressBook</code></strong><br></p>
+<p><strong>Aspect: Implementation of <code>StorageManager#backup()</code></strong><br></p>
 </div>
 <div class="ulist">
 <ul>
@@ -435,28 +444,28 @@ backup will be called. Otherwise, Ark does not backup the missing save file.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Pros:</strong> It becomes easier to implement method rather than writing out a separate logic for <code>backupAddressBook()</code>. It
-makes updates easier since enhancements to <code>saveAddressBook()</code> will also enhance <code>backupAddressBook()</code>.<br></p>
+<p><strong>Pros:</strong> It becomes easier to implement method rather than writing out a separate logic for <code>backup()</code>. It
+makes updates easier since enhancements to saving Ark in <code>saveAddressBook()</code> will also enhance <code>backup()</code>.<br></p>
 </li>
 <li>
-<p><strong>Cons:</strong> This implementation increases the coupling of <code>backupAddressBook()</code> and
-<code>saveAddressBook()</code> where changes in <code>saveAddressBook()</code> are likely to cause changes in <code>backupAddressBook()</code>.<br></p>
+<p><strong>Cons:</strong> This implementation increases the coupling of <code>backup()</code> and <code>saveAddressBook()</code> where changes in
+<code>saveAddressBook()</code> are likely to cause changes in <code>backup()</code>.<br></p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Alternative 2:</strong> Separate the implementation of <code>backupAddressBook()</code> from <code>saveAddressBook()</code><br></p>
+<p><strong>Alternative 2:</strong> Separate the implementation of <code>backup()</code> from <code>saveAddressBook()</code><br></p>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Pros:</strong> Reduced coupling of <code>saveAddressBook()</code> and <code>backupAddressBook()</code> and allows the backup file to be saved at a
+<p><strong>Pros:</strong> Reduced coupling of <code>saveAddressBook()</code> and <code>backup()</code> and allows the backup file to be saved at a
 different location from the main save file. This prevents the backup file from being corrupted if the folder of the
 main save file becomes corrupted.<br></p>
 </li>
 <li>
-<p><strong>Cons:</strong> More tedious to implement and maintain <code>backupAddressBook()</code> since enhancements to the saving feature has to
-be implemented in both <code>saveAddressBook()</code> and <code>backupAddressBook()</code><br></p>
+<p><strong>Cons:</strong> More tedious to implement and maintain <code>backup()</code> since enhancements to the saving feature has to
+be implemented in both <code>saveAddressBook()</code> and <code>backup()</code><br></p>
 </li>
 </ul>
 </div>
@@ -465,41 +474,36 @@ be implemented in both <code>saveAddressBook()</code> and <code>backupAddressBoo
 </div>
 <hr>
 <div class="paragraph">
-<p><strong>Aspect: Trigger to execute the backup command</strong><br></p>
+<p><strong>Aspect: Trigger to execute the backup mechanism</strong><br></p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Automatically backup data on Ark on launch of the software.<br></p>
+<p><strong>Alternative 1 (current choice):</strong> Automatically backup data on launch.<br></p>
 <div class="ulist">
 <ul>
 <li>
 <p><strong>Pros:</strong> This implementation ensures that the if the user corrupts the data of Ark during a session. The user will be
-able to revert to the start of the session, which is ensured to be a workable instance of the Ark software.<br></p>
+able to revert to the start of the session, which is likely to be a functional copy of his original save file.<br></p>
 </li>
 <li>
-<p><strong>Cons:</strong> This does not give the most recent copy of the data of the Ark if many changes were made in a single session.<br></p>
+<p><strong>Cons:</strong> This does not give the most recent copy of the data of the Ark if many changes were made in a single
+session.<br>
+1* <strong>Alternative 2:</strong> Backup data every few minutes<br></p>
 </li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Alternative 2:</strong> Backup data on Ark every few minutes<br></p>
-<div class="ulist">
-<ul>
 <li>
 <p><strong>Pros:</strong> Provides a very recent copy of the data on Ark.<br></p>
 </li>
 <li>
-<p><strong>Cons:</strong> More tedious and difficult to implement. User may also be running another process at that point of time. This
-could cause a bottleneck if there is a lot of data to be saved, and multiple backup calls are queued one after the
-other.<br></p>
+<p><strong>Cons:</strong> More tedious and difficult to implement. User may also be running another process at that point of time.
+This could cause a bottleneck if there is a lot of data to be saved, and multiple backup calls will be queued one after
+the other if the previous backup process is called even before the current one has finished running.<br></p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Alternative 3:</strong> Backup data after a fixed number of `UndoableCommand`s.<br></p>
+<p><strong>Alternative 3:</strong> Backup data after a fixed number of <code>UndoableCommand</code>.<br></p>
 <div class="ulist">
 <ul>
 <li>
@@ -507,8 +511,8 @@ other.<br></p>
 </li>
 <li>
 <p><strong>Cons:</strong> More tedious and difficult to implement. Difficult to determine the optimal amount of data to restore. If
-the corruption of the data is caused by a several of commands, it becomes difficult to ensure that the backup file
-provides a workable copy of the data of Ark.</p>
+the corruption of the data is caused by a series of commands, it becomes difficult to provide reasonable assurance
+that the backup file provides a functional copy of the data of Ark.</p>
 </li>
 </ul>
 </div>
@@ -517,30 +521,30 @@ provides a workable copy of the data of Ark.</p>
 </div>
 <hr>
 <div class="paragraph">
-<p><strong>Aspect: Choice of backing up if there is no save file.</strong><br></p>
+<p><strong>Aspect: Case: Backup if main storage file is not present</strong><br></p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Ark does not backup if it cannot read the save file<br></p>
+<p><strong>Alternative 1 (current choice):</strong> Ark does not backup if it cannot read the main storage file<br></p>
 <div class="ulist">
 <ul>
 <li>
 <p><strong>Pros:</strong> Backup data will not be overwritten in the event that Ark is not able to read the designated save file for
-reasons such as the save file being corrupted/missing+</p>
+reasons such as the save file being corrupted/missing.<br></p>
 </li>
 <li>
-<p><strong>Cons:</strong> Additional overhead to check if Ark is able to read the designated save file.<br></p>
+<p><strong>Cons:</strong> Additional overhead to check if Ark is able to read the save file.<br></p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Alternative 2:</strong> Ark backs up even if the save file does not exist.<br></p>
+<p><strong>Alternative 2:</strong>Back up even if the main storage file does not exist or cannot be read by Ark.<br></p>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Pros:</strong> Less overhead needed to check if Ark is able to read the designated save file.<br></p>
+<p><strong>Pros:</strong> Less overhead needed to check if Ark is able to read the save file.<br></p>
 </li>
 <li>
 <p><strong>Cons:</strong> Backup data could be overwritten in the event the designated save file is corrupted/missing.<br></p>
@@ -631,6 +635,13 @@ particular instance. Hence, it is imperative that delivery companies are able to
 have a clear idea of the stage of delivery that their parcels are at. Moreover, it allows delivery customers to be
 accountable to their clients when their clients inquire about the delivery status of their parcels.</p>
 </div>
+<div class="paragraph">
+<p>In addition, this feature has an automatic <code>Status</code> update base on the delivery date of the parcel. If the delivery date has
+ been passed, the parcel <code>Status</code> updates to <code>OVERDUE</code>. Otherwise, it will update to <code>PENDING</code>. This update only works
+ for parcels that have <code>PENDING</code> or <code>OVERDUE</code> <code>Status</code>. The automatic update feature allows our users to have a more
+ intuitive description of the urgency of a parcel delivery. Rather than observing the date to determine if the parcel is
+ overdue, Ark&#8217;s <code>Status</code> feature, with its automatic updates helps users visualize this information more intuitively.</p>
+</div>
 </div>
 <div class="sect3">
 <h4 id="implementation-3"><a class="link" href="#implementation-3">Implementation</a></h4>
@@ -644,11 +655,11 @@ accountable to their clients when their clients inquire about the delivery statu
 <h3 id="status-field"><a class="link" href="#status-field">Status field</a></h3>
 <div class="paragraph">
 <p><code>Status</code> represents the current stage of delivery that a parcel is at. As seen in the class diagram below,
-<code>Status</code> is implemented using <code>Enumeration</code> interface and it has the four possible values:</p>
+<code>Status</code> is implements an <code>Enumeration</code> interface and it has the four possible values:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/StatusClassDiagram.png" alt="width:"250"">
+<img src="../images/StatusClassDiagram.png" alt="width:"150"">
 </div>
 </div>
 <div class="paragraph">
@@ -691,7 +702,7 @@ delivered by.</p></td>
 <div class="paragraph">
 <p>As seen in the class diagram, the <code>getInstance()</code> method retrieves the static instance of <code>Status</code> based on the <code>status</code>
 String input. For example, <code>getInstance("pending")</code> will return the <code>PENDING Status</code>. Additionally, Status is updated
-automatically when a parcel is edited, added. The Status of parcels in Ark will also be updated when Ark first launches.
+automatically when a parcel is edited or added. The <code>Status</code> of parcels in Ark will also be updated when Ark first launches.
 This is done through the <code>getUpdatedInstance(s : Status, d : DeliveryDate)</code> method and the overloaded method
 <code>getUpdated(d : DeliveryDate)</code> method.<br></p>
 </div>
@@ -709,7 +720,7 @@ will return an <code>OVERDUE Status</code>. Otherwise, it will return a <code>PE
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Status implements an Enumeration.</p>
+<p><strong>Alternative 1 (current choice):</strong> Status implements an Enumeration interface.</p>
 <div class="ulist">
 <ul>
 <li>
@@ -761,7 +772,7 @@ test these methods and integrate the automatic <code>Status</code> update into t
 </div>
 </li>
 <li>
-<p><strong>Alternative 2:</strong> Update <code>State</code> in <code>getInstance()</code>.</p>
+<p><strong>Alternative 2:</strong> Update <code>Status</code> in <code>getInstance()</code>.</p>
 <div class="ulist">
 <ul>
 <li>
@@ -769,7 +780,7 @@ test these methods and integrate the automatic <code>Status</code> update into t
 </li>
 <li>
 <p><strong>Cons:</strong> More tedious to code because a <code>DeliveryDate</code> object has to be instantiated before programmer is able to
-retrieve a <code>Status</code>.</p>
+retrieve an updated <code>Status</code>.</p>
 </li>
 </ul>
 </div>
@@ -801,7 +812,7 @@ retrieve a <code>Status</code>.</p>
 <p>This field allows you to add tracking numbers to your parcels. Tracking numbers allow you to keep track of the parcels
 that are in your possession. This field is important because a single person can have many parcels belonging to
 him. Hence, you can use our Tracking Number to differentiate between the different parcels that are allocated to a
-single recipient. You can also use tracking numbers to identify specific parcels to be allocated</p>
+single recipient. You can also use tracking numbers to identify specific parcels.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -842,7 +853,10 @@ The team is working on adding support for more types of tracking numbers such as
 <div class="sect3">
 <h4 id="justification-4"><a class="link" href="#justification-4">Justification</a></h4>
 <div class="paragraph">
-<p>{{to be added}}</p>
+<p>Delivery companies use tracking numbers to track their parcels in their possession. Tracking numbers are necessary since
+a single person can have many different items that are meant to delivered to him on a single day. Tracking numbers help
+our users and their clients differentiate between these parcels. This helps our users become more accountable to clients
+if a certain parcel has not been delivered as well.</p>
 </div>
 </div>
 <div class="sect3">
@@ -980,7 +994,12 @@ code exists even though it might meet the criteria above. The team is working on
 <div class="sect3">
 <h4 id="justification-5"><a class="link" href="#justification-5">Justification</a></h4>
 <div class="paragraph">
-<p>{Justify the need for, and the current design (i.e. external behavior) of, the feature}</p>
+<p>Addresses in Singapore have a postal code representation. We use this postal code feature to query Google Maps on the
+destination address of a parcel and help our users visualize this information. This feature is necessary because
+addresses in Singapore can have similar names (Type OCBC into Google Maps, and you will observe that OCBC has many
+branches) around Singapore. Hence, postal codes will help Google Maps pinpoint the exact address that we should deliver
+a parcel too. Furthermore, postal codes are short and succinct and do not require an extensive amount of effort for
+the user to input this data.</p>
 </div>
 </div>
 <div class="sect3">
@@ -994,9 +1013,10 @@ code exists even though it might meet the criteria above. The team is working on
 <div class="sect2">
 <h3 id="postal-code-field"><a class="link" href="#postal-code-field">Postal Code Field</a></h3>
 <div class="paragraph">
-<p>The Postal Code field is implemented as part of Address. The <code>Postal Code</code> class stores the postal address of locations
-in Singapore. It only accepts values of <code>s</code> or <code>S</code> followed by 6 digits. The value stored in this class is used to store
- the postal code of the address. The value is used to query Google Maps when the <code>select</code> command is executed.</p>
+<p>The postal code field is represented using the <code>PostalCode</code> class. The <code>PostalCode</code> field is implemented as part of the
+<code>Address</code> class. The <code>PostalCode</code> class stores the postal address the address text. It only accepts values of
+<code>s</code> or <code>S</code> followed by 6 digits. The <code>PostalCode</code> will generate a <code>String</code> to query Google Maps when the <code>select</code>
+command is executed or a when a parcel is selected.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1025,8 +1045,8 @@ code exists even though it might meet the criteria above. The team is working on
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Pros:</strong> This composition relationship is more intuitive. If an <code>Address</code> is deleted, its corresponding <code>Postal
-Code</code> is also deleted.</p>
+<p><strong>Pros:</strong> This composition relationship is more intuitive. If an <code>Address</code> is deleted, its corresponding <code>PostalCode</code>
+is also deleted.</p>
 </li>
 <li>
 <p><strong>Cons:</strong> -<br></p>
@@ -1050,6 +1070,42 @@ results in more overhead.</p>
 </li>
 </ul>
 </div>
+<hr>
+<div class="paragraph">
+<p><strong>Valid inputs to the <code>PostalCode</code> class</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> `Postal code accepts postal district codes above 80. (first two digits of postal code)</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> This ensures that when new postal code districts are added into Singapore, the user will be able to add the
+postal codes from the new postal code district without receiving an error.</p>
+</li>
+<li>
+<p><strong>Cons:</strong> The user might enter postal codes that belong to a non-existent district e.g. S810000<br></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Reject postal codes with postal district codes above 80.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> The user will have a stricter validation of his postal code.<br></p>
+</li>
+<li>
+<p><strong>Cons:</strong> If a new postal district is added, e.g. 81, and there is parcel that has a postal code belonging to the
+district, Ark will reject that parcel from being entered,</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
 <div class="paragraph">
 <p><mark>End of Extract</mark></p>
 </div>
@@ -1057,8 +1113,759 @@ results in more overhead.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="enhancement-proposed-optimization-of-delivery-scheduling-based-on-time-or-distance"><a class="link" href="#enhancement-proposed-optimization-of-delivery-scheduling-based-on-time-or-distance">Enhancement Proposed: Optimization of delivery scheduling based on time or distance.</a></h3>
-
+<h3 id="enhancement-added-tag-feature"><a class="link" href="#enhancement-added-tag-feature">Enhancement Added: Tag Feature</a></h3>
+<div class="sect3">
+<h4 id="external-behavior-6"><a class="link" href="#external-behavior-6">External behavior</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: User Guide]</mark></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="tags"><a class="link" href="#tags">Tags Field: Delivery Tags of Parcel</a></h3>
+<div class="paragraph">
+<p><code>Tags</code> are used to indicate how the parcel should be handled. Tags can contain one or more of the following <code>Tag</code>:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 80%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Tag</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">FROZEN</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This means the parcel should be refrigerated as its contents are temperature sensitive.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">FLAMMABLE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This means that the parcels' contents are highly flammable and should be kept away from heat.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HEAVY</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This indicates that the parcel is heavy and may require additional manpower to deliver.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">FRAGILE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This state indicates that the parcels' contents can be broken easily and requires additional care
+when handling.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>To input a <code>Tag</code>, you can type insensitive formats of any of the above <code>Tags</code>. e.g. <code>frozen</code> or <code>Frozen</code> are valid inputs
+to add a <code>FROZEN</code> <code>Tag</code>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Values other than the above values will be rejected. e.g. <code>friends</code>, <code>colleagues</code>.
+If your use of Ark requires more tags to be made available, please contact our team and we will see to your request.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+<div class="sect3">
+<h4 id="justification-6"><a class="link" href="#justification-6">Justification</a></h4>
+<div class="paragraph">
+<p>More often than not, different parcels require different types of handling. The Tag feature is used to help users tag
+parcels with tags to describe how the parcel needs to be handled. This information helps to ensure that proper handling
+precautions are taken while handling a parcel and ensures that it reaches its intended recipient safely.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implementation-6"><a class="link" href="#implementation-6">Implementation</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: User Guide]</mark></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="tags-field"><a class="link" href="#tags-field">Tags Field</a></h3>
+<div class="paragraph">
+<p><code>Tags</code> are used to indicate how the parcel should be handled. The <code>Tags</code> field can contain one or more of the following <code>Tag</code>:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 80%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Tag</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">FROZEN</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This means the parcel should be refrigerated as its contents are temperature sensitive.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">FLAMMABLE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This means that the parcels' contents are highly flammable and should be kept away from heat.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HEAVY</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This indicates that the parcel is heavy and may require additional manpower to deliver.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">FRAGILE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This state indicates that the parcels' contents can be broken easily and requires additional care
+when handling.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect3">
+<h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong><code>Implementation of Tag</code></strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Tag implements the Enumeration interface.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> <code>Tag`s has fixed values. The user should also not be allowed to create new `Tag</code> objects.</p>
+</li>
+<li>
+<p><strong>Cons:</strong> Less options for the user to alter the <code>Tag</code> values<br></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Allow the user to define any `Tag`s they wish.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> Users have more versatility on naming conventions</p>
+</li>
+<li>
+<p><strong>Cons:</strong> It becomes difficult for delivery personnel to keep track of the tags since different personnel might
+use different tag names to refer to the same tag.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="enhancement-added-tooltip-feature"><a class="link" href="#enhancement-added-tooltip-feature">Enhancement Added: Tooltip Feature</a></h3>
+<div class="sect3">
+<h4 id="external-behavior-7"><a class="link" href="#external-behavior-7">External behavior</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: User Guide]</mark></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="tool-tip"><a class="link" href="#tool-tip">Parcel Tooltip</a></h4>
+<div class="paragraph">
+<p>Ark comes with a tooltip feature that allows you to view parcel details that are too long. Suppose you have entered
+a parcel with really long details into Ark. As seen below, John&#8217;s parcel has a delivery address that is too long,
+and a part of it has been replaced by ellipsis i.e. <code>&#8230;&#8203;</code> as seen in figure 4.21.1 below.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/ParcelWithLongInput.PNG" alt="ParcelWithLongInput" width="1000">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 4.21.1 : Parcel with a long address</em></p>
+</div>
+<div class="paragraph">
+<p>To view the full delivery address, we simply mouseover his address and the full details of his
+address will appear as a tooltip. This can be seen in figure 4.22.2 below.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/mouse-over-address.png" alt="mouse over address" width="1000">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 4.22.2 : Tooltip to show more of John&#8217;s address</em></p>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+</div>
+<div class="sect3">
+<h4 id="justification-7"><a class="link" href="#justification-7">Justification</a></h4>
+<div class="paragraph">
+<p>There are occasions where inputs to Ark are really long. To ensure that our users will be able to see the full input
+in Ark, a tooltip is added to help our users visualize this elongated data as observed in the diagram above.</p>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="enhancement-added-gui-tab-feature"><a class="link" href="#enhancement-added-gui-tab-feature">Enhancement Added: Gui Tab Feature</a></h3>
+<div class="sect3">
+<h4 id="external-behavior-8"><a class="link" href="#external-behavior-8">External behavior</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: User Guide]</mark></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="gui-tab-mechanism"><a class="link" href="#gui-tab-mechanism">GUI tab mechanism</a></h3>
+<div class="paragraph">
+<p>To help you organise between the parcels you have delivered and the parcels you have delivered, Ark provides you two
+lists, one containing the parcels you have yet to deliver, and the other, the parcels that you have already delivered.</p>
+</div>
+<div class="paragraph">
+<p>When you launch the application, Ark will show the list of undelivered parcels in your inventory. To view
+the list of delivered parcels, you can click on the <code>Completed Parcel</code> tab located on the Tab Panel of Ark.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/completed-parcel-list.PNG" alt="completed parcel list" width="1000">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 4.3.1 : Clicking on <code>Completed Parcel</code> tab</em></p>
+</div>
+<div class="paragraph">
+<p>As seen above in figure 4.3.1, the list has changed to the list of parcels that have been delivered. To revert back to the list of
+parcels that have not been delivered, simply click on the <code>All Parcels</code> tab.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Parcels that have a <code>COMPLETED</code> status will be added to the list of delivered parcels directly while Parcels
+that do not have a <code>COMPLETED</code> status will  be added to the list of undelivered parcels.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+<div class="sect3">
+<h4 id="justification-8"><a class="link" href="#justification-8">Justification</a></h4>
+<div class="paragraph">
+<p>Users can use this feature to segment the work (parcels) that have completed and the parcels they have to yet to deliver.
+This helps users to differentiate between the tasks they have completed and tasks that they have to do. By organising this
+data into separate lists, we can help users to visualize information about their parcels more intuitively without
+having a clunky interface.</p>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="documentation-contributions"><a class="link" href="#documentation-contributions">Documentation Contributions</a></h3>
+<div class="paragraph">
+<p>Here are some of the more significant segments of documentation that I&#8217;ve written for the Ark project.</p>
+</div>
+<div class="sect3">
+<h4 id="user-guide"><a class="link" href="#user-guide">User Guide</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: User Guide]</mark></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="parcel-fields"><a class="link" href="#parcel-fields">Parcel Fields</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="name"><a class="link" href="#name">Name Field: Name of Parcel Recipient</a></h3>
+<div class="paragraph">
+<p>The Name field represents the name of the parcel&#8217;s recipient. It can contain the name of the organisation or the person
+ that you are delivering to the parcel to.<br></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The Name field will only allow alphanumeric characters separated by whitespace. e.g. <code>John Doe</code>;
+<code>8 Noodles at Shangri-La&#8217;s Rasa Sentosa Resort &amp; Spa</code><br>
+Non-alphanumeric entries will be rejected by Ark. e.g. <code>John Doe!</code>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="tracking-number"><a class="link" href="#tracking-number">Tracking Number Field: Tracking Number of Parcel</a></h3>
+<div class="paragraph">
+<p>The Tracking Number field represents the tracking number of the parcels.</p>
+</div>
+<div class="paragraph">
+<p>This field allows you to add tracking numbers to your parcels. Tracking numbers allow you to keep track of the parcels
+that are in your possession. This field is important because a single person can have many parcels belonging to
+him. Hence, you can use our Tracking Number to differentiate between the different parcels that are allocated to a
+single recipient. You can also use tracking numbers to identify specific parcels.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Ark only supports tracking numbers for registered articles managed by SingPost at this instance. These
+numbers include two <code>R`s followed by nine digits and ending with `SG</code>. e.g. <code>RR123456789SG</code><br>
+You can read more about SingPost Registered Article tracking number
+ <a href="http://www.singpost.com/send-receive/sending-within-singapore/registered-article-local">here</a>.<br>
+Tracking numbers that do not conform to the above format will be rejected e.g. <code>rr123545679sg</code>; <code>RR#12345678SG</code>;
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+You can add multiple parcels with the same tracking number. This allows you to reuse tracking numbers in the event when
+the number of parcels in your inventory exceeds the number of tracking numbers. There has been instances of this
+occurring during festive seasons such as Christmas.<br>
+The team is working on adding support for more types of tracking numbers such as those of
+ <a href="https://www.ups.com/tracking/tracking.html">UPS</a> and <a href="https://www.fedex.com/sg/">FedEx</a> in the future.<br>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="phone"><a class="link" href="#phone">Phone Field: Phone of Parcel Recipient</a></h3>
+<div class="paragraph">
+<p>The Phone field represents the phone number of the parcel&#8217;s recipient. It can contain the phone number of the
+organisation or the person that you are delivering to the parcel to.<br></p>
+</div>
+<div class="paragraph">
+<p>You can only assign a single phone number to a each parcel. You may omit this field in your entry, preferably only
+when it is not provided.<br></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The Phone field will only allow you to add phone numbers with 3 or more digits. e.g. <code>1234 5678</code>; <code>1122 2344 5678</code>;<br>
+This is to allow you to add overseas numbers per the request of the parcel&#8217;s recipient.<br>
+Phone numbers shorter than 3 digits will be rejected. e.g. <code>4</code>, <code>12</code>;<br>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="address"><a class="link" href="#address">Address Field: Destination Address of Parcel Delivery</a></h3>
+<div class="paragraph">
+<p>The Address field represents the destination address of your parcel. This field contains the address that you should
+deliver your parcel to.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The Address field will only allow you to add an address with at least a single character as the text representation of
+the address, and appended with a valid postal code, separated from the text representation of the address with space(s).
+e.g. <code>123, example street #05-26 S012345</code>;<br>
+Invalid address entries include the following: e.g. <code>123, example street #05-26</code>
+You can learn more about valid postal code entries below.<br>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="postal-code"><a class="link" href="#postal-code">Postal Code: Postal Code of Delivery Address of the Parcel</a></h4>
+<div class="paragraph">
+<p>Ark can store the postal address of locations in Singapore. It only accepts values of <code>s</code> or <code>S</code> followed by 6 digits.
+The postal code of a parcel is used to query Google Maps when the <code>select</code> command is executed or when a parcel in the
+Parcel List Panel is clicked. Invalid values would include the following: <code>213661</code>; <code>s#11122</code>;</p>
+</div>
+<div class="paragraph">
+<p><strong>Postal codes must be appended to the end of the address text.</strong> e.g. Suppose you are adding a new parcel into Ark and
+entered <code>add &#8230;&#8203;(Some info)&#8230;&#8203; a/NUS School of Computing, COM1, 13 Computing Drive, S117417 &#8230;&#8203;(More info required
+in the add command)&#8230;&#8203;</code>. In this case, <code>S11417</code> is the postal code of the above address and is appended to its
+respective address, separated by a space.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+If you did not append the postal code of the address at the end of your address, Ark will not recognize your address
+input as a valid input and would give you an invalid input message.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Presently, the <code>PostalCode</code> field still does a very relaxed validation and does not completely ensure that the postal
+code exists even though it might meet the criteria above. The team is working on producing a database of postal codes
+ in Singapore. In the meantime, we encourage users to take additional precautions when entering the postal codes
+ into Ark and ensure that the postal code inputs are valid.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="email"><a class="link" href="#email">Email Field: Email of Parcel Recipient</a></h3>
+<div class="paragraph">
+<p>The Email field represents the email contact of the parcel&#8217;s recipient. It can contain the email of the organisation
+or the person that you are delivering to the parcel to.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The Email field will only allow alphanumeric or periods characters separated by an <code>@</code> character. e.g. <code>John@example.com</code>
+Invalid Email entries include the following: e.g. <code>John_Doe@example.com</code>; <code>JaneDoe.example.com</code>;
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="delivery-date"><a class="link" href="#delivery-date">Due Date Field: Due Date for Parcel Delivery</a></h3>
+<div class="paragraph">
+<p><code>Delivery Date</code> is used to indicate the delivery date that the parcel must be delivered by.
+The dates are only accepted if they are in the valid format DD-MM-YYYY or understandable by Ark.</p>
+</div>
+<div class="paragraph">
+<p>Ark is able to recognise various forms of dates as shown in the table below but the dates in the Ark are formatted
+as DD-MM-YYYY. However, invalid inputs such as a phone number or symbols still will be rejected.</p>
+</div>
+<div class="paragraph">
+<p>Current date as of writing is 12 November 2017.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 60%;">
+<col style="width: 40%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">User input</th>
+<th class="tableblock halign-left valign-top">Date parsed by Ark</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">01-01-2017</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">01-01-2017</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">01/01/2017</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">01-01-2017</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">01.01.2017</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">01-01-2017</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">01-01-17</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">01-01-2017</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">First day of 2017</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">01-01-2017</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The day before yesterday</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">10-11-2017</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Yesterday</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">11-11-2017</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Today</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">12-11-2017</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tomorrow</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">13-11-2017</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The day after tomorrow</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">14-11-2017</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Three days from now</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">15-11-2017</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Four days later</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">16-11-2017</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Seventeenth of November</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">17-11-2017</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This Friday</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">17-11-2017</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Next Friday</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">24-11-2017</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Christmas Eve</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">24-12-2017</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A week before Christmas Eve</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">17-12-2017</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A year from now</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">12-11-2018</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Friday of the second week of January</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Query too complicated, date defaults to today</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">123456789</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Invalid date error shown</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">!@#$%^&amp;*()</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Invalid date error shown</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The parcel list is maintained in sorted order by comparing
+their delivery dates, with the earliest on top.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="status"><a class="link" href="#status">Status Field: Delivery Status of Parcel</a></h3>
+<div class="paragraph">
+<p><code>Status</code> is used to indicate the current delivery status of a parcel. A parcel can have 4 possible delivery status and
+listed below is a description of these <code>Status</code> values.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 80%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Status</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PENDING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This means that the parcel has not been delivered and has not passed the date it is supposed to be
+delivered by.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DELIVERING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This means that the parcel is currently working being delivered to its destination address.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">COMPLETED</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This indicates that the parcel has been successfully delivered to its destination.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">OVERDUE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This state indicates that the parcel has not been delivered and has passed its due date.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>To input a <code>Status</code>, you can type case-insensitive formats of the above Status. e.g. <code>pending</code> or <code>Pending</code> are valid
+inputs to add a <code>PENDING</code> <code>Status</code>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Values other than the above values will be rejected. e.g. <code>PROCESSING</code>, <code>PROCESSED</code>;
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="tags"><a class="link" href="#tags">Tags Field: Delivery Tags of Parcel</a></h3>
+<div class="paragraph">
+<p><code>Tags</code> are used to indicate how the parcel should be handled. Tags can contain one or more of the following <code>Tag</code>:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 80%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Tag</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">FROZEN</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This means the parcel should be refrigerated as its contents are temperature sensitive.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">FLAMMABLE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This means that the parcels' contents are highly flammable and should be kept away from heat.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HEAVY</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This indicates that the parcel is heavy and may require additional manpower to deliver.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">FRAGILE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This state indicates that the parcels' contents can be broken easily and requires additional care
+when handling.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>To input a <code>Tag</code>, you can type insensitive formats of any of the above <code>Tags</code>. e.g. <code>frozen</code> or <code>Frozen</code> are valid inputs
+to add a <code>FROZEN</code> <code>Tag</code>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Values other than the above values will be rejected. e.g. <code>friends</code>, <code>colleagues</code>.
+If your use of Ark requires more tags to be made available, please contact our team and we will see to your request.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+<div class="sect3">
+<h4 id="developer-guide"><a class="link" href="#developer-guide">Developer Guide</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: Developer Guide]</mark></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="what-is-ark"><a class="link" href="#what-is-ark">What is Ark?</a></h3>
+<div class="paragraph">
+<p>Ark is a Command Line Interface software that helps delivery and shipping vendors manage their parcels and deliveries.
+Ark allows these delivery companies to track the parcels that they have to deliver to their customers, and empowers
+delivery vendors with simple end-to-end management of these deliveries. Ark also provides route optimization features
+to help vendors optimize their deliveries based on time or distance.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="about-this-guide"><a class="link" href="#about-this-guide">About this guide</a></h3>
+<div class="paragraph">
+<p>The purpose of this developer guide is to help incoming developers, project managers and executives understand the
+high-level details of the Ark software and help them develop code in coherence with our guidelines. Such details
+include the Ark architecture and system, its components and the interaction between these components.<br></p>
+</div>
+<div class="paragraph">
+<p>This guide contains information pertaining to issues such as:<br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Setting up the development environment for Ark.</p>
+</li>
+<li>
+<p>Understanding the high-level components of Ark.</p>
+</li>
+<li>
+<p>Understanding the various features and their implementations in Ark.</p>
+</li>
+<li>
+<p>Adding documentation to document the changes you have made.</p>
+</li>
+<li>
+<p>Running tests for the code in Ark.</p>
+</li>
+<li>
+<p>Details on how to manage the Ark project using Version Control and Continuous Integration.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+<div class="paragraph">
+<p><strong>Here are some enhancements that I have proposed for my team&#8217;s project:</strong></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="enhancement-proposed-clustering-of-parcel-deliveries"><a class="link" href="#enhancement-proposed-clustering-of-parcel-deliveries">Enhancement Proposed: Clustering of Parcel Deliveries</a></h3>
+<div class="paragraph">
+<p>Cluster parcels with <code>Delivering</code> Status according to their address locations to ensure that deliveries in a single
+cluster are delivered together.</p>
+</div>
 </div>
 <div class="sect2">
 <h3 id="other-contributions"><a class="link" href="#other-contributions">Other contributions</a></h3>
@@ -1093,25 +1900,65 @@ missing and be replaced if with ellipsis <code>&#8230;&#8203;</code> if it was t
 <p>Add end-to-end internal logic for parcel tab click (this change is pretty huge).
 You can view the pull request <a href="https://github.com/CS2103AUG2017-T16-B1/main/pull/175">here</a></p>
 </li>
+<li>
+<p>Fixed Acceptance Testing bugs for my team. Some examples:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/CS2103AUG2017-T16-B1/main/issues/159">#159</a></p>
+</li>
+<li>
+<p><a href="https://github.com/CS2103AUG2017-T16-B1/main/issues/154">#154</a></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Helped other teams do acceptance testing. Some examples:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/CS2103AUG2017-W09-B1/main/issues/189">W09-B1</a></p>
+</li>
+<li>
+<p><a href="https://github.com/CS2103AUG2017-T11-B3/main/issues/111">T11-B3</a></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Participate in forum. Some examples:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/nus-cs2103-AY1718S1/forum/issues/152">Will this violate SRP</a></p>
+</li>
+<li>
+<p><a href="https://github.com/nus-cs2103-AY1718S1/forum/issues/14">Code quality improvements for addressbook-level1: share here #14</a></p>
+</li>
+</ul>
+</div>
+</li>
 </ul>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="project-nusvisions"><a class="link" href="#project-nusvisions">Project: NUSVisions</a></h2>
+<h2 id="other-project-nusvisions"><a class="link" href="#other-project-nusvisions">Other Project: NUSVisions</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>NUSVisions is an application meant to help NUS students plan for the entire 4 years of their studies. It stores your
-sessions to ensure that modules saved in your plans remain after a period of time. I deployed the web application on
-a Heroku server and you can access it by clicking <a href="https://nusvision.herokuapp.com/">here</a></p>
+<p>NUSVisions was an application I built over the Summer of 2017. NUSVisions is an application meant to help NUS students
+plan for the entire 4 years of their studies. It stores your sessions to ensure that modules saved in your plans remain
+after a period of time. I deployed the web application on a Heroku server and you can access it by clicking
+<a href="https://nusvision.herokuapp.com/">here</a></p>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-13 04:30:43 +00:00
+Last updated 2017-11-13 07:58:09 +00:00
 </div>
 </div>
 </body>

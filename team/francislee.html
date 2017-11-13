@@ -83,58 +83,6 @@ Deletes the tag "urgent" from each parcel in the address book.</p>
 <div class="sect3">
 <h4 id="implementation"><a class="link" href="#implementation">Implementation</a></h4>
 <hr>
-</div>
-</div>
-<div class="sect2">
-<h3 id="delete-tag-mechanism"><a class="link" href="#delete-tag-mechanism">Delete Tag mechanism</a></h3>
-<div class="paragraph">
-<p>The delete tag mechanism is facilitated by a <code>deleteTag</code> method within the <code>ModelManager</code>. It supports the deletion
-of tags from every single parcel in Ark.</p>
-</div>
-<div class="paragraph">
-<p>We first retrieve the list of parcels in Ark and iterate through each parcel and recreate the parcel object using the
-original parcel. We then check if tag we want to remove is present in the new parcel&#8217;s list of tags. If the tag is
-present, we remove it, otherwise, we do nothing. We then update the old parcel in Ark with the new parcel with the
-updated list of tags.</p>
-</div>
-<div class="sect3">
-<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
-<div class="paragraph">
-<p><strong>Aspect: Implementation of <code>deleteTagCommand</code></strong><br></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Alternative 1 (current choice):</strong> Add method to delete tags in <code>ModelManager</code><br></p>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Pros:</strong> It is easy to implement a method to remove every instance where the Tag appears, we only have to be able to
-correctly iterate through all the lists of tags.<br></p>
-</li>
-<li>
-<p><strong>Cons:</strong> Might be computationally expensive for large number of parcels as Ark will need to iterate through every
-Tag to delete them.<br></p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Alternative 2:</strong> Maintain a list of tags and where the tags are located<br></p>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Pros:</strong> Computationally quicker to just find the tag and remove the tag from every parcel in the list of tags<br></p>
-</li>
-<li>
-<p><strong>Cons:</strong> More difficult to implement as we have to store an additional list of tags which is linked to each parcel
-and has to be updated whenever we edit other parcel details as well.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
 <hr>
 </div>
 </div>
@@ -447,7 +395,7 @@ not on the current active list, a tab switch needs to happen. This is taken care
 the Model Manager class.</p>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">Design Considerations</a></h4>
+<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect: Implementation of <code>maintainSorted</code></strong><br></p>
 </div>
@@ -646,7 +594,7 @@ the edit command to change the status of the parcel to <code>COMPLETED</code>.</
 <p>To exit <code>listen</code> mode, type <code>/cancel</code>.</p>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">Design Considerations</a></h4>
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect: Implementation of <code>ArkBot</code></strong><br></p>
 </div>
@@ -707,7 +655,7 @@ course&#8217;s project showcase.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-13 04:30:43 +00:00
+Last updated 2017-11-13 07:58:09 +00:00
 </div>
 </div>
 </body>
