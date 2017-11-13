@@ -15,7 +15,8 @@ AddressBook - Level 4 is a desktop address book application used for teaching So
 ---
 #Start of Extract [from: User Guide]#
 
-include::../UserGuide.adoc[tag=autocomplete][tag=commandSummary]
+include::../UserGuide.adoc[tag=autocomplete]
+include::../UserGuide.adoc[tag=commandSummary]
 
 #End of Extract#
 

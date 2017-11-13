@@ -64,7 +64,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 These are the main components of the Ark user interface that will help you to interact with Ark. +
 
 image::Ark_Main_Window_Numbered.png[width="890"]
-_Figure 4 : This is the main window of Ark with each section color coded_
+_Figure 4.0.1 : This is the main window of Ark with each section color coded_
 
 1. *Menu Bar* - Click on the options here to access the main or help menu.
 2. *Command Box* - You can type commands here.
@@ -75,7 +75,7 @@ the particular parcel in the *Parcel List Panel* (Refer to No. 6 below).
 delivered parcels, click on the `Completed Parcels` tab.
 6. *Parcel Card* - The details of a parcel is showed here.
 7. *Parcel List Panel* - The list of parcels in your inventory is showed here.
-7. *Status Bar Footer* - You can view a summary of the parcels in your inventory here.
+8. *Status Bar Footer* - You can view a summary of the parcels in your inventory here.
 
 //tag::browser[]
 === Google Maps Browser
@@ -86,7 +86,7 @@ into the command box or click on a Parcel Card, and will display a Google Maps s
 of the parcel's address in the browser section of the main window.
 
 image::Ark_Browser.png[width="890"]
-_Figure 4.11.1 : Selecting a parcel_
+_Figure 4.1.1 : Selecting a parcel_
 
 Every time you select a parcel, the Browser Panel will show as the Parcel List Panel minimizes.
 As seen in figure 4.11.1 above, when the parcel belonging to Cornelia Meier, at index 4, is selected,
@@ -118,7 +118,6 @@ this date. You can read more in the link:#delivery-date[Due Date] section.
 Read more about parcel tags in the link:#tag[Tags] section.
 
 //tag::tooltip[]
-
 [#tool-tip]
 ==== Parcel Tooltip
 
@@ -127,14 +126,13 @@ a parcel with really long details into Ark. As seen below, John's parcel has a d
 and a part of it has been replaced by ellipsis i.e. `...` as seen in figure 4.21.1 below.
 
 image::ParcelWithLongInput.PNG[width="1000"]
-_Figure 4.21.1 : Parcel with a long address_
+_Figure 4.2.1.1 : Parcel with a long address_
 
 To view the full delivery address, we simply mouseover his address and the full details of his
 address will appear as a tooltip. This can be seen in figure 4.22.2 below.
 
 image::mouse-over-address.png[width="1000"]
-_Figure 4.22.2 : Tooltip to show more of John's address_
-
+_Figure 4.2.1.2 : Tooltip to show more of John's address_
 //end::tooltip[]
 
 //tag::gui-tab[]
@@ -155,11 +153,9 @@ parcels that have not been delivered, simply click on the `All Parcels` tab.
 [NOTE]
 Parcels that have a `COMPLETED` status will be added to the list of delivered parcels directly while Parcels
 that do not have a `COMPLETED` status will  be added to the list of undelivered parcels.
-
 //end::gui-tab[]
 
 //tag::overduePopup[]
-
 === Overdue Parcels Popup Window
 
 Every time you startup Ark, if you have any parcels with the status `OVERDUE` in the parcel list,
@@ -167,7 +163,7 @@ a separate window will popup notifying you of the number of overdue parcels that
 The popup window will show for 7 seconds before closing itself. You can also close the window manually by clicking
 the `x` at the top right of the window. Figure 4.4.1 below is an example of what the popup window looks like:
 
-image::Ark_Popup_Window.PNG[width="600"]
+image::Ark_Popup_Window.png[width="600"]
 _Figure 4.4.1 : Overdue Parcels Popup Window_
 
 //end::overduePopup[]
@@ -420,11 +416,11 @@ Upon successful execution of the add command, the latest parcel added will be se
 
 //tag::import[]
 [#import]
-=== Import Multiple Parcels into Ark `import`
+=== Add Multiple Parcels into Ark from a Storage Fiel: `import`
 
 You can import parcels into Ark using the `import` feature. This feature works with valid save files of Ark. To use
 this feature, you must first copy/move the save file that you want to import into the `/data/import/` folder of
-Ark's home directory. Then you can type the following command into the `CommandBox`, `import `, followed by the name
+Ark's home directory. Then you can type the following command into the `CommandBox`, `import` , followed by the name
 of your file.
 
 [NOTE]
@@ -530,7 +526,7 @@ The Browser Panel section will then show a google map search
 of the selected parcel's delivery address (postal code). You can see an example in the picture below. +
 
 image::Ark_Browser.png[width="790"]
-_Figure 5.9.1 : The `Select` command will display the location of the selected parcel_
+_Figure 6.8.1 : The `Select` command will display the location of the selected parcel_
 
 Format: `select INDEX`
 
@@ -673,13 +669,13 @@ To make use of the autocomplete feature for commands, simply type in the first f
 to use:
 
 image::autocompleteWithStartOfAddCommand.PNG[width="400"]
-_Figure 5.21.1 : Fill in the first few letters of the command you want to use. In this case, we want to use the `Add`
+_Figure 6.15.1 : Fill in the first few letters of the command you want to use. In this case, we want to use the `Add`
  command, so we enter `a` into the text field_
 
 now press the kbd:[Tab] key: +
 
 image::autocompleteWithFullAddCommand.PNG[width="400"]
-_Figure 5.21.2 : After kbd:[Tab] is pressed Ark will fill in the command for you_
+_Figure 6.15.2 : After kbd:[Tab] is pressed Ark will fill in the command for you_
 
 Ark will then fill in the rest for you if there is a match.
 
@@ -687,55 +683,55 @@ If there is more than one possibility for the autocompletion, Ark will display t
 below.
 
 image::autocompleteWithEditCommandCycle.PNG[width="400"]
-_Figure 5.21.3 : If there are multiple autocomplete options, the options will be displayed in the result window_
+_Figure 6.15.3 : If there are multiple autocomplete options, the options will be displayed in the result window_
 
 In this case, you can press tab to cycle through the different options available.
 
 image::autocompleteWithExitCommandCycle.PNG[width="400"]
-_Figure 5.21.4 : Pressing kbd:[Tab] again will cycle to the next matching command_
+_Figure 6.15.4 : Pressing kbd:[Tab] again will cycle to the next matching command_
 
 *Autocomplete for prefixes:* +
 For commands that require prefixes, you can press kbd:[Tab] after filling in the command word. Ark will bring you to the
 next missing prefix for you to fill in. After this, you can then press tab to cycle through the list of prefixes.
 
 image::autocompleteWithFullAddCommandAndOnePrefix.PNG[width="400"]
-_Figure 5.21.5 : After filling in the command into the text field, pressing kbd:[Tab] will bring you
+_Figure 6.15.5 : After filling in the command into the text field, pressing kbd:[Tab] will bring you
  to the first missing prefix_
 
 image::autocompleteWithFullAddCommandAndOnePrefixCycle.PNG[width="400"]
-_Figure 5.21.6 : Pressing kbd:[Tab] will cycle to the next missing prefix_
+_Figure 6.15.6 : Pressing kbd:[Tab] will cycle to the next missing prefix_
 
 Alternatively, you can also enter the first letter of the prefix you want before you press kbd:[Tab] and Ark will fill
 in the `/` character for you.
 
 image::autocompleteWithFullAddCommandAndPartOfPrefix.PNG[width="400]
-_Figure 5.21.7 : Fill in the command you want along with the first letter of the prefix you want_
+_Figure 6.15.7 : Fill in the command you want along with the first letter of the prefix you want_
 
 image::autocompleteWithFullAddCommandAndOnePrefix.PNG[width="400"]
-_Figure 5.21.8 : Pressing kbd:[Tab] append the `/` character for you_
+_Figure 6.15.8 : Pressing kbd:[Tab] append the `/` character for you_
 
 After you have chosen the prefix you want, simply enter in the details as needed.
 
 image::autocompleteWithFullAddCommandAndOnePrefixFilled.PNG[width="400"]
-_Figure 5.21.9 : Fill in the needed details as per normal_
+_Figure 6.15.9 : Fill in the needed details as per normal_
 
 After you are done entering the needed details of the prefix, press kbd:[Tab] to move on to the next prefix. Note
 that if your input ends with the first character of a prefix preceded by a space (e.g " n"),
 you will need to press kbd:[Space] before you press kbd:[Tab] to get the outcome you want.
 
 image::autocompleteWithFullAddCommandAndOnePrefixFilledNext.PNG[width="400"]
-_Figure 5.21.10 : Pressing kbd:[Tab] will fill in the next missing prefix_
+_Figure 6.15.10 : Pressing kbd:[Tab] will fill in the next missing prefix_
 
 *Autocomplete for indexes:* +
 For commands that require indexes, you can press kbd:[Tab] after filling in the command word. Ark will then
 allow you to cycle through the indexes available by pressing kbd:[Tab]
 
 image::autocompleteWithStartOfSelectCommand.PNG[width="400"]
-_Figure 5.21.11 : After filling in the command into the text field, pressing kbd:[Tab] will bring you
+_Figure 6.15.11 : After filling in the command into the text field, pressing kbd:[Tab] will bring you
  to the first available index_
 
 image::autocompleteWithStartOfSelectCommandCycle.PNG[width="400"]
-_Figure 5.21.12 : Pressing kbd:[Tab] will cycle to the next available index_
+_Figure 6.15.12 : Pressing kbd:[Tab] will cycle to the next available index_
 
 *Examples:*
 
@@ -853,7 +849,7 @@ for an image QR code to be sent. The QR code must contain details of the parcel 
 Ark's list of parcels.
 
 image::QR_Sample_Interaction.png[width="400"]
-_Figure 6.21.3.1: Sample interaction of sending QR code to ArkBot_
+_Figure 6.19.3.1: Sample interaction of sending QR code to ArkBot_
 
 As shown in Figure 6.21.3.1, upon typing `/complete`, ArkBot will prompt the user for an image. If ArkBot is able to
 recognise the parcel, it will reply with the parcel's previous details as shown and mark it as completed on Ark.

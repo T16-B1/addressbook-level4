@@ -19,6 +19,22 @@ By: `Team T16-B1`      Since: `Sept 2017`      Licence: `MIT`
 Ark is a parcel delivery management system to help delivery companies manage their parcels and their
 deliveries. This test script is used help testers perform manual testing of Ark.
 
+== How to load the Sample Data into Ark
+.  Ensure you have Java version 1.8.0_60 or later versions installed on your Computer.
++
+[NOTE]
+Having any Java 8 version is not enough. +
+This app will not work with earlier versions of Java 8. +
+
+. Download the latest Ark.jar link:https://github.com/CS2103AUG2017-T16-B1/main/releases[here].
+. Create a folder you want to use as the home folder for your Ark.
+. Copy the Ark.jar file to the home folder.
+. Create a folder named data inside the home folder.
+. Rename the [T16-B1][ Ark]SampleData.xml file  to addressbook.xml in all lower case.
+. Copy the addressbook.xml file and paste it inside the data folder.
+. The sample data is now loaded and ready for testing.
+. Double-click the Ark.jar file to start the app. The sample data should appear in a few seconds.
+
 == Features to Test
 
 *Test Format*
@@ -27,11 +43,22 @@ deliveries. This test script is used help testers perform manual testing of Ark.
 *Input* - Action to perform i.e. if `undo` -> `import ark_save`, this means enter `undo`, then enter `import ark_save` +
 *Output* - Expected output description. +
 
-=== Startup Test
+=== Startup Tests
 
-We have implemented some features that triggered automatically on startup.
+We have implemented some features that triggered automatically on startup. +
 
 ==== Manual Testing
+
+*Description:* On startup, if there are any parcels found with the OVERDUE status in the uncompleted parcel list
+it will cause a popup window notifying the user of the number of OVERDUE parcels. +
+*Input:* - +
+*Expected output:* For the sample data xml file. A popup window with the title of "Important" will appear over the main window of the Ark application.
+The content header will read "Overdue Parcels" and the content text will show
+"You have parcels whose status are overdue\n Number of overdue parcels: 5"
+
+*Description:* No popup window should show if there are no OVERDUE parcels +
+*Input:* `clear` and close the application. Reopen the application again. +
+*Expected output:* There should be no popup window.
 
 *Description:* Startup automatically updates the status of parcels according to their date in Gui. +
 *Input:* - +
@@ -52,6 +79,69 @@ as the new storage file that you had downloaded previously.
 *Description:* Backup file does not backup if there is no storage file to read. +
 *Input:* (Copy your Ark.jar into an empty folder (without any save files). +
 *Expected output:* No backup is created. +
+
+=== Switching Tabs
+Command format: `tab (TAB_INDEX)`. E.g. `tab 2` +
+Description: This command allows you to switch between parcel list tabs. There are two tabs, one for all uncompleted parcels, index 1, and completed parcels, index 2.
+
+Alternatively, you can also click on the tabs to switch to the clicked tab.
+
+==== Manual Testing
+*Description:* Changing tabs normally +
+*Input:* `tab 2` +
+*Expected output:* Ark should switch you to the 2nd tab, Completed Parcels. +
+
+*Description:* Switching to a tab that is not there +
+*Input:* `tab 3` +
+*Expected output:* The results display will show “Invalid Tab Number” +
+
+*Description:* Inputting a non number +
+*Input:* `tab a` +
+*Expected output:* The results display will show “Invalid command format” +
+
+*Description:* Not inputting an argument +
+*Input:* `tab` +
+*Expected output:* The results display will show “Invalid command format” +
+
+*Description:* Adding a parcel meant for the completed list while currently on the all parcels tab +
+*Input:* `tab 1` -> `add (any valid parcel with a COMPLETED status)` +
+*Expected output:* Ark will automatically switch to the completed parcels tab and select the newly added parcel. +
+
+=== List Command
+Command format: `list`
+Description: This command will expand the parcel list panel in Ark. The list will minimize back whenever `add` or `edit` commands are entered.
+
+You can also drag the split pane divider around to change the sizes of the list panel. However they will go back to their set defaults sizes after `add` , `edit` , `list` , `select` , `delete` commands.
+
+==== Manual Testing
+*Description:* Getting the list to minimize and then show  +
+*Input:* `select 1` -> `list` +
+*Expected output:* The list should minimize after the `select` command and expand back again after the `list` command +
+
+*Description:* Adding a parcel while the list is maximized +
+*Input:* `list` -> `add (any valid parcel)` +
+*Expected output:* The list should maximize after the `list` command and the list should minimize and select the newly added parcel after the `add` command.+
+
+*Description:* editing a parcel while the list is maximized +
+*Input:* `list` -> `edit (any valid index) n/new name` +
+*Expected output:* The list should maximize after the `list` command and the list should minimize and select the newly edited parcel after the `edit` command. The edited parcel should now display “new name”. +
+
+=== Select Command
+Command format: `select (PARCEL_INDEX)`. e.g. `select 1` to select the first parcel in the parcel list.
+Description: This command allows you to select any parcel in the parcel list of the current tab. If the parcel list is currently maximized, it will minimize the list to show the browser panel. The browser will show the google maps search of the postal code of the selected parcel.
+
+==== Manual Testing
+*Description:* Selecting a parcel when the list is maximized +
+*Input:* `list` -> `select (any valid index)` +
+*Expected output:* After selecting a parcel, the list will minimize to show the browser. The browser will show the google maps search of the postal code of the selected parcel.  +
+
+*Description:* Selecting a parcel when the list is minimized +
+*Input:* `select (any valid index)` +
+*Expected output:* After selecting a parcel, the browser will show the google maps search of the postal code of the selected parcel. The list remains minimized.  +
+
+*Description:* To select a parcel in different tabs, you need to be in that tab first +
+*Input:* `tab 2` -> `select (any valid index)` -> `tab 1` -> `select (any valid index)` +
+*Expected output:* After switching to the completed parcels tab, selecting a parcel will select the indexed parcel of that tab. After switching back to the first tab and selecting another parcel, it will instead select the indexed parcel from the first tab. +
 
 === Add Command
 
@@ -106,7 +196,6 @@ as the new storage file that you had downloaded previously.
 *Description:* Regular edit command +
 *Input:* `edit 5 p/9123 e/johntoe@example.com s/DELIVERING` +
 *Expected output:* Ark should edit the fifth parcel in the list to have an email of `johntoe@email.com` and phone `9123` +
-
 
 === Import Command
 
@@ -171,6 +260,66 @@ alphanumeric characters. +
 *Input:* `undo` -> `select (any valid index)` -> `import [T16-B1][Ark]ark_save` +
 *Expected output:* Import command removes the selection in the list but browser panel remains unchanged.
 
+=== Tab Autocomplete
+Description: This feature helps you command as well as to fill in your missing indexes and prefixes
+
+==== Manual Testing
+
+*Description:* Autocomplete to command +
+*Input:* `e`(from previous step) -> press kbd:[Tab]
+*Expected output:* The text in the text field becomes `edit`, the results box should display “Multiple matches found: edit exit”
+
+*Description:* Cycle through multiple matching commands +
+*Input:* `edit`(from previous step) -> press kbd:[Space] -> press kbd::[Tab]
+*Expected output:* The text in the text field becomes `exit`, the results box should display “Multiple matches found: edit exit”
+
+*Description:* Cycle through multiple matching commands +
+*Input:* `exit`(from previous step) -> press kbd:[Tab]
+*Expected output:* The text in the text field becomes `edit`, the results box should display “Multiple matches found: edit exit”
+
+*Description:* Autocomplete to missing index +
+*Input:* `edit`(from previous step) -> press kbd:[Space] -> press kbd:[Tab]
+*Expected output:* The text in the text field becomes `edit 1`
+
+*Description:* Cycle through indexes +
+*Input:* `edit 1` (from previous step) -> press kbd:[Tab]
+*Expected output:* The text in the text field becomes `edit 2`
+
+*Description:* Cycle through indexes +
+*Input:* `edit 2` (from previous step) -> press kbd:[Tab]
+*Expected output:* The text in the text field becomes `edit 3`
+
+*Description:* Autocomplete to next missing prefix +
+*Input:* `edit 3` (from previous step) -> press kbd:[Space] -> press kbd:[Tab]
+*Expected output:* The text in the text field becomes `edit 3 #/`
+
+*Description:* Cycle to next missing prefix +
+*Input:* `edit 3 #/` (from previous step) -> press kbd:[Tab]
+*Expected output:* The text in the text field becomes `edit 3 n/`
+
+*Description:* Cycle to next missing prefix +
+*Input:* `edit 3 n/` (from previous step) -> press kbd:[Tab]
+*Expected output:* The text in the text field becomes `edit 3 a/`
+
+*Description:* Cycle to next missing prefix +
+*Input:* `edit 3 a/` (from previous step) -> press kbd:[Tab]
+*Expected output:* The text in the text field becomes `edit 3 d/`
+
+*Description:* Cycle to next missing prefix +
+*Input:* `edit 3 d/` (from previous step) -> press kbd:[Tab]
+*Expected output:* The text in the text field becomes `edit 3 p/`
+
+*Description:* Fill in selected field and tab to next missing prefix +
+*Input:* `edit 3 p/` (from previous step) -> `edit 3 p/123341222`
+*Expected output:* The text in the text field becomes `edit 3 p/123341222 #/`
+
+*Description:* Fill in missing `/` +
+*Input:* ` edit 3 p/123341222 #/`(from previous step) -> `edit 3 p/123341222 e` -> press kbd:[Tab]
+*Expected output:* The text in the text field becomes `edit 3 p/123341222 e/`
+
+*Description:* Fill in selected field and enter command `/` +
+*Input:* ` edit 3 p/123341222 e/`(from previous step) -> `edit 3 p/123341222 e/thisIsAnExampleEmail@example.com` -> press kbd:[Tab]
+*Expected output:* The phone field of the 3rd parcel in Undelivered list will be 123341222 and the email field will be thisIsAnExampleEmail@example.com.
 
 
 

@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addressbook>
+    <parcels>
+        <trackingNumber>RR000000005SG</trackingNumber>
+        <name>Ursalla</name>
+        <phone>NIL</phone>
+        <email>NIL</email>
+        <address>House 21, S000021</address>
+        <deliveryDate>06-11-2017</deliveryDate>
+        <status>COMPLETED</status>
+    </parcels>
+    <parcels>
+        <trackingNumber>RR000000055SG</trackingNumber>
+        <name>Victoria</name>
+        <phone>NIL</phone>
+        <email>NIL</email>
+        <address>House 22, S000022</address>
+        <deliveryDate>06-11-2017</deliveryDate>
+        <status>COMPLETED</status>
+        <tagged>FRAGILE</tagged>
+    </parcels>
+    <parcels>
+        <trackingNumber>RR000000555SG</trackingNumber>
+        <name>Wallace</name>
+        <phone>NIL</phone>
+        <email>NIL</email>
+        <address>House 23, S000023</address>
+        <deliveryDate>06-11-2017</deliveryDate>
+        <status>COMPLETED</status>
+        <tagged>FLAMMABLE</tagged>
+        <tagged>FRAGILE</tagged>
+    </parcels>
+    <parcels>
+        <trackingNumber>RR000005555SG</trackingNumber>
+        <name>Xylins</name>
+        <phone>NIL</phone>
+        <email>NIL</email>
+        <address>House 24, S000024</address>
+        <deliveryDate>06-11-2017</deliveryDate>
+        <status>COMPLETED</status>
+        <tagged>FLAMMABLE</tagged>
+        <tagged>HEAVY</tagged>
+        <tagged>FRAGILE</tagged>
+    </parcels>
+    <parcels>
+        <trackingNumber>RR000055555SG</trackingNumber>
+        <name>Zenon</name>
+        <phone>NIL</phone>
+        <email>NIL</email>
+        <address>House 25, S000025</address>
+        <deliveryDate>06-11-2017</deliveryDate>
+        <status>COMPLETED</status>
+        <tagged>FLAMMABLE</tagged>
+        <tagged>HEAVY</tagged>
+        <tagged>FRAGILE</tagged>
+        <tagged>FROZEN</tagged>
+    </parcels>
+    <parcels>
+        <trackingNumber>RR000000001SG</trackingNumber>
+        <name>Albert</name>
+        <phone>NIL</phone>
+        <email>NIL</email>
+        <address>House 1, S000001</address>
+        <deliveryDate>12-11-2017</deliveryDate>
+        <status>OVERDUE</status>
+    </parcels>
+    <parcels>
+        <trackingNumber>RR000000011SG</trackingNumber>
+        <name>Bobby</name>
+        <phone>92222222</phone>
+        <email>NIL</email>
+        <address>House 2, S000002</address>
+        <deliveryDate>12-11-2017</deliveryDate>
+        <status>OVERDUE</status>
+    </parcels>
+    <parcels>
+        <trackingNumber>RR000000111SG</trackingNumber>
+        <name>Corona</name>
+        <phone>NIL</phone>
+        <email>coronaemail@email.com</email>
+        <address>House 3, S000003</address>
+        <deliveryDate>12-11-2017</deliveryDate>
+        <status>OVERDUE</status>
+    </parcels>
+    <parcels>
+        <trackingNumber>RR000001111SG</trackingNumber>
+        <name>Darryl</name>
+        <phone>94444444</phone>
+        <email>darrylemail@email.com</email>
+        <address>House 4, S000004</address>
+        <deliveryDate>12-11-2017</deliveryDate>
+        <status>OVERDUE</status>
+    </parcels>
+    <parcels>
+        <trackingNumber>RR000011111SG</trackingNumber>
+        <name>Eileen</name>
+        <phone>NIL</phone>
+        <email>NIL</email>
+        <address>House 5, S000005</address>
+        <deliveryDate>12-11-2017</deliveryDate>
+        <status>OVERDUE</status>
+        <tagged>FRAGILE</tagged>
+    </parcels>
+    <parcels>
+        <trackingNumber>RR000000002SG</trackingNumber>
+        <name>Francis</name>
+        <phone>NIL</phone>
+        <email>NIL</email>
+        <address>House 6, S000006</address>
+        <deliveryDate>18-11-2017</deliveryDate>
+        <status>PENDING</status>
+    </parcels>
+    <parcels>
+        <trackingNumber>RR000000022SG</trackingNumber>
+        <name>George</name>
+        <phone>97777777</phone>
+        <email>NIL</email>
+        <address>House 7, S000007</address>
+        <deliveryDate>18-11-2017</deliveryDate>
+        <status>PENDING</status>
+    </parcels>
+    <parcels>
+        <trackingNumber>RR000000222SG</trackingNumber>
+        <name>Harry</name>
+        <phone>NIL</phone>
+        <email>harryemail@email.com</email>
+        <address>House 8, S000008</address>
+        <deliveryDate>18-11-2017</deliveryDate>
+        <status>PENDING</status>
+    </parcels>
+    <parcels>
+        <trackingNumber>RR000002222SG</trackingNumber>
+        <name>Ireen</name>
+        <phone>90999999</phone>
+        <email>ireenemail@email.com</email>
+        <address>House 9, S000009</address>
+        <deliveryDate>18-11-2017</deliveryDate>
+        <status>PENDING</status>
+    </parcels>
+    <parcels>
+        <trackingNumber>RR000022222SG</trackingNumber>
+        <name>Joel</name>
+        <phone>NIL</phone>
+        <email>NIL</email>
+        <address>House 10, S000010</address>
+        <deliveryDate>18-11-2017</deliveryDate>
+        <status>PENDING</status>
+        <tagged>FLAMMABLE</tagged>
+    </parcels>
+    <parcels>
+        <trackingNumber>RR000000003SG</trackingNumber>
+        <name>Kennerd</name>
+        <phone>NIL</phone>
+        <email>NIL</email>
+        <address>House 11, S000011</address>
+        <deliveryDate>18-11-2017</deliveryDate>
+        <status>DELIVERING</status>
+    </parcels>
+    <parcels>
+        <trackingNumber>RR000000033SG</trackingNumber>
+        <name>Leonado</name>
+        <phone>91222222</phone>
+        <email>NIL</email>
+        <address>House 12, S000012</address>
+        <deliveryDate>18-11-2017</deliveryDate>
+        <status>DELIVERING</status>
+    </parcels>
+    <parcels>
+        <trackingNumber>RR000000333SG</trackingNumber>
+        <name>Nathan</name>
+        <phone>NIL</phone>
+        <email>nathanemail@email.com</email>
+        <address>House 13, S000013</address>
+        <deliveryDate>18-11-2017</deliveryDate>
+        <status>DELIVERING</status>
+    </parcels>
+    <parcels>
+        <trackingNumber>RR000003333SG</trackingNumber>
+        <name>Marryl</name>
+        <phone>91333333</phone>
+        <email>marrylemail@email.com</email>
+        <address>House 14, S000014</address>
+        <deliveryDate>18-11-2017</deliveryDate>
+        <status>DELIVERING</status>
+    </parcels>
+    <parcels>
+        <trackingNumber>RR000033333SG</trackingNumber>
+        <name>Opelia</name>
+        <phone>NIL</phone>
+        <email>NIL</email>
+        <address>House 15, S000015</address>
+        <deliveryDate>18-11-2017</deliveryDate>
+        <status>DELIVERING</status>
+        <tagged>FROZEN</tagged>
+    </parcels>
+    <parcels>
+        <trackingNumber>RR000000006SG</trackingNumber>
+        <name>Yellow</name>
+        <phone>NIL</phone>
+        <email>NIL</email>
+        <address>House 26, S000026</address>
+        <deliveryDate>20-11-2017</deliveryDate>
+        <status>COMPLETED</status>
+        <tagged>FLAMMABLE</tagged>
+    </parcels>
+    <parcels>
+        <trackingNumber>RR000000066SG</trackingNumber>
+        <name>Alpha</name>
+        <phone>92777777</phone>
+        <email>NIL</email>
+        <address>House 27, S000027</address>
+        <deliveryDate>20-11-2017</deliveryDate>
+        <status>COMPLETED</status>
+        <tagged>FLAMMABLE</tagged>
+        <tagged>FROZEN</tagged>
+    </parcels>
+    <parcels>
+        <trackingNumber>RR000000666SG</trackingNumber>
+        <name>Betta</name>
+        <phone>92888888</phone>
+        <email>NIL</email>
+        <address>House 28, S000028</address>
+        <deliveryDate>20-11-2017</deliveryDate>
+        <status>COMPLETED</status>
+        <tagged>FLAMMABLE</tagged>
+        <tagged>FROZEN</tagged>
+        <tagged>FRAGILE</tagged>
+    </parcels>
+    <parcels>
+        <trackingNumber>RR000006666SG</trackingNumber>
+        <name>Gamma</name>
+        <phone>92999999</phone>
+        <email>NIL</email>
+        <address>House 29, S000029</address>
+        <deliveryDate>20-11-2017</deliveryDate>
+        <status>COMPLETED</status>
+        <tagged>FLAMMABLE</tagged>
+        <tagged>FROZEN</tagged>
+    </parcels>
+    <parcels>
+        <trackingNumber>RR000066666SG</trackingNumber>
+        <name>Omega</name>
+        <phone>93000000</phone>
+        <email>omega@email.com</email>
+        <address>House 30, S000030</address>
+        <deliveryDate>20-11-2017</deliveryDate>
+        <status>COMPLETED</status>
+        <tagged>HEAVY</tagged>
+        <tagged>FROZEN</tagged>
+    </parcels>
+    <parcels>
+        <trackingNumber>RR000000007SG</trackingNumber>
+        <name>Epsilon</name>
+        <phone>93111111</phone>
+        <email>epsilon@email.com</email>
+        <address>House 31, S000031</address>
+        <deliveryDate>20-11-2017</deliveryDate>
+        <status>COMPLETED</status>
+        <tagged>FROZEN</tagged>
+        <tagged>FRAGILE</tagged>
+    </parcels>
+    <parcels>
+        <trackingNumber>RR000000077SG</trackingNumber>
+        <name>Phi</name>
+        <phone>93222222</phone>
+        <email>phi@email.com</email>
+        <address>House 32, S000032</address>
+        <deliveryDate>20-11-2017</deliveryDate>
+        <status>COMPLETED</status>
+        <tagged>HEAVY</tagged>
+        <tagged>FRAGILE</tagged>
+    </parcels>
+    <parcels>
+        <trackingNumber>RR000000777SG</trackingNumber>
+        <name>Teta</name>
+        <phone>93333333</phone>
+        <email>teta@email.com</email>
+        <address>House 33, S000033</address>
+        <deliveryDate>20-11-2017</deliveryDate>
+        <status>COMPLETED</status>
+    </parcels>
+    <parcels>
+        <trackingNumber>RR000000004SG</trackingNumber>
+        <name>Perry</name>
+        <phone>NIL</phone>
+        <email>NIL</email>
+        <address>House 16, S000016</address>
+        <deliveryDate>25-11-2017</deliveryDate>
+        <status>PENDING</status>
+    </parcels>
+    <parcels>
+        <trackingNumber>RR000000044SG</trackingNumber>
+        <name>Quincy</name>
+        <phone>91777777</phone>
+        <email>NIL</email>
+        <address>House 17, S000017</address>
+        <deliveryDate>25-11-2017</deliveryDate>
+        <status>PENDING</status>
+    </parcels>
+    <parcels>
+        <trackingNumber>RR000000444SG</trackingNumber>
+        <name>Randy</name>
+        <phone>NIL</phone>
+        <email>randyemail@email.com</email>
+        <address>House 18, S000018</address>
+        <deliveryDate>25-11-2017</deliveryDate>
+        <status>PENDING</status>
+    </parcels>
+    <parcels>
+        <trackingNumber>RR000004444SG</trackingNumber>
+        <name>Sandy</name>
+        <phone>91999999</phone>
+        <email>sandyemail@email.com</email>
+        <address>House 19, S000019</address>
+        <deliveryDate>25-11-2017</deliveryDate>
+        <status>PENDING</status>
+    </parcels>
+    <parcels>
+        <trackingNumber>RR000044444SG</trackingNumber>
+        <name>Terry</name>
+        <phone>NIL</phone>
+        <email>NIL</email>
+        <address>House 20, S000020</address>
+        <deliveryDate>25-11-2017</deliveryDate>
+        <status>PENDING</status>
+        <tagged>HEAVY</tagged>
+    </parcels>
+    <parcels>
+        <trackingNumber>RR000007777SG</trackingNumber>
+        <name>Lamda</name>
+        <phone>93444444</phone>
+        <email>lamda@email.com</email>
+        <address>House 34, S000034</address>
+        <deliveryDate>25-12-2017</deliveryDate>
+        <status>COMPLETED</status>
+    </parcels>
+    <parcels>
+        <trackingNumber>RR000077777SG</trackingNumber>
+        <name>Pen Gwyn</name>
+        <phone>93555555</phone>
+        <email>coldbirb@email.com</email>
+        <address>House 35, S000035</address>
+        <deliveryDate>25-12-2017</deliveryDate>
+        <status>COMPLETED</status>
+    </parcels>
+    <parcels>
+        <trackingNumber>RR000000008SG</trackingNumber>
+        <name>Po Tato</name>
+        <phone>NIL</phone>
+        <email>potato@email.com</email>
+        <address>House 36, S000036</address>
+        <deliveryDate>25-12-2017</deliveryDate>
+        <status>COMPLETED</status>
+    </parcels>
+    <parcels>
+        <trackingNumber>RR000000088SG</trackingNumber>
+        <name>Goose</name>
+        <phone>NIL</phone>
+        <email>goose@email.com</email>
+        <address>House 37, S000037</address>
+        <deliveryDate>25-12-2017</deliveryDate>
+        <status>COMPLETED</status>
+    </parcels>
+    <parcels>
+        <trackingNumber>RR000000888SG</trackingNumber>
+        <name>Tacitus</name>
+        <phone>NIL</phone>
+        <email>tacitus@email.com</email>
+        <address>House 38, S000038</address>
+        <deliveryDate>25-12-2017</deliveryDate>
+        <status>COMPLETED</status>
+    </parcels>
+    <parcels>
+        <trackingNumber>RR000008888SG</trackingNumber>
+        <name>Jiao Ciao</name>
+        <phone>NIL</phone>
+        <email>workhorse@email.com</email>
+        <address>House 39, S000039</address>
+        <deliveryDate>25-12-2017</deliveryDate>
+        <status>COMPLETED</status>
+    </parcels>
+    <parcels>
+        <trackingNumber>RR000088888SG</trackingNumber>
+        <name>Stanley</name>
+        <phone>NIL</phone>
+        <email>bob@email.com</email>
+        <address>House 40, S000040</address>
+        <deliveryDate>25-12-2017</deliveryDate>
+        <status>COMPLETED</status>
+    </parcels>
+    <tags>FRAGILE</tags>
+    <tags>FLAMMABLE</tags>
+    <tags>FROZEN</tags>
+    <tags>HEAVY</tags>
+</addressbook>
