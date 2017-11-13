@@ -51,11 +51,11 @@ to automate testing for the Ark application.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="import"><a class="link" href="#import">Import Multiple Parcels into Ark <code>import</code></a></h3>
+<h3 id="import"><a class="link" href="#import">Add Multiple Parcels into Ark from a Storage Fiel: <code>import</code></a></h3>
 <div class="paragraph">
 <p>You can import parcels into Ark using the <code>import</code> feature. This feature works with valid save files of Ark. To use
 this feature, you must first copy/move the save file that you want to import into the <code>/data/import/</code> folder of
-Ark&#8217;s home directory. Then you can type the following command into the <code>CommandBox</code>, `import `, followed by the name
+Ark&#8217;s home directory. Then you can type the following command into the <code>CommandBox</code>, <code>import</code> , followed by the name
 of your file.</p>
 </div>
 <div class="admonitionblock note">
@@ -156,12 +156,12 @@ it inherits from the <code>UndoableCommand</code> interface rather than inheriti
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 4.7.1 : Sequence diagram describing the operation of <code>import</code> when it is executed</em></p>
+<p><em>Figure 4.8.1 : Sequence diagram describing the operation of <code>import</code> when it is executed</em></p>
 </div>
 <div class="paragraph">
 <p>As seen in the sequence diagram above, the command is first parsed to create an <code>ImportCommandParser</code>. This parser
-takes the arguments of the import command ("ark_save") as the name of the file to import and converts it to a
-full file path string ("./data/import/ark_save.xml") to locate the file to import. Thereafter, it loads the file
+takes the arguments of the import command <code>("ark_save")</code> as the name of the file to import and converts it to a
+full file path string <code>("./data/import/ark_save.xml")</code> to locate the file to import. Thereafter, it loads the file
 to import into Ark and reads the data. This returns a list of parcels that are used in create an <code>ImportCommand</code>.</p>
 </div>
 <div class="paragraph">
@@ -173,7 +173,7 @@ to import into Ark and reads the data. This returns a list of parcels that are u
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 4.7.2 : Reference frame for the execution of the Import Command</em></p>
+<p><em>Figure 4.8.2 : Reference frame for the execution of the Import Command</em></p>
 </div>
 <div class="paragraph">
 <p>As seen in the diagram above, when the command is executed, the <code>executeUndoableMethod</code> methods calls
@@ -218,7 +218,7 @@ If the file to import is missing or empty, a <code>CommandException</code> will 
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice): using <code>readAddressBook()</code> to implement the logic <code>ImportCommand</code></strong><br></p>
+<p><strong>Alternative 1 (current choice):</strong> using <code>readAddressBook()</code> to implement the logic <code>ImportCommand</code>**<br></p>
 <div class="ulist">
 <ul>
 <li>
@@ -449,7 +449,7 @@ makes updates easier since enhancements to saving Ark in <code>saveAddressBook()
 </li>
 <li>
 <p><strong>Cons:</strong> This implementation increases the coupling of <code>backup()</code> and <code>saveAddressBook()</code> where changes in
-<code>saveAddressBook()</code> are likely to cause changes in <code>backup()</code>.<br></p>
+<code>saveAddressBook()</code> are likely to cause changes in <code>backup()</code> .<br></p>
 </li>
 </ul>
 </div>
@@ -655,7 +655,7 @@ accountable to their clients when their clients inquire about the delivery statu
 <h3 id="status-field"><a class="link" href="#status-field">Status field</a></h3>
 <div class="paragraph">
 <p><code>Status</code> represents the current stage of delivery that a parcel is at. As seen in the class diagram below,
-<code>Status</code> is implements an <code>Enumeration</code> interface and it has the four possible values:</p>
+<code>Status</code> implements an <code>Enumeration</code> interface and it has the four possible values:</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -663,7 +663,7 @@ accountable to their clients when their clients inquire about the delivery statu
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 4.13: Status Class Diagram</em></p>
+<p><em>Figure 4.12.1: Status Class Diagram</em></p>
 </div>
 <div class="paragraph">
 <p>The following are the descriptions for the four possible values of <code>Status</code>:</p>
@@ -779,7 +779,7 @@ test these methods and integrate the automatic <code>Status</code> update into t
 <p><strong>Pros:</strong> Less overhead and more intuitive.</p>
 </li>
 <li>
-<p><strong>Cons:</strong> More tedious to code because a <code>DeliveryDate</code> object has to be instantiated before programmer is able to
+<p><strong>Cons:</strong> More tedious to code because a <code>DeliveryDate</code> object has to be instantiated before user is able to
 retrieve an updated <code>Status</code>.</p>
 </li>
 </ul>
@@ -1027,7 +1027,7 @@ command is executed or a when a parcel is selected.</p>
 <td class="content">
 Presently, the <code>PostalCode</code> field still does a very relaxed validation and does not completely ensure that the postal
 code exists even though it might meet the criteria above. The team is working on producing a database of postal codes
- in Singapore by quering the Google Maps Distance Matrix API. In the meantime, it is assumed that users will enter
+ in Singapore by querying the Google Maps Distance Matrix API. In the meantime, it is assumed that users will enter
  the correct postal code.
 </td>
 </tr>
@@ -1234,7 +1234,7 @@ when handling.</p></td>
 <div class="sect3">
 <h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">Design Considerations</a></h4>
 <div class="paragraph">
-<p><strong><code>Implementation of Tag</code></strong></p>
+<p><strong>Implementation of <code>Tag</code></strong></p>
 </div>
 <div class="ulist">
 <ul>
@@ -1295,7 +1295,7 @@ and a part of it has been replaced by ellipsis i.e. <code>&#8230;&#8203;</code> 
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 4.21.1 : Parcel with a long address</em></p>
+<p><em>Figure 4.2.1.1 : Parcel with a long address</em></p>
 </div>
 <div class="paragraph">
 <p>To view the full delivery address, we simply mouseover his address and the full details of his
@@ -1307,7 +1307,7 @@ address will appear as a tooltip. This can be seen in figure 4.22.2 below.</p>
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 4.22.2 : Tooltip to show more of John&#8217;s address</em></p>
+<p><em>Figure 4.2.1.2 : Tooltip to show more of John&#8217;s address</em></p>
 </div>
 <div class="paragraph">
 <p><mark>End of Extract</mark></p>
@@ -1958,7 +1958,7 @@ after a period of time. I deployed the web application on a Heroku server and yo
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-13 13:20:09 +00:00
+Last updated 2017-11-13 13:39:44 +00:00
 </div>
 </div>
 </body>

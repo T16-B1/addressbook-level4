@@ -1242,7 +1242,7 @@ makes updates easier since enhancements to saving Ark in <code>saveAddressBook()
 </li>
 <li>
 <p><strong>Cons:</strong> This implementation increases the coupling of <code>backup()</code> and <code>saveAddressBook()</code> where changes in
-<code>saveAddressBook()</code> are likely to cause changes in <code>backup()</code>.<br></p>
+<code>saveAddressBook()</code> are likely to cause changes in <code>backup()</code> .<br></p>
 </li>
 </ul>
 </div>
@@ -1375,12 +1375,12 @@ it inherits from the <code>UndoableCommand</code> interface rather than inheriti
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 4.7.1 : Sequence diagram describing the operation of <code>import</code> when it is executed</em></p>
+<p><em>Figure 4.8.1 : Sequence diagram describing the operation of <code>import</code> when it is executed</em></p>
 </div>
 <div class="paragraph">
 <p>As seen in the sequence diagram above, the command is first parsed to create an <code>ImportCommandParser</code>. This parser
-takes the arguments of the import command ("ark_save") as the name of the file to import and converts it to a
-full file path string ("./data/import/ark_save.xml") to locate the file to import. Thereafter, it loads the file
+takes the arguments of the import command <code>("ark_save")</code> as the name of the file to import and converts it to a
+full file path string <code>("./data/import/ark_save.xml")</code> to locate the file to import. Thereafter, it loads the file
 to import into Ark and reads the data. This returns a list of parcels that are used in create an <code>ImportCommand</code>.</p>
 </div>
 <div class="paragraph">
@@ -1392,7 +1392,7 @@ to import into Ark and reads the data. This returns a list of parcels that are u
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 4.7.2 : Reference frame for the execution of the Import Command</em></p>
+<p><em>Figure 4.8.2 : Reference frame for the execution of the Import Command</em></p>
 </div>
 <div class="paragraph">
 <p>As seen in the diagram above, when the command is executed, the <code>executeUndoableMethod</code> methods calls
@@ -1437,7 +1437,7 @@ If the file to import is missing or empty, a <code>CommandException</code> will 
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice): using <code>readAddressBook()</code> to implement the logic <code>ImportCommand</code></strong><br></p>
+<p><strong>Alternative 1 (current choice):</strong> using <code>readAddressBook()</code> to implement the logic <code>ImportCommand</code>**<br></p>
 <div class="ulist">
 <ul>
 <li>
@@ -1553,11 +1553,11 @@ package can be seen in the class diagram below:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/AutocompleterClassDiagram.png" alt="AutocompleterClassDiagram" width="900">
+<img src="images/AutoCompleterClassDiagram.png" alt="AutoCompleterClassDiagram" width="900">
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 4.8.1 : Class diagram of the autocomplete package</em></p>
+<p><em>Figure 4.9.1 : Class diagram of the autocomplete package</em></p>
 </div>
 <div class="paragraph">
 <p>The role of the <code>CommandBoxParser</code> Class is to parse the text in the <code>CommandBox</code> to extract commands and arguments as well
@@ -1579,17 +1579,17 @@ updates the state of the <code>Autocompleter</code> according to the diagram bel
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/AutocompleteStateActivityDiagram.PNG" alt="AutocompleteStateActivityDiagram" width="900">
+<img src="images/AutoCompleteStateActivityDiagram.PNG" alt="AutoCompleteStateActivityDiagram" width="900">
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 4.8.2 : Activity diagram of the <code>updateAutocompleter</code> method</em></p>
+<p><em>Figure 4.9.2 : Activity diagram of the <code>updateAutocompleter</code> method</em></p>
 </div>
 <div class="paragraph">
 <p>Besides updating the state, the updateState method also updates the <code>possibleAutocompleteOptions</code> list. In the case
 where there are multiple commands available, this will contain all the possible options. In the case where multiple
-prefixes are available, this will contain the missing prefixes. These options are accessed using the <code>resultIndex `which
-is either incremented with wrap-around or reset depending on the state of the `Autocompleter</code> when autocomplete
+prefixes are available, this will contain the missing prefixes. These options are accessed using the <code>resultIndex</code> which
+is either incremented with wrap-around or reset depending on the state of the <code>Autocompleter</code> when autocomplete
 is called.<br>
 The countingIndex is used to keep track of the index field for commands that need it. Its maximum size is the
 size of the current ActiveList in the model. It is either incremented with wrap-around or reset depending on
@@ -1599,11 +1599,11 @@ Command box which then updates the text field according to the diagram below.</p
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/AutocompleterAutocompleteActivityDiagram.PNG" alt="AutocompleterAutocompleteActivityDiagram" width="900">
+<img src="images/AutoCompleterAutocompleteActivityDiagram.PNG" alt="AutoCompleterAutocompleteActivityDiagram" width="900">
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 4.8.3 : Activity diagram of the <code>autocomplete</code> method</em></p>
+<p><em>Figure 4.9.3 : Activity diagram of the <code>autocomplete</code> method</em></p>
 </div>
 <div class="sect3">
 <h4 id="design-considerations-7"><a class="link" href="#design-considerations-7">4.9.1. Design Considerations</a></h4>
@@ -1670,7 +1670,7 @@ Also creates coupling between the <code>Autocompleter</code> and <code>CommandBo
 <p><strong>Pros:</strong> Easier to test since <code>CommandBoxTest</code> has already been set up and implemented.<br></p>
 </li>
 <li>
-<p><strong>Cons:</strong> <code>CommandBox</code> class now has multiple responsibilities, which violates SRP. +=== Tab autocomplete mechanism</p>
+<p><strong>Cons:</strong> <code>CommandBox</code> class now has multiple responsibilities, which violates SRP.<br></p>
 </li>
 </ul>
 </div>
@@ -1761,7 +1761,7 @@ command is executed or a when a parcel is selected.</p>
 <td class="content">
 Presently, the <code>PostalCode</code> field still does a very relaxed validation and does not completely ensure that the postal
 code exists even though it might meet the criteria above. The team is working on producing a database of postal codes
- in Singapore by quering the Google Maps Distance Matrix API. In the meantime, it is assumed that users will enter
+ in Singapore by querying the Google Maps Distance Matrix API. In the meantime, it is assumed that users will enter
  the correct postal code.
 </td>
 </tr>
@@ -1846,7 +1846,7 @@ district, Ark will reject that parcel from being entered,</p>
 <h3 id="status-field"><a class="link" href="#status-field">4.12. Status field</a></h3>
 <div class="paragraph">
 <p><code>Status</code> represents the current stage of delivery that a parcel is at. As seen in the class diagram below,
-<code>Status</code> is implements an <code>Enumeration</code> interface and it has the four possible values:</p>
+<code>Status</code> implements an <code>Enumeration</code> interface and it has the four possible values:</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -1854,7 +1854,7 @@ district, Ark will reject that parcel from being entered,</p>
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 4.13: Status Class Diagram</em></p>
+<p><em>Figure 4.12.1: Status Class Diagram</em></p>
 </div>
 <div class="paragraph">
 <p>The following are the descriptions for the four possible values of <code>Status</code>:</p>
@@ -1970,7 +1970,7 @@ test these methods and integrate the automatic <code>Status</code> update into t
 <p><strong>Pros:</strong> Less overhead and more intuitive.</p>
 </li>
 <li>
-<p><strong>Cons:</strong> More tedious to code because a <code>DeliveryDate</code> object has to be instantiated before programmer is able to
+<p><strong>Cons:</strong> More tedious to code because a <code>DeliveryDate</code> object has to be instantiated before user is able to
 retrieve an updated <code>Status</code>.</p>
 </li>
 </ul>
@@ -2105,7 +2105,7 @@ their delivery dates, with the earliest on top.</p>
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 4.14.1 : Sequence diagram describing the parsing of delivery date when <code>edit 1 d/today</code> is executed</em></p>
+<p><em>Figure 4.13.1 : Sequence diagram describing the parsing of delivery date when <code>edit 1 d/today</code> is executed</em></p>
 </div>
 <div class="paragraph">
 <p>As seen in the sequence diagram above, a request comes in to ParserUtil to parse the delivery date. A new
@@ -2155,7 +2155,7 @@ when handling.</p></td>
 <div class="sect3">
 <h4 id="design-considerations-11"><a class="link" href="#design-considerations-11">4.14.1. Design Considerations</a></h4>
 <div class="paragraph">
-<p><strong><code>Implementation of Tag</code></strong></p>
+<p><strong>Implementation of <code>Tag</code></strong></p>
 </div>
 <div class="ulist">
 <ul>
@@ -2198,7 +2198,7 @@ use different tag names to refer to the same tag.</p>
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 4.16.1 : Adding Alice to Ark, maintainSorted is actually called and returns void.</em></p>
+<p><em>Figure 4.15.1 : Adding Alice to Ark, maintainSorted is actually called and returns void.</em></p>
 </div>
 <div class="paragraph">
 <p>The list of parcels in Ark is maintained to be always in sorted order according to delivery dates,
@@ -3415,7 +3415,7 @@ characters.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-13 13:20:09 +00:00
+Last updated 2017-11-13 13:39:44 +00:00
 </div>
 </div>
 </body>
