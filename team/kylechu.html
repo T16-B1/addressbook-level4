@@ -32,11 +32,301 @@
 <div class="paragraph">
 <p><mark>Start of Extract [from: User Guide]</mark></p>
 </div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="autocomplete"><a class="link" href="#autocomplete">Autocomplete</a></h3>
+<div class="paragraph">
+<p>Trying to type in long commands can be quite a hassle. That is why Ark comes with tab autocompletion which is able to
+help fill in commands as well as the prefixes for you without requiring you to fully type out the command
+with the needed fields. Ark autocompletion is smart and knows exactly what field you need, all you have to do is press
+<kbd>Tab</kbd> and let Ark handle the rest!</p>
+</div>
+<div class="paragraph">
+<p><strong>Autocomplete for commands:</strong><br>
+To make use of the autocomplete feature for commands, simply type in the first few letters of the command you want
+to use:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/autocompleteWithStartOfAddCommand.PNG" alt="autocompleteWithStartOfAddCommand" width="400">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 6.15.1 : Fill in the first few letters of the command you want to use. In this case, we want to use the <code>Add</code>
+ command, so we enter <code>a</code> into the text field</em></p>
+</div>
+<div class="paragraph">
+<p>now press the <kbd>Tab</kbd> key:<br></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/autocompleteWithFullAddCommand.PNG" alt="autocompleteWithFullAddCommand" width="400">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 6.15.2 : After <kbd>Tab</kbd> is pressed Ark will fill in the command for you</em></p>
+</div>
+<div class="paragraph">
+<p>Ark will then fill in the rest for you if there is a match.</p>
+</div>
+<div class="paragraph">
+<p>If there is more than one possibility for the autocompletion, Ark will display the possible options to you as shown in the
+below.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/autocompleteWithEditCommandCycle.PNG" alt="autocompleteWithEditCommandCycle" width="400">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 6.15.3 : If there are multiple autocomplete options, the options will be displayed in the result window</em></p>
+</div>
+<div class="paragraph">
+<p>In this case, you can press tab to cycle through the different options available.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/autocompleteWithExitCommandCycle.PNG" alt="autocompleteWithExitCommandCycle" width="400">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 6.15.4 : Pressing <kbd>Tab</kbd> again will cycle to the next matching command</em></p>
+</div>
+<div class="paragraph">
+<p><strong>Autocomplete for prefixes:</strong><br>
+For commands that require prefixes, you can press <kbd>Tab</kbd> after filling in the command word. Ark will bring you to the
+next missing prefix for you to fill in. After this, you can then press tab to cycle through the list of prefixes.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/autocompleteWithFullAddCommandAndOnePrefix.PNG" alt="autocompleteWithFullAddCommandAndOnePrefix" width="400">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 6.15.5 : After filling in the command into the text field, pressing <kbd>Tab</kbd> will bring you
+ to the first missing prefix</em></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/autocompleteWithFullAddCommandAndOnePrefixCycle.PNG" alt="autocompleteWithFullAddCommandAndOnePrefixCycle" width="400">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 6.15.6 : Pressing <kbd>Tab</kbd> will cycle to the next missing prefix</em></p>
+</div>
+<div class="paragraph">
+<p>Alternatively, you can also enter the first letter of the prefix you want before you press <kbd>Tab</kbd> and Ark will fill
+in the <code>/</code> character for you.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/autocompleteWithFullAddCommandAndPartOfPrefix.PNG" alt="autocompleteWithFullAddCommandAndPartOfPrefix" width=""400">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 6.15.7 : Fill in the command you want along with the first letter of the prefix you want</em></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/autocompleteWithFullAddCommandAndOnePrefix.PNG" alt="autocompleteWithFullAddCommandAndOnePrefix" width="400">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 6.15.8 : Pressing <kbd>Tab</kbd> append the <code>/</code> character for you</em></p>
+</div>
+<div class="paragraph">
+<p>After you have chosen the prefix you want, simply enter in the details as needed.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/autocompleteWithFullAddCommandAndOnePrefixFilled.PNG" alt="autocompleteWithFullAddCommandAndOnePrefixFilled" width="400">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 6.15.9 : Fill in the needed details as per normal</em></p>
+</div>
+<div class="paragraph">
+<p>After you are done entering the needed details of the prefix, press <kbd>Tab</kbd> to move on to the next prefix. Note
+that if your input ends with the first character of a prefix preceded by a space (e.g " n"),
+you will need to press <kbd>Space</kbd> before you press <kbd>Tab</kbd> to get the outcome you want.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/autocompleteWithFullAddCommandAndOnePrefixFilledNext.PNG" alt="autocompleteWithFullAddCommandAndOnePrefixFilledNext" width="400">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 6.15.10 : Pressing <kbd>Tab</kbd> will fill in the next missing prefix</em></p>
+</div>
+<div class="paragraph">
+<p><strong>Autocomplete for indexes:</strong><br>
+For commands that require indexes, you can press <kbd>Tab</kbd> after filling in the command word. Ark will then
+allow you to cycle through the indexes available by pressing <kbd>Tab</kbd></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/autocompleteWithStartOfSelectCommand.PNG" alt="autocompleteWithStartOfSelectCommand" width="400">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 6.15.11 : After filling in the command into the text field, pressing <kbd>Tab</kbd> will bring you
+ to the first available index</em></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/autocompleteWithStartOfSelectCommandCycle.PNG" alt="autocompleteWithStartOfSelectCommandCycle" width="400">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 6.15.12 : Pressing <kbd>Tab</kbd> will cycle to the next available index</em></p>
+</div>
+<div class="paragraph">
+<p><strong>Examples:</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>a</code> + <kbd>Tab</kbd> (auto-completes with <code>add</code> in the command line input)</p>
+</li>
+<li>
+<p><code>e</code> + <kbd>Tab</kbd> + <kbd>Tab</kbd> (cycles to <code>exit</code> command)</p>
+</li>
+<li>
+<p><code>edit</code> + <kbd>Tab</kbd> + <kbd>Tab</kbd> (auto-completes with <code>edit 1</code> on the first tab and then cycles
+to <code>edit 2</code> on the second tab)</p>
+</li>
+<li>
+<p><code>add</code> + <kbd>Tab</kbd> + <kbd>Tab</kbd> (auto-completes with <code>edit #/</code> on the first tab and then cycles
+to <code>edit n/</code> on the second tab)</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="command-summary"><a class="link" href="#command-summary">Command Summary</a></h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Command</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Description</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Compulsory fields</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Optional fields</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Example usage</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Add</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Adds a new parcel to Ark</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>#/TRACKING_NUMBER</code><br>
+                                    <code>n/NAME</code><br>
+                                    <code>p/PHONE_NUMBER</code><br>
+                                    <code>e/EMAIL</code><br>
+                                    <code>a/ADDRESS</code><br>
+                                    <code>d/DELIVERY_DATE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>s/STATUS</code><br>
+                                    <code>t/TAG</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>add #/RR906906906SG n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, S123465 d/12-12-2012 s/pending t/flammable</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Clear</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Deletes <strong>all</strong> parcels from Ark</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>clear</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Delete</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Deletes a particular parcel from Ark</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>INDEX</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>delete 1</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Edit</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Edits the details of a particular parcel in Ark</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>INDEX</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>#/TRACKING_NUMBER</code><br>
+                      <code>n/NAME</code><br>
+                      <code>p/PHONE_NUMBER</code><br>
+                      <code>e/EMAIL</code><br>
+                      <code>a/ADDRESS</code><br>
+                      <code>d/DELIVERY_DATE</code><br>
+                      <code>s/STATUS</code><br>
+                      <code>t/TAG</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>edit 2 #/RR000000000SG n/James Lee e/jameslee@example.com</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Find</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Searches Ark for a parcel containing a particular keyword</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>KEYWORD</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ADDITIONAL KEYWORDS</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>find John</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>List</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Lists all parcels currently in Ark</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>list</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Help</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Opens the help window</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>help</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Select</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Selects a particular parcel in Ark</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>INDEX</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>select 1</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>History</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Displays the history of previous commands executed in Ark</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>history</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Undo</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Undoes the latest command executed in Ark</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>undo</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Redo</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Redoes the latest undone command in Ark</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Redo</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Import</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Imports one or more parcels from an xml file</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>FILE_NAME</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>import ark_save</code></p></td>
+</tr>
+</tbody>
+</table>
 <div class="paragraph">
 <p><mark>End of Extract</mark></p>
 </div>
 <hr>
-</div>
 <div class="sect3">
 <h4 id="justification"><a class="link" href="#justification">Justification</a></h4>
 <div class="paragraph">
@@ -50,7 +340,6 @@ essential since Ark is meant to be used by people managing large volumes of deli
 <hr>
 <div class="paragraph">
 <p><mark>Start of Extract [from: Developer Guide]</mark></p>
-</div>
 </div>
 </div>
 <div class="sect2">
@@ -216,7 +505,7 @@ modules in their Partner Universities that could possible be mapped back to modu
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-13 13:39:44 +00:00
+Last updated 2017-11-13 13:59:15 +00:00
 </div>
 </div>
 </body>
