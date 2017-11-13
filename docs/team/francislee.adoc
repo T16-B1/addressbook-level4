@@ -4,16 +4,18 @@ ifdef::env-github,env-browser[:outfilesuffix: .adoc]
 :stylesDir: ../stylesheets
 
 == Project: Ark
-Ark is a parcel management software which users can interact with using a Command Line Interface, and it has a GUI
-created with JavaFX. It is written in Java, and has about 14 kLoC.
-You may access the Ark repository link:https://github.com/CS2103AUG2017-T16-B1/main[here].
+Ark is a desktop delivery management application that my team and I had built for our Software Engineering module in the
+National University of Singapore. We built this application for delivery companies to manage their deliveries.
+The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 14kLoC.
+ You may access the Ark repository link:https://github.com/CS2103AUG2017-T16-B1/main[here].
 
 Ark was built on top of link::https://github.com/nus-cs2103-AY1718S1/addressbook-level4[Addressbook - Level 4], an
-addressbook application.
+addressbook application. A number of features were added and refactoring was done to develop the original codebase
+into the parcel management application, Ark.
 
-Below you can take a look at the segments of Ark that I've written. Functional code refers to code that
-directly affects the performance and usability of Ark. Whereas test code refers to code written
-to automatically test the features I've implemented.
+You may access the links below for a list of more significant contributions I have made to Ark. Functional code
+refers to the code that I have written to enhance the Ark application while Test code refers to the code that I have written
+to automate testing for the Ark application.
 
 *Code contributed*: [https://github.com/CS2103AUG2017-T16-B1/main/blob/master/collated/main/fustilio.md[Functional code]][https://github.com/CS2103AUG2017-T16-B1/main/blob/master/collated/test/fustilio.md[Test code]]
 
