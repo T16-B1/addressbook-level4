@@ -1547,101 +1547,44 @@ to import.<br></p>
 </div>
 <div class="sect2">
 <h3 id="tab-autocomplete-mechanism"><a class="link" href="#tab-autocomplete-mechanism">4.9. Tab autocomplete mechanism</a></h3>
-<div class="paragraph">
-<p>The tab autocomplete mechanism is facilitated by the <code>autocompleter</code> package. The structure of the <code>autocompleter</code>
-package can be seen in the class diagram below:</p>
-</div>
 <div class="imageblock">
 <div class="content">
-<img src="images/AutocompleterClassDiagram.png" alt="AutocompleterClassDiagram" width="900">
+<img src="images/SDforTabAutocomplete.png" alt="SDforTabAutocomplete" width="900">
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 4.8.1 : Class diagram of the autocomplete package</em></p>
+<p><em>Figure 4.8.1 : Sequence Diagram describing the operation of the <code>Autocompleter</code> when <code>autocomplete</code> is executed</em></p>
 </div>
 <div class="paragraph">
-<p>The role of the <code>CommandBoxParser</code> Class is to parse the text in the <code>CommandBox</code> to extract commands and arguments as well
-as to find missing prefixes.<br></p>
+<p>The tab autocomplete mechanism is facilitated by the <code>autocomplete</code> method residing inside the <code>Autocompleter</code>.
+It supports the tab autocompletion for possible commands that that match the text in the CommandBox.<br></p>
 </div>
 <div class="paragraph">
-<p>The role of the <code>AutocompleteCommand</code> Enum is to keep track of the current command that the <code>Autocompleter</code>
-recognizes.<br></p>
+<p>A new <code>Autocompleter</code> is initialized when the <code>CommandBox</code> is initialized as an attribute of the <code>CommandBox</code>. When
+the <code>tab</code> key is pressed by the user, <code>CommandBox#processAutocomplete</code> retrieves the text that is currently in
+the <code>commandTextField</code> and passes it into the <code>Autocompleter#autocomplete</code> as a string. If the string is empty,
+<code>autocomplete</code> raises a <code>NewResultAvailableEvent</code> to prompt the user to use the help command and returns
+an empty string.<br></p>
 </div>
 <div class="paragraph">
-<p>The rote of the <code>AutocompleteState</code> Enum is to keep track of the current state of the <code>Autocompleter</code>.<br></p>
+<p>If the string is not empty, the text in <code>commandTextField</code> will be converted into an array and stored in
+<code>commandBoxTextArray</code>. If there is only one word in the <code>commandBoxTextArray</code>,
+<code>AutoCompleter#processOneWordAutocomplete</code> will be called and the only word in commandBoxTextArray is passed in as a
+string <code>commandBoxText</code>. <code>processOneWordAutocomplete</code> will then pass <code>commandBoxText</code> into <code>getClosestCommands</code>.
+<code>getClosestCommands</code> then iterates through all the possible commands in <code>commandList</code> and compares them with
+<code>commandBoxText</code> using  <code>AutoComplete#isPossibleMatch</code> . If <code>isPossibleMatch</code> returns true, the command is then stored
+inside the arrayList <code>possibleResults</code>. After iterating through <code>commandList</code>, <code>getClosestCommands</code> then returns
+<code>possibleResults</code>. If there is only one item inside <code>possibleResults</code>, <code>processOneWordAutoComplete</code> will return it to
+<code>autocomplete</code> which then returns it to <code>processAutocomplete</code>. If there is more than one item, a
+<code>NewResultAvailableEvent</code> is raised which prompts the user on the possible autocomplete commands available and returns
+the original value of <code>commandBoxText</code>.<br></p>
 </div>
 <div class="paragraph">
-<p>The <code>Autocompleter</code> class is the main entry point into the package. An instance of the <code>Autocompleter</code> class is
-instantiated inside the <code>CommandBox</code> class on start up. Inside the <code>CommandBox</code>, an event listener is
-attached to the <code>TextField</code> which calls the <code>updateAutocompleter</code> method whenever the text inside it is
-changed. The <code>updateAutocompleter</code> method then calls the <code>updateAutocompleter</code> method in the <code>Autocompleter</code> which
-updates the state of the <code>Autocompleter</code> according to the diagram below:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/AutocompleteStateActivityDiagram.PNG" alt="AutocompleteStateActivityDiagram" width="900">
-</div>
-</div>
-<div class="paragraph">
-<p><em>Figure 4.8.2 : Activity diagram of the <code>updateAutocompleter</code> method</em></p>
-</div>
-<div class="paragraph">
-<p>Besides updating the state, the updateState method also updates the <code>possibleAutocompleteOptions</code> list. In the case
-where there are multiple commands available, this will contain all the possible options. In the case where multiple
-prefixes are available, this will contain the missing prefixes. These options are accessed using the <code>resultIndex `which
-is either incremented with wrap-around or reset depending on the state of the `Autocompleter</code> when autocomplete
-is called.<br>
-The countingIndex is used to keep track of the index field for commands that need it. Its maximum size is the
-size of the current ActiveList in the model. It is either incremented with wrap-around or reset depending on
-the state of the <code>Autocompleter</code> when <code>autocomplete</code> is called.
-When tab is entered by the user, the <code>autocomplete</code> method is called through the <code>processAutocompelete</code> in the
-Command box which then updates the text field according to the diagram below.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/AutocompleterAutocompleteActivityDiagram.PNG" alt="AutocompleterAutocompleteActivityDiagram" width="900">
-</div>
-</div>
-<div class="paragraph">
-<p><em>Figure 4.8.3 : Activity diagram of the <code>autocomplete</code> method</em></p>
+<p>After <code>autocomplete</code> returns a string to <code>processAutocomplete</code>, it then passes the string into <code>CommandBox#replaceText</code>
+to replace the text in <code>commandFieldText</code> with the string.<br></p>
 </div>
 <div class="sect3">
 <h4 id="design-considerations-7"><a class="link" href="#design-considerations-7">4.9.1. Design Considerations</a></h4>
-<div class="paragraph">
-<p><strong>Aspect: autocomplete interface </strong><br></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Alternative 1 (current choice): </strong> A unix like tab auto-completion mechanism that allows users to cycle through
-options.<br></p>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Pros:</strong> More intuitive and non-intrusive interface, which improves user experience.</p>
-</li>
-<li>
-<p><strong>Cons:</strong> Harder to implement, the whole autocompleter would be built from the ground up.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Alternative 2: </strong> A drop down box that gives users suggestions on the options they have.</p>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Pros:</strong> Can be easily implemented by using a ComboBox in JavaFX.</p>
-</li>
-<li>
-<p><strong>Cons:</strong> Highly intrusive and isn&#8217;t as intuitive as a tab autocomplete. The ComboBox response time might also be
-too slow for people who type fast.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
 <div class="paragraph">
 <p><strong>Aspect: Implementation of <code>autocomplete</code></strong><br></p>
 </div>
@@ -3415,7 +3358,7 @@ characters.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-13 11:33:35 +00:00
+Last updated 2017-11-13 11:32:49 +00:00
 </div>
 </div>
 </body>
