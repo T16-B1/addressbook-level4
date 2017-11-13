@@ -42,7 +42,7 @@ of every parcel and searches for addresses by postal codes only.
 Having any Java 8 version is not enough. +
 This app will not work with earlier versions of Java 8.
 +
-.  Download the latest `ark.jar` link:{repoURL}/releases[here].
+.  Download the latest `[T16-B1][Ark].jar` link:{repoURL}/releases[here].
 .  Copy the file to the folder you want to use as the home folder for your Ark application.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
@@ -810,7 +810,7 @@ The following steps illustrate how you should retrieve and configure the Authori
 
 1. Retrieve Authorization Token from https://core.telegram.org/bots#6-botfather[Botfather].
 * Your token should look something like this: `458231237:AAEPeghjklUxY7GHnYiJ5c0y-IldALLI0FE`
-2. Initialize Ark.jar to generate the default configuration file, config.json.
+2. Initialize [T16-B1][Ark].jar to generate the default configuration file, config.json.
 3. Open config.json with your favourite text editor.
 * Some common text editors include Notepad or Vim.
 4. Change the value of the `botToken` field as shown in Figure 6.19.2.1.

@@ -26,14 +26,14 @@ deliveries. This test script is used help testers perform manual testing of Ark.
 Having any Java 8 version is not enough. +
 This app will not work with earlier versions of Java 8. +
 
-. Download the latest Ark.jar link:https://github.com/CS2103AUG2017-T16-B1/main/releases[here].
+. Download the latest [T16-B1][Ark].jar link:https://github.com/CS2103AUG2017-T16-B1/main/releases[here].
 . Create a folder you want to use as the home folder for your Ark.
-. Copy the Ark.jar file to the home folder.
+. Copy the [T16-B1][Ark].jar file to the home folder.
 . Create a folder named data inside the home folder.
 . Rename the [T16-B1][ Ark]SampleData.xml file  to addressbook.xml in all lower case.
 . Copy the addressbook.xml file and paste it inside the data folder.
 . The sample data is now loaded and ready for testing.
-. Double-click the Ark.jar file to start the app. The sample data should appear in a few seconds.
+. Double-click the [T16-B1][Ark].jar file to start the app. The sample data should appear in a few seconds.
 
 == Features to Test
 
@@ -77,7 +77,7 @@ Observe that the parcels in the save file will also updated Status. +
 as the new storage file that you had downloaded previously.
 
 *Description:* Backup file does not backup if there is no storage file to read. +
-*Input:* (Copy your Ark.jar into an empty folder (without any save files). +
+*Input:* (Copy your [T16-B1][Ark].jar into an empty folder (without any save files). +
 *Expected output:* No backup is created. +
 
 === Switching Tabs
