@@ -22,7 +22,7 @@
 <p>AddressBook - Level 4 is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 6 kLoC.</p>
 </div>
 <div class="paragraph">
-<p><strong>Code contributed</strong>: [<a href="https://github.com">Functional code</a>] [<a href="https://github.com">Test code</a>] {give links to collated code files}</p>
+<p><strong>Code contributed</strong>: [<a href="https://github.com/CS2103AUG2017-T16-B1/main/blob/master/collated/main/Kowalski985.md">Functional code</a>] [<a href="https://github.com/CS2103AUG2017-T16-B1/main/blob/master/collated/test/Kowalski985.md">Test code</a>]</p>
 </div>
 <div class="sect2">
 <h3 id="enhancement-added-tab-autocomplete"><a class="link" href="#enhancement-added-tab-autocomplete">Enhancement Added: Tab autocomplete</a></h3>
@@ -32,180 +32,11 @@
 <div class="paragraph">
 <p><mark>Start of Extract [from: User Guide]</mark></p>
 </div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="autocomplete"><a class="link" href="#autocomplete">Autocomplete</a></h3>
-<div class="paragraph">
-<p>Trying to type in long commands can be quite a hassle. That is why Ark comes with tab autocompletion which is able to
-help fill in commands as well as the prefixes for you without requiring you to fully type out the command
-with the needed fields. Ark autocompletion is smart and knows exactly what field you need, all you have to do is press
-<kbd>Tab</kbd> and let Ark handle the rest!</p>
-</div>
-<div class="paragraph">
-<p><strong>Autocomplete for commands:</strong><br>
-To make use of the autocomplete feature for commands, simply type in the first few letters of the command you want
-to use:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/autocompleteWithStartOfAddCommand.PNG" alt="autocompleteWithStartOfAddCommand" width="400">
-</div>
-</div>
-<div class="paragraph">
-<p><em>Figure 5.21.1 : Fill in the first few letters of the command you want to use. In this case, we want to use the <code>Add</code>
- command, so we enter <code>a</code> into the text field</em></p>
-</div>
-<div class="paragraph">
-<p>now press the <kbd>Tab</kbd> key:<br></p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/autocompleteWithFullAddCommand.PNG" alt="autocompleteWithFullAddCommand" width="400">
-</div>
-</div>
-<div class="paragraph">
-<p><em>Figure 5.21.2 : After <kbd>Tab</kbd> is pressed Ark will fill in the command for you</em></p>
-</div>
-<div class="paragraph">
-<p>Ark will then fill in the rest for you if there is a match.</p>
-</div>
-<div class="paragraph">
-<p>If there is more than one possibility for the autocompletion, Ark will display the possible options to you as shown in the
-below.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/autocompleteWithEditCommandCycle.PNG" alt="autocompleteWithEditCommandCycle" width="400">
-</div>
-</div>
-<div class="paragraph">
-<p><em>Figure 5.21.3 : If there are multiple autocomplete options, the options will be displayed in the result window</em></p>
-</div>
-<div class="paragraph">
-<p>In this case, you can press tab to cycle through the different options available.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/autocompleteWithExitCommandCycle.PNG" alt="autocompleteWithExitCommandCycle" width="400">
-</div>
-</div>
-<div class="paragraph">
-<p><em>Figure 5.21.4 : Pressing <kbd>Tab</kbd> again will cycle to the next matching command</em></p>
-</div>
-<div class="paragraph">
-<p><strong>Autocomplete for prefixes:</strong><br>
-For commands that require prefixes, you can press <kbd>Tab</kbd> after filling in the command word. Ark will bring you to the
-next missing prefix for you to fill in. After this, you can then press tab to cycle through the list of prefixes.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/autocompleteWithFullAddCommandAndOnePrefix.PNG" alt="autocompleteWithFullAddCommandAndOnePrefix" width="400">
-</div>
-</div>
-<div class="paragraph">
-<p><em>Figure 5.21.5 : After filling in the command into the text field, pressing <kbd>Tab</kbd> will bring you
- to the first missing prefix</em></p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/autocompleteWithFullAddCommandAndOnePrefixCycle.PNG" alt="autocompleteWithFullAddCommandAndOnePrefixCycle" width="400">
-</div>
-</div>
-<div class="paragraph">
-<p><em>Figure 5.21.6 : Pressing <kbd>Tab</kbd> will cycle to the next missing prefix</em></p>
-</div>
-<div class="paragraph">
-<p>Alternatively, you can also enter the first letter of the prefix you want before you press <kbd>Tab</kbd> and Ark will fill
-in the <code>/</code> character for you.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/autocompleteWithFullAddCommandAndPartOfPrefix.PNG" alt="autocompleteWithFullAddCommandAndPartOfPrefix" width=""400">
-</div>
-</div>
-<div class="paragraph">
-<p><em>Figure 5.21.7 : Fill in the command you want along with the first letter of the prefix you want</em></p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/autocompleteWithFullAddCommandAndOnePrefix.PNG" alt="autocompleteWithFullAddCommandAndOnePrefix" width="400">
-</div>
-</div>
-<div class="paragraph">
-<p><em>Figure 5.21.8 : Pressing <kbd>Tab</kbd> append the <code>/</code> character for you</em></p>
-</div>
-<div class="paragraph">
-<p>After you have chosen the prefix you want, simply enter in the details as needed.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/autocompleteWithFullAddCommandAndOnePrefixFilled.PNG" alt="autocompleteWithFullAddCommandAndOnePrefixFilled" width="400">
-</div>
-</div>
-<div class="paragraph">
-<p><em>Figure 5.21.9 : Fill in the needed details as per normal</em></p>
-</div>
-<div class="paragraph">
-<p>After you are done entering the needed details of the prefix, press <kbd>Tab</kbd> to move on to the next prefix. Note
-that if your input ends with the first character of a prefix preceded by a space (e.g " n"),
-you will need to press <kbd>Space</kbd> before you press <kbd>Tab</kbd> to get the outcome you want.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/autocompleteWithFullAddCommandAndOnePrefixFilledNext.PNG" alt="autocompleteWithFullAddCommandAndOnePrefixFilledNext" width="400">
-</div>
-</div>
-<div class="paragraph">
-<p><em>Figure 5.21.10 : Pressing <kbd>Tab</kbd> will fill in the next missing prefix</em></p>
-</div>
-<div class="paragraph">
-<p><strong>Autocomplete for indexes:</strong><br>
-For commands that require indexes, you can press <kbd>Tab</kbd> after filling in the command word. Ark will then
-allow you to cycle through the indexes available by pressing <kbd>Tab</kbd></p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/autocompleteWithStartOfSelectCommand.PNG" alt="autocompleteWithStartOfSelectCommand" width="400">
-</div>
-</div>
-<div class="paragraph">
-<p><em>Figure 5.21.11 : After filling in the command into the text field, pressing <kbd>Tab</kbd> will bring you
- to the first available index</em></p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/autocompleteWithStartOfSelectCommandCycle.PNG" alt="autocompleteWithStartOfSelectCommandCycle" width="400">
-</div>
-</div>
-<div class="paragraph">
-<p><em>Figure 5.21.12 : Pressing <kbd>Tab</kbd> will cycle to the next available index</em></p>
-</div>
-<div class="paragraph">
-<p><strong>Examples:</strong></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>a</code> + <kbd>Tab</kbd> (auto-completes with <code>add</code> in the command line input)</p>
-</li>
-<li>
-<p><code>e</code> + <kbd>Tab</kbd> + <kbd>Tab</kbd> (cycles to <code>exit</code> command)</p>
-</li>
-<li>
-<p><code>edit</code> + <kbd>Tab</kbd> + <kbd>Tab</kbd> (auto-completes with <code>edit 1</code> on the first tab and then cycles
-to <code>edit 2</code> on the second tab)</p>
-</li>
-<li>
-<p><code>add</code> + <kbd>Tab</kbd> + <kbd>Tab</kbd> (auto-completes with <code>edit #/</code> on the first tab and then cycles
-to <code>edit n/</code> on the second tab)</p>
-</li>
-</ul>
-</div>
 <div class="paragraph">
 <p><mark>End of Extract</mark></p>
 </div>
 <hr>
+</div>
 <div class="sect3">
 <h4 id="justification"><a class="link" href="#justification">Justification</a></h4>
 <div class="paragraph">
@@ -224,44 +55,101 @@ essential since Ark is meant to be used by people managing large volumes of deli
 </div>
 <div class="sect2">
 <h3 id="tab-autocomplete-mechanism"><a class="link" href="#tab-autocomplete-mechanism">Tab autocomplete mechanism</a></h3>
+<div class="paragraph">
+<p>The tab autocomplete mechanism is facilitated by the <code>autocompleter</code> package. The structure of the <code>autocompleter</code>
+package can be seen in the class diagram below:</p>
+</div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/SDforTabAutocomplete.png" alt="SDforTabAutocomplete" width="900">
+<img src="../images/AutocompleterClassDiagram.png" alt="AutocompleterClassDiagram" width="900">
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 4.8.1 : Sequence Diagram describing the operation of the <code>Autocompleter</code> when <code>autocomplete</code> is executed</em></p>
+<p><em>Figure 4.8.1 : Class diagram of the autocomplete package</em></p>
 </div>
 <div class="paragraph">
-<p>The tab autocomplete mechanism is facilitated by the <code>autocomplete</code> method residing inside the <code>Autocompleter</code>.
-It supports the tab autocompletion for possible commands that that match the text in the CommandBox.<br></p>
+<p>The role of the <code>CommandBoxParser</code> Class is to parse the text in the <code>CommandBox</code> to extract commands and arguments as well
+as to find missing prefixes.<br></p>
 </div>
 <div class="paragraph">
-<p>A new <code>Autocompleter</code> is initialized when the <code>CommandBox</code> is initialized as an attribute of the <code>CommandBox</code>. When
-the <code>tab</code> key is pressed by the user, <code>CommandBox#processAutocomplete</code> retrieves the text that is currently in
-the <code>commandTextField</code> and passes it into the <code>Autocompleter#autocomplete</code> as a string. If the string is empty,
-<code>autocomplete</code> raises a <code>NewResultAvailableEvent</code> to prompt the user to use the help command and returns
-an empty string.<br></p>
+<p>The role of the <code>AutocompleteCommand</code> Enum is to keep track of the current command that the <code>Autocompleter</code>
+recognizes.<br></p>
 </div>
 <div class="paragraph">
-<p>If the string is not empty, the text in <code>commandTextField</code> will be converted into an array and stored in
-<code>commandBoxTextArray</code>. If there is only one word in the <code>commandBoxTextArray</code>,
-<code>AutoCompleter#processOneWordAutocomplete</code> will be called and the only word in commandBoxTextArray is passed in as a
-string <code>commandBoxText</code>. <code>processOneWordAutocomplete</code> will then pass <code>commandBoxText</code> into <code>getClosestCommands</code>.
-<code>getClosestCommands</code> then iterates through all the possible commands in <code>commandList</code> and compares them with
-<code>commandBoxText</code> using  <code>AutoComplete#isPossibleMatch</code> . If <code>isPossibleMatch</code> returns true, the command is then stored
-inside the arrayList <code>possibleResults</code>. After iterating through <code>commandList</code>, <code>getClosestCommands</code> then returns
-<code>possibleResults</code>. If there is only one item inside <code>possibleResults</code>, <code>processOneWordAutoComplete</code> will return it to
-<code>autocomplete</code> which then returns it to <code>processAutocomplete</code>. If there is more than one item, a
-<code>NewResultAvailableEvent</code> is raised which prompts the user on the possible autocomplete commands available and returns
-the original value of <code>commandBoxText</code>.<br></p>
+<p>The rote of the <code>AutocompleteState</code> Enum is to keep track of the current state of the <code>Autocompleter</code>.<br></p>
 </div>
 <div class="paragraph">
-<p>After <code>autocomplete</code> returns a string to <code>processAutocomplete</code>, it then passes the string into <code>CommandBox#replaceText</code>
-to replace the text in <code>commandFieldText</code> with the string.<br></p>
+<p>The <code>Autocompleter</code> class is the main entry point into the package. An instance of the <code>Autocompleter</code> class is
+instantiated inside the <code>CommandBox</code> class on start up. Inside the <code>CommandBox</code>, an event listener is
+attached to the <code>TextField</code> which calls the <code>updateAutocompleter</code> method whenever the text inside it is
+changed. The <code>updateAutocompleter</code> method then calls the <code>updateAutocompleter</code> method in the <code>Autocompleter</code> which
+updates the state of the <code>Autocompleter</code> according to the diagram below:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/AutocompleteStateActivityDiagram.PNG" alt="AutocompleteStateActivityDiagram" width="900">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 4.8.2 : Activity diagram of the <code>updateAutocompleter</code> method</em></p>
+</div>
+<div class="paragraph">
+<p>Besides updating the state, the updateState method also updates the <code>possibleAutocompleteOptions</code> list. In the case
+where there are multiple commands available, this will contain all the possible options. In the case where multiple
+prefixes are available, this will contain the missing prefixes. These options are accessed using the <code>resultIndex `which
+is either incremented with wrap-around or reset depending on the state of the `Autocompleter</code> when autocomplete
+is called.<br>
+The countingIndex is used to keep track of the index field for commands that need it. Its maximum size is the
+size of the current ActiveList in the model. It is either incremented with wrap-around or reset depending on
+the state of the <code>Autocompleter</code> when <code>autocomplete</code> is called.
+When tab is entered by the user, the <code>autocomplete</code> method is called through the <code>processAutocompelete</code> in the
+Command box which then updates the text field according to the diagram below.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/AutocompleterAutocompleteActivityDiagram.PNG" alt="AutocompleterAutocompleteActivityDiagram" width="900">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 4.8.3 : Activity diagram of the <code>autocomplete</code> method</em></p>
 </div>
 <div class="sect3">
 <h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect: autocomplete interface </strong><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice): </strong> A unix like tab auto-completion mechanism that allows users to cycle through
+options.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> More intuitive and non-intrusive interface, which improves user experience.</p>
+</li>
+<li>
+<p><strong>Cons:</strong> Harder to implement, the whole autocompleter would be built from the ground up.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2: </strong> A drop down box that gives users suggestions on the options they have.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> Can be easily implemented by using a ComboBox in JavaFX.</p>
+</li>
+<li>
+<p><strong>Cons:</strong> Highly intrusive and isn&#8217;t as intuitive as a tab autocomplete. The ComboBox response time might also be
+too slow for people who type fast.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
 <div class="paragraph">
 <p><strong>Aspect: Implementation of <code>autocomplete</code></strong><br></p>
 </div>
@@ -328,7 +216,7 @@ modules in their Partner Universities that could possible be mapped back to modu
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-13 11:32:49 +00:00
+Last updated 2017-11-13 11:41:34 +00:00
 </div>
 </div>
 </body>
