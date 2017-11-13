@@ -976,7 +976,7 @@ use different tag names to refer to the same tag.
 //end::tags[]
 
 //tag::sortedList[]
-=== Maintain sorted and selection mechanism
+=== Maintain sorted mechanism
 image::AddParcelSdForLogic.png[width="890"]
 _Figure 4.15.1 : Adding Alice to Ark, maintainSorted is actually called and returns void._
 
@@ -984,7 +984,7 @@ The list of parcels in Ark is maintained to be always in sorted order according 
 with the earliest being on the top. This is so that the user will be able to look at the more
 pertinent deliveries. +
 
-The list is sorted whenever a parcel is added, edited. This is
+The list is sorted whenever a parcel is added or edited. This is
 because these commands are the ones that might possibly cause the new parcel to be placed
 in the wrong position. +
 
@@ -1014,21 +1014,18 @@ just using the built in sorting methods. +
 ArkBot is written using https://github.com/rubenlagus/TelegramBots[TelegramBots], a Java library written by
 https://github.com/rubenlagus[rubenlagus] to create bots using https://core.telegram.org/bots/api[Telegram Bots API].
 
-At present the following commands have an equivalent in ArkBot: `add` `delete` `list` `find` `undo` `redo` `help`.
-
-ArkBot also has the added functionality of `complete` which is merely a wrapper around the `edit` command to mark parcel
+At present the following commands have an equivalent in ArkBot: `add` `delete` `list` `find` `undo` `redo` `help`. ArkBot also has the added functionality of `complete` which is merely a wrapper around the `edit` command to mark parcel
 deliveries as complete. This is especially useful for our delivery man.
 
 Like all Telegram Bots, each command must be prefixed with a `/` character. So if I were to want to trigger the help
 command, I would send `/help` to ArkBot.
 
-If we enter the `complete` command into ArkBot without any parameters, we enter `listen` mode.
+At present, all messages and commands to ArkBot are sent directly to Ark where they are processed and the commands and
+arguments are formatted as Ark commands and subsequently executed.
 
-In `listen` mode, ArkBot is waiting for a QR to be sent to be analysed. The image is then downloaded and using the
+If we enter the `complete` command into ArkBot without any parameters, we enter `listen` mode. In `listen` mode, ArkBot is waiting for a QR to be sent to be analysed. The image is then downloaded and using the
 https://github.com/zxing/zxing[zxing] barcode scanning library for Java, the information is unwrapped and parsed into
 the edit command to change the status of the parcel to `COMPLETED`.
-
-To exit `listen` mode, type `/cancel`.
 
 ==== Design Considerations
 
