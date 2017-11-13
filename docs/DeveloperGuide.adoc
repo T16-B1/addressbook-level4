@@ -1014,9 +1014,7 @@ just using the built in sorting methods. +
 ArkBot is written using https://github.com/rubenlagus/TelegramBots[TelegramBots], a Java library written by
 https://github.com/rubenlagus[rubenlagus] to create bots using https://core.telegram.org/bots/api[Telegram Bots API].
 
-At present the following commands have an equivalent in ArkBot: `add` `delete` `list` `find` `undo` `redo` `help`.
-
-ArkBot also has the added functionality of `complete` which is merely a wrapper around the `edit` command to mark parcel
+At present the following commands have an equivalent in ArkBot: `add` `delete` `list` `find` `undo` `redo` `help`. ArkBot also has the added functionality of `complete` which is merely a wrapper around the `edit` command to mark parcel
 deliveries as complete. This is especially useful for our delivery man.
 
 Like all Telegram Bots, each command must be prefixed with a `/` character. So if I were to want to trigger the help

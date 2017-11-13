@@ -415,6 +415,9 @@ Support for other delivery companies will come in future patches. +
 If not included in the add command, the default value of both the phone and email field is `NIL` while the default
 value for the status field is `PENDING`.
 
+[NOTE]
+Upon successful execution of the add command, the latest parcel added will be selected.
+
 //tag::import[]
 [#import]
 === Import Multiple Parcels into Ark `import`
@@ -474,6 +477,9 @@ Edits the phone number and email address of the 1st parcel to be `91234567` and 
 Edits the recipient's name of the 2nd parcel to be `Betsy Crower` and clears all existing tags.
 * `edit 1 d/03-03-2003` +
 Edits the delivery date of the 1st parcel to be 03-03-2003.
+
+[NOTE]
+Upon successful execution of the add command, the latest parcel edited will be selected.
 
 === Locating parcels by name: `find`
 
@@ -799,6 +805,29 @@ he will be able to mark the deliveries as complete easily from the convenience o
 Like all Telegram Bots, each command must be prefixed with a `/` character. So if I were to want to trigger the help
 command, I would send `/help` to ArkBot. The command formats are identical to that of Ark to make things easy to recall.
 
+==== Configuring ArkBot
+Telegram Bots require an Authorization Token which make them unique. To make the ArkBot respond only
+to your Ark software, head https://core.telegram.org/bots#6-botfather[here] to learn how to retrieve an Authorization
+Token from Telegram's Botfather.
+
+The following steps illustrate how you should retrieve and configure the Authorization Token:
+
+1. Retrieve Authorization Token from https://core.telegram.org/bots#6-botfather[Botfather].
+* Your token should look something like this: `458231237:AAEPeghjklUxY7GHnYiJ5c0y-IldALLI0FE`
+2. Initialize Ark.jar to generate the default configuration file, config.json.
+3. Open config.json with your favourite text editor.
+* Some common text editors include Notepad or Vim.
+4. Change the value of the `botToken` field as shown in Figure 6.19.2.1.
+5. Restart Ark and you should be all set!
+
+image::sampleConfigFileSelected.png[width="600"]
+_Figure 6.19.2.1 : Sample Configuration File with Telegram Bot Authorization Token field highlighted._
+
+After which, enter the authorization token into
+the config.json file that is created in the same folder you placed the Ark software executable file. This token
+is especially important as anyone with access to it will be able to access the information that is sent and received
+by the bot.
+
 ==== ArkBot Commands
 Here the commands that are available in ArkBot.
 
@@ -831,14 +860,6 @@ recognise the parcel, it will reply with the parcel's previous details as shown 
 
 If ArkBot is not in `listen mode` and a QR code with parcel details are sent, ArkBot assumes that the user is trying to
 read the information on the QR code and displays it.
-
-==== Configuring ArkBot
-Telegram Bots require an Authorization Token which make them unique. To make the ArkBot respond only
-to your Ark software, head https://core.telegram.org/bots#generating-an-authorization-token[here] to learn
-how to retrieve an Authorization Token from Telegram. After which, enter the authorization token into
-the config.json file that is created in the same folder you placed the Ark software executable file. This token
-is especially important as anyone with access to it will be able to access the information that is sent and received
-by the bot.
 
 //end::ArkBot[]
 
