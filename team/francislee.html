@@ -19,18 +19,20 @@
 <h2 id="project-ark"><a class="link" href="#project-ark">Project: Ark</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Ark is a parcel management software which users can interact with using a Command Line Interface, and it has a GUI
-created with JavaFX. It is written in Java, and has about 14 kLoC.
-You may access the Ark repository <a href="https://github.com/CS2103AUG2017-T16-B1/main">here</a>.</p>
+<p>Ark is a desktop delivery management application that my team and I had built for our Software Engineering module in the
+National University of Singapore. We built this application for delivery companies to manage their deliveries.
+The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 14kLoC.
+ You may access the Ark repository <a href="https://github.com/CS2103AUG2017-T16-B1/main">here</a>.</p>
 </div>
 <div class="paragraph">
 <p>Ark was built on top of <a href=":https://github.com/nus-cs2103-AY1718S1/addressbook-level4">Addressbook - Level 4</a>, an
-addressbook application.</p>
+addressbook application. A number of features were added and refactoring was done to develop the original codebase
+into the parcel management application, Ark.</p>
 </div>
 <div class="paragraph">
-<p>Below you can take a look at the segments of Ark that I&#8217;ve written. Functional code refers to code that
-directly affects the performance and usability of Ark. Whereas test code refers to code written
-to automatically test the features I&#8217;ve implemented.</p>
+<p>You may access the links below for a list of more significant contributions I have made to Ark. Functional code
+refers to the code that I have written to enhance the Ark application while Test code refers to the code that I have written
+to automate testing for the Ark application.</p>
 </div>
 <div class="paragraph">
 <p><strong>Code contributed</strong>: [<a href="https://github.com/CS2103AUG2017-T16-B1/main/blob/master/collated/main/fustilio.md">Functional code</a>][<a href="https://github.com/CS2103AUG2017-T16-B1/main/blob/master/collated/test/fustilio.md">Test code</a>][<a href="https://github.com/CS2103AUG2017-T16-B1/main/blob/master/collated/unused/fustilio.md">Unused code</a>]</p>
@@ -338,7 +340,7 @@ more easily.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="maintain-sorted-and-selection-mechanism"><a class="link" href="#maintain-sorted-and-selection-mechanism">Maintain sorted and selection mechanism</a></h3>
+<h3 id="maintain-sorted-mechanism"><a class="link" href="#maintain-sorted-mechanism">Maintain sorted mechanism</a></h3>
 <div class="imageblock">
 <div class="content">
 <img src="../images/AddParcelSdForLogic.png" alt="AddParcelSdForLogic" width="890">
@@ -353,7 +355,7 @@ with the earliest being on the top. This is so that the user will be able to loo
 pertinent deliveries.<br></p>
 </div>
 <div class="paragraph">
-<p>The list is sorted whenever a parcel is added, edited. This is
+<p>The list is sorted whenever a parcel is added or edited. This is
 because these commands are the ones that might possibly cause the new parcel to be placed
 in the wrong position.<br></p>
 </div>
@@ -423,6 +425,64 @@ he will be able to mark the deliveries as complete easily from the convenience o
 <div class="paragraph">
 <p>Like all Telegram Bots, each command must be prefixed with a <code>/</code> character. So if I were to want to trigger the help
 command, I would send <code>/help</code> to ArkBot. The command formats are identical to that of Ark to make things easy to recall.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="configuring-arkbot"><a class="link" href="#configuring-arkbot">Configuring ArkBot</a></h4>
+<div class="paragraph">
+<p>Telegram Bots require an Authorization Token which make them unique. To make the ArkBot respond only
+to your Ark software, head <a href="https://core.telegram.org/bots#6-botfather">here</a> to learn how to retrieve an Authorization
+Token from Telegram&#8217;s Botfather.</p>
+</div>
+<div class="paragraph">
+<p>The following steps illustrate how you should retrieve and configure the Authorization Token:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Retrieve Authorization Token from <a href="https://core.telegram.org/bots#6-botfather">Botfather</a>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Your token should look something like this: <code>458231237:AAEPeghjklUxY7GHnYiJ5c0y-IldALLI0FE</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Initialize [T16-B1][Ark].jar to generate the default configuration file, config.json.</p>
+</li>
+<li>
+<p>Open config.json with your favourite text editor.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Some common text editors include Notepad or Vim.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Change the value of the <code>botToken</code> field as shown in Figure 6.19.2.1.</p>
+</li>
+<li>
+<p>Restart Ark and you should be all set!</p>
+</li>
+</ol>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/sampleConfigFileSelected.png" alt="sampleConfigFileSelected" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 6.19.2.1 : Sample Configuration File with Telegram Bot Authorization Token field highlighted.</em></p>
+</div>
+<div class="paragraph">
+<p>After which, enter the authorization token into
+the config.json file that is created in the same folder you placed the Ark software executable file. This token
+is especially important as anyone with access to it will be able to access the information that is sent and received
+by the bot.</p>
 </div>
 </div>
 <div class="sect3">
@@ -508,17 +568,6 @@ recognise the parcel, it will reply with the parcel&#8217;s previous details as 
 <p>If ArkBot is not in <code>listen mode</code> and a QR code with parcel details are sent, ArkBot assumes that the user is trying to
 read the information on the QR code and displays it.</p>
 </div>
-</div>
-<div class="sect3">
-<h4 id="configuring-arkbot"><a class="link" href="#configuring-arkbot">Configuring ArkBot</a></h4>
-<div class="paragraph">
-<p>Telegram Bots require an Authorization Token which make them unique. To make the ArkBot respond only
-to your Ark software, head <a href="https://core.telegram.org/bots#generating-an-authorization-token">here</a> to learn
-how to retrieve an Authorization Token from Telegram. After which, enter the authorization token into
-the config.json file that is created in the same folder you placed the Ark software executable file. This token
-is especially important as anyone with access to it will be able to access the information that is sent and received
-by the bot.</p>
-</div>
 <hr>
 </div>
 <div class="sect3">
@@ -541,10 +590,7 @@ a mobile phone.</p>
 <a href="https://github.com/rubenlagus">rubenlagus</a> to create bots using <a href="https://core.telegram.org/bots/api">Telegram Bots API</a>.</p>
 </div>
 <div class="paragraph">
-<p>At present the following commands have an equivalent in ArkBot: <code>add</code> <code>delete</code> <code>list</code> <code>find</code> <code>undo</code> <code>redo</code> <code>help</code>.</p>
-</div>
-<div class="paragraph">
-<p>ArkBot also has the added functionality of <code>complete</code> which is merely a wrapper around the <code>edit</code> command to mark parcel
+<p>At present the following commands have an equivalent in ArkBot: <code>add</code> <code>delete</code> <code>list</code> <code>find</code> <code>undo</code> <code>redo</code> <code>help</code>. ArkBot also has the added functionality of <code>complete</code> which is merely a wrapper around the <code>edit</code> command to mark parcel
 deliveries as complete. This is especially useful for our delivery man.</p>
 </div>
 <div class="paragraph">
@@ -552,15 +598,13 @@ deliveries as complete. This is especially useful for our delivery man.</p>
 command, I would send <code>/help</code> to ArkBot.</p>
 </div>
 <div class="paragraph">
-<p>If we enter the <code>complete</code> command into ArkBot without any parameters, we enter <code>listen</code> mode.</p>
+<p>At present, all messages and commands to ArkBot are sent directly to Ark where they are processed and the commands and
+arguments are formatted as Ark commands and subsequently executed.</p>
 </div>
 <div class="paragraph">
-<p>In <code>listen</code> mode, ArkBot is waiting for a QR to be sent to be analysed. The image is then downloaded and using the
+<p>If we enter the <code>complete</code> command into ArkBot without any parameters, we enter <code>listen</code> mode. In <code>listen</code> mode, ArkBot is waiting for a QR to be sent to be analysed. The image is then downloaded and using the
 <a href="https://github.com/zxing/zxing">zxing</a> barcode scanning library for Java, the information is unwrapped and parsed into
 the edit command to change the status of the parcel to <code>COMPLETED</code>.</p>
-</div>
-<div class="paragraph">
-<p>To exit <code>listen</code> mode, type <code>/cancel</code>.</p>
 </div>
 <div class="sect3">
 <h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">Design Considerations</a></h4>
@@ -624,7 +668,7 @@ course&#8217;s project showcase.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-13 15:05:17 +00:00
+Last updated 2017-11-13 15:14:59 +00:00
 </div>
 </div>
 </body>
