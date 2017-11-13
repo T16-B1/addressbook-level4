@@ -337,6 +337,26 @@ as DD-MM-YYYY. However, invalid inputs such as a phone number or symbols still w
 <p>The parcel list is maintained in sorted order by comparing
 their delivery dates, with the earliest on top.</p>
 </div>
+<div class="paragraph">
+<p>The following sequence diagram shows how the delivery date is parsed to
+<a href="https://github.com/ocpsoft/prettytime">PrettyTime</a>'s parser:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/DeliveryDateSequenceDiagram.png" alt="DeliveryDateSequenceDiagram" width="890">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 4.14.1 : Sequence diagram describing the parsing of delivery date when <code>edit 1 d/today</code> is executed</em></p>
+</div>
+<div class="paragraph">
+<p>As seen in the sequence diagram above, a request comes in to ParserUtil to parse the delivery date. A new
+DeliveryDate is then created and within it we instantiate a SimpleDateFormat object with the desired date
+format and an instance of PrettyTimeParser. We then request for PrettyTimeParser to parse the string <code>today</code>
+and subsequently pass it&#8217;s result into our SimpleDateFormat to format our date in the way we&#8217;ve defined, <code>dd-MM-yyyy</code>.
+After the date has been formatted, we store it within the DeliveryDate object to be returned to ParserUtil and
+subsequently returned to whichever method which called it.</p>
+</div>
 <hr>
 </div>
 <div class="sect2">
@@ -376,7 +396,7 @@ more easily.</p>
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 4.14.1 : Adding Alice to Ark, maintainSorted is actually called and returns void.</em></p>
+<p><em>Figure 4.16.1 : Adding Alice to Ark, maintainSorted is actually called and returns void.</em></p>
 </div>
 <div class="paragraph">
 <p>The list of parcels in Ark is maintained to be always in sorted order according to delivery dates,
@@ -655,7 +675,7 @@ course&#8217;s project showcase.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-13 09:55:47 +00:00
+Last updated 2017-11-13 11:02:54 +00:00
 </div>
 </div>
 </body>
