@@ -21,7 +21,7 @@ This is a test asciidoc document to check the setup for asciidoc documentation.
 .. first i
 .. first ii
 .. first iii
-. second
+. sec       ond
 . third
 .. third i
 ... third i i

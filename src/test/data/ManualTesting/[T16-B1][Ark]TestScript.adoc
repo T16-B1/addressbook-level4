@@ -321,6 +321,76 @@ Description: This feature helps you command as well as to fill in your missing i
 *Input:* ` edit 3 p/123341222 e/`(from previous step) -> `edit 3 p/123341222 e/thisIsAnExampleEmail@example.com` -> press kbd:[Tab]
 *Expected output:* The phone field of the 3rd parcel in Undelivered list will be 123341222 and the email field will be thisIsAnExampleEmail@example.com.
 
+=== Telegram Bot Interface
+The following commands should be input into Telegram Interface. Before you begin, do configure the Telegram Bot as per the User Guide.
+
+Description: This feature allows you to perform certain Ark commands from the convenience of your phone.
+
+==== Manual Testing
+
+*Description:* Add command success +
+*Input:* `/add #/RR000000000SG n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 S123121 d/01-01-2001 s/DELIVERING` +
+*Expected output:* Ark should add the new parcels into the running instance of Ark. Changes reflected in Ark as well. +
+
+*Description:* Add command failure (invalid format - missing name) +
+*Input:* `/add #/RR314159265SG p/62353535 e/Napoleon@example.com a/Versaille S962123 d/tomorrow` +
+*Expected output:* Invalid inputs that do not comply with the add command format, ArkBot will show an error message. +
+
+*Description:* Add command success (invalid format - duplicate parcel) +
+*Input:* `/add #/RR000000000SG n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 S123121 d/01-01-2001 s/DELIVERING` +
+*Expected output:* Adding a duplicate parcel will also result in ArkBot showing an error message.
+Duplicate parcels are parcels with the same details (every detail except Status and Tag is used for comparison). +
+
+*Description:* List command success +
+*Input:* `/list` +
+*Expected output:* ArkBot should display the list of uncompleted parcels from Ark. +
+
+*Description:* Delete command success +
+*Input:* `/delete 1` +
+*Expected output:* ArkBot should display the list of uncompleted parcels from Ark, without the deleted parcel. Changes reflected in Ark as well.
+
+*Description:* Undo command +
+*Input:* `/undo` +
+*Expected output:* ArkBot should display undo command success message. Typing `/list` will show you that the deletion has been undone. Changes reflected in Ark as well. +
+
+*Description:* Redo command +
+*Input:* `/redo` +
+*Expected output:* ArkBot should display redo command success message. Typing `/list` will show you that the undo has been reverted. Changes reflected in Ark as well. +
+
+*Description:* Delete command failure +
+*Input:* `/delete 0` +
+*Expected output:* ArkBot should show an error message. +
+
+*Description:* Find command success +
+*Input:* `/find Meier` +
+*Expected output:* ArkBot should show a list of uncompleted parcels that have “Meier” in their names + Changes reflected in Ark as well.
+
+*Description:* Find command failure (missing query)+
+*Input:* `/find` +
+*Expected output:* ArkBot should show an error message. +
+
+*Description:* Complete command success +
+*Input:* `/complete 1` +
+*Expected output:* ArkBot should show a list of uncompleted parcels from Ark, without the completed parcel. Changes reflected in Ark as well. +
+
+*Description:* Complete command failure (invalid trailing characters) +
+*Input:* `/complete @#$` +
+*Expected output:* ArkBot should show an error message. +
+
+*Description:* Complete command success (Enter listen mode) +
+*Input:* `/complete` +
+*Expected output:* ArkBot will prompt for user to upload a QR code. +
+
+*Description:* Cancel command success (Exit listen mode) +
+*Input:* `/cancel` +
+*Expected output:* ArkBot show QR code upload cancelled message. +
+
+*Description:* Upload QR code success +
+*Input:* `/complete`, [upload QR code image] +
+*Expected output:* ArkBot shows parcel completion message. +
+
+image::sampleQR.png[width="600"]
+
 
 
 
