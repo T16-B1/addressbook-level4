@@ -11,7 +11,7 @@ image::docs/images/Ui.png[width="1200"]
 endif::[]
 
 ifndef::env-github[]
-image::docs/images/Ark_Main_Window.png[width="1200"]
+image::images/Ark_Main_Window.png[width="1200"]
 endif::[]
 
 * Ark is a desktop delivery management application. It has a GUI but most of the user interactions happen using a CLI (Command Line Interface).
