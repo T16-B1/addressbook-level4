@@ -17,7 +17,7 @@ You may access the links below for a list of more significant contributions I ha
 refers to the code that I have written to enhance the Ark application while Test code refers to the code that I have written
 to automate testing for the Ark application.
 
-*Code contributed*: [https://github.com/CS2103AUG2017-T16-B1/main/blob/master/collated/main/kennard123661.md[Functional code]][https://github.com/CS2103AUG2017-T16-B1/main/blob/master/collated/test/kennard123661.md[Test code]]
+*Code contributed*: [https://github.com/CS2103AUG2017-T16-B1/main/blob/master/collated/main/Kowalski985.md[Functional code]][https://github.com/CS2103AUG2017-T16-B1/main/blob/master/collated/test/Kowalski985.md[Test code]]
 
 The following are my contributions to the project explained in detail:
 
